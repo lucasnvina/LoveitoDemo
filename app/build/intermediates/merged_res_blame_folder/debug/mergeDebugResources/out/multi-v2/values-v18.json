@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-53:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\vinar\\.gradle\\caches\\8.13\\transforms\\bacecc86133492e203be67d38c6aa8dd\\transformed\\appcompat-1.7.0\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

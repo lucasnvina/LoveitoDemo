@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#000000</color>
+    <string name="app_name">Loveito</string>
+    <string name="gcm_defaultSenderId" translatable="false">958884545779</string>
+    <string name="google_api_key" translatable="false">AIzaSyA4G2EULhcBW7AXKT-ReOiAiSL7gYRE0VM</string>
+    <string name="google_app_id" translatable="false">1:958884545779:android:2ceec5a7e14dc9e9f56386</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA4G2EULhcBW7AXKT-ReOiAiSL7gYRE0VM</string>
+    <string name="google_storage_bucket" translatable="false">loveito-aeec9.firebasestorage.app</string>
+    <string name="project_id" translatable="false">loveito-aeec9</string>
+    <style name="Theme.Loveito" parent="Theme.Material3.DayNight.NoActionBar"/>
+</resources>

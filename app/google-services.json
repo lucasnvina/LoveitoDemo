@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958884545779",
+    "project_id": "loveito-aeec9",
+    "storage_bucket": "loveito-aeec9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958884545779:android:2ceec5a7e14dc9e9f56386",
+        "android_client_info": {
+          "package_name": "com.loveito.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4G2EULhcBW7AXKT-ReOiAiSL7gYRE0VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

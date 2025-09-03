@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-53:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\vinar\\.gradle\\caches\\8.13\\transforms\\e1f70f31a867cbf869f7793cca925f80\\transformed\\material-1.12.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        }
+    ]
+}

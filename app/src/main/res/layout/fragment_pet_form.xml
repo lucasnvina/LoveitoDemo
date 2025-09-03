@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Foto visible en ambos modos -->
+        <ImageView
+            android:id="@+id/ivPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:maxHeight="300dp"
+            android:src="@android:color/darker_gray" />
+
+        <!-- VIEW MODE -->
+        <LinearLayout
+            android:id="@+id/groupView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Resumen con etiquetas -->
+            <LinearLayout
+                android:id="@+id/cardSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="#1FFFFFFF"
+                android:layout_marginTop="12dp">
+
+                <TextView android:id="@+id/tvSName" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nombre:"/>
+                <TextView android:id="@+id/tvSBreed" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Raza:"/>
+                <TextView android:id="@+id/tvSWeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Peso:"/>
+                <TextView android:id="@+id/tvSSex" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sexo:"/>
+                <TextView android:id="@+id/tvSBirth" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nacimiento:"/>
+                <TextView android:id="@+id/tvSAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Edad:"/>
+                <TextView android:id="@+id/tvSNeutered" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Castrado:"/>
+                <TextView android:id="@+id/tvSHeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Alto:"/>
+                <TextView android:id="@+id/tvSLength" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Largo:"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crisis:"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <!-- Lista de crisis -->
+            <LinearLayout
+                android:id="@+id/containerCrises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnStartEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+        <!-- EDIT MODE -->
+        <LinearLayout
+            android:id="@+id/groupEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foto de perfil"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+            <Button
+                android:id="@+id/btnPickImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Elegir foto" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:layout_marginTop="12dp"/>
+            <EditText
+                android:id="@+id/etPetName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Lobito" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raza"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etPetBreed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: Mestizo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peso (kg)"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etPetWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 23.5"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexo"
+                android:layout_marginTop="8dp"/>
+            <Spinner
+                android:id="@+id/spSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de nacimiento"
+                android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPickBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Elegir" />
+
+                <TextView
+                    android:id="@+id/tvBirthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No definida"
+                    android:layout_marginStart="12dp"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cbNeutered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Castrado/a"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alto (cm)"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etHeightCm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 55"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Largo (cm)"
+                android:layout_marginTop="8dp"/>
+            <EditText
+                android:id="@+id/etLengthCm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 75"
+                android:inputType="numberDecimal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnSavePet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Guardar" />
+
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnCancelEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancelar" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDeletePet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eliminar Mascota"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#D32F2F"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "start": "n1",
+  "nodes": {
+    "n1": {
+      "type": "question",
+      "text": "¿Está convulsionando AHORA o está inconsciente / con dificultad para respirar / con hemorragia abundante?",
+      "yes": "red_emergencia",
+      "no": "n2"
+    },
+    "n2": {
+      "type": "question",
+      "text": "¿La crisis duró > 5 min, o hubo 2+ episodios en 24 h?",
+      "yes": "red_status",
+      "no": "n3"
+    },
+    "n3": {
+      "type": "question",
+      "text": "¿Hubo tóxicos/veneno, traumatismo fuerte o golpe de calor?",
+      "yes": "red_tox_trauma",
+      "no": "n4"
+    },
+    "n4": {
+      "type": "question",
+      "text": "¿Ahora está desorientado, no puede ponerse de pie, tiene dolor intenso continuo, vómitos repetidos o diarrea con sangre, o fiebre > 39.5 °C?",
+      "yes": "amber_urgente",
+      "no": "n5"
+    },
+    "n5": {
+      "type": "question",
+      "text": "¿Quedó sólo decaimiento leve (<24 h), vómitos/diarrea leves (≤2, sin sangre), o herida menor?",
+      "yes": "green_control",
+      "no": "n6"
+    },
+    "n6": {
+      "type": "question",
+      "text": "¿Volvió a la normalidad (actitud usual, respira bien, camina estable)?",
+      "yes": "green_observar",
+      "no": "amber_duda"
+    },
+    "red_emergencia": {
+      "type": "result",
+      "severity": "red",
+      "title": "EMERGENCIA",
+      "actions": [
+        "Trasladá ya a una guardia veterinaria.",
+        "No le ofrezcas comida/agua durante la crisis.",
+        "Si convulsiona: despejá alrededor, registrá el tiempo/video si podés.",
+        "Si hay sangrado abundante, hacé presión suave con gasa/paño limpio."
+      ]
+    },
+    "red_status": {
+      "type": "result",
+      "severity": "red",
+      "title": "EMERGENCIA (crisis prolongada/agrupada)",
+      "actions": [
+        "Acudí de inmediato a una guardia veterinaria.",
+        "Anotá duración y cantidad de episodios."
+      ]
+    },
+    "red_tox_trauma": {
+      "type": "result",
+      "severity": "red",
+      "title": "EMERGENCIA (tóxicos/trauma/golpe de calor)",
+      "actions": [
+        "Acudí a guardia veterinaria sin demora.",
+        "Llevá el envase/sustancia si sospechás tóxico.",
+        "En golpe de calor: enfriá gradualmente (paños frescos, NO hielo directo)."
+      ]
+    },
+    "amber_urgente": {
+      "type": "result",
+      "severity": "amber",
+      "title": "URGENCIA (hoy mismo)",
+      "actions": [
+        "Contactá a tu veterinario y pedí turno urgente (hoy).",
+        "Mantené hidratación; dieta blanda si vomitó/diarrea leve.",
+        "Usá Loveito para registrar episodios/síntomas por voz."
+      ]
+    },
+    "amber_duda": {
+      "type": "result",
+      "severity": "amber",
+      "title": "URGENCIA (24 h)",
+      "actions": [
+        "Pedí turno dentro de 24 h para control.",
+        "Observá signos de alarma (empeora dolor, vómitos con sangre, decaimiento marcado).",
+        "Registrá en Loveito cualquier nuevo episodio."
+      ]
+    },
+    "green_control": {
+      "type": "result",
+      "severity": "green",
+      "title": "CONTROL/DOMICILIO",
+      "actions": [
+        "Cuidados en casa y control con tu veterinario en 24–48 h.",
+        "Dieta blanda 24 h si hubo vómito leve.",
+        "Si repite crisis o aparecen signos de alarma, pasá a URGENCIA/EMERGENCIA."
+      ]
+    },
+    "green_observar": {
+      "type": "result",
+      "severity": "green",
+      "title": "OBSERVACIÓN",
+      "actions": [
+        "Monitoreo y registro en Loveito.",
+        "Si reaparece un episodio o aparece dolor/respiración dificultosa, repetí el triage o consultá."
+      ]
+    }
+  }
+}
