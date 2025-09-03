@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/etPassword"
-            android:hint="Contraseña (mín. 6)"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
