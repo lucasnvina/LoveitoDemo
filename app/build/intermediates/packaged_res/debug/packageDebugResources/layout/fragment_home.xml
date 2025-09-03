@@ -3,13 +3,10 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
 
-    <TextView
-        android:text="Loveito — Home"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
     <Button
         android:id="@+id/btnOpenPets"

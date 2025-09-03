@@ -3,17 +3,19 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnAddPet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Agregar mascota" />
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
 
     <ListView
         android:id="@+id/listPets"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="12dp"/>
+        android:layout_height="590dp"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnAddPet"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="Agregar mascota" />
+
 </LinearLayout>

@@ -1,98 +1,102 @@
 [
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-mdpi/ic_launcher.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_auth.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_auth.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/layout_fragment_pet_form.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/fragment_pet_form.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-hdpi_ic_launcher_foreground.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-hdpi/ic_launcher_foreground.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_pets_list.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_pets_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
         "merged": "com.loveito.demo.app-debug-55:/layout_fragment_auth.xml.flat",
         "source": "com.loveito.demo.app-main-57:/layout/fragment_auth.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/layout_fragment_crisis_detail.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/fragment_crisis_detail.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_crisis_start.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_crisis_start.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/layout_fragment_crisis_start.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/fragment_crisis_start.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxhdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xhdpi/ic_launcher_foreground.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_crisis_detail.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_crisis_detail.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/layout_fragment_pets_list.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/fragment_pets_list.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\layout_fragment_pet_form.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\layout\\fragment_pet_form.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-hdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-hdpi/ic_launcher.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/layout_activity_main.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/activity_main.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xhdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxxhdpi\\ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxhdpi/ic_launcher_foreground.png"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-55:/mipmap-mdpi_ic_launcher_foreground.png.flat",
-        "source": "com.loveito.demo.app-main-57:/mipmap-mdpi/ic_launcher_foreground.png"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-55:/layout_fragment_home.xml.flat",
-        "source": "com.loveito.demo.app-main-57:/layout/fragment_home.xml"
+        "merged": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-debug-55:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\vinar\\.gradle\\daemon\\8.13\\com.loveito.demo.app-main-57:\\mipmap-anydpi-v26\\ic_launcher.xml"
     }
 ]
