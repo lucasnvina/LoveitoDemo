@@ -3597,7 +3597,6 @@ int id tvSName 0x7f0801ef
 int id tvSNeutered 0x7f0801f0
 int id tvSSex 0x7f0801f1
 int id tvSWeight 0x7f0801f2
-int id tvStatus 0x7f080205
 int id unchecked 0x7f0801f3
 int id uniform 0x7f0801f4
 int id unlabeled 0x7f0801f5

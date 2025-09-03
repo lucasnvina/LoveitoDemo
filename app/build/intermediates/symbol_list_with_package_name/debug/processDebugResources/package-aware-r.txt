@@ -3598,7 +3598,6 @@ id tvSName
 id tvSNeutered
 id tvSSex
 id tvSWeight
-id tvStatus
 id unchecked
 id uniform
 id unlabeled

@@ -46,7 +46,6 @@ id tvSName
 id tvSNeutered
 id tvSSex
 id tvSWeight
-id tvStatus
 layout activity_main
 layout fragment_auth
 layout fragment_crisis_detail
