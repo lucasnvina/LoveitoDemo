@@ -68,6 +68,14 @@
                 android:layout_height="wrap_content"
                 android:text="Editar"
                 android:layout_marginTop="16dp" />
+            <Button
+                android:id="@+id/btnDeletePet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eliminar"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#D32F2F"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <!-- EDIT MODE -->

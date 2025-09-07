@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Loveito</string>
+    <string name="pet_name">Nombre: %1$s</string>
+    <string name="pet_breed">Raza: %1$s</string>
+    <string name="pet_weight">Peso: %1$s</string>
+    <string name="pet_sex">Sexo: %1$s</string>
+    <string name="pet_birth">Nacimiento: %1$s</string>
+    <string name="pet_age">Edad: %1$s</string>
+    <string name="pet_neutered">Castrado: %1$s</string>
+    <string name="pet_height">Alto: %1$s</string>
+    <string name="pet_length">Largo: %1$s</string>
+    <string name="no_crises">Sin crisis registradas</string>
+    <string name="pet_deleted">Mascota eliminada</string>
+    <string name="delete_pet_confirm">¿Querés eliminar esta mascota y sus datos asociados?</string>
+    <string name="delete_pet_title">Eliminar mascota</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="enter_name">Ingresá un nombre</string>
+    <string name="pet_created">Mascota creada</string>
+    <string name="pet_updated">Mascota actualizada</string>
+    <string name="error">Error: %1$s</string>
+    <string name="not_defined">No definida</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="years">años</string>
+    <string name="kg">kg</string>
+    <string name="cm">cm</string>
+    <string name="dash">—</string>
+    <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
 </resources>

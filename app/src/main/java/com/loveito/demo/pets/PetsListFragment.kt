@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.loveito.demo.R
 
@@ -44,28 +43,6 @@ class PetsListFragment : Fragment() {
                 .replace(R.id.fragment_host, form)
                 .addToBackStack(null)
                 .commit()
-        }
-
-        listView.setOnItemLongClickListener { _, _, position, _ ->
-            val pet = items[position]
-            AlertDialog.Builder(requireContext())
-                .setTitle("Eliminar mascota")
-                .setMessage("¿Seguro que querés eliminar ${pet.name}?")
-                .setPositiveButton("Eliminar") { _, _ ->
-                    repo.deletePet(
-                        id = pet.id,
-                        onSuccess = {
-                            Toast.makeText(requireContext(), "Mascota eliminada", Toast.LENGTH_SHORT).show()
-                            load()
-                        },
-                        onError = { e ->
-                            Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-                .setNegativeButton("Cancelar", null)
-                .show()
-            true
         }
 
         load()

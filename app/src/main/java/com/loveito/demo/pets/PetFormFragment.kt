@@ -68,7 +68,7 @@ class PetFormFragment : Fragment() {
     private lateinit var btnPick: Button
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
-    private lateinit var btnDeletePet: Button
+    private lateinit var btnDeletePet: Button // Cambiado a lateinit var
 
     private var birthDateMillis: Long? = null
 
@@ -96,6 +96,26 @@ class PetFormFragment : Fragment() {
         groupView = view.findViewById(R.id.groupView)
         groupEdit = view.findViewById(R.id.groupEdit)
         btnStartEdit = view.findViewById(R.id.btnStartEdit)
+        btnDeletePet = view.findViewById(R.id.btnDeletePet)
+        btnDeletePet.setOnClickListener {
+            val id = editingId ?: return@setOnClickListener
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.delete_pet_title))
+                .setMessage(getString(R.string.delete_pet_confirm))
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                    repo.deletePet(id,
+                        onSuccess = {
+                            Toast.makeText(requireContext(), getString(R.string.pet_deleted), Toast.LENGTH_SHORT).show()
+                            parentFragmentManager.popBackStack()
+                        },
+                        onError = { e ->
+                            Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+                .setNegativeButton(getString(R.string.cancel), null)
+                .show()
+        }
 
         tvSName = view.findViewById(R.id.tvSName)
         tvSBreed = view.findViewById(R.id.tvSBreed)
@@ -188,20 +208,20 @@ class PetFormFragment : Fragment() {
         btnDeletePet.setOnClickListener {
             val id = editingId ?: return@setOnClickListener
             AlertDialog.Builder(requireContext())
-                .setTitle("Eliminar Mascota")
-                .setMessage("¿Querés eliminar esta mascota y sus datos asociados?")
-                .setPositiveButton("Eliminar") { _, _ ->
+                .setTitle(getString(R.string.delete_pet_title))
+                .setMessage(getString(R.string.delete_pet_confirm))
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                     repo.deletePet(id,
                         onSuccess = {
-                            Toast.makeText(requireContext(), "Mascota eliminada", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.pet_deleted), Toast.LENGTH_SHORT).show()
                             parentFragmentManager.popBackStack()
                         },
                         onError = { e ->
-                            Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
                         }
                     )
                 }
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show()
         }
 
@@ -286,7 +306,7 @@ class PetFormFragment : Fragment() {
         crisesContainer.removeAllViews()
         if (crisesItems.isEmpty()) {
             val empty = TextView(requireContext())
-            empty.text = "Sin crisis registradas"
+            empty.text = getString(R.string.no_crises)
             empty.setPadding(8, 8, 8, 8)
             crisesContainer.addView(empty)
             return
@@ -296,7 +316,7 @@ class PetFormFragment : Fragment() {
                 orientation = LinearLayout.VERTICAL
                 setPadding(16, 12, 16, 12)
             }
-            val ts = java.text.SimpleDateFormat("dd/MM HH:mm").format(java.util.Date(c.startedAt))
+            val ts = java.text.SimpleDateFormat("dd/MM HH:mm", java.util.Locale.getDefault()).format(java.util.Date(c.startedAt))
             val mins = c.durationSec / 60
             val secs = c.durationSec % 60
             val sev = (c.triageSeverity ?: "").lowercase()
@@ -307,7 +327,7 @@ class PetFormFragment : Fragment() {
                 else -> ""
             }
             val title = TextView(requireContext()).apply {
-                text = "[$ts] ${c.note ?: "crisis"} — ${mins}m ${secs}s$sevTag"
+                text = getString(R.string.crisis_item, ts, c.note ?: "crisis", mins, secs, sevTag)
                 textSize = 16f
             }
             row.addView(title)
@@ -330,15 +350,15 @@ class PetFormFragment : Fragment() {
     }
 
     private fun renderSummary(p: Pet) {
-        tvSName.text = "Nombre: ${p.name}"
-        tvSBreed.text = "Raza: ${p.breed ?: "—"}"
-        tvSWeight.text = "Peso: ${p.weightKg?.let { "${it} kg" } ?: "—"}"
-        tvSSex.text = "Sexo: ${p.sex ?: "—"}"
-        tvSBirth.text = "Nacimiento: ${p.birthDate?.let { formatDate(it) } ?: "—"}"
-        tvSAge.text = "Edad: ${p.birthDate?.let { yearsFrom(it) }?.let { "${it} años" } ?: "—"}"
-        tvSNeutered.text = "Castrado: ${if (p.neutered == true) "Sí" else "No" }"
-        tvSHeight.text = "Alto: ${p.heightCm?.let { "${it} cm" } ?: "—"}"
-        tvSLength.text = "Largo: ${p.lengthCm?.let { "${it} cm" } ?: "—"}"
+        tvSName.text = getString(R.string.pet_name, p.name)
+        tvSBreed.text = getString(R.string.pet_breed, p.breed ?: getString(R.string.dash))
+        tvSWeight.text = getString(R.string.pet_weight, p.weightKg?.let { "${it} ${getString(R.string.kg)}" } ?: getString(R.string.dash))
+        tvSSex.text = getString(R.string.pet_sex, p.sex ?: getString(R.string.dash))
+        tvSBirth.text = getString(R.string.pet_birth, p.birthDate?.let { formatDate(it) } ?: getString(R.string.dash))
+        tvSAge.text = getString(R.string.pet_age, p.birthDate?.let { yearsFrom(it) }?.let { "$it ${getString(R.string.years)}" } ?: getString(R.string.dash))
+        tvSNeutered.text = getString(R.string.pet_neutered, if (p.neutered == true) getString(R.string.yes) else getString(R.string.no))
+        tvSHeight.text = getString(R.string.pet_height, p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash))
+        tvSLength.text = getString(R.string.pet_length, p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash))
     }
 
     private fun yearsFrom(millis: Long): Int {
@@ -354,7 +374,7 @@ class PetFormFragment : Fragment() {
     }
 
     private fun formatDate(millis: Long): String {
-        return java.text.SimpleDateFormat("dd/MM/yyyy").format(java.util.Date(millis))
+        return java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(java.util.Date(millis))
     }
 
     private fun decodeBitmapWithExifFromUri(uri: Uri): Bitmap? {
