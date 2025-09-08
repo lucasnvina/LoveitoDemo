@@ -4,7 +4,7 @@
             "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-v22/values-v22.xml",
             "map": [
                 {
-                    "source": "/Users/eru/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-v22/values-v22.xml",
+                    "source": "C:\\Users\\LuKaS\\.gradle\\caches\\8.13\\transforms\\e61375d36af7de1deb55af497483c131\\transformed\\appcompat-1.7.1\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
