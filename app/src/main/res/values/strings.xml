@@ -28,4 +28,16 @@
     <string name="cm">cm</string>
     <string name="dash">—</string>
     <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Contraseña</string>
+    <string name="auth_signup">Crear cuenta</string>
+    <string name="auth_signin">Ingresar</string>
+    <string name="auth_forgot_password">Olvidé mi contraseña</string>
+    <string name="add_pet_button">Agregar mascota</string>
+    <string name="select_pet_label">Elegí la mascota</string>
+    <string name="start_button">Iniciar</string>
+    <string name="pet_name_label">Nombre</string>
+    <string name="pet_photo_desc">Foto mascota</string>
+    <string name="add_symbol">+</string>
+    <string name="add_label">Agregar</string>
 </resources>

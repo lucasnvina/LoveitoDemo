@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Elegí la mascota"
+        android:text="@string/select_pet_label"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginBottom="8dp" />
@@ -26,7 +27,7 @@
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar"
+        android:text="@string/start_button"
         android:layout_marginTop="12dp" />
 
 </LinearLayout>

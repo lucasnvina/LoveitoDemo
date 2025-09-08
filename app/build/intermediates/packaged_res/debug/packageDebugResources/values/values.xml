@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#000000</color>
+    <string name="add_label">Agregar</string>
+    <string name="add_pet_button">Agregar mascota</string>
+    <string name="add_symbol">+</string>
     <string name="app_name">Loveito</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_forgot_password">Olvidé mi contraseña</string>
+    <string name="auth_password">Contraseña</string>
+    <string name="auth_signin">Ingresar</string>
+    <string name="auth_signup">Crear cuenta</string>
     <string name="cancel">Cancelar</string>
     <string name="cm">cm</string>
     <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
@@ -28,11 +36,15 @@
     <string name="pet_height">Alto: %1$s</string>
     <string name="pet_length">Largo: %1$s</string>
     <string name="pet_name">Nombre: %1$s</string>
+    <string name="pet_name_label">Nombre</string>
     <string name="pet_neutered">Castrado: %1$s</string>
+    <string name="pet_photo_desc">Foto mascota</string>
     <string name="pet_sex">Sexo: %1$s</string>
     <string name="pet_updated">Mascota actualizada</string>
     <string name="pet_weight">Peso: %1$s</string>
     <string name="project_id" translatable="false">loveito-aeec9</string>
+    <string name="select_pet_label">Elegí la mascota</string>
+    <string name="start_button">Iniciar</string>
     <string name="years">años</string>
     <string name="yes">Sí</string>
     <style name="Theme.Loveito" parent="Theme.Material3.DayNight.NoActionBar"/>

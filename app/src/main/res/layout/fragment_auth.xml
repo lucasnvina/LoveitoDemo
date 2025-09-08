@@ -3,7 +3,8 @@
     android:fillViewport="true"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -13,7 +14,7 @@
 
         <EditText
             android:id="@+id/etEmail"
-            android:hint="Email"
+            android:hint="@string/auth_email"
             android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
         <EditText
             android:id="@+id/etPassword"
-            android:hint="Contraseña"
+            android:hint="@string/auth_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,21 +30,21 @@
 
         <Button
             android:id="@+id/btnSignUp"
-            android:text="Crear cuenta"
+            android:text="@string/auth_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
 
         <Button
             android:id="@+id/btnSignIn"
-            android:text="Ingresar"
+            android:text="@string/auth_signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
         <Button
             android:id="@+id/btnForgot"
-            android:text="Olvidé mi contraseña"
+            android:text="@string/auth_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
