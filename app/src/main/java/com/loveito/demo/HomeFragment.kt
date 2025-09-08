@@ -16,7 +16,6 @@ import com.loveito.demo.pets.PetFormFragment
 import com.loveito.demo.pets.PetGridAdapter
 import com.loveito.demo.pets.PetGridItem
 import com.loveito.demo.pets.PetsRepository
-import com.loveito.demo.pets.PetsListFragment
 
 class HomeFragment : Fragment() {
 

@@ -18,7 +18,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:maxHeight="300dp"
-            android:src="@android:color/darker_gray" />
+            android:src="@android:color/darker_gray"
+            android:contentDescription="@string/pet_photo_desc" />
 
         <!-- VIEW MODE -->
         <LinearLayout
@@ -37,21 +38,21 @@
                 android:background="#1FFFFFFF"
                 android:layout_marginTop="12dp">
 
-                <TextView android:id="@+id/tvSName" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nombre:"/>
-                <TextView android:id="@+id/tvSBreed" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Raza:"/>
-                <TextView android:id="@+id/tvSWeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Peso:"/>
-                <TextView android:id="@+id/tvSSex" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sexo:"/>
-                <TextView android:id="@+id/tvSBirth" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Nacimiento:"/>
-                <TextView android:id="@+id/tvSAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Edad:"/>
-                <TextView android:id="@+id/tvSNeutered" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Castrado:"/>
-                <TextView android:id="@+id/tvSHeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Alto:"/>
-                <TextView android:id="@+id/tvSLength" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Largo:"/>
+                <TextView android:id="@+id/tvSName" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_name"/>
+                <TextView android:id="@+id/tvSBreed" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_breed"/>
+                <TextView android:id="@+id/tvSWeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_weight"/>
+                <TextView android:id="@+id/tvSSex" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_sex"/>
+                <TextView android:id="@+id/tvSBirth" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_birth"/>
+                <TextView android:id="@+id/tvSAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_age"/>
+                <TextView android:id="@+id/tvSNeutered" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_neutered"/>
+                <TextView android:id="@+id/tvSHeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_height"/>
+                <TextView android:id="@+id/tvSLength" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_length"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Crisis:"
+                android:text="@string/pet_label_crisis"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
 
@@ -66,14 +67,14 @@
             <Button
                 android:id="@+id/btnStartEdit"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:text="Editar"
+                android:layout_height="48dp"
+                android:text="@string/pet_btn_edit"
                 android:layout_marginTop="16dp" />
             <Button
                 android:id="@+id/btnDeletePet"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eliminar"
+                android:layout_height="48dp"
+                android:text="@string/pet_btn_delete"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="#D32F2F"
                 android:textColor="@android:color/white" />
@@ -90,53 +91,58 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Foto de perfil"
+                android:text="@string/pet_label_profile_photo"
                 android:textStyle="bold"
                 android:layout_marginTop="12dp"/>
             <Button
                 android:id="@+id/btnPickImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Elegir foto" />
+                android:layout_height="48dp"
+                android:text="@string/pet_btn_pick_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="@string/pet_label_name"
                 android:layout_marginTop="12dp"/>
             <EditText
                 android:id="@+id/etPetName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: Lobito" />
+                android:hint="@string/pet_hint_name"
+                android:inputType="textPersonName"
+                android:autofillHints="name" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Raza"
+                android:text="@string/pet_label_breed"
                 android:layout_marginTop="8dp"/>
             <EditText
                 android:id="@+id/etPetBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: Mestizo" />
+                android:hint="@string/pet_hint_breed"
+                android:inputType="text"
+                android:autofillHints="text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Peso (kg)"
+                android:text="@string/pet_label_weight"
                 android:layout_marginTop="8dp"/>
             <EditText
                 android:id="@+id/etPetWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: 23.5"
-                android:inputType="numberDecimal" />
+                android:hint="@string/pet_hint_weight"
+                android:inputType="numberDecimal"
+                android:autofillHints="weight" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sexo"
+                android:text="@string/pet_label_sex_short"
                 android:layout_marginTop="8dp"/>
             <Spinner
                 android:id="@+id/spSex"
@@ -146,7 +152,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha de nacimiento"
+                android:text="@string/pet_label_birth_date"
                 android:layout_marginTop="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,14 +162,14 @@
                 <Button
                     android:id="@+id/btnPickBirth"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Elegir" />
+                    android:layout_height="48dp"
+                    android:text="@string/pet_btn_pick_birth" />
 
                 <TextView
                     android:id="@+id/tvBirthDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No definida"
+                    android:text="@string/pet_label_not_defined"
                     android:layout_marginStart="12dp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
@@ -172,32 +178,34 @@
                 android:id="@+id/cbNeutered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Castrado/a"
+                android:text="@string/pet_label_neutered_checkbox"
                 android:layout_marginTop="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alto (cm)"
+                android:text="@string/pet_label_height_cm"
                 android:layout_marginTop="8dp"/>
             <EditText
                 android:id="@+id/etHeightCm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: 55"
-                android:inputType="numberDecimal" />
+                android:hint="@string/pet_hint_height"
+                android:inputType="numberDecimal"
+                android:autofillHints="height" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Largo (cm)"
+                android:text="@string/pet_label_length_cm"
                 android:layout_marginTop="8dp"/>
             <EditText
                 android:id="@+id/etLengthCm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ej: 75"
-                android:inputType="numberDecimal" />
+                android:hint="@string/pet_hint_length"
+                android:inputType="numberDecimal"
+                android:autofillHints="length" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,9 +216,9 @@
                 <Button
                     android:id="@+id/btnSavePet"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Guardar" />
+                    android:text="@string/pet_btn_save" />
 
                 <Space
                     android:layout_width="8dp"
@@ -219,16 +227,16 @@
                 <Button
                     android:id="@+id/btnCancelEdit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="Cancelar" />
+                    android:text="@string/pet_btn_cancel" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnDeletePet"
+                android:id="@+id/btnDeletePetEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eliminar Mascota"
+                android:layout_height="48dp"
+                android:text="@string/pet_btn_delete_pet"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="#D32F2F"
                 android:textColor="@android:color/white" />

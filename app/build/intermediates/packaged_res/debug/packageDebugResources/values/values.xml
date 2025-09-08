@@ -13,10 +13,15 @@
     <string name="cancel">Cancelar</string>
     <string name="cm">cm</string>
     <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
+    <string name="crisis_meta">Meta</string>
+    <string name="crisis_recommendations">Recomendaciones:</string>
+    <string name="crisis_severity">Severidad</string>
+    <string name="crisis_title">Crisis</string>
     <string name="dash">—</string>
     <string name="delete">Eliminar</string>
     <string name="delete_pet_confirm">¿Querés eliminar esta mascota y sus datos asociados?</string>
     <string name="delete_pet_title">Eliminar mascota</string>
+    <string name="delete_record">Eliminar Registro</string>
     <string name="enter_name">Ingresá un nombre</string>
     <string name="error">Error: %1$s</string>
     <string name="gcm_defaultSenderId" translatable="false">958884545779</string>
@@ -31,9 +36,38 @@
     <string name="pet_age">Edad: %1$s</string>
     <string name="pet_birth">Nacimiento: %1$s</string>
     <string name="pet_breed">Raza: %1$s</string>
+    <string name="pet_btn_cancel">Cancelar</string>
+    <string name="pet_btn_delete">Eliminar</string>
+    <string name="pet_btn_delete_pet">Eliminar Mascota</string>
+    <string name="pet_btn_edit">Editar</string>
+    <string name="pet_btn_pick_birth">Elegir</string>
+    <string name="pet_btn_pick_image">Elegir foto</string>
+    <string name="pet_btn_save">Guardar</string>
     <string name="pet_created">Mascota creada</string>
     <string name="pet_deleted">Mascota eliminada</string>
     <string name="pet_height">Alto: %1$s</string>
+    <string name="pet_hint_breed">Ej: Mestizo</string>
+    <string name="pet_hint_height">Ej: 55</string>
+    <string name="pet_hint_length">Ej: 75</string>
+    <string name="pet_hint_name">Ej: Lobito</string>
+    <string name="pet_hint_weight">Ej: 23.5</string>
+    <string name="pet_label_age">Edad:</string>
+    <string name="pet_label_birth">Nacimiento:</string>
+    <string name="pet_label_birth_date">Fecha de nacimiento</string>
+    <string name="pet_label_breed">Raza:</string>
+    <string name="pet_label_crisis">Crisis:</string>
+    <string name="pet_label_height">Alto:</string>
+    <string name="pet_label_height_cm">Alto (cm)</string>
+    <string name="pet_label_length">Largo:</string>
+    <string name="pet_label_length_cm">Largo (cm)</string>
+    <string name="pet_label_name">Nombre:</string>
+    <string name="pet_label_neutered">Castrado:</string>
+    <string name="pet_label_neutered_checkbox">Castrado/a</string>
+    <string name="pet_label_not_defined">No definida</string>
+    <string name="pet_label_profile_photo">Foto de perfil</string>
+    <string name="pet_label_sex">Sexo:</string>
+    <string name="pet_label_sex_short">Sexo</string>
+    <string name="pet_label_weight">Peso:</string>
     <string name="pet_length">Largo: %1$s</string>
     <string name="pet_name">Nombre: %1$s</string>
     <string name="pet_name_label">Nombre</string>
@@ -44,7 +78,9 @@
     <string name="pet_weight">Peso: %1$s</string>
     <string name="project_id" translatable="false">loveito-aeec9</string>
     <string name="select_pet_label">Elegí la mascota</string>
+    <string name="sign_out_button">Cerrar sesión</string>
     <string name="start_button">Iniciar</string>
+    <string name="start_crisis_button">Registrar crisis</string>
     <string name="years">años</string>
     <string name="yes">Sí</string>
     <style name="Theme.Loveito" parent="Theme.Material3.DayNight.NoActionBar"/>

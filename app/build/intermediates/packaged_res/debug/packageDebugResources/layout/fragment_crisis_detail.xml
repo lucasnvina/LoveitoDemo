@@ -15,7 +15,7 @@
             android:id="@+id/tvCrisisTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crisis"
+            android:text="@string/crisis_title"
             android:textStyle="bold"
             android:textSize="18sp" />
 
@@ -24,14 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Meta" />
+            android:text="@string/crisis_meta" />
 
         <TextView
             android:id="@+id/tvCrisisSeverity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Severidad"
+            android:text="@string/crisis_severity"
             android:textStyle="bold"
             android:textSize="16sp" />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Recomendaciones:"
+            android:text="@string/crisis_recommendations"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -53,7 +53,7 @@
             android:id="@+id/btnDeleteCrisis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar Registro"
+            android:text="@string/delete_record"
             android:layout_marginTop="24dp"
             android:backgroundTint="#D32F2F"
             android:textColor="@android:color/white"/>
