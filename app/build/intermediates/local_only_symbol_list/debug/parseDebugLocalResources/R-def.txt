@@ -6,7 +6,6 @@ id btnCancelEdit
 id btnDeleteCrisis
 id btnDeletePet
 id btnForgot
-id btnOpenPets
 id btnPickBirth
 id btnPickImage
 id btnSavePet
@@ -30,13 +29,18 @@ id etPetWeight
 id fragment_host
 id groupEdit
 id groupView
+id ivPetPhoto
 id ivPreview
 id listPets
+id recyclerPets
 id spSex
+id tvAddLabel
+id tvAddSymbol
 id tvBirthDate
 id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
+id tvPetName
 id tvSAge
 id tvSBirth
 id tvSBreed
@@ -53,6 +57,8 @@ layout fragment_crisis_start
 layout fragment_home
 layout fragment_pet_form
 layout fragment_pets_list
+layout item_pet_add
+layout item_pet_grid
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round

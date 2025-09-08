@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical">
 
-
-
-    <Button
-        android:id="@+id/btnOpenPets"
-        android:text="Mis Mascotas"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPets"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:overScrollMode="never" />
 
     <Button
         android:id="@+id/btnStartCrisis"
