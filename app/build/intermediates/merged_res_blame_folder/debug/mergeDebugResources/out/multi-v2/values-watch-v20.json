@@ -4,7 +4,7 @@
             "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LuKaS\\.gradle\\caches\\8.13\\transforms\\4740fa39394b86de3636fed982e70a55\\transformed\\play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",
+                    "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/res/values-watch-v20/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\LuKaS\\.gradle\\caches\\8.13\\transforms\\e61375d36af7de1deb55af497483c131\\transformed\\appcompat-1.7.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-watch-v20/values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

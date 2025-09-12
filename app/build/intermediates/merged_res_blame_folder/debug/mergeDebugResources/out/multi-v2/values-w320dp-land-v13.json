@@ -4,7 +4,7 @@
             "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LuKaS\\.gradle\\caches\\8.13\\transforms\\afd5d1f0d4ab858c49ee6da8295fb0a4\\transformed\\material-1.13.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
+                    "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/afd5d1f0d4ab858c49ee6da8295fb0a4/transformed/material-1.13.0/res/values-w320dp-land-v13/values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

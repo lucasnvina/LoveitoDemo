@@ -4,7 +4,7 @@
             "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\LuKaS\\.gradle\\caches\\8.13\\transforms\\e61375d36af7de1deb55af497483c131\\transformed\\appcompat-1.7.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
