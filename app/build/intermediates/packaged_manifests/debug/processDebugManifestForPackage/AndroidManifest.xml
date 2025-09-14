@@ -30,7 +30,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.Loveito" >
         <activity
-            android:name="com.loveito.demo.MainActivity"
+            android:name="com.loveito.demo.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.loveito.demo.MainActivity"
+            android:exported="true" />
         <activity
             android:name="com.google.firebase.auth.internal.GenericIdpActivity"
             android:excludeFromRecents="true"

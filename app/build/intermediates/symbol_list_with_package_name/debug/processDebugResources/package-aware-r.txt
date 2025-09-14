@@ -3664,6 +3664,7 @@ drawable ic_clock_black_24dp
 drawable ic_expand_less_22px
 drawable ic_expand_more_22px
 drawable ic_keyboard_black_24dp
+drawable ic_launcher_logo
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3676,6 +3677,7 @@ drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
 drawable ic_search_black_24
+drawable logo_final
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3752,6 +3754,8 @@ drawable notify_panel_notification_icon_bg
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font nunito_light
+font nunito_semibold
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -4042,6 +4046,7 @@ id listMode
 id listPets
 id list_item
 id locale
+id login_logo
 id ltr
 id m3_side_sheet
 id marquee
@@ -4221,6 +4226,7 @@ id south
 id spSex
 id spacer
 id special_effects_controller_view_tag
+id splash_logo
 id spline
 id split_action_bar
 id spread
@@ -4456,6 +4462,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_splash
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -4828,6 +4835,7 @@ string select_pet_label
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string sign_out_button
+string splash_logo_desc
 string start_button
 string start_crisis_button
 string status_bar_notification_info_overflow
@@ -5153,6 +5161,9 @@ style Motion_Material3_Spring_Standard_Fast_Spatial
 style Motion_Material3_Spring_Standard_Slow_Effects
 style Motion_Material3_Spring_Standard_Slow_Spatial
 style NoUnderlineEditText
+style NunitoBoldButton
+style NunitoBoldEditText
+style NunitoLightEditText
 style Platform_AppCompat
 style Platform_AppCompat_Light
 style Platform_MaterialComponents

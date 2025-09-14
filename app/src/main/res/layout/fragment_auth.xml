@@ -13,9 +13,19 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
 
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="213dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/splash_logo_desc"
+            android:src="@drawable/logo_final" />
+
         <EditText
             android:id="@+id/etEmail"
             android:hint="@string/auth_email"
+            style="@style/NunitoLightEditText"
             android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"
             android:layout_width="match_parent"
@@ -30,6 +40,7 @@
         <EditText
             android:id="@+id/etPassword"
             android:hint="@string/auth_password"
+            style="@style/NunitoLightEditText"
             android:inputType="textPassword"
             android:autofillHints="password"
             android:layout_width="match_parent"
@@ -43,8 +54,9 @@
             android:background="@drawable/edittext_accent_primary" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignUp"
-            android:text="@string/auth_signup"
+            android:id="@+id/btnSignIn"
+            android:text="@string/auth_signin"
+            style="@style/NunitoBoldButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -56,8 +68,9 @@
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignIn"
-            android:text="@string/auth_signin"
+            android:id="@+id/btnSignUp"
+            android:text="@string/auth_signup"
+            style="@style/NunitoBoldButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -71,6 +84,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnForgot"
             android:text="@string/auth_forgot_password"
+            style="@style/NunitoBoldButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

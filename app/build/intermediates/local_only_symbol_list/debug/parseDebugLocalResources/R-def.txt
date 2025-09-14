@@ -23,6 +23,10 @@ drawable button_accent_primary
 drawable button_error_default
 drawable button_home
 drawable edittext_accent_primary
+drawable ic_launcher_logo
+drawable logo_final
+font nunito_light
+font nunito_semibold
 id btnAddPet
 id btnCancelEdit
 id btnDeleteCrisis
@@ -55,8 +59,10 @@ id groupView
 id ivPetPhoto
 id ivPreview
 id listPets
+id login_logo
 id recyclerPets
 id spSex
+id splash_logo
 id tvAddLabel
 id tvAddSymbol
 id tvBirthDate
@@ -74,6 +80,7 @@ id tvSNeutered
 id tvSSex
 id tvSWeight
 layout activity_main
+layout activity_splash
 layout fragment_auth
 layout fragment_crisis_detail
 layout fragment_crisis_start
@@ -163,9 +170,13 @@ string pet_weight
 string project_id
 string select_pet_label
 string sign_out_button
+string splash_logo_desc
 string start_button
 string start_crisis_button
 string years
 string yes
 style NoUnderlineEditText
+style NunitoBoldButton
+style NunitoBoldEditText
+style NunitoLightEditText
 style Theme.Loveito
