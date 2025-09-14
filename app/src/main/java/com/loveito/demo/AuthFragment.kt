@@ -17,7 +17,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         fun toast(s:String)=Toast.makeText(requireContext(),s,Toast.LENGTH_SHORT).show()
         fun goHome() {
             parentFragmentManager.beginTransaction()
-                .replace((view.parent as android.view.ViewGroup).id, HomeFragment())
+                .replace(R.id.fragment_host, HomeFragment())
                 .commit()
         }
 

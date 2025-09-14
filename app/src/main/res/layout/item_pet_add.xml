@@ -5,13 +5,13 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="8dp"
-    android:background="#FFF"
+    android:background="@color/bg_inverse"
     android:elevation="2dp">
 
     <FrameLayout
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="#EEE"
+        android:background="@color/bg_surface"
         android:foregroundGravity="center">
         <TextView
             android:id="@+id/tvAddSymbol"
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:text="@string/add_symbol"
             android:textSize="48sp"
-            android:textColor="#888"
+            android:textColor="@color/text_secondary"
             android:gravity="center" />
     </FrameLayout>
 

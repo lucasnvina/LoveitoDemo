@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="8dp"
-    android:background="#FFF"
+    android:background="@color/bg_inverse"
     android:elevation="2dp">
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        android:background="#EEE"
+        android:background="@color/bg_surface"
         android:contentDescription="@string/pet_photo_desc" />
 
     <TextView

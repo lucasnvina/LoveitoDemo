@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NoUnderlineEditText">
+        <item name="android:background">@drawable/edittext_accent_primary</item>
+        <item name="android:textColor">@color/accent_primary</item>
+        <item name="android:textColorHint">@color/accent_primary</item>
+    </style>
+</resources>
+

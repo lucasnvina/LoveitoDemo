@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="accent_on">#F6E2CC</color>
+    <color name="accent_primary">#230000</color>
+    <color name="bg_inverse">@color/neutral_000</color>
+    <color name="bg_primary">#F6E2CC</color>
+    <color name="bg_surface">#F6E2CC</color>
+    <color name="black_900">#000000</color>
+    <color name="border_default">@color/rust_500</color>
+    <color name="brown_800">#2E2115</color>
+    <color name="error_accessible">#CF6679</color>
+    <color name="error_default">@color/error_accessible</color>
     <color name="ic_launcher_background">#000000</color>
+    <color name="maroon_900">#230000</color>
+    <color name="neutral_000">#FFFFFF</color>
+    <color name="red_900">#6A0000</color>
+    <color name="rust_500">#B96C30</color>
+    <color name="rust_tinted_off_white">#E6D6CB</color>
+    <color name="text_inverse">@color/maroon_900</color>
+    <color name="text_primary">#2E2115</color>
+    <color name="text_secondary">@color/rust_tinted_off_white</color>
     <string name="add_label">Agregar</string>
     <string name="add_pet_button">Agregar mascota</string>
     <string name="add_symbol">+</string>
@@ -83,5 +101,20 @@
     <string name="start_crisis_button">Registrar crisis</string>
     <string name="years">años</string>
     <string name="yes">Sí</string>
-    <style name="Theme.Loveito" parent="Theme.Material3.DayNight.NoActionBar"/>
+    <style name="NoUnderlineEditText">
+        <item name="android:background">@drawable/edittext_accent_primary</item>
+        <item name="android:textColor">@color/accent_primary</item>
+        <item name="android:textColorHint">@color/accent_primary</item>
+    </style>
+    <style name="Theme.Loveito" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/bg_primary</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent_primary</item>
+        <item name="colorOnSecondary">@color/accent_on</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorSurface">@color/bg_surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorError">@color/error_default</item>
+        <item name="colorOnError">@color/text_primary</item>
+    </style>
 </resources>

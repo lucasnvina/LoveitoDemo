@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -35,18 +36,63 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="12dp"
-                android:background="#1FFFFFFF"
+                android:background="@color/bg_surface"
                 android:layout_marginTop="12dp">
 
-                <TextView android:id="@+id/tvSName" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_name"/>
-                <TextView android:id="@+id/tvSBreed" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_breed"/>
-                <TextView android:id="@+id/tvSWeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_weight"/>
-                <TextView android:id="@+id/tvSSex" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_sex"/>
-                <TextView android:id="@+id/tvSBirth" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_birth"/>
-                <TextView android:id="@+id/tvSAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_age"/>
-                <TextView android:id="@+id/tvSNeutered" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_neutered"/>
-                <TextView android:id="@+id/tvSHeight" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_height"/>
-                <TextView android:id="@+id/tvSLength" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/pet_label_length"/>
+                <TextView
+                    android:id="@+id/tvSName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_name"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSBreed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_breed"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_weight"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_sex"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_birth"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_age"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSNeutered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_neutered"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_height"
+                    android:textColor="@color/text_primary"/>
+                <TextView
+                    android:id="@+id/tvSLength"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_length"
+                    android:textColor="@color/text_primary"/>
             </LinearLayout>
 
             <TextView
@@ -64,20 +110,30 @@
                 android:orientation="vertical"
                 android:layout_marginTop="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnStartEdit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/pet_btn_edit"
-                android:layout_marginTop="16dp" />
-            <Button
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/accent_primary"
+                android:textColor="@color/accent_on"
+                app:cornerRadius="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal" />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeletePet"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/pet_btn_delete"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="#D32F2F"
-                android:textColor="@android:color/white" />
+                android:backgroundTint="@color/error_default"
+                android:textColor="@color/accent_on"
+                app:cornerRadius="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <!-- EDIT MODE -->
@@ -94,11 +150,17 @@
                 android:text="@string/pet_label_profile_photo"
                 android:textStyle="bold"
                 android:layout_marginTop="12dp"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPickImage"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/pet_btn_pick_image" />
+                android:text="@string/pet_btn_pick_image"
+                android:backgroundTint="@color/accent_primary"
+                android:textColor="@color/accent_on"
+                app:cornerRadius="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -159,11 +221,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPickBirth"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="@string/pet_btn_pick_birth" />
+                    android:text="@string/pet_btn_pick_birth"
+                    android:backgroundTint="@color/accent_primary"
+                    android:textColor="@color/accent_on"
+                    app:cornerRadius="12dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/tvBirthDate"
@@ -213,33 +281,44 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSavePet"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="@string/pet_btn_save" />
-
-                <Space
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
+                    android:text="@string/pet_btn_save"
+                    android:backgroundTint="@color/accent_primary"
+                    android:textColor="@color/accent_on"
+                    app:cornerRadius="12dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center_horizontal" />
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancelEdit"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:text="@string/pet_btn_cancel" />
+                    android:text="@string/pet_btn_cancel"
+                    android:backgroundTint="@color/accent_primary"
+                    android:textColor="@color/accent_on"
+                    app:cornerRadius="12dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_gravity="center_horizontal" />
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeletePetEdit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/pet_btn_delete_pet"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="#D32F2F"
-                android:textColor="@android:color/white" />
+                android:backgroundTint="@color/error_default"
+                android:textColor="@color/accent_on"
+                app:cornerRadius="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
     </LinearLayout>

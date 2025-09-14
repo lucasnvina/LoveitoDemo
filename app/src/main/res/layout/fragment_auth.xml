@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:padding="16dp"
     android:layout_width="match_parent"
@@ -18,7 +19,13 @@
             android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/accent_primary"
+            android:textColorHint="@color/accent_primary"
+            android:background="@drawable/edittext_accent_primary" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -27,27 +34,51 @@
             android:autofillHints="password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/accent_primary"
+            android:textColorHint="@color/accent_primary"
+            android:background="@drawable/edittext_accent_primary" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
             android:text="@string/auth_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/accent_primary"
+            android:textColor="@color/accent_on"
+            app:cornerRadius="12dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignIn"
             android:text="@string/auth_signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/accent_primary"
+            android:textColor="@color/accent_on"
+            app:cornerRadius="12dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnForgot"
             android:text="@string/auth_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/accent_primary"
+            android:textColor="@color/accent_on"
+            app:cornerRadius="12dp" />
     </LinearLayout>
 </ScrollView>

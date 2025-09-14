@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Palette -->
+    <color name="black_900">#000000</color>
+    <color name="maroon_900">#230000</color>
+    <color name="rust_500">#B96C30</color>
+    <color name="brown_800">#2E2115</color>
+    <color name="red_900">#6A0000</color>
+    <color name="neutral_000">#FFFFFF</color>
+    <color name="rust_tinted_off_white">#E6D6CB</color>
+    <color name="error_accessible">#CF6679</color>
+
+    <!-- Semantic Tokens -->
+    <color name="bg_primary">#F6E2CC</color>
+    <color name="bg_surface">#F6E2CC</color>
+    <color name="bg_inverse">@color/neutral_000</color>
+
+    <color name="text_primary">#2E2115</color>
+    <color name="text_secondary">@color/rust_tinted_off_white</color>
+    <color name="text_inverse">@color/maroon_900</color>
+
+    <color name="accent_primary">#230000</color>
+    <color name="accent_on">#F6E2CC</color>
+
+    <color name="border_default">@color/rust_500</color>
+    <color name="error_default">@color/error_accessible</color>
+</resources>

@@ -48,6 +48,10 @@
         "source": "com.loveito.demo.app-main-64:/layout/item_pet_grid.xml"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_button_home.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/button_home.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pet_form.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/fragment_pet_form.xml"
     },
@@ -58,6 +62,10 @@
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_button_error_default.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/button_error_default.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_crisis_detail.xml.flat",
@@ -84,16 +92,24 @@
         "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher.png"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_button_accent_primary.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/button_accent_primary.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xhdpi/ic_launcher_foreground.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_auth.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/fragment_auth.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher.png.flat",
