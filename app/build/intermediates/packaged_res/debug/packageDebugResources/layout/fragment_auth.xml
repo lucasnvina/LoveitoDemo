@@ -20,7 +20,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:contentDescription="@string/splash_logo_desc"
-            android:src="@drawable/logo_final" />
+            android:src="@drawable/logo_final"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:padding="0dp" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -56,7 +59,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignIn"
             android:text="@string/auth_signin"
-            style="@style/NunitoBoldButton"
+            style="@style/NunitoBoldButtonRounded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -65,12 +68,12 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/accent_primary"
             android:textColor="@color/accent_on"
-            app:cornerRadius="12dp" />
+            app:cornerRadius="32dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
             android:text="@string/auth_signup"
-            style="@style/NunitoBoldButton"
+            style="@style/NunitoBoldButtonRounded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -79,12 +82,12 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/accent_primary"
             android:textColor="@color/accent_on"
-            app:cornerRadius="12dp" />
+            app:cornerRadius="32dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnForgot"
             android:text="@string/auth_forgot_password"
-            style="@style/NunitoBoldButton"
+            style="@style/NunitoBoldButtonRounded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -93,6 +96,6 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/accent_primary"
             android:textColor="@color/accent_on"
-            app:cornerRadius="12dp" />
+            app:cornerRadius="32dp" />
     </LinearLayout>
 </ScrollView>

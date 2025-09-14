@@ -48,12 +48,20 @@
         "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher.webp"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary_rounded.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary_rounded.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/layout_item_pet_grid.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/item_pet_grid.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_edittext.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/pill_edittext.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/drawable_button_home.xml.flat",
@@ -106,6 +114,10 @@
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_activity_splash.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_button.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/pill_button.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher.webp.flat",

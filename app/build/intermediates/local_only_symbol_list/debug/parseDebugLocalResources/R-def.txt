@@ -23,8 +23,11 @@ drawable button_accent_primary
 drawable button_error_default
 drawable button_home
 drawable edittext_accent_primary
+drawable edittext_accent_primary_rounded
 drawable ic_launcher_logo
 drawable logo_final
+drawable pill_button
+drawable pill_edittext
 font nunito_light
 font nunito_semibold
 id btnAddPet
@@ -177,6 +180,7 @@ string years
 string yes
 style NoUnderlineEditText
 style NunitoBoldButton
+style NunitoBoldButtonRounded
 style NunitoBoldEditText
 style NunitoLightEditText
 style Theme.Loveito
