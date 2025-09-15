@@ -38,6 +38,7 @@
     <string name="start_button">Iniciar</string>
     <string name="pet_name_label">Nombre</string>
     <string name="pet_photo_desc">Foto mascota</string>
+    <string name="user_photo_desc">Foto de usuario</string>
     <string name="add_symbol">+</string>
     <string name="add_label">Agregar</string>
     <string name="crisis_title">Crisis</string>

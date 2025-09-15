@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        android:background="@color/bg_surface"
+        android:background="@drawable/circle_transparent"
         android:contentDescription="@string/pet_photo_desc" />
 
     <TextView

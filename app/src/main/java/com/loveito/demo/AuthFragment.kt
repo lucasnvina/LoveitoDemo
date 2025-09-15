@@ -11,14 +11,15 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     private val auth by lazy { FirebaseAuth.getInstance() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Hide status bar for login screen
+        requireActivity().window.insetsController?.hide(android.view.WindowInsets.Type.statusBars())
+
         val emailEt = view.findViewById<EditText>(R.id.etEmail)
         val passEt  = view.findViewById<EditText>(R.id.etPassword)
 
         fun toast(s:String)=Toast.makeText(requireContext(),s,Toast.LENGTH_SHORT).show()
         fun goHome() {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, HomeFragment())
-                .commit()
+            (requireActivity() as? MainActivity)?.navigateToFragment(HomeFragment())
         }
 
         view.findViewById<Button>(R.id.btnSignUp).setOnClickListener {
@@ -44,5 +45,9 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
                 .addOnSuccessListener { toast("Email enviado") }
                 .addOnFailureListener { toast(it.localizedMessage ?: "No se pudo enviar") }
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as? MainActivity)?.updateTopBarVisibility()
     }
 }

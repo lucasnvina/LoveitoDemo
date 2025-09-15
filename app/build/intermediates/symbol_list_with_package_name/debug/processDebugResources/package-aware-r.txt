@@ -3625,6 +3625,7 @@ drawable btn_radio_on_to_off_mtrl_animation
 drawable button_accent_primary
 drawable button_error_default
 drawable button_home
+drawable circle_transparent
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -3678,6 +3679,7 @@ drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
 drawable ic_search_black_24
+drawable ic_user_placeholder
 drawable logo_final
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3871,6 +3873,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btnAddPet
 id btnCancelEdit
+id btnChangePhoto
 id btnDeleteCrisis
 id btnDeletePet
 id btnDeletePetEdit
@@ -3878,8 +3881,8 @@ id btnForgot
 id btnPickBirth
 id btnPickImage
 id btnSavePet
+id btnSaveProfile
 id btnSignIn
-id btnSignOut
 id btnSignUp
 id btnStart
 id btnStartCrisis
@@ -3971,7 +3974,9 @@ id enterAlwaysCollapsed
 id entireSpace
 id escape
 id etEmail
+id etFirstName
 id etHeightCm
+id etLastName
 id etLengthCm
 id etPassword
 id etPetBreed
@@ -4034,6 +4039,8 @@ id italic
 id item_touch_helper_previous_elevation
 id ivPetPhoto
 id ivPreview
+id ivProfilePhoto
+id ivUserPhoto
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -4290,6 +4297,7 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id top
+id topBar
 id topPanel
 id top_center
 id touch_outside
@@ -4310,6 +4318,7 @@ id tvBirthDate
 id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
+id tvEmail
 id tvPetName
 id tvSAge
 id tvSBirth
@@ -4320,6 +4329,7 @@ id tvSName
 id tvSNeutered
 id tvSSex
 id tvSWeight
+id tvUserName
 id unchecked
 id uniform
 id unlabeled
@@ -4490,6 +4500,7 @@ layout fragment_crisis_start
 layout fragment_home
 layout fragment_pet_form
 layout fragment_pets_list
+layout fragment_profile
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_pet_add
@@ -4557,6 +4568,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout top_bar
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
@@ -4842,6 +4854,7 @@ string splash_logo_desc
 string start_button
 string start_crisis_button
 string status_bar_notification_info_overflow
+string user_photo_desc
 string years
 string yes
 style AlertDialog_AppCompat

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -37,12 +39,33 @@ class HomeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-        view.findViewById<Button>(R.id.btnSignOut).setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, AuthFragment())
-                .commit()
+
+        // Listener para desplegar el menú al tocar la foto de usuario
+        val ivUserPhoto = view.findViewById<ImageView>(R.id.ivUserPhoto)
+        ivUserPhoto?.setOnClickListener {
+            val popup = PopupMenu(requireContext(), ivUserPhoto)
+            popup.menu.add("Ver Perfil")
+            popup.menu.add("Cerrar Sesión")
+            popup.setOnMenuItemClickListener { item ->
+                when (item.title) {
+                    "Ver Perfil" -> {
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_host, ProfileFragment())
+                            .addToBackStack(null)
+                            .commit()
+                        true
+                    }
+                    "Cerrar Sesión" -> {
+                        FirebaseAuth.getInstance().signOut()
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_host, AuthFragment())
+                            .commit()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popup.show()
         }
     }
 
@@ -67,5 +90,10 @@ class HomeFragment : Fragment() {
         }, onError = {
             Toast.makeText(requireContext(), "Error cargando mascotas", Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? MainActivity)?.updateTopBarVisibility()
     }
 }

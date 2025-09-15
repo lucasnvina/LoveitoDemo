@@ -48,6 +48,10 @@
         "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher.webp"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_circle_transparent.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/circle_transparent.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary_rounded.xml.flat",
         "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary_rounded.xml"
     },
@@ -76,6 +80,10 @@
         "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_profile.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/fragment_profile.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/drawable_button_error_default.xml.flat",
         "source": "com.loveito.demo.app-main-64:/drawable/button_error_default.xml"
     },
@@ -100,6 +108,10 @@
         "source": "com.loveito.demo.app-main-64:/layout/activity_main.xml"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/layout_top_bar.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/top_bar.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
@@ -110,6 +122,10 @@
     {
         "merged": "com.loveito.demo.app-debug-62:/drawable_button_accent_primary.xml.flat",
         "source": "com.loveito.demo.app-main-64:/drawable/button_accent_primary.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_ic_user_placeholder.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/ic_user_placeholder.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_activity_splash.xml.flat",
@@ -128,12 +144,12 @@
         "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_auth.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/fragment_auth.xml"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_auth.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/fragment_auth.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pets_list.xml.flat",

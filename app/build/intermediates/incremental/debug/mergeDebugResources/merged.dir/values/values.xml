@@ -2745,6 +2745,7 @@
     <string name="start_button">Iniciar</string>
     <string name="start_crisis_button">Registrar crisis</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="user_photo_desc">Foto de usuario</string>
     <string name="years">años</string>
     <string name="yes">Sí</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
