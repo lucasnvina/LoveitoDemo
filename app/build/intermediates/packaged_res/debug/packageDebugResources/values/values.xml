@@ -35,6 +35,7 @@
     <string name="cancel">Cancelar</string>
     <string name="chevron_desc">Chevron hacia la derecha</string>
     <string name="cm">cm</string>
+    <string name="collapse_desc">Colapsar</string>
     <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
     <string name="crisis_meta">Meta</string>
     <string name="crisis_recommendations">Recomendaciones:</string>
@@ -59,6 +60,9 @@
     <string name="heart_desc">Icono de corazón</string>
     <string name="kg">kg</string>
     <string name="last_crisis_label">Última Crisis</string>
+    <string name="logo_loveito_dog_desc">Logo Loveito Dog</string>
+    <string name="medication_desc">Medicación</string>
+    <string name="medication_label">Medicación</string>
     <string name="no">No</string>
     <string name="no_crises">Sin crisis registradas</string>
     <string name="no_crisis_registered">Sin crisis registrada</string>
@@ -107,7 +111,14 @@
     <string name="pet_updated">Mascota actualizada</string>
     <string name="pet_weight">Peso: %1$s</string>
     <string name="project_id" translatable="false">loveito-aeec9</string>
+    <string name="recommendation_item_1">• Item de recomendación 1</string>
+    <string name="recommendation_item_2">• Item de recomendación 2</string>
+    <string name="recommendation_item_3">• Item de recomendación 3</string>
+    <string name="recommendations_desc">Recomendaciones</string>
+    <string name="recommendations_label">Recomendaciones</string>
     <string name="select_pet_label">Elegí la mascota</string>
+    <string name="share_desc">Compartir</string>
+    <string name="share_label">Compartir</string>
     <string name="sign_out_button">Cerrar sesión</string>
     <string name="splash_logo_desc">Logo de la pantalla de inicio</string>
     <string name="start_button">Iniciar</string>

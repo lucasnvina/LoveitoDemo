@@ -98,6 +98,7 @@ class PetFormFragment : Fragment() {
     }
 
     private var rootView: View? = null
+    private lateinit var scrollView: ScrollView // <-- Add this property
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pet_form, container, false)
@@ -311,17 +312,28 @@ class PetFormFragment : Fragment() {
                 .commit()
         }
 
+        // Collapsible Recommendations Card setup
         headerRecommendations = view.findViewById(R.id.headerRecommendations)
         contentRecommendations = view.findViewById(R.id.contentRecommendations)
         ivCollapseArrow = view.findViewById(R.id.ivCollapseArrow)
-        // Start collapsed
+
+        // Ensure collapsed by default (redundant, but safe)
         contentRecommendations.visibility = View.GONE
         ivCollapseArrow.rotation = 0f
+
         headerRecommendations.setOnClickListener {
-            val isVisible = contentRecommendations.visibility == View.VISIBLE
-            contentRecommendations.visibility = if (isVisible) View.GONE else View.VISIBLE
-            ivCollapseArrow.animate().rotation(if (isVisible) 0f else 180f).setDuration(200).start()
+            val isCollapsed = contentRecommendations.visibility == View.GONE
+            if (isCollapsed) {
+                contentRecommendations.visibility = View.VISIBLE
+                ivCollapseArrow.animate().rotation(180f).setDuration(200).start()
+            } else {
+                contentRecommendations.visibility = View.GONE
+                ivCollapseArrow.animate().rotation(0f).setDuration(200).start()
+            }
         }
+
+        // Ensure ScrollView has enough bottom padding to avoid overlap with logo
+        // Removed programmatic padding adjustment, now handled in XML
     }
 
     override fun onResume() {

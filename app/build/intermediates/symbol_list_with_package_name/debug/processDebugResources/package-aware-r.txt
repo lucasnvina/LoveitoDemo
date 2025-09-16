@@ -4670,6 +4670,7 @@ string character_counter_pattern
 string chevron_desc
 string clear_text_end_icon_content_description
 string cm
+string collapse_desc
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title
@@ -4725,6 +4726,7 @@ string icon_content_description
 string item_view_role_description
 string kg
 string last_crisis_label
+string logo_loveito_dog_desc
 string m3_exceed_max_badge_text_suffix
 string m3_loading_indicator_content_description
 string m3_ref_typeface_brand_medium
@@ -4764,6 +4766,8 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string medication_desc
+string medication_label
 string mtrl_badge_numberless_content_description
 string mtrl_button_collapsed_content_description
 string mtrl_button_expanded_content_description
@@ -4887,11 +4891,18 @@ string pet_sex
 string pet_updated
 string pet_weight
 string project_id
+string recommendation_item_1
+string recommendation_item_2
+string recommendation_item_3
+string recommendations_desc
+string recommendations_label
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
 string select_pet_label
+string share_desc
+string share_label
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string sign_out_button

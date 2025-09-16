@@ -89,4 +89,15 @@
     <string name="avg_time_desc">Icono de reloj</string>
     <string name="avg_time_label">Tiempo medio</string>
     <string name="fab_loveito_icon_desc">Botón Loveito</string>
+    <string name="share_desc">Compartir</string>
+    <string name="share_label">Compartir</string>
+    <string name="medication_desc">Medicación</string>
+    <string name="medication_label">Medicación</string>
+    <string name="recommendations_desc">Recomendaciones</string>
+    <string name="recommendations_label">Recomendaciones</string>
+    <string name="collapse_desc">Colapsar</string>
+    <string name="recommendation_item_1">• Item de recomendación 1</string>
+    <string name="recommendation_item_2">• Item de recomendación 2</string>
+    <string name="recommendation_item_3">• Item de recomendación 3</string>
+    <string name="logo_loveito_dog_desc">Logo Loveito Dog</string>
 </resources>

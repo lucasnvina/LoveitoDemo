@@ -91,6 +91,7 @@ id listPets
 id login_logo
 id recyclerPets
 id rvCrises
+id scrollView
 id sectionAvgTime
 id sectionLastCrisis
 id sectionMedication
@@ -156,6 +157,7 @@ string avg_time_label
 string cancel
 string chevron_desc
 string cm
+string collapse_desc
 string crisis_item
 string crisis_meta
 string crisis_recommendations
@@ -180,6 +182,9 @@ string google_storage_bucket
 string heart_desc
 string kg
 string last_crisis_label
+string logo_loveito_dog_desc
+string medication_desc
+string medication_label
 string no
 string no_crises
 string no_crisis_registered
@@ -228,7 +233,14 @@ string pet_sex
 string pet_updated
 string pet_weight
 string project_id
+string recommendation_item_1
+string recommendation_item_2
+string recommendation_item_3
+string recommendations_desc
+string recommendations_label
 string select_pet_label
+string share_desc
+string share_label
 string sign_out_button
 string splash_logo_desc
 string start_button
