@@ -11,9 +11,39 @@ class MainActivity : AppCompatActivity() {
         topBar?.visibility = if (fragment != null && fragment::class.java.simpleName == "AuthFragment") android.view.View.GONE else android.view.View.VISIBLE
     }
 
+    private fun loadUserPhoto() {
+        val ivUserPhoto = findViewById<android.widget.ImageView>(R.id.ivUserPhoto)
+        val tvUserName = findViewById<android.widget.TextView>(R.id.tvUserName)
+        val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+        db.collection("users").document(uid).get().addOnSuccessListener { doc ->
+            val photoUrl = doc.getString("photoUrl")
+            val firstName = doc.getString("firstName") ?: ""
+            // Solo mostrar el primer nombre (primer palabra)
+            val firstWord = firstName.split(" ").firstOrNull()?.trim() ?: "Usuario"
+            tvUserName?.text = if (firstWord.isNotBlank()) firstWord else "Usuario"
+            if (!photoUrl.isNullOrEmpty()) {
+                try {
+                    com.bumptech.glide.Glide.with(this)
+                        .load(photoUrl)
+                        .circleCrop()
+                        .placeholder(R.drawable.ic_user_placeholder)
+                        .error(R.drawable.ic_user_placeholder)
+                        .into(ivUserPhoto)
+                } catch (_: Exception) {}
+            } else {
+                ivUserPhoto?.setImageResource(R.drawable.ic_user_placeholder)
+            }
+        }.addOnFailureListener {
+            tvUserName?.text = "Usuario"
+            ivUserPhoto?.setImageResource(R.drawable.ic_user_placeholder)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         updateTopBarVisibility()
+        loadUserPhoto()
     }
 
     override fun onStart() {
@@ -72,6 +102,8 @@ class MainActivity : AppCompatActivity() {
             }
             navigateToFragment(start)
         }
+
+        loadUserPhoto()
     }
 
     fun navigateToFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean = false) {

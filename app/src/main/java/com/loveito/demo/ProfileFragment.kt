@@ -78,6 +78,10 @@ class ProfileFragment : Fragment() {
         btnSaveProfile.setOnClickListener {
             val firstName = etFirstName.text.toString().trim()
             val lastName = etLastName.text.toString().trim()
+            if (firstName.isEmpty() || lastName.isEmpty()) {
+                android.widget.Toast.makeText(requireContext(), "Nombre y apellido son obligatorios", android.widget.Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val updates = hashMapOf<String, Any>(
                 "firstName" to firstName,
                 "lastName" to lastName,
@@ -85,16 +89,30 @@ class ProfileFragment : Fragment() {
             )
             if (selectedPhotoUri != null) {
                 // Subir foto a Storage y guardar URL
-                val ref = storage.reference.child("profile_photos/$uid.jpg")
+                val ref = storage.reference.child("users/$uid/profilepic")
                 ref.putFile(selectedPhotoUri!!).continueWithTask { task ->
                     if (!task.isSuccessful) throw task.exception!!
                     ref.downloadUrl
                 }.addOnSuccessListener { uri ->
                     updates["photoUrl"] = uri.toString()
                     db.collection("users").document(uid).set(updates)
+                        .addOnSuccessListener {
+                            android.widget.Toast.makeText(requireContext(), "Perfil guardado", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener {
+                            android.widget.Toast.makeText(requireContext(), "Error al guardar perfil", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                }.addOnFailureListener { exception ->
+                    android.widget.Toast.makeText(requireContext(), "Error al subir foto: ${exception.message}", android.widget.Toast.LENGTH_LONG).show()
                 }
             } else {
                 db.collection("users").document(uid).set(updates)
+                    .addOnSuccessListener {
+                        android.widget.Toast.makeText(requireContext(), "Perfil guardado", android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        android.widget.Toast.makeText(requireContext(), "Error al guardar perfil", android.widget.Toast.LENGTH_SHORT).show()
+                    }
             }
         }
 
