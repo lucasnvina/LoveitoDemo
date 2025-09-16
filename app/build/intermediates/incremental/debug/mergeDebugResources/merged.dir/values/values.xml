@@ -2490,6 +2490,9 @@
     <string name="auth_password">Contraseña</string>
     <string name="auth_signin">Ingresar</string>
     <string name="auth_signup">Crear cuenta</string>
+    <string name="avg_crisis_time_format">%1$dm %2$ds</string>
+    <string name="avg_time_desc">Icono de reloj</string>
+    <string name="avg_time_label">Tiempo medio</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string description="A description of an accessibility action to collapse the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_collapse">Collapse the bottom sheet</string>
     <string description="A description of an accessibility action to expand the bottom sheet [CHAR LIMIT=NONE]" name="bottomsheet_action_expand">Expand the bottom sheet</string>
@@ -2533,7 +2536,9 @@
     <string name="crisis_recommendations">Recomendaciones:</string>
     <string name="crisis_severity">Severidad</string>
     <string name="crisis_title">Crisis</string>
+    <string name="crisis_today">Hoy</string>
     <string name="dash">—</string>
+    <string name="days_since_last_crisis">Hace %1$d días</string>
     <string name="delete">Eliminar</string>
     <string name="delete_pet_confirm">¿Querés eliminar esta mascota y sus datos asociados?</string>
     <string name="delete_pet_title">Eliminar mascota</string>
@@ -2545,7 +2550,9 @@
     Error: invalid
   </string>
     <string name="error_icon_content_description">Error</string>
+    <string name="error_loading_crisis">Error al cargar</string>
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
+    <string name="fab_loveito_icon_desc">Botón Loveito</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
     <string name="fallback_menu_item_copy_link">Copy link</string>
@@ -2556,10 +2563,12 @@
     <string name="google_app_id" translatable="false">1:958884545779:android:2ceec5a7e14dc9e9f56386</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA4G2EULhcBW7AXKT-ReOiAiSL7gYRE0VM</string>
     <string name="google_storage_bucket" translatable="false">loveito-aeec9.firebasestorage.app</string>
+    <string name="heart_desc">Icono de corazón</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="item_view_role_description">Tab</string>
     <string name="kg">kg</string>
+    <string name="last_crisis_label">Última Crisis</string>
     <string name="m3_exceed_max_badge_text_suffix" translatable="false"><ns2:g example="Some te" id="part of a long text">%1$s</ns2:g><ns2:g example="…" id="suffix">%2$s</ns2:g></string>
     <string description="Content description for a loading indicator [CHAR LIMIT=NONE]" name="m3_loading_indicator_content_description">
     Loading
@@ -2683,6 +2692,7 @@
   </string>
     <string name="no">No</string>
     <string name="no_crises">Sin crisis registradas</string>
+    <string name="no_crisis_registered">Sin crisis registrada</string>
     <string name="not_defined">No definida</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>

@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
 import com.loveito.demo.R
 import java.io.ByteArrayInputStream
 import java.net.HttpURLConnection
@@ -37,7 +38,6 @@ class PetFormFragment : Fragment() {
 
     private val repo = PetsRepository()
     private var pickedUri: Uri? = null
-    private var ivPreview: ImageView? = null
 
     // Groups
     private lateinit var groupView: LinearLayout
@@ -45,6 +45,7 @@ class PetFormFragment : Fragment() {
     private lateinit var btnStartEdit: Button
 
     // Summary
+    private lateinit var ivSummaryPhoto: ImageView
     private lateinit var tvSName: TextView
     private lateinit var tvSBreed: TextView
     private lateinit var tvSWeight: TextView
@@ -54,6 +55,9 @@ class PetFormFragment : Fragment() {
     private lateinit var tvSNeutered: TextView
     private lateinit var tvSHeight: TextView
     private lateinit var tvSLength: TextView
+    private lateinit var tvLastCrisisDate: TextView
+    private lateinit var sectionLastCrisis: View
+    private lateinit var tvAvgCrisisTime: TextView // Nueva referencia para el tiempo medio
 
     // Editor
     private lateinit var etName: EditText
@@ -65,25 +69,30 @@ class PetFormFragment : Fragment() {
     private lateinit var cbNeutered: CheckBox
     private lateinit var etHeight: EditText
     private lateinit var etLength: EditText
-    private lateinit var btnPick: Button
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
     private lateinit var btnDeletePet: Button // Cambiado a lateinit var
+    private lateinit var btnPickImage: MaterialButton
+    private var ivLogoLoveitoDog: ImageView? = null
 
     private var birthDateMillis: Long? = null
 
     // Crisis container
-    private lateinit var crisesContainer: LinearLayout
-    private var crisesItems: MutableList<Crisis> = mutableListOf()
     private var editingId: String? = null
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             pickedUri = uri
             val bmp = decodeBitmapWithExifFromUri(uri)
-            ivPreview?.setImageBitmap(bmp)
+            if (bmp != null) {
+                ivSummaryPhoto.setImageBitmap(bmp)
+            } else {
+                ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+            }
         }
     }
+
+    private var rootView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pet_form, container, false)
@@ -91,8 +100,8 @@ class PetFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rootView = view
 
-        ivPreview = view.findViewById(R.id.ivPreview)
         groupView = view.findViewById(R.id.groupView)
         groupEdit = view.findViewById(R.id.groupEdit)
         btnStartEdit = view.findViewById(R.id.btnStartEdit)
@@ -117,6 +126,7 @@ class PetFormFragment : Fragment() {
                 .show()
         }
 
+        ivSummaryPhoto = view.findViewById(R.id.ivSummaryPhoto)
         tvSName = view.findViewById(R.id.tvSName)
         tvSBreed = view.findViewById(R.id.tvSBreed)
         tvSWeight = view.findViewById(R.id.tvSWeight)
@@ -126,6 +136,9 @@ class PetFormFragment : Fragment() {
         tvSNeutered = view.findViewById(R.id.tvSNeutered)
         tvSHeight = view.findViewById(R.id.tvSHeight)
         tvSLength = view.findViewById(R.id.tvSLength)
+        tvLastCrisisDate = view.findViewById(R.id.tvLastCrisisDate)
+        sectionLastCrisis = view.findViewById(R.id.sectionLastCrisis)
+        tvAvgCrisisTime = view.findViewById(R.id.tvAvgCrisisTime) // Inicializar la referencia del tiempo medio
 
         etName = view.findViewById(R.id.etPetName)
         etBreed = view.findViewById(R.id.etPetBreed)
@@ -136,11 +149,13 @@ class PetFormFragment : Fragment() {
         cbNeutered = view.findViewById(R.id.cbNeutered)
         etHeight = view.findViewById(R.id.etHeightCm)
         etLength = view.findViewById(R.id.etLengthCm)
-        btnPick = view.findViewById(R.id.btnPickImage)
         btnSave = view.findViewById(R.id.btnSavePet)
         btnCancel = view.findViewById(R.id.btnCancelEdit)
         btnDeletePet = view.findViewById(R.id.btnDeletePet)
-        crisesContainer = view.findViewById(R.id.containerCrises)
+        btnPickImage = view.findViewById(R.id.btnPickImage)
+        btnPickImage.setOnClickListener {
+            pickImage.launch("image/*")
+        }
 
         val sexAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, listOf("","Macho","Hembra","Otro"))
         spSex.adapter = sexAdapter
@@ -149,6 +164,7 @@ class PetFormFragment : Fragment() {
 
         if (editingId != null) {
             switchToViewMode()
+            btnPickImage.visibility = View.GONE
             repo.getPet(editingId!!,
                 onSuccess = { p ->
                     // fill editor fields for when user taps "Editar"
@@ -163,7 +179,18 @@ class PetFormFragment : Fragment() {
                     birthDateMillis = p.birthDate
                     if (birthDateMillis != null) tvBirthDate.text = formatDate(birthDateMillis!!)
 
-                    p.photoUrl?.let { url -> loadBitmapWithExifFromUrl(url) { bmp -> ivPreview?.setImageBitmap(bmp) } }
+                    // Set photo in summary
+                    if (p.photoUrl != null && p.photoUrl.isNotEmpty()) {
+                        loadBitmapWithExifFromUrl(p.photoUrl) { bmp ->
+                            if (bmp != null) {
+                                ivSummaryPhoto.setImageBitmap(bmp)
+                            } else {
+                                ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                            }
+                        }
+                    } else {
+                        ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                    }
 
                     renderSummary(p)
                     loadCrises(p.id)
@@ -174,9 +201,8 @@ class PetFormFragment : Fragment() {
             // Creating new pet -> only edit mode
             btnDeletePet.visibility = View.GONE
             switchToEditMode()
+            btnPickImage.visibility = View.VISIBLE
         }
-
-        btnPick.setOnClickListener { pickImage.launch("image/*") }
 
         btnPickBirth.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -227,8 +253,9 @@ class PetFormFragment : Fragment() {
 
         btnStartEdit.setOnClickListener {
             switchToEditMode()
+            btnPickImage.visibility = View.VISIBLE
+            ivLogoLoveitoDog?.visibility = View.GONE // Hide in edit mode
         }
-
         btnCancel.setOnClickListener {
             pickedUri = null
             // reload pet to refresh editor fields to last saved
@@ -248,6 +275,35 @@ class PetFormFragment : Fragment() {
                 }, onError = {})
             }
             switchToViewMode()
+            btnPickImage.visibility = View.GONE
+            ivLogoLoveitoDog?.visibility = View.VISIBLE // Show in view mode
+        }
+
+        sectionLastCrisis.setOnClickListener {
+            // Navegar al fragmento de lista de crisis
+            editingId?.let { petId ->
+                val args = Bundle().apply { putString("petId", petId) }
+                val fragment = PetCrisesFragment()
+                fragment.arguments = args
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_host, fragment)
+                    .addToBackStack(null)
+                    .commit()
+        }
+        }
+
+        ivLogoLoveitoDog = view.findViewById(R.id.ivLogoLoveitoDog)
+        // Set visibility based on mode
+        if (editingId != null) {
+            ivLogoLoveitoDog?.visibility = View.VISIBLE
+        } else {
+            ivLogoLoveitoDog?.visibility = View.GONE
+        }
+        ivLogoLoveitoDog?.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_host, com.loveito.demo.pets.CrisisStartFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
@@ -256,16 +312,21 @@ class PetFormFragment : Fragment() {
         editingId?.let { loadCrises(it) }
     }
 
-    override fun onDestroyView() { super.onDestroyView(); ivPreview = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        rootView = null
+    }
 
     private fun switchToViewMode() {
         groupView.visibility = View.VISIBLE
         groupEdit.visibility = View.GONE
+        ivLogoLoveitoDog?.visibility = View.VISIBLE
     }
 
     private fun switchToEditMode() {
         groupView.visibility = View.GONE
         groupEdit.visibility = View.VISIBLE
+        ivLogoLoveitoDog?.visibility = View.GONE
     }
 
     private fun save(name: String, breed: String?, weightKg: Double?, sex: String?, birthDate: Long?, neutered: Boolean, heightCm: Double?, lengthCm: Double?) {
@@ -295,70 +356,49 @@ class PetFormFragment : Fragment() {
     private fun loadCrises(petId: String) {
         repo.getCrisesForPet(petId,
             onSuccess = { list ->
-                crisesItems.clear(); crisesItems.addAll(list)
-                renderCrises()
+                // Calcular tiempo medio de crisis
+                val avgText = if (list.isNotEmpty()) {
+                    val avgSec = list.map { it.durationSec }.average().toInt()
+                    val min = avgSec / 60
+                    val sec = avgSec % 60
+                    getString(R.string.avg_crisis_time_format, min, sec)
+                } else {
+                    "-"
+                }
+                tvAvgCrisisTime.text = avgText
+
+                // Última crisis: días desde la última
+                if (list.isNotEmpty()) {
+                    val lastCrisis = list.maxByOrNull { it.startedAt }
+                    lastCrisis?.let {
+                        val now = System.currentTimeMillis()
+                        val days = ((now - it.startedAt) / (1000 * 60 * 60 * 24)).toInt()
+                        val daysText = if (days == 0) getString(R.string.crisis_today) else getString(R.string.days_since_last_crisis, days)
+                        tvLastCrisisDate.text = daysText
+                    }
+                } else {
+                    tvLastCrisisDate.text = getString(R.string.no_crisis_registered)
+                }
             },
-            onError = { e -> Toast.makeText(requireContext(), "Error al cargar crisis: ${e.localizedMessage}", Toast.LENGTH_SHORT).show() }
+            onError = { e ->
+                tvAvgCrisisTime.text = "-"
+                tvLastCrisisDate.text = getString(R.string.error_loading_crisis)
+            }
         )
     }
 
-    private fun renderCrises() {
-        crisesContainer.removeAllViews()
-        if (crisesItems.isEmpty()) {
-            val empty = TextView(requireContext())
-            empty.text = getString(R.string.no_crises)
-            empty.setPadding(8, 8, 8, 8)
-            crisesContainer.addView(empty)
-            return
-        }
-        for (c in crisesItems) {
-            val row = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.VERTICAL
-                setPadding(16, 12, 16, 12)
-            }
-            val ts = java.text.SimpleDateFormat("dd/MM HH:mm", java.util.Locale.getDefault()).format(java.util.Date(c.startedAt))
-            val mins = c.durationSec / 60
-            val secs = c.durationSec % 60
-            val sev = (c.triageSeverity ?: "").lowercase()
-            val sevTag = when (sev) {
-                "red" -> " [EMERGENCIA]"
-                "amber" -> " [URGENCIA]"
-                "green" -> " [OK]"
-                else -> ""
-            }
-            val title = TextView(requireContext()).apply {
-                text = getString(R.string.crisis_item, ts, c.note ?: "crisis", mins, secs, sevTag)
-                textSize = 16f
-            }
-            row.addView(title)
-            row.setOnClickListener {
-                val frag = CrisisDetailFragment.newInstance(c.petId, c.id)
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_host, frag)
-                    .addToBackStack(null)
-                    .commit()
-            }
-            val divider = View(requireContext()).apply {
-                setBackgroundColor(0x22FFFFFF)
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 1
-                ).apply { setMargins(0, 8, 0, 8) }
-            }
-            crisesContainer.addView(row)
-            crisesContainer.addView(divider)
-        }
-    }
-
     private fun renderSummary(p: Pet) {
-        tvSName.text = getString(R.string.pet_name, p.name)
-        tvSBreed.text = getString(R.string.pet_breed, p.breed ?: getString(R.string.dash))
-        tvSWeight.text = getString(R.string.pet_weight, p.weightKg?.let { "${it} ${getString(R.string.kg)}" } ?: getString(R.string.dash))
-        tvSSex.text = getString(R.string.pet_sex, p.sex ?: getString(R.string.dash))
-        tvSBirth.text = getString(R.string.pet_birth, p.birthDate?.let { formatDate(it) } ?: getString(R.string.dash))
-        tvSAge.text = getString(R.string.pet_age, p.birthDate?.let { yearsFrom(it) }?.let { "$it ${getString(R.string.years)}" } ?: getString(R.string.dash))
-        tvSNeutered.text = getString(R.string.pet_neutered, if (p.neutered == true) getString(R.string.yes) else getString(R.string.no))
-        tvSHeight.text = getString(R.string.pet_height, p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash))
-        tvSLength.text = getString(R.string.pet_length, p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash))
+        tvSName.text = p.name
+        // Solo el dato, sin prefijo
+        tvSBreed.text = p.breed ?: getString(R.string.dash)
+        tvSWeight.text = p.weightKg?.let { "${it} ${getString(R.string.kg)}" } ?: getString(R.string.dash)
+        tvSSex.text = p.sex ?: getString(R.string.dash)
+        tvSBirth.text = p.birthDate?.let { formatDate(it) } ?: getString(R.string.dash)
+        tvSAge.text = p.birthDate?.let { yearsFrom(it) }?.let { "$it ${getString(R.string.years)}" } ?: getString(R.string.dash)
+        tvSNeutered.text = if (p.neutered == true) getString(R.string.yes) else getString(R.string.no)
+        tvSHeight.text = p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
+        tvSLength.text = p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
+        // Optionally, set image here as well if needed
     }
 
     private fun yearsFrom(millis: Long): Int {

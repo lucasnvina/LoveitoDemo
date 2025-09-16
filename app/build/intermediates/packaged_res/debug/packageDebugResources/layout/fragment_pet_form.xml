@@ -1,325 +1,450 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="true"
+        android:paddingTop="?attr/actionBarSize"
+        android:paddingBottom="48dp">
 
-        <!-- Foto visible en ambos modos -->
-        <ImageView
-            android:id="@+id/ivPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:maxHeight="300dp"
-            android:src="@android:color/darker_gray"
-            android:contentDescription="@string/pet_photo_desc" />
-
-        <!-- VIEW MODE -->
         <LinearLayout
-            android:id="@+id/groupView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Resumen con etiquetas -->
-            <LinearLayout
-                android:id="@+id/cardSummary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:background="@color/bg_surface"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:id="@+id/tvSName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_name"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSBreed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_breed"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSWeight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_weight"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSSex"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_sex"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSBirth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_birth"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSAge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_age"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSNeutered"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_neutered"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSHeight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_height"
-                    android:textColor="@color/text_primary"/>
-                <TextView
-                    android:id="@+id/tvSLength"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pet_label_length"
-                    android:textColor="@color/text_primary"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_crisis"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
-
-            <!-- Lista de crisis -->
-            <LinearLayout
-                android:id="@+id/containerCrises"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnStartEdit"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/pet_btn_edit"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/accent_primary"
-                android:textColor="@color/accent_on"
-                app:cornerRadius="12dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_gravity="center_horizontal" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDeletePet"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/pet_btn_delete"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/error_default"
-                android:textColor="@color/accent_on"
-                app:cornerRadius="12dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-        <!-- EDIT MODE -->
-        <LinearLayout
-            android:id="@+id/groupEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
+            <!-- Nombre arriba de todo -->
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvSName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pet_label_profile_photo"
+                android:text=""
+                android:textAlignment="viewStart"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPickImage"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/pet_btn_pick_image"
-                android:backgroundTint="@color/accent_primary"
-                android:textColor="@color/accent_on"
-                app:cornerRadius="12dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_gravity="center_horizontal" />
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="26sp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/text_primary"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_name"
-                android:layout_marginTop="12dp"/>
-            <EditText
-                android:id="@+id/etPetName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pet_hint_name"
-                android:inputType="textPersonName"
-                android:autofillHints="name" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_breed"
-                android:layout_marginTop="8dp"/>
-            <EditText
-                android:id="@+id/etPetBreed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pet_hint_breed"
-                android:inputType="text"
-                android:autofillHints="text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_weight"
-                android:layout_marginTop="8dp"/>
-            <EditText
-                android:id="@+id/etPetWeight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pet_hint_weight"
-                android:inputType="numberDecimal"
-                android:autofillHints="weight" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_sex_short"
-                android:layout_marginTop="8dp"/>
-            <Spinner
-                android:id="@+id/spSex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_birth_date"
-                android:layout_marginTop="8dp"/>
+            <!-- VIEW MODE -->
             <LinearLayout
+                android:id="@+id/groupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <!-- Tarjeta de datos con foto y datos -->
+                <LinearLayout
+                    android:id="@+id/cardSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:elevation="4dp"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:gravity="center_vertical">
+                    <!-- Foto a la izquierda -->
+                    <FrameLayout
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/pet_photo_border"
+                        android:layout_marginEnd="16dp">
+                        <ImageView
+                            android:id="@+id/ivSummaryPhoto"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="@string/pet_photo_desc"
+                            android:padding="0dp"
+                            android:clipToOutline="true"
+                            android:outlineProvider="background"
+                            android:background="@drawable/circle_transparent" />
+                    </FrameLayout>
+                    <!-- Datos a la derecha -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp">
+                        <!-- Campos con etiqueta en Nunito Bold y dato en Nunito Light -->
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_breed" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingStart="0dp" android:paddingEnd="4dp" />
+                            <TextView android:id="@+id/tvSBreed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" android:paddingStart="0dp" android:paddingEnd="4dp" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_weight" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSWeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_sex" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSSex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_birth" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSBirth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_age" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSAge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_neutered" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSNeutered" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_height" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSHeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_length" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" />
+                            <TextView android:id="@+id/tvSLength" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Sección horizontal: Última Crisis y Tiempo medio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Sección: Última Crisis (izquierda) -->
+                    <LinearLayout
+                        android:id="@+id/sectionLastCrisis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_pet_item"
+                        android:elevation="4dp"
+                        android:padding="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center_vertical">
+                        <!-- Icono corazón -->
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_heart"
+                            android:contentDescription="@string/heart_desc"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="12dp" />
+                        <!-- Título y fecha -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/last_crisis_label"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nunito_semibold"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_primary"
+                                android:gravity="start"
+                                android:paddingBottom="2dp" />
+                            <TextView
+                                android:id="@+id/tvLastCrisisDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_crisis_registered"
+                                android:textSize="13sp"
+                                android:textColor="@color/text_secondary"
+                                android:fontFamily="@font/nunito_light"
+                                android:gravity="start" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Sección: Tiempo medio (derecha) -->
+                    <LinearLayout
+                        android:id="@+id/sectionAvgTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_pet_item"
+                        android:elevation="4dp"
+                        android:padding="16dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical">
+                        <!-- Icono reloj -->
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_timer"
+                            android:contentDescription="@string/avg_time_desc"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="12dp" />
+                        <!-- Título y valor -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/avg_time_label"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nunito_semibold"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_primary"
+                                android:gravity="start"
+                                android:paddingBottom="2dp" />
+                            <TextView
+                                android:id="@+id/tvAvgCrisisTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/dash"
+                                android:textSize="13sp"
+                                android:textColor="@color/text_secondary"
+                                android:fontFamily="@font/nunito_light"
+                                android:gravity="start" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPickBirth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="@string/pet_btn_pick_birth"
-                    android:backgroundTint="@color/accent_primary"
-                    android:textColor="@color/accent_on"
-                    app:cornerRadius="12dp"
+                    android:id="@+id/btnStartEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_btn_edit"
+                    style="@style/NunitoBoldButtonRounded"
+                    android:layout_marginTop="0dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/accent_primary"
+                    android:textColor="@color/accent_on"
+                    app:cornerRadius="32dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDeletePet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_btn_delete"
+                    style="@style/NunitoBoldButtonRounded"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#6a0000"
+                    android:textColor="@color/accent_on"
+                    app:cornerRadius="32dp" />
+            </LinearLayout>
+
+            <!-- EDIT MODE -->
+            <LinearLayout
+                android:id="@+id/groupEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/tvBirthDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pet_label_not_defined"
-                    android:layout_marginStart="12dp"
-                    android:layout_gravity="center_vertical"/>
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/cbNeutered"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_neutered_checkbox"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_height_cm"
-                android:layout_marginTop="8dp"/>
-            <EditText
-                android:id="@+id/etHeightCm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pet_hint_height"
-                android:inputType="numberDecimal"
-                android:autofillHints="height" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pet_label_length_cm"
-                android:layout_marginTop="8dp"/>
-            <EditText
-                android:id="@+id/etLengthCm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pet_hint_length"
-                android:inputType="numberDecimal"
-                android:autofillHints="length" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp">
+                    android:text="@string/pet_label_profile_photo"
+                    android:textStyle="bold"
+                    android:layout_marginTop="12dp"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSavePet"
-                    android:layout_width="0dp"
+                    android:id="@+id/btnPickImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_btn_pick_image"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_name"
+                    android:layout_marginTop="12dp"/>
+                <EditText
+                    android:id="@+id/etPetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pet_hint_name"
+                    android:inputType="textPersonName"
+                    android:autofillHints="name" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_breed"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/etPetBreed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pet_hint_breed"
+                    android:inputType="text"
+                    android:autofillHints="text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_weight"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/etPetWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pet_hint_weight"
+                    android:inputType="numberDecimal"
+                    android:autofillHints="weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_sex_short"
+                    android:layout_marginTop="8dp"/>
+                <Spinner
+                    android:id="@+id/spSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_birth_date"
+                    android:layout_marginTop="8dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPickBirth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="@string/pet_btn_pick_birth"
+                        android:backgroundTint="@color/accent_primary"
+                        android:textColor="@color/accent_on"
+                        app:cornerRadius="12dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/tvBirthDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pet_label_not_defined"
+                        android:layout_marginStart="12dp"
+                        android:layout_gravity="center_vertical"/>
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cbNeutered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_neutered_checkbox"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_height_cm"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/etHeightCm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pet_hint_height"
+                    android:inputType="numberDecimal"
+                    android:autofillHints="height" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_label_length_cm"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/etLengthCm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pet_hint_length"
+                    android:inputType="numberDecimal"
+                    android:autofillHints="length" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSavePet"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="@string/pet_btn_save"
+                        android:backgroundTint="@color/accent_primary"
+                        android:textColor="@color/accent_on"
+                        app:cornerRadius="12dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_gravity="center_horizontal" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancelEdit"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="@string/pet_btn_cancel"
+                        android:backgroundTint="@color/accent_primary"
+                        android:textColor="@color/accent_on"
+                        app:cornerRadius="12dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDeletePetEdit"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:text="@string/pet_btn_save"
-                    android:backgroundTint="@color/accent_primary"
+                    android:text="@string/pet_btn_delete_pet"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/error_default"
                     android:textColor="@color/accent_on"
                     app:cornerRadius="12dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_gravity="center_horizontal" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancelEdit"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:text="@string/pet_btn_cancel"
-                    android:backgroundTint="@color/accent_primary"
-                    android:textColor="@color/accent_on"
-                    app:cornerRadius="12dp"
-                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="24dp"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDeletePetEdit"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/pet_btn_delete_pet"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/error_default"
-                android:textColor="@color/accent_on"
-                app:cornerRadius="12dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_gravity="center_horizontal" />
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
+    <!-- Imagen fija abajo de todo, fuera del ScrollView -->
+    <ImageView
+        android:id="@+id/ivLogoLoveitoDog"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@drawable/logo_loveito_dog"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="Logo Loveito Dog"
+        android:importantForAccessibility="yes" />
+</FrameLayout>

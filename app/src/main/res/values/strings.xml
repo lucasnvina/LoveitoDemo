@@ -79,4 +79,14 @@
     <string name="sign_out_button">Cerrar sesión</string>
     <string name="splash_logo_desc">Logo de la pantalla de inicio</string>
     <string name="chevron_desc">Chevron hacia la derecha</string>
+    <string name="no_crisis_registered">Sin crisis registrada</string>
+    <string name="error_loading_crisis">Error al cargar</string>
+    <string name="days_since_last_crisis">Hace %1$d días</string>
+    <string name="crisis_today">Hoy</string>
+    <string name="avg_crisis_time_format">%1$dm %2$ds</string>
+    <string name="heart_desc">Icono de corazón</string>
+    <string name="last_crisis_label">Última Crisis</string>
+    <string name="avg_time_desc">Icono de reloj</string>
+    <string name="avg_time_label">Tiempo medio</string>
+    <string name="fab_loveito_icon_desc">Botón Loveito</string>
 </resources>
