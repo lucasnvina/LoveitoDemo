@@ -2,6 +2,7 @@ R_DEF: Internal format may change without notice
 local
 color accent_on
 color accent_primary
+color bg
 color bg_inverse
 color bg_primary
 color bg_surface
@@ -19,25 +20,34 @@ color rust_tinted_off_white
 color text_inverse
 color text_primary
 color text_secondary
+drawable bg_add_circle
+drawable bg_pet_add_item
+drawable bg_pet_item
 drawable button_accent_primary
 drawable button_error_default
 drawable button_home
+drawable chevron_border
 drawable circle_transparent
 drawable edittext_accent_primary
 drawable edittext_accent_primary_rounded
+drawable ic_chevron_right
+drawable ic_chevron_right_brown
 drawable ic_launcher_logo
 drawable ic_user_placeholder
 drawable logo_final
+drawable pet_photo_border
 drawable pill_button
 drawable pill_edittext
+drawable profile_photo_border
+drawable user_photo_border
 font nunito_light
 font nunito_semibold
 id btnAddPet
 id btnCancelEdit
-id btnChangePhoto
 id btnDeleteCrisis
 id btnDeletePet
 id btnDeletePetEdit
+id btnEditProfile
 id btnForgot
 id btnPickBirth
 id btnPickImage
@@ -64,6 +74,7 @@ id etPetWeight
 id fragment_host
 id groupEdit
 id groupView
+id ivChevron
 id ivPetPhoto
 id ivPreview
 id ivProfilePhoto
@@ -81,6 +92,7 @@ id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
 id tvEmail
+id tvFullName
 id tvPetName
 id tvSAge
 id tvSBirth
@@ -117,6 +129,7 @@ string auth_password
 string auth_signin
 string auth_signup
 string cancel
+string chevron_desc
 string cm
 string crisis_item
 string crisis_meta
@@ -191,6 +204,7 @@ string start_crisis_button
 string user_photo_desc
 string years
 string yes
+style CustomPopupMenu
 style NoUnderlineEditText
 style NunitoBoldButton
 style NunitoBoldButtonRounded

@@ -63,7 +63,7 @@ class PetGridAdapter(
             if (!item.photoUrl.isNullOrEmpty()) {
                 Glide.with(ivPhoto.context)
                     .load(item.photoUrl)
-                    .centerCrop()
+                    .circleCrop()
                     .placeholder(R.mipmap.ic_launcher)
                     .into(ivPhoto)
             } else {

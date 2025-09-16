@@ -2,34 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:padding="8dp"
-    android:background="@color/bg_inverse"
-    android:elevation="2dp">
+    android:background="@drawable/bg_pet_add_item"
+    android:elevation="4dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp">
 
     <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/bg_surface"
-        android:foregroundGravity="center">
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_add_circle"
+        android:layout_marginEnd="12dp">
         <TextView
             android:id="@+id/tvAddSymbol"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/add_symbol"
-            android:textSize="48sp"
-            android:textColor="@color/text_secondary"
-            android:gravity="center" />
+            android:text="+"
+            android:textSize="32sp"
+            android:textColor="#b96c30"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:fontFamily="@font/nunito_light" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/tvAddLabel"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_label"
-        android:textAlignment="center"
-        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="Agregar mascota"
+        android:textAlignment="viewStart"
+        android:textStyle="normal"
+        android:fontFamily="@font/nunito_light"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="0dp"
+        android:textColor="#b96c30" />
+
+    <ImageView
+        android:id="@+id/ivChevron"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_chevron_right_brown"
+        android:contentDescription="@string/chevron_desc"
+        android:layout_marginStart="12dp" />
 </LinearLayout>

@@ -11,15 +11,13 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     private val auth by lazy { FirebaseAuth.getInstance() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Hide status bar for login screen
-        requireActivity().window.insetsController?.hide(android.view.WindowInsets.Type.statusBars())
-
         val emailEt = view.findViewById<EditText>(R.id.etEmail)
         val passEt  = view.findViewById<EditText>(R.id.etPassword)
 
         fun toast(s:String)=Toast.makeText(requireContext(),s,Toast.LENGTH_SHORT).show()
         fun goHome() {
             (requireActivity() as? MainActivity)?.navigateToFragment(HomeFragment())
+            (requireActivity() as? MainActivity)?.loadUserPhoto()
         }
 
         view.findViewById<Button>(R.id.btnSignUp).setOnClickListener {

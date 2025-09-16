@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         topBar?.visibility = if (fragment != null && fragment::class.java.simpleName == "AuthFragment") android.view.View.GONE else android.view.View.VISIBLE
     }
 
-    private fun loadUserPhoto() {
+    fun loadUserPhoto() {
         val ivUserPhoto = findViewById<android.widget.ImageView>(R.id.ivUserPhoto)
         val tvUserName = findViewById<android.widget.TextView>(R.id.tvUserName)
         val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: return
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val ivUserPhoto = findViewById<android.widget.ImageView>(R.id.ivUserPhoto)
         ivUserPhoto?.setOnClickListener {
-            val popup = android.widget.PopupMenu(this, ivUserPhoto)
+            val popup = android.widget.PopupMenu(android.view.ContextThemeWrapper(this, R.style.CustomPopupMenu), ivUserPhoto)
             popup.menu.add("Ver Perfil")
             popup.menu.add("Cerrar Sesión")
             popup.setOnMenuItemClickListener { item ->

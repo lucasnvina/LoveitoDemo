@@ -10,7 +10,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.loveito.demo.pets.CrisisStartFragment
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerPets = view.findViewById(R.id.recyclerPets)
-        recyclerPets.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerPets.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         loadPets()
         view.findViewById<Button>(R.id.btnStartCrisis).setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
 
     private fun loadPets() {
         repo.getMyPets(onSuccess = { pets ->
-            val items: List<PetGridItem> = pets.map { PetGridItem.Pet(it.id, it.name, it.photoUrl) } + PetGridItem.Add
+            val items: List<PetGridItem> = listOf(PetGridItem.Add) + pets.map { PetGridItem.Pet(it.id, it.name, it.photoUrl) }
             adapter = PetGridAdapter(items,
                 onPetClick = { pet: PetGridItem.Pet ->
                     parentFragmentManager.beginTransaction()

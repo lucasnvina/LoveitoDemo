@@ -32,4 +32,9 @@
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/edittext_accent_primary</item>
     </style>
+    <style name="CustomPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:background">@color/accent_primary</item>
+        <item name="android:textColor">@color/accent_on</item>
+        <item name="android:fontFamily">@font/nunito_light</item>
+    </style>
 </resources>

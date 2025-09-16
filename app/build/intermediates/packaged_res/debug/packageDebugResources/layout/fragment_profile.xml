@@ -11,57 +11,103 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <ImageView
-            android:id="@+id/ivProfilePhoto"
+        <FrameLayout
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@drawable/ic_user_placeholder"
-            android:background="@drawable/circle_transparent"
-            android:scaleType="centerCrop"
-            android:contentDescription="Foto de perfil"
-            android:layout_marginBottom="16dp" />
+            android:background="@drawable/profile_photo_border"
+            android:layout_marginBottom="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnChangePhoto"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/ivProfilePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_user_placeholder"
+                android:scaleType="centerCrop"
+                android:contentDescription="Foto de perfil"
+                android:padding="4dp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cambiar foto"
-            android:layout_marginBottom="24dp" />
+            android:text="Nombre Apellido"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="#230000"
+            android:layout_marginBottom="4dp" />
 
         <EditText
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:layout_marginBottom="12dp" />
+            android:textColor="#230000"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:fontFamily="@font/nunito_light"
+            android:visibility="gone"
+            android:layout_marginBottom="2dp" />
 
         <EditText
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Apellido"
-            android:inputType="textPersonName"
-            android:layout_marginBottom="12dp" />
+            android:textColor="#230000"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:fontFamily="@font/nunito_light"
+            android:visibility="gone"
+            android:layout_marginBottom="4dp" />
 
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="email@ejemplo.com"
-            android:textColor="@color/text_secondary"
+            android:textColor="#230000"
+            android:textAlignment="center"
+            android:gravity="center"
             android:layout_marginBottom="24dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:fontFamily="@font/nunito_light" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modificar"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/accent_primary"
+            android:textColor="@color/accent_on"
+            app:cornerRadius="32dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSaveProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar cambios"
+            android:text="Guardar"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/accent_primary"
             android:textColor="@color/accent_on"
-            app:cornerRadius="12dp"
-            android:layout_marginTop="16dp" />
+            app:cornerRadius="32dp" />
 
     </LinearLayout>
 </ScrollView>

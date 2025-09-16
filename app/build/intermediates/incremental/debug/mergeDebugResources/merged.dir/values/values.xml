@@ -718,6 +718,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="bg">#F6E2CC</color>
     <color name="bg_inverse">@color/neutral_000</color>
     <color name="bg_primary">#F6E2CC</color>
     <color name="bg_surface">#F6E2CC</color>
@@ -2505,6 +2506,7 @@
     <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>
     <string name="character_counter_overflowed_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
+    <string name="chevron_desc">Chevron hacia la derecha</string>
     <string name="clear_text_end_icon_content_description">Clear text</string>
     <string name="cm">cm</string>
     <string msgid="2523291102206661146" name="common_google_play_services_enable_button">Enable</string>
@@ -6424,6 +6426,11 @@
     </style>
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
+    </style>
+    <style name="CustomPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:background">@color/accent_primary</item>
+        <item name="android:textColor">@color/accent_on</item>
+        <item name="android:fontFamily">@font/nunito_light</item>
     </style>
     <style name="MaterialAlertDialog.Material3" parent="MaterialAlertDialog.MaterialComponents">
     <item name="backgroundTint">@macro/m3_comp_dialog_container_color</item>

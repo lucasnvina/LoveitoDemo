@@ -1,43 +1,19 @@
 [
     {
-        "merged": "com.loveito.demo.app-debug-62:/drawable_ic_launcher_logo.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/drawable/ic_launcher_logo.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_profile_photo_border.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/profile_photo_border.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_crisis_start.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/fragment_crisis_start.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher.webp"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher_foreground.webp"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/font_nunito_light.ttf.flat",
-        "source": "com.loveito.demo.app-main-64:/font/nunito_light.ttf"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher.xml"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xhdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher_foreground.webp"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_home.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/fragment_home.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
@@ -52,20 +28,8 @@
         "source": "com.loveito.demo.app-main-64:/drawable/circle_transparent.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary_rounded.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary_rounded.xml"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/layout_item_pet_grid.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/item_pet_grid.xml"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_edittext.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/drawable/pill_edittext.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/drawable_button_home.xml.flat",
@@ -74,10 +38,6 @@
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pet_form.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/fragment_pet_form.xml"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_profile.xml.flat",
@@ -92,6 +52,90 @@
         "source": "com.loveito.demo.app-main-64:/layout/fragment_crisis_detail.xml"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/layout_item_pet_add.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/item_pet_add.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/layout_top_bar.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/top_bar.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_bg_add_circle.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/bg_add_circle.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/layout_activity_splash.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_button.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/pill_button.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_chevron_border.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/chevron_border.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pets_list.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/fragment_pets_list.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_ic_launcher_logo.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/ic_launcher_logo.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/font_nunito_light.ttf.flat",
+        "source": "com.loveito.demo.app-main-64:/font/nunito_light.ttf"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_home.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary_rounded.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary_rounded.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_edittext.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/pill_edittext.xml"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-62:/font_nunito_semibold.ttf.flat",
         "source": "com.loveito.demo.app-main-64:/font/nunito_semibold.ttf"
     },
@@ -100,20 +144,24 @@
         "source": "com.loveito.demo.app-main-64:/drawable/logo_final.png"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_item_pet_add.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/item_pet_add.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_ic_chevron_right.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/ic_chevron_right.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_activity_main.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/activity_main.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_top_bar.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/top_bar.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_ic_chevron_right_brown.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/ic_chevron_right_brown.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_bg_pet_item.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/bg_pet_item.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xhdpi_ic_launcher.webp.flat",
@@ -128,43 +176,31 @@
         "source": "com.loveito.demo.app-main-64:/drawable/ic_user_placeholder.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_activity_splash.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/activity_splash.xml"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/drawable_pill_button.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/drawable/pill_button.xml"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/drawable/edittext_accent_primary.xml"
-    },
-    {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_user_photo_border.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/user_photo_border.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/layout_fragment_auth.xml.flat",
         "source": "com.loveito.demo.app-main-64:/layout/fragment_auth.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pets_list.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/fragment_pets_list.xml"
+        "merged": "com.loveito.demo.app-debug-62:/drawable_bg_pet_add_item.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/bg_pet_add_item.xml"
     },
     {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xhdpi/ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_foreground.webp"
-    },
-    {
         "merged": "com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.loveito.demo.app-debug-62:/drawable_pet_photo_border.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/drawable/pet_photo_border.xml"
     }
 ]

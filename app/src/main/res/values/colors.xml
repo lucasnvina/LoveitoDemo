@@ -14,6 +14,7 @@
     <color name="bg_primary">#F6E2CC</color>
     <color name="bg_surface">#F6E2CC</color>
     <color name="bg_inverse">@color/neutral_000</color>
+    <color name="bg">#F6E2CC</color>
 
     <color name="text_primary">#2E2115</color>
     <color name="text_secondary">@color/rust_tinted_off_white</color>

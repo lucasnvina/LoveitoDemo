@@ -78,4 +78,5 @@
     <string name="start_crisis_button">Registrar crisis</string>
     <string name="sign_out_button">Cerrar sesión</string>
     <string name="splash_logo_desc">Logo de la pantalla de inicio</string>
+    <string name="chevron_desc">Chevron hacia la derecha</string>
 </resources>

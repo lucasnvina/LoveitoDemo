@@ -2,6 +2,7 @@
 <resources>
     <color name="accent_on">#F6E2CC</color>
     <color name="accent_primary">#230000</color>
+    <color name="bg">#F6E2CC</color>
     <color name="bg_inverse">@color/neutral_000</color>
     <color name="bg_primary">#F6E2CC</color>
     <color name="bg_surface">#F6E2CC</color>
@@ -29,6 +30,7 @@
     <string name="auth_signin">Ingresar</string>
     <string name="auth_signup">Crear cuenta</string>
     <string name="cancel">Cancelar</string>
+    <string name="chevron_desc">Chevron hacia la derecha</string>
     <string name="cm">cm</string>
     <string name="crisis_item">[%1$s] %2$s — %3$dm %4$ds%5$s</string>
     <string name="crisis_meta">Meta</string>
@@ -103,6 +105,11 @@
     <string name="user_photo_desc">Foto de usuario</string>
     <string name="years">años</string>
     <string name="yes">Sí</string>
+    <style name="CustomPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:background">@color/accent_primary</item>
+        <item name="android:textColor">@color/accent_on</item>
+        <item name="android:fontFamily">@font/nunito_light</item>
+    </style>
     <style name="NoUnderlineEditText">
         <item name="android:background">@drawable/edittext_accent_primary</item>
         <item name="android:textColor">@color/accent_primary</item>

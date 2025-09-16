@@ -2,27 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:padding="8dp"
-    android:background="@color/bg_inverse"
-    android:elevation="2dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_pet_item"
+    android:elevation="4dp">
 
-    <ImageView
-        android:id="@+id/ivPetPhoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/circle_transparent"
-        android:contentDescription="@string/pet_photo_desc" />
+    <FrameLayout
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/pet_photo_border"
+        android:layout_marginEnd="12dp">
+
+        <ImageView
+            android:id="@+id/ivPetPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_transparent"
+            android:contentDescription="@string/pet_photo_desc"
+            android:padding="3dp" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tvPetName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="@string/pet_name_label"
-        android:textAlignment="center"
-        android:textStyle="bold"
+        android:textAlignment="viewStart"
+        android:textStyle="normal"
+        android:fontFamily="@font/nunito_light"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="0dp"
+        android:textColor="#230000" />
+
+    <ImageView
+        android:id="@+id/ivChevron"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_chevron_right"
+        android:contentDescription="@string/chevron_desc"
+        android:layout_marginStart="12dp" />
 </LinearLayout>
