@@ -23,6 +23,7 @@ color text_secondary
 drawable bg_add_circle
 drawable bg_pet_add_item
 drawable bg_pet_item
+drawable bg_pet_item_shadow
 drawable button_accent_primary
 drawable button_error_default
 drawable button_home

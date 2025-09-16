@@ -7,14 +7,14 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
         android:paddingBottom="16dp"
-        android:paddingTop="0dp"
+        android:paddingTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerPets"

@@ -3618,6 +3618,7 @@ drawable avd_show_password
 drawable bg_add_circle
 drawable bg_pet_add_item
 drawable bg_pet_item
+drawable bg_pet_item_shadow
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
