@@ -62,9 +62,11 @@ id btnSignUp
 id btnStart
 id btnStartCrisis
 id btnStartEdit
+id cardRecommendations
 id cardSummary
 id cbNeutered
 id containerActions
+id contentRecommendations
 id etEmail
 id etFirstName
 id etHeightCm
@@ -77,7 +79,9 @@ id etPetWeight
 id fragment_host
 id groupEdit
 id groupView
+id headerRecommendations
 id ivChevron
+id ivCollapseArrow
 id ivLogoLoveitoDog
 id ivPetPhoto
 id ivProfilePhoto
@@ -89,6 +93,8 @@ id recyclerPets
 id rvCrises
 id sectionAvgTime
 id sectionLastCrisis
+id sectionMedication
+id sectionShare
 id spSex
 id splash_logo
 id topBar

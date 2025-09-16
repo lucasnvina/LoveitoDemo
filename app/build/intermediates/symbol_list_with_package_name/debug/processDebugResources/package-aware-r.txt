@@ -3904,6 +3904,7 @@ id btnStartEdit
 id buttonPanel
 id cache_measures
 id cancel_button
+id cardRecommendations
 id cardSummary
 id carryVelocity
 id cbNeutered
@@ -3931,6 +3932,7 @@ id container
 id containerActions
 id content
 id contentPanel
+id contentRecommendations
 id contiguous
 id continuousVelocity
 id coordinator
@@ -4027,6 +4029,7 @@ id groupView
 id group_divider
 id grouping
 id groups
+id headerRecommendations
 id header_title
 id hidden
 id hide_ime_id
@@ -4051,6 +4054,7 @@ id inward
 id italic
 id item_touch_helper_previous_elevation
 id ivChevron
+id ivCollapseArrow
 id ivLogoLoveitoDog
 id ivPetPhoto
 id ivProfilePhoto
@@ -4231,6 +4235,8 @@ id search_src_text
 id search_voice_btn
 id sectionAvgTime
 id sectionLastCrisis
+id sectionMedication
+id sectionShare
 id select_dialog_listview
 id selected
 id selection_type

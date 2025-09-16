@@ -80,6 +80,11 @@ class PetFormFragment : Fragment() {
     // Crisis container
     private var editingId: String? = null
 
+    // Collapsible Recommendations Card
+    private lateinit var headerRecommendations: LinearLayout
+    private lateinit var contentRecommendations: LinearLayout
+    private lateinit var ivCollapseArrow: ImageView
+
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             pickedUri = uri
@@ -304,6 +309,18 @@ class PetFormFragment : Fragment() {
                 .replace(R.id.fragment_host, com.loveito.demo.pets.CrisisStartFragment())
                 .addToBackStack(null)
                 .commit()
+        }
+
+        headerRecommendations = view.findViewById(R.id.headerRecommendations)
+        contentRecommendations = view.findViewById(R.id.contentRecommendations)
+        ivCollapseArrow = view.findViewById(R.id.ivCollapseArrow)
+        // Start collapsed
+        contentRecommendations.visibility = View.GONE
+        ivCollapseArrow.rotation = 0f
+        headerRecommendations.setOnClickListener {
+            val isVisible = contentRecommendations.visibility == View.VISIBLE
+            contentRecommendations.visibility = if (isVisible) View.GONE else View.VISIBLE
+            ivCollapseArrow.animate().rotation(if (isVisible) 0f else 180f).setDuration(200).start()
         }
     }
 
