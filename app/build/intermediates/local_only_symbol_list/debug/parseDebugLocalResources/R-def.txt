@@ -49,6 +49,7 @@ font nunito_light
 font nunito_semibold
 id btnAddPet
 id btnCancelEdit
+id btnCancelProfile
 id btnDeleteCrisis
 id btnDeletePet
 id btnDeletePetEdit
@@ -61,7 +62,6 @@ id btnSaveProfile
 id btnSignIn
 id btnSignUp
 id btnStart
-id btnStartCrisis
 id btnStartEdit
 id cardRecommendations
 id cardSummary

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -33,12 +32,6 @@ class HomeFragment : Fragment() {
         recyclerPets = view.findViewById(R.id.recyclerPets)
         recyclerPets.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         loadPets()
-        view.findViewById<Button>(R.id.btnStartCrisis).setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, CrisisStartFragment())
-                .addToBackStack(null)
-                .commit()
-        }
 
         // Listener para desplegar el menú al tocar la foto de usuario
         val ivUserPhoto = view.findViewById<ImageView>(R.id.ivUserPhoto)

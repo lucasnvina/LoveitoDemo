@@ -3887,6 +3887,7 @@ int id browser_actions_menu_items 0x7f09006c
 int id browser_actions_menu_view 0x7f09006d
 int id btnAddPet 0x7f09006e
 int id btnCancelEdit 0x7f09006f
+int id btnCancelProfile 0x7f090264
 int id btnDeleteCrisis 0x7f090070
 int id btnDeletePet 0x7f090071
 int id btnDeletePetEdit 0x7f090072
@@ -3899,7 +3900,6 @@ int id btnSaveProfile 0x7f090078
 int id btnSignIn 0x7f090079
 int id btnSignUp 0x7f09007a
 int id btnStart 0x7f09007b
-int id btnStartCrisis 0x7f09007c
 int id btnStartEdit 0x7f09007d
 int id buttonPanel 0x7f09007e
 int id cache_measures 0x7f09007f

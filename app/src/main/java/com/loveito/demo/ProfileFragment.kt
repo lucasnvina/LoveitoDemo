@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.EditText
 
 class ProfileFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -23,14 +24,21 @@ class ProfileFragment : Fragment() {
     private lateinit var tvEmail: TextView
     private lateinit var btnSaveProfile: MaterialButton
     private lateinit var btnEditProfile: MaterialButton
-    private lateinit var etFirstName: android.widget.EditText
-    private lateinit var etLastName: android.widget.EditText
+    private lateinit var btnCancelProfile: MaterialButton
+    private lateinit var etFirstName: EditText
+    private lateinit var etLastName: EditText
     private var isEditingName = false
+    private var originalFirstName: String = ""
+    private var originalLastName: String = ""
+    private var currentUid: String? = null
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             selectedPhotoUri = uri
             ivProfilePhoto.setImageURI(uri)
+            currentUid?.let { uid ->
+                uploadPhoto(uid, uri)
+            }
         }
     }
 
@@ -46,21 +54,23 @@ class ProfileFragment : Fragment() {
         tvEmail = view.findViewById(R.id.tvEmail)
         btnSaveProfile = view.findViewById(R.id.btnSaveProfile)
         btnEditProfile = view.findViewById(R.id.btnEditProfile)
+        btnCancelProfile = view.findViewById(R.id.btnCancelProfile)
         etFirstName = view.findViewById(R.id.etFirstName)
         etLastName = view.findViewById(R.id.etLastName)
 
         val user = FirebaseAuth.getInstance().currentUser
         val uid = user?.uid ?: ""
+        currentUid = uid
         tvEmail.text = user?.email ?: ""
 
         // Cargar datos del usuario desde Firestore
         db.collection("users").document(uid).get().addOnSuccessListener { doc ->
             if (doc != null && doc.exists()) {
-                val firstName = doc.getString("firstName") ?: ""
-                val lastName = doc.getString("lastName") ?: ""
-                tvFullName.text = "$firstName $lastName"
-                etFirstName.setText(firstName)
-                etLastName.setText(lastName)
+                originalFirstName = doc.getString("firstName") ?: ""
+                originalLastName = doc.getString("lastName") ?: ""
+                tvFullName.text = listOf(originalFirstName, originalLastName).filter { it.isNotBlank() }.joinToString(" ")
+                etFirstName.setText(originalFirstName)
+                etLastName.setText(originalLastName)
                 val photoUrl = doc.getString("photoUrl")
                 if (!photoUrl.isNullOrEmpty()) {
                     // Cargar imagen con Glide si está disponible
@@ -74,79 +84,95 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // Make photo tappable to change
+        // Hacer la foto clickeable para cambiarla (se sube automáticamente)
         ivProfilePhoto.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
 
+        // Entrar en modo edición
         btnEditProfile.setOnClickListener {
-            if (!isEditingName) {
-                // Switch to edit mode
-                tvFullName.visibility = View.GONE
-                etFirstName.visibility = View.VISIBLE
-                etLastName.visibility = View.VISIBLE
-                isEditingName = true
-            } else {
-                // Cancel edit mode
-                tvFullName.visibility = View.VISIBLE
-                etFirstName.visibility = View.GONE
-                etLastName.visibility = View.GONE
-                isEditingName = false
-            }
+            enterEditMode()
         }
 
+        // Guardar cambios de nombre
         btnSaveProfile.setOnClickListener {
-            if (isEditingName) {
-                val firstName = etFirstName.text.toString().trim()
-                val lastName = etLastName.text.toString().trim()
-                if (firstName.isEmpty() || lastName.isEmpty()) {
-                    android.widget.Toast.makeText(requireContext(), "Nombre y apellido son obligatorios", android.widget.Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                val updates = hashMapOf<String, Any>(
-                    "firstName" to firstName,
-                    "lastName" to lastName
-                )
-                db.collection("users").document(uid).update(updates)
-                    .addOnSuccessListener {
-                        tvFullName.text = "$firstName $lastName"
-                        tvFullName.visibility = View.VISIBLE
-                        etFirstName.visibility = View.GONE
-                        etLastName.visibility = View.GONE
-                        isEditingName = false
-                        android.widget.Toast.makeText(requireContext(), "Nombre actualizado", android.widget.Toast.LENGTH_SHORT).show()
-                    }
-                    .addOnFailureListener {
-                        android.widget.Toast.makeText(requireContext(), "Error al guardar nombre", android.widget.Toast.LENGTH_SHORT).show()
-                    }
+            if (!isEditingName) return@setOnClickListener
+            val newFirst = etFirstName.text.toString().trim()
+            val newLast = etLastName.text.toString().trim()
+            if (newFirst.isEmpty() || newLast.isEmpty()) {
+                android.widget.Toast.makeText(requireContext(), "Nombre y apellido son obligatorios", android.widget.Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // Only save photo if changed
-            if (selectedPhotoUri != null) {
-                val updates = hashMapOf<String, Any>(
-                    "email" to (user?.email ?: "")
-                )
-                val ref = storage.reference.child("users/$uid/profilepic")
-                ref.putFile(selectedPhotoUri!!).continueWithTask { task ->
-                    if (!task.isSuccessful) throw task.exception!!
-                    ref.downloadUrl
-                }.addOnSuccessListener { uri ->
-                    updates["photoUrl"] = uri.toString()
-                    db.collection("users").document(uid).update(updates)
-                        .addOnSuccessListener {
-                            android.widget.Toast.makeText(requireContext(), "Perfil guardado", android.widget.Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener {
-                            android.widget.Toast.makeText(requireContext(), "Error al guardar perfil", android.widget.Toast.LENGTH_SHORT).show()
-                        }
-                }.addOnFailureListener { exception ->
-                    android.widget.Toast.makeText(requireContext(), "Error al subir foto: ${exception.message}", android.widget.Toast.LENGTH_LONG).show()
+            val updates = hashMapOf<String, Any>(
+                "firstName" to newFirst,
+                "lastName" to newLast
+            )
+            db.collection("users").document(uid).update(updates)
+                .addOnSuccessListener {
+                    originalFirstName = newFirst
+                    originalLastName = newLast
+                    tvFullName.text = "$newFirst $newLast"
+                    exitEditMode(cancel = false)
+                    android.widget.Toast.makeText(requireContext(), "Nombre actualizado", android.widget.Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                android.widget.Toast.makeText(requireContext(), "No hay cambios para guardar", android.widget.Toast.LENGTH_SHORT).show()
+                .addOnFailureListener {
+                    android.widget.Toast.makeText(requireContext(), "Error al guardar nombre", android.widget.Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        // Cancelar edición
+        btnCancelProfile.setOnClickListener {
+            if (isEditingName) {
+                etFirstName.setText(originalFirstName)
+                etLastName.setText(originalLastName)
+                exitEditMode(cancel = true)
             }
         }
 
+        // Asegurar estado inicial (vista, no edición)
+        exitEditMode(cancel = true)
+
         return view
+    }
+
+    private fun enterEditMode() {
+        if (isEditingName) return
+        isEditingName = true
+        tvFullName.visibility = View.GONE
+        etFirstName.visibility = View.VISIBLE
+        etLastName.visibility = View.VISIBLE
+        btnEditProfile.visibility = View.GONE
+        btnSaveProfile.visibility = View.VISIBLE
+        btnCancelProfile.visibility = View.VISIBLE
+        etFirstName.requestFocus()
+    }
+
+    private fun exitEditMode(cancel: Boolean) {
+        isEditingName = false
+        tvFullName.visibility = View.VISIBLE
+        etFirstName.visibility = View.GONE
+        etLastName.visibility = View.GONE
+        btnEditProfile.visibility = View.VISIBLE
+        btnSaveProfile.visibility = View.GONE
+        btnCancelProfile.visibility = View.GONE
+    }
+
+    private fun uploadPhoto(uid: String, uri: Uri) {
+        val ref = storage.reference.child("users/$uid/profilepic")
+        ref.putFile(uri).continueWithTask { task ->
+            if (!task.isSuccessful) throw task.exception ?: Exception("Upload failed")
+            ref.downloadUrl
+        }.addOnSuccessListener { download ->
+            val updates = hashMapOf<String, Any>("photoUrl" to download.toString())
+            db.collection("users").document(uid).update(updates)
+                .addOnSuccessListener {
+                    android.widget.Toast.makeText(requireContext(), "Foto actualizada", android.widget.Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    android.widget.Toast.makeText(requireContext(), "Error al guardar foto", android.widget.Toast.LENGTH_SHORT).show()
+                }
+        }.addOnFailureListener { ex ->
+            android.widget.Toast.makeText(requireContext(), "Error al subir foto: ${ex.message}", android.widget.Toast.LENGTH_LONG).show()
+        }
     }
 }

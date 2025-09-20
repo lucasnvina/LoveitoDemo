@@ -3888,6 +3888,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btnAddPet
 id btnCancelEdit
+id btnCancelProfile
 id btnDeleteCrisis
 id btnDeletePet
 id btnDeletePetEdit
@@ -3900,7 +3901,6 @@ id btnSaveProfile
 id btnSignIn
 id btnSignUp
 id btnStart
-id btnStartCrisis
 id btnStartEdit
 id buttonPanel
 id cache_measures
