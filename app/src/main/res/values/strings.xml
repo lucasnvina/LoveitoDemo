@@ -46,16 +46,16 @@
     <string name="crisis_severity">Severidad</string>
     <string name="crisis_recommendations">Recomendaciones:</string>
     <string name="delete_record">Eliminar Registro</string>
-    <string name="pet_label_name">Nombre: </string>
-    <string name="pet_label_breed">Raza: </string>
-    <string name="pet_label_weight">Peso: </string>
-    <string name="pet_label_sex">Sexo: </string>
-    <string name="pet_label_birth">Nacimiento: </string>
-    <string name="pet_label_age">Edad: </string>
-    <string name="pet_label_neutered">Castrado: </string>
-    <string name="pet_label_height">Alto: </string>
-    <string name="pet_label_length">Largo: </string>
-    <string name="pet_label_crisis">Crisis: </string>
+    <string name="pet_label_name">Nombre</string>
+    <string name="pet_label_breed">Raza</string>
+    <string name="pet_label_weight">Peso</string>
+    <string name="pet_label_sex">Sexo</string>
+    <string name="pet_label_birth">Nacimiento</string>
+    <string name="pet_label_age">Edad</string>
+    <string name="pet_label_neutered">Castrado</string>
+    <string name="pet_label_height">Alto</string>
+    <string name="pet_label_length">Largo</string>
+    <string name="pet_label_crisis">Crisis</string>
     <string name="pet_label_profile_photo">Foto de perfil</string>
     <string name="pet_label_sex_short">Sexo</string>
     <string name="pet_label_birth_date">Fecha de nacimiento</string>
@@ -99,4 +99,6 @@
     <string name="recommendation_item_2">• Item de recomendación 2</string>
     <string name="recommendation_item_3">• Item de recomendación 3</string>
     <string name="logo_loveito_dog_desc">Logo Loveito Dog</string>
+    <string name="pet_change_photo">Cambiar foto</string>
+    <string name="profile_change_photo">Cambiar foto de perfil</string>
 </resources>

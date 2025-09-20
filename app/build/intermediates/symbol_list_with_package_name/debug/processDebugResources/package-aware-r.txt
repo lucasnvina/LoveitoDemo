@@ -2250,6 +2250,7 @@ color m3expressive_nav_rail_item_icon_tint
 color m3expressive_nav_rail_item_label_tint
 color m3expressive_nav_rail_item_ripple_tint
 color maroon_900
+color maroon_900_stroke
 color material_blue_grey_800
 color material_blue_grey_900
 color material_blue_grey_950
@@ -3630,6 +3631,10 @@ drawable btn_radio_on_to_off_mtrl_animation
 drawable button_accent_primary
 drawable button_error_default
 drawable button_home
+drawable camera_overlay_bg
+drawable checkbox_custom_checked
+drawable checkbox_custom_selector
+drawable checkbox_custom_unchecked
 drawable chevron_border
 drawable circle_transparent
 drawable common_full_open_on_phone
@@ -3651,6 +3656,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable cursor_maroon
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3667,6 +3673,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_check_mark
 drawable ic_chevron_right
 drawable ic_chevron_right_brown
 drawable ic_clear_black_24
@@ -3846,6 +3853,8 @@ id action_mode_close_button
 id action_text
 id actions
 id activity_chooser_view_content
+id actvNeutered
+id actvSex
 id add
 id adjust_height
 id adjust_width
@@ -3893,8 +3902,6 @@ id btnDeleteCrisis
 id btnDeletePetEdit
 id btnEditProfile
 id btnForgot
-id btnPickBirth
-id btnPickImage
 id btnSavePet
 id btnSaveProfile
 id btnSignIn
@@ -3907,7 +3914,6 @@ id cancel_button
 id cardRecommendations
 id cardSummary
 id carryVelocity
-id cbNeutered
 id center
 id centerCrop
 id centerInside
@@ -3979,6 +3985,7 @@ id easeOut
 id east
 id edge
 id editModeBottomSpacer
+id editPhotoContainer
 id edit_query
 id edit_text_id
 id elastic
@@ -3989,6 +3996,7 @@ id enterAlways
 id enterAlwaysCollapsed
 id entireSpace
 id escape
+id etBirthDate
 id etEmail
 id etFirstName
 id etHeightCm
@@ -4054,10 +4062,13 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id ivCameraOverlay
 id ivChevron
 id ivCollapseArrow
+id ivEditPhoto
 id ivLogoLoveitoDog
 id ivPetPhoto
+id ivProfileCameraOverlay
 id ivProfilePhoto
 id ivSummaryPhoto
 id ivUserPhoto
@@ -4197,6 +4208,7 @@ id pin
 id position
 id postLayout
 id pressed
+id profilePhotoContainer
 id progress_circular
 id progress_horizontal
 id radio
@@ -4258,7 +4270,6 @@ id snackbar_text
 id snap
 id snapMargins
 id south
-id spSex
 id spacer
 id special_effects_controller_view_tag
 id splash_logo
@@ -4316,6 +4327,14 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id tilPetBirth
+id tilPetBreed
+id tilPetHeight
+id tilPetLength
+id tilPetName
+id tilPetNeutered
+id tilPetSex
+id tilPetWeight
 id time
 id title
 id titleDividerNoCustom
@@ -4340,7 +4359,6 @@ id triangle
 id tvAddLabel
 id tvAddSymbol
 id tvAvgCrisisTime
-id tvBirthDate
 id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
@@ -4348,6 +4366,7 @@ id tvDate
 id tvEmail
 id tvEmpty
 id tvFullName
+id tvItem
 id tvLastCrisisDate
 id tvNote
 id tvPetName
@@ -4538,8 +4557,11 @@ layout fragment_profile
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_crisis
+layout item_dropdown_maroon
 layout item_pet_add
 layout item_pet_grid
+layout item_spinner_center_field
+layout item_spinner_center_field_dropdown
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4857,6 +4879,7 @@ string pet_btn_edit
 string pet_btn_pick_birth
 string pet_btn_pick_image
 string pet_btn_save
+string pet_change_photo
 string pet_created
 string pet_deleted
 string pet_height
@@ -4890,6 +4913,7 @@ string pet_photo_desc
 string pet_sex
 string pet_updated
 string pet_weight
+string profile_change_photo
 string project_id
 string recommendation_item_1
 string recommendation_item_2
@@ -5207,6 +5231,9 @@ style CardView
 style CardView_Dark
 style CardView_Light
 style CustomPopupMenu
+style EditCenterField
+style EditSectionCheck
+style EditSectionLabel
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text
@@ -5236,6 +5263,7 @@ style Motion_Material3_Spring_Standard_Slow_Spatial
 style NoUnderlineEditText
 style NunitoBoldButton
 style NunitoBoldButtonRounded
+style NunitoBoldButtonRounded_Destructive
 style NunitoBoldEditText
 style NunitoLightEditText
 style Platform_AppCompat
@@ -5252,6 +5280,8 @@ style Platform_V21_AppCompat_Light
 style Platform_V25_AppCompat
 style Platform_V25_AppCompat_Light
 style Platform_Widget_AppCompat_Spinner
+style RoundedOutlinedField
+style RoundedOutlinedFieldHint
 style RtlOverlay_DialogWindowTitle_AppCompat
 style RtlOverlay_Widget_AppCompat_ActionBar_TitleItem
 style RtlOverlay_Widget_AppCompat_DialogTitle_Icon
@@ -5628,6 +5658,7 @@ style ThemeOverlay_AppCompat_Dialog
 style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
 style ThemeOverlay_Design_TextInputEditText
+style ThemeOverlay_Loveito_CursorMaroon
 style ThemeOverlay_Material3
 style ThemeOverlay_Material3_ActionBar
 style ThemeOverlay_Material3_AutoCompleteTextView

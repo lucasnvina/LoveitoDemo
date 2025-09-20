@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <size android:width="32dp" android:height="32dp" />
+            <stroke android:width="2dp" android:color="@color/rust_500" />
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item android:gravity="center" android:drawable="@drawable/ic_check_mark" />
+</layer-list>
+

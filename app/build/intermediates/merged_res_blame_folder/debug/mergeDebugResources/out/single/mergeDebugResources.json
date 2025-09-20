@@ -1,11 +1,19 @@
 [
     {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_item_spinner_center_field.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/item_spinner_center_field.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/mipmap-xxhdpi/ic_launcher_foreground.webp"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_logo_loveito_dog.png.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/logo_loveito_dog.png"
+    },
+    {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_item_spinner_center_field_dropdown.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/item_spinner_center_field_dropdown.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
@@ -28,6 +36,10 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/circle_transparent.xml"
     },
     {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/color_maroon_900_stroke.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/color/maroon_900_stroke.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_ic_launcher_logo.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/ic_launcher_logo.xml"
     },
@@ -40,8 +52,8 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/ic_timer.xml"
     },
     {
-        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_pet_form.xml.flat",
-        "source": "com.loveito.demo.app-main-64:/layout/fragment_pet_form.xml"
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_checkbox_custom_unchecked.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/checkbox_custom_unchecked.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_item_pet_add.xml.flat",
@@ -52,8 +64,16 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/profile_photo_border.xml"
     },
     {
+        "merged": "com.loveito.demo.app-debug-62:/layout_fragment_profile.xml.flat",
+        "source": "com.loveito.demo.app-main-64:/layout/fragment_profile.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_ic_user_placeholder.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/ic_user_placeholder.xml"
+    },
+    {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_ic_check_mark.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/ic_check_mark.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_fragment_pet_crises.xml.flat",
@@ -62,6 +82,10 @@
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_fragment_crisis_detail.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/fragment_crisis_detail.xml"
+    },
+    {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_cursor_maroon.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/cursor_maroon.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_edittext_accent_primary.xml.flat",
@@ -140,6 +164,10 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/fragment_home.xml"
     },
     {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_camera_overlay_bg.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/camera_overlay_bg.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
     },
@@ -162,6 +190,10 @@
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_fragment_profile.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_item_dropdown_maroon.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/item_dropdown_maroon.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/mipmap-mdpi_ic_launcher.webp.flat",
@@ -212,6 +244,10 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/mipmap-xhdpi/ic_launcher_foreground.webp"
     },
     {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_checkbox_custom_selector.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/checkbox_custom_selector.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/mipmap-hdpi_ic_launcher.webp.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/mipmap-hdpi/ic_launcher.webp"
     },
@@ -222,6 +258,10 @@
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_fragment_pet_form.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/layout/fragment_pet_form.xml"
+    },
+    {
+        "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/drawable_checkbox_custom_checked.xml.flat",
+        "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-64:/drawable/checkbox_custom_checked.xml"
     },
     {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-62:/layout_activity_splash.xml.flat",

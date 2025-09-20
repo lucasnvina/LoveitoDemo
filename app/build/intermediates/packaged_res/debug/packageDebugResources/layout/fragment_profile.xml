@@ -12,10 +12,14 @@
         android:gravity="center_horizontal">
 
         <FrameLayout
+            android:id="@+id/profilePhotoContainer"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:background="@drawable/profile_photo_border"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/ivProfilePhoto"
@@ -23,8 +27,20 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_user_placeholder"
                 android:scaleType="centerCrop"
-                android:contentDescription="Foto de perfil"
+                android:contentDescription="@string/user_photo_desc"
                 android:padding="4dp" />
+
+            <ImageView
+                android:id="@+id/ivProfileCameraOverlay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/camera_overlay_bg"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:tint="@color/neutral_000"
+                android:contentDescription="@string/profile_change_photo"
+                android:visibility="gone" />
         </FrameLayout>
 
         <TextView
@@ -42,29 +58,25 @@
 
         <EditText
             android:id="@+id/etFirstName"
+            style="@style/EditCenterField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
-            android:textColor="#230000"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            android:fontFamily="@font/nunito_light"
+            android:inputType="textPersonName"
+            android:imeOptions="actionNext"
+            android:autofillHints="name"
             android:visibility="gone"
             android:layout_marginBottom="2dp" />
 
         <EditText
             android:id="@+id/etLastName"
+            style="@style/EditCenterField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Apellido"
-            android:textColor="#230000"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            android:fontFamily="@font/nunito_light"
+            android:inputType="textPersonName"
+            android:imeOptions="actionDone"
+            android:autofillHints="name"
             android:visibility="gone"
             android:layout_marginBottom="4dp" />
 
@@ -115,14 +127,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancelar"
-            style="@style/NunitoBoldButtonRounded"
+            style="@style/NunitoBoldButtonRounded.Destructive"
             android:layout_marginTop="2dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#6a0000"
-            android:textColor="@color/accent_on"
-            app:cornerRadius="32dp"
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

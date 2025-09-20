@@ -26,6 +26,9 @@ import kotlin.math.max
 
 class PetFormFragment : Fragment() {
 
+    private val sexOptions = listOf("Macho", "Hembra")
+    private val neuteredOptions by lazy { listOf(getString(R.string.yes), getString(R.string.no)) }
+
     companion object {
         @Suppress("UNUSED_PARAMETER")
         fun newEdit(id: String, name: String, notes: String, photoUrl: String) = PetFormFragment().apply {
@@ -57,27 +60,27 @@ class PetFormFragment : Fragment() {
     private lateinit var tvSLength: TextView
     private lateinit var tvLastCrisisDate: TextView
     private lateinit var sectionLastCrisis: View
-    private lateinit var tvAvgCrisisTime: TextView // Nueva referencia para el tiempo medio
+    private lateinit var tvAvgCrisisTime: TextView
 
-    // Editor
+    // Editor (nuevos widgets Material)
     private lateinit var etName: EditText
     private lateinit var etBreed: EditText
     private lateinit var etWeight: EditText
-    private lateinit var spSex: Spinner
-    private lateinit var btnPickBirth: Button
-    private lateinit var tvBirthDate: TextView
-    private lateinit var cbNeutered: CheckBox
+    private lateinit var actvSex: AutoCompleteTextView
+    private lateinit var etBirthDate: EditText
+    private lateinit var actvNeutered: AutoCompleteTextView
     private lateinit var etHeight: EditText
     private lateinit var etLength: EditText
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
     private lateinit var btnDeletePetEdit: Button
-    private lateinit var btnPickImage: MaterialButton
     private var ivLogoLoveitoDog: ImageView? = null
+    private lateinit var ivEditPhoto: ImageView
+    private lateinit var editPhotoContainer: View
+    private var ivCameraOverlay: ImageView? = null
 
     private var birthDateMillis: Long? = null
 
-    // Crisis container
     private var editingId: String? = null
 
     // Collapsible Recommendations Card
@@ -91,14 +94,16 @@ class PetFormFragment : Fragment() {
             val bmp = decodeBitmapWithExifFromUri(uri)
             if (bmp != null) {
                 ivSummaryPhoto.setImageBitmap(bmp)
+                ivEditPhoto.setImageBitmap(bmp)
             } else {
                 ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder)
             }
         }
     }
 
     private var rootView: View? = null
-    private lateinit var scrollView: ScrollView // <-- Add this property
+    private lateinit var scrollView: ScrollView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pet_form, container, false)
@@ -110,7 +115,7 @@ class PetFormFragment : Fragment() {
 
         groupView = view.findViewById(R.id.groupView)
         groupEdit = view.findViewById(R.id.groupEdit)
-        scrollView = view.findViewById(R.id.scrollView) // Initialize scrollView to avoid crash
+        scrollView = view.findViewById(R.id.scrollView)
         btnStartEdit = view.findViewById(R.id.btnStartEdit)
         btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
         btnDeletePetEdit.setOnClickListener {
@@ -134,15 +139,16 @@ class PetFormFragment : Fragment() {
         }
         btnStartEdit.setOnClickListener {
             switchToEditMode()
-            btnPickImage.visibility = View.VISIBLE
             ivLogoLoveitoDog?.visibility = View.GONE
-            // Scroll al inicio (safe check)
             if (::scrollView.isInitialized) {
                 scrollView.post { scrollView.fullScroll(View.FOCUS_UP) }
             }
         }
 
         ivSummaryPhoto = view.findViewById(R.id.ivSummaryPhoto)
+        ivEditPhoto = view.findViewById(R.id.ivEditPhoto)
+        editPhotoContainer = view.findViewById(R.id.editPhotoContainer)
+        ivCameraOverlay = view.findViewById(R.id.ivCameraOverlay)
         tvSName = view.findViewById(R.id.tvSName)
         tvSBreed = view.findViewById(R.id.tvSBreed)
         tvSWeight = view.findViewById(R.id.tvSWeight)
@@ -154,57 +160,62 @@ class PetFormFragment : Fragment() {
         tvSLength = view.findViewById(R.id.tvSLength)
         tvLastCrisisDate = view.findViewById(R.id.tvLastCrisisDate)
         sectionLastCrisis = view.findViewById(R.id.sectionLastCrisis)
-        tvAvgCrisisTime = view.findViewById(R.id.tvAvgCrisisTime) // Inicializar la referencia del tiempo medio
+        tvAvgCrisisTime = view.findViewById(R.id.tvAvgCrisisTime)
 
         etName = view.findViewById(R.id.etPetName)
         etBreed = view.findViewById(R.id.etPetBreed)
         etWeight = view.findViewById(R.id.etPetWeight)
-        spSex = view.findViewById(R.id.spSex)
-        btnPickBirth = view.findViewById(R.id.btnPickBirth)
-        tvBirthDate = view.findViewById(R.id.tvBirthDate)
-        cbNeutered = view.findViewById(R.id.cbNeutered)
+        actvSex = view.findViewById(R.id.actvSex)
+        etBirthDate = view.findViewById(R.id.etBirthDate)
+        actvNeutered = view.findViewById(R.id.actvNeutered)
         etHeight = view.findViewById(R.id.etHeightCm)
         etLength = view.findViewById(R.id.etLengthCm)
         btnSave = view.findViewById(R.id.btnSavePet)
         btnCancel = view.findViewById(R.id.btnCancelEdit)
-        btnPickImage = view.findViewById(R.id.btnPickImage)
-        btnPickImage.setOnClickListener {
-            pickImage.launch("image/*")
-        }
+        btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
+        ivLogoLoveitoDog = view.findViewById(R.id.ivLogoLoveitoDog)
 
-        val sexAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, listOf("","Macho","Hembra","Otro"))
-        spSex.adapter = sexAdapter
+        // Adapters para dropdowns
+        actvSex.setAdapter(ArrayAdapter(requireContext(), R.layout.item_dropdown_maroon, sexOptions).apply {
+            setDropDownViewResource(R.layout.item_dropdown_maroon)
+        })
+        actvNeutered.setAdapter(ArrayAdapter(requireContext(), R.layout.item_dropdown_maroon, neuteredOptions).apply {
+            setDropDownViewResource(R.layout.item_dropdown_maroon)
+        })
+        actvSex.setOnClickListener { actvSex.showDropDown() }
+        actvNeutered.setOnClickListener { actvNeutered.showDropDown() }
 
         editingId = arguments?.getString("id")
 
         if (editingId != null) {
             switchToViewMode()
-            btnPickImage.visibility = View.GONE
             repo.getPet(editingId!!,
                 onSuccess = { p ->
                     // fill editor fields for when user taps "Editar"
                     etName.setText(p.name)
                     etBreed.setText(p.breed ?: "")
                     etWeight.setText(p.weightKg?.toString() ?: "")
-                    val sexPos = listOf("","Macho","Hembra","Otro").indexOf(p.sex ?: "")
-                    spSex.setSelection(max(sexPos, 0))
-                    cbNeutered.isChecked = p.neutered == true
+                    actvSex.setText(p.sex ?: "", false)
+                    actvNeutered.setText(if (p.neutered == true) getString(R.string.yes) else getString(R.string.no), false)
                     etHeight.setText(p.heightCm?.toString() ?: "")
                     etLength.setText(p.lengthCm?.toString() ?: "")
                     birthDateMillis = p.birthDate
-                    if (birthDateMillis != null) tvBirthDate.text = formatDate(birthDateMillis!!)
+                    if (birthDateMillis != null) etBirthDate.setText(formatDate(birthDateMillis!!))
 
                     // Set photo in summary
                     if (p.photoUrl != null && p.photoUrl.isNotEmpty()) {
                         loadBitmapWithExifFromUrl(p.photoUrl) { bmp ->
                             if (bmp != null) {
                                 ivSummaryPhoto.setImageBitmap(bmp)
+                                ivEditPhoto.setImageBitmap(bmp)
                             } else {
                                 ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                                ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder)
                             }
                         }
                     } else {
                         ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                        ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder)
                     }
 
                     renderSummary(p)
@@ -216,31 +227,17 @@ class PetFormFragment : Fragment() {
             // Creating new pet -> only edit mode
             btnDeletePetEdit.visibility = View.GONE
             switchToEditMode()
-            btnPickImage.visibility = View.VISIBLE
         }
 
-        btnPickBirth.setOnClickListener {
-            val cal = Calendar.getInstance()
-            if (birthDateMillis != null) cal.timeInMillis = birthDateMillis!!
-            val dlg = DatePickerDialog(requireContext(),
-                { _, y, m, d ->
-                    val c = Calendar.getInstance()
-                    c.set(y, m, d, 0, 0, 0)
-                    c.set(Calendar.MILLISECOND, 0)
-                    birthDateMillis = c.timeInMillis
-                    tvBirthDate.text = formatDate(birthDateMillis!!)
-                },
-                cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
-            )
-            dlg.show()
-        }
+        // Date picker sobre el campo no editable
+        etBirthDate.setOnClickListener { showDatePicker() }
 
         btnSave.setOnClickListener {
             val weight = etWeight.text.toString().replace(',', '.').toDoubleOrNull()
             val breed = etBreed.text.toString().trim().ifEmpty { null }
             val name = etName.text.toString().trim()
-            val sex = spSex.selectedItem?.toString()?.ifEmpty { null }
-            val neutered = cbNeutered.isChecked
+            val sex = actvSex.text?.toString()?.ifEmpty { null }
+            val neutered = actvNeutered.text?.toString() == getString(R.string.yes)
             val height = etHeight.text.toString().replace(',', '.').toDoubleOrNull()
             val length = etLength.text.toString().replace(',', '.').toDoubleOrNull()
             save(name, breed, weight, sex, birthDateMillis, neutered, height, length)
@@ -248,25 +245,22 @@ class PetFormFragment : Fragment() {
 
         btnCancel.setOnClickListener {
             pickedUri = null
-            // reload pet to refresh editor fields to last saved
             editingId?.let { id ->
                 repo.getPet(id, onSuccess = { p ->
                     etName.setText(p.name)
                     etBreed.setText(p.breed ?: "")
                     etWeight.setText(p.weightKg?.toString() ?: "")
-                    val sexPos = listOf("","Macho","Hembra","Otro").indexOf(p.sex ?: "")
-                    spSex.setSelection(max(sexPos, 0))
-                    cbNeutered.isChecked = p.neutered == true
+                    actvSex.setText(p.sex ?: "", false)
+                    actvNeutered.setText(if (p.neutered == true) getString(R.string.yes) else getString(R.string.no), false)
                     etHeight.setText(p.heightCm?.toString() ?: "")
                     etLength.setText(p.lengthCm?.toString() ?: "")
                     birthDateMillis = p.birthDate
-                    tvBirthDate.text = if (birthDateMillis != null) formatDate(birthDateMillis!!) else "No definida"
+                    etBirthDate.setText(if (birthDateMillis != null) formatDate(birthDateMillis!!) else getString(R.string.pet_label_not_defined))
                     renderSummary(p)
                 }, onError = {})
             }
             switchToViewMode()
-            btnPickImage.visibility = View.GONE
-            ivLogoLoveitoDog?.visibility = View.VISIBLE // Show in view mode
+            ivLogoLoveitoDog?.visibility = View.VISIBLE
         }
 
         sectionLastCrisis.setOnClickListener {
@@ -280,20 +274,6 @@ class PetFormFragment : Fragment() {
                     .addToBackStack(null)
                     .commit()
         }
-        }
-
-        ivLogoLoveitoDog = view.findViewById(R.id.ivLogoLoveitoDog)
-        // Set visibility based on mode
-        if (editingId != null) {
-            ivLogoLoveitoDog?.visibility = View.VISIBLE
-        } else {
-            ivLogoLoveitoDog?.visibility = View.GONE
-        }
-        ivLogoLoveitoDog?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, com.loveito.demo.pets.CrisisStartFragment())
-                .addToBackStack(null)
-                .commit()
         }
 
         // Collapsible Recommendations Card setup
@@ -318,6 +298,36 @@ class PetFormFragment : Fragment() {
 
         // Ensure ScrollView has enough bottom padding to avoid overlap with logo
         // Removed programmatic padding adjustment, now handled in XML
+
+        // Set click listeners for picking image only in edit mode
+        val photoClickListener = View.OnClickListener {
+            if (groupEdit.visibility == View.VISIBLE) {
+                pickImage.launch("image/*")
+            }
+        }
+        editPhotoContainer.setOnClickListener(photoClickListener)
+        ivEditPhoto.setOnClickListener(photoClickListener)
+        ivCameraOverlay?.setOnClickListener(photoClickListener)
+
+        // Optional: long click could also open picker
+        editPhotoContainer.setOnLongClickListener {
+            if (groupEdit.visibility == View.VISIBLE) {
+                pickImage.launch("image/*"); true
+            } else false
+        }
+    }
+
+    private fun showDatePicker() {
+        val cal = Calendar.getInstance()
+        if (birthDateMillis != null) cal.timeInMillis = birthDateMillis!!
+        val dlg = DatePickerDialog(requireContext(), { _, y, m, d ->
+            val c = Calendar.getInstance()
+            c.set(y, m, d, 0, 0, 0)
+            c.set(Calendar.MILLISECOND, 0)
+            birthDateMillis = c.timeInMillis
+            etBirthDate.setText(formatDate(birthDateMillis!!))
+        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
+        dlg.show()
     }
 
     override fun onResume() {
@@ -343,25 +353,24 @@ class PetFormFragment : Fragment() {
     }
 
     private fun save(name: String, breed: String?, weightKg: Double?, sex: String?, birthDate: Long?, neutered: Boolean, heightCm: Double?, lengthCm: Double?) {
-        if (name.isEmpty()) { Toast.makeText(requireContext(), "Ingresá un nombre", Toast.LENGTH_SHORT).show(); return }
+        if (name.isEmpty()) { Toast.makeText(requireContext(), getString(R.string.enter_name), Toast.LENGTH_SHORT).show(); return }
         val id = editingId
         if (id == null) {
             repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm,
-                onSuccess = { Toast.makeText(requireContext(), "Mascota creada", Toast.LENGTH_SHORT).show(); parentFragmentManager.popBackStack() },
-                onError = { e -> Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show() }
+                onSuccess = { Toast.makeText(requireContext(), getString(R.string.pet_created), Toast.LENGTH_SHORT).show(); parentFragmentManager.popBackStack() },
+                onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
         } else {
             repo.updatePet(id, name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm,
                 onSuccess = {
-                    Toast.makeText(requireContext(), "Mascota actualizada", Toast.LENGTH_SHORT).show()
-                    // After save, go back to view mode and refresh summary
+                    Toast.makeText(requireContext(), getString(R.string.pet_updated), Toast.LENGTH_SHORT).show()
                     repo.getPet(id, onSuccess = { p ->
                         renderSummary(p)
                     }, onError = { })
                     pickedUri = null
                     switchToViewMode()
                 },
-                onError = { e -> Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show() }
+                onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
         }
     }

@@ -14,12 +14,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.EditText
+import android.widget.Toast
 
 class ProfileFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val storage = FirebaseStorage.getInstance()
     private var selectedPhotoUri: Uri? = null
     private lateinit var ivProfilePhoto: ImageView
+    private lateinit var ivProfileCameraOverlay: ImageView
+    private lateinit var profilePhotoContainer: View
     private lateinit var tvFullName: TextView
     private lateinit var tvEmail: TextView
     private lateinit var btnSaveProfile: MaterialButton
@@ -50,6 +53,8 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
         ivProfilePhoto = view.findViewById(R.id.ivProfilePhoto)
+        ivProfileCameraOverlay = view.findViewById(R.id.ivProfileCameraOverlay)
+        profilePhotoContainer = view.findViewById(R.id.profilePhotoContainer)
         tvFullName = view.findViewById(R.id.tvFullName)
         tvEmail = view.findViewById(R.id.tvEmail)
         btnSaveProfile = view.findViewById(R.id.btnSaveProfile)
@@ -84,15 +89,20 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // Hacer la foto clickeable para cambiarla (se sube automáticamente)
-        ivProfilePhoto.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+        // Click para cambiar foto SOLO en modo edición
+        val photoClickListener = View.OnClickListener {
+            if (isEditingName) {
+                pickImageLauncher.launch("image/*")
+            } else {
+                Toast.makeText(requireContext(), "Pulsa 'Modificar' para cambiar la foto", Toast.LENGTH_SHORT).show()
+            }
         }
+        ivProfilePhoto.setOnClickListener(photoClickListener)
+        profilePhotoContainer.setOnClickListener(photoClickListener)
+        ivProfileCameraOverlay.setOnClickListener(photoClickListener)
 
         // Entrar en modo edición
-        btnEditProfile.setOnClickListener {
-            enterEditMode()
-        }
+        btnEditProfile.setOnClickListener { enterEditMode() }
 
         // Guardar cambios de nombre
         btnSaveProfile.setOnClickListener {
@@ -100,7 +110,7 @@ class ProfileFragment : Fragment() {
             val newFirst = etFirstName.text.toString().trim()
             val newLast = etLastName.text.toString().trim()
             if (newFirst.isEmpty() || newLast.isEmpty()) {
-                android.widget.Toast.makeText(requireContext(), "Nombre y apellido son obligatorios", android.widget.Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Nombre y apellido son obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val updates = hashMapOf<String, Any>(
@@ -113,10 +123,10 @@ class ProfileFragment : Fragment() {
                     originalLastName = newLast
                     tvFullName.text = "$newFirst $newLast"
                     exitEditMode(cancel = false)
-                    android.widget.Toast.makeText(requireContext(), "Nombre actualizado", android.widget.Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Nombre actualizado", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    android.widget.Toast.makeText(requireContext(), "Error al guardar nombre", android.widget.Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error al guardar nombre", Toast.LENGTH_SHORT).show()
                 }
         }
 
@@ -129,10 +139,21 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // Asegurar estado inicial (vista, no edición)
+        // Estado inicial (modo vista)
         exitEditMode(cancel = true)
 
         return view
+    }
+
+    private fun updatePhotoEditState() {
+        // Mostrar overlay y activar interacción solo en modo edición
+        val editing = isEditingName
+        ivProfileCameraOverlay.visibility = if (editing) View.VISIBLE else View.GONE
+        profilePhotoContainer.isEnabled = editing
+        ivProfilePhoto.isEnabled = editing
+        profilePhotoContainer.isClickable = editing
+        ivProfilePhoto.isClickable = editing
+        ivProfileCameraOverlay.isClickable = editing
     }
 
     private fun enterEditMode() {
@@ -145,6 +166,7 @@ class ProfileFragment : Fragment() {
         btnSaveProfile.visibility = View.VISIBLE
         btnCancelProfile.visibility = View.VISIBLE
         etFirstName.requestFocus()
+        updatePhotoEditState()
     }
 
     private fun exitEditMode(cancel: Boolean) {
@@ -155,6 +177,7 @@ class ProfileFragment : Fragment() {
         btnEditProfile.visibility = View.VISIBLE
         btnSaveProfile.visibility = View.GONE
         btnCancelProfile.visibility = View.GONE
+        updatePhotoEditState()
     }
 
     private fun uploadPhoto(uid: String, uri: Uri) {
@@ -166,13 +189,13 @@ class ProfileFragment : Fragment() {
             val updates = hashMapOf<String, Any>("photoUrl" to download.toString())
             db.collection("users").document(uid).update(updates)
                 .addOnSuccessListener {
-                    android.widget.Toast.makeText(requireContext(), "Foto actualizada", android.widget.Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    android.widget.Toast.makeText(requireContext(), "Error al guardar foto", android.widget.Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error al guardar foto", Toast.LENGTH_SHORT).show()
                 }
         }.addOnFailureListener { ex ->
-            android.widget.Toast.makeText(requireContext(), "Error al subir foto: ${ex.message}", android.widget.Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Error al subir foto: ${ex.message}", Toast.LENGTH_LONG).show()
         }
     }
 }
