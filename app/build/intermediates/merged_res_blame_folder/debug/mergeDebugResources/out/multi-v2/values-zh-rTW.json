@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/res/values-zh-rTW/values.xml",

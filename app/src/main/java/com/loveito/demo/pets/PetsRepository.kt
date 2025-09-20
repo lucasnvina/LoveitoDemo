@@ -12,6 +12,18 @@ class PetsRepository(
 ) {
     private val PETS = "pets"
 
+    private fun parseMedications(raw: Any?): List<Medication> {
+        val list = raw as? List<*> ?: return emptyList()
+        return list.mapNotNull { item ->
+            val m = item as? Map<*, *> ?: return@mapNotNull null
+            val name = m["name"] as? String ?: ""
+            val dose = m["dose"] as? String ?: ""
+            val timesAny = m["times"]
+            val times = (timesAny as? List<*>)?.mapNotNull { it as? String } ?: emptyList()
+            Medication(name = name, dose = dose, times = times)
+        }
+    }
+
     fun getMyPets(onSuccess: (List<Pet>) -> Unit, onError: (Exception) -> Unit) {
         val uid = auth.currentUser?.uid ?: run { onSuccess(emptyList()); return }
         db.collection(PETS)
@@ -36,6 +48,7 @@ class PetsRepository(
                         photoUrl = doc.getString("photoUrl"),
                         createdAt = doc.getLong("createdAt") ?: 0L,
                         updatedAt = doc.getLong("updatedAt") ?: 0L,
+                        medications = parseMedications(doc.get("medications"))
                     )
                 }
                 onSuccess(list)
@@ -63,6 +76,7 @@ class PetsRepository(
                     photoUrl = doc.getString("photoUrl"),
                     createdAt = doc.getLong("createdAt") ?: 0L,
                     updatedAt = doc.getLong("updatedAt") ?: 0L,
+                    medications = parseMedications(doc.get("medications"))
                 )
                 onSuccess(p)
             }
@@ -79,6 +93,7 @@ class PetsRepository(
         neutered: Boolean?,
         heightCm: Double?,
         lengthCm: Double?,
+        medications: List<Medication>? = null,
         onSuccess: (String) -> Unit,
         onError: (Exception) -> Unit
     ) {
@@ -98,6 +113,9 @@ class PetsRepository(
             "createdAt" to now,
             "updatedAt" to now,
         )
+        if (medications != null) {
+            base["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+        }
         val docRef = db.collection(PETS).document()
         docRef.set(base)
             .addOnSuccessListener {
@@ -128,6 +146,7 @@ class PetsRepository(
         neutered: Boolean?,
         heightCm: Double?,
         lengthCm: Double?,
+        medications: List<Medication>? = null,
         onSuccess: () -> Unit,
         onError: (Exception) -> Unit
     ) {
@@ -144,6 +163,9 @@ class PetsRepository(
             "lengthCm" to lengthCm,
             "updatedAt" to System.currentTimeMillis()
         )
+        if (medications != null) {
+            updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+        }
         ref.update(updates)
             .addOnSuccessListener {
                 if (photo == null) onSuccess()
@@ -156,6 +178,16 @@ class PetsRepository(
                     onError = onError
                 )
             }
+            .addOnFailureListener(onError)
+    }
+
+    fun updatePetMedications(id: String, medications: List<Medication>, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
+        val ref = db.collection(PETS).document(id)
+        val updates = hashMapOf<String, Any?>()
+        updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+        updates["updatedAt"] = System.currentTimeMillis()
+        ref.update(updates)
+            .addOnSuccessListener { onSuccess() }
             .addOnFailureListener(onError)
     }
 

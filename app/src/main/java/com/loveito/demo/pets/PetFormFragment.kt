@@ -16,13 +16,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
-import com.google.android.material.button.MaterialButton
+import androidx.fragment.app.setFragmentResultListener
 import com.loveito.demo.R
 import java.io.ByteArrayInputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
-import kotlin.math.max
+import java.util.Locale
 
 class PetFormFragment : Fragment() {
 
@@ -61,6 +61,7 @@ class PetFormFragment : Fragment() {
     private lateinit var tvLastCrisisDate: TextView
     private lateinit var sectionLastCrisis: View
     private lateinit var tvAvgCrisisTime: TextView
+    private lateinit var tvMedicationSummary: TextView
 
     // Editor (nuevos widgets Material)
     private lateinit var etName: EditText
@@ -87,6 +88,8 @@ class PetFormFragment : Fragment() {
     private lateinit var headerRecommendations: LinearLayout
     private lateinit var contentRecommendations: LinearLayout
     private lateinit var ivCollapseArrow: ImageView
+
+    private lateinit var sectionMedication: View
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
@@ -161,6 +164,7 @@ class PetFormFragment : Fragment() {
         tvLastCrisisDate = view.findViewById(R.id.tvLastCrisisDate)
         sectionLastCrisis = view.findViewById(R.id.sectionLastCrisis)
         tvAvgCrisisTime = view.findViewById(R.id.tvAvgCrisisTime)
+        tvMedicationSummary = view.findViewById(R.id.tvMedicationSummary)
 
         etName = view.findViewById(R.id.etPetName)
         etBreed = view.findViewById(R.id.etPetBreed)
@@ -174,6 +178,7 @@ class PetFormFragment : Fragment() {
         btnCancel = view.findViewById(R.id.btnCancelEdit)
         btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
         ivLogoLoveitoDog = view.findViewById(R.id.ivLogoLoveitoDog)
+        sectionMedication = view.findViewById(R.id.sectionMedication)
 
         // Adapters para dropdowns
         actvSex.setAdapter(ArrayAdapter(requireContext(), R.layout.item_dropdown_maroon, sexOptions).apply {
@@ -227,6 +232,8 @@ class PetFormFragment : Fragment() {
             // Creating new pet -> only edit mode
             btnDeletePetEdit.visibility = View.GONE
             switchToEditMode()
+            // Nueva mascota: agregar 1 fila inicial vacía de medicación opcional
+            // addMedicationRow(null)
         }
 
         // Date picker sobre el campo no editable
@@ -315,7 +322,113 @@ class PetFormFragment : Fragment() {
                 pickImage.launch("image/*"); true
             } else false
         }
+
+        // btnAddMedication.setOnClickListener {
+        //     addMedicationRow(null)
+        // }
+
+        // Escuchar resultados de actualización de medicaciones
+        setFragmentResultListener("medicationsUpdated") { _, bundle ->
+            val updatedPetId = bundle.getString("petId")
+            if (updatedPetId != null && updatedPetId == editingId) {
+                repo.getPet(updatedPetId, onSuccess = { p ->
+                    renderSummary(p)
+                }, onError = { })
+            }
+        }
+
+        sectionMedication.setOnClickListener {
+            editingId?.let { petId ->
+                val f = PetMedicationsFragment()
+                f.arguments = Bundle().apply { putString("petId", petId) }
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_host, f)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
     }
+
+    // Llamar después de obtener la mascota para llenar UI en modo edición (cuando el usuario entra a editar)
+    // private fun populateMedicationsForEdit(medications: List<Medication>) {
+    //     medicationsContainer.removeAllViews()
+    //     if (medications.isEmpty()) {
+    //         // Agregar una fila vacía para incentivar entrada
+    //         addMedicationRow(null)
+    //     } else {
+    //         medications.forEach { addMedicationRow(it) }
+    //     }
+    // }
+
+    // private fun addMedicationRow(med: Medication?) {
+    //     val ctx = requireContext()
+    //     val row = layoutInflater.inflate(R.layout.item_medication_edit_row, medicationsContainer, false)
+    //     val etName = row.findViewById<EditText>(R.id.etMedName)
+    //     val etDose = row.findViewById<EditText>(R.id.etMedDose)
+    //     val chipGroup = row.findViewById<ChipGroup>(R.id.chipGroupTimes)
+    //     val btnAddTime = row.findViewById<MaterialButton>(R.id.btnAddTime)
+    //     val btnRemove = row.findViewById<ImageButton>(R.id.btnRemoveMedication)
+
+    //     // Poblar datos iniciales
+    //     med?.let {
+    //         etName.setText(it.name)
+    //         etDose.setText(it.dose)
+    //         it.times.forEach { t -> addTimeChip(chipGroup, t) }
+    //     }
+
+    //     btnAddTime.setOnClickListener {
+    //         showTimePicker { time ->
+    //             // Evitar duplicados
+    //             val exists = (0 until chipGroup.childCount).mapNotNull { idx -> (chipGroup.getChildAt(idx) as? Chip)?.text?.toString() }.contains(time)
+    //             if (!exists) addTimeChip(chipGroup, time) else Toast.makeText(ctx, "Horario ya agregado", Toast.LENGTH_SHORT).show()
+    //         }
+    //     }
+
+    //     btnRemove.setOnClickListener {
+    //         AlertDialog.Builder(ctx)
+    //             .setMessage(getString(R.string.medication_delete_confirm))
+    //             .setPositiveButton(getString(R.string.delete)) { _, _ -> medicationsContainer.removeView(row) }
+    //             .setNegativeButton(getString(R.string.cancel), null)
+    //             .show()
+    //     }
+
+    //     medicationsContainer.addView(row)
+    // }
+
+    // private fun addTimeChip(group: ChipGroup, time: String) {
+    //     val chip = Chip(requireContext())
+    //     chip.text = time
+    //     chip.isCloseIconVisible = true
+    //     chip.setOnCloseIconClickListener { group.removeView(chip) }
+    //     group.addView(chip)
+    // }
+
+    // private fun showTimePicker(onTime: (String) -> Unit) {
+    //     val now = Calendar.getInstance()
+    //     val h = now.get(Calendar.HOUR_OF_DAY)
+    //     val m = now.get(Calendar.MINUTE)
+    //     TimePickerDialog(requireContext(), { _, hourOfDay, minute ->
+    //         val formatted = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
+    //         onTime(formatted)
+    //     }, h, m, true).show()
+    // }
+
+    // private fun collectMedications(): List<Medication> {
+    //     val list = mutableListOf<Medication>()
+    //     for (i in 0 until medicationsContainer.childCount) {
+    //         val row = medicationsContainer.getChildAt(i)
+    //         val etName = row.findViewById<EditText>(R.id.etMedName)
+    //         val etDose = row.findViewById<EditText>(R.id.etMedDose)
+    //         val chipGroup = row.findViewById<ChipGroup>(R.id.chipGroupTimes)
+    //         val name = etName.text.toString().trim()
+    //         val dose = etDose.text.toString().trim()
+    //         // Si no hay nombre, ignorar la fila vacía
+    //         if (name.isEmpty() && dose.isEmpty() && chipGroup.childCount == 0) continue
+    //         val times = (0 until chipGroup.childCount).mapNotNull { idx -> (chipGroup.getChildAt(idx) as? Chip)?.text?.toString() }
+    //         list.add(Medication(name = name, dose = dose, times = times))
+    //     }
+    //     return list
+    // }
 
     private fun showDatePicker() {
         val cal = Calendar.getInstance()
@@ -350,18 +463,21 @@ class PetFormFragment : Fragment() {
         groupView.visibility = View.GONE
         groupEdit.visibility = View.VISIBLE
         ivLogoLoveitoDog?.visibility = View.GONE
+        // Repoblar meds si ya estaban cargadas
+        // if (loadedMedications.isNotEmpty()) populateMedicationsForEdit(loadedMedications)
     }
 
     private fun save(name: String, breed: String?, weightKg: Double?, sex: String?, birthDate: Long?, neutered: Boolean, heightCm: Double?, lengthCm: Double?) {
         if (name.isEmpty()) { Toast.makeText(requireContext(), getString(R.string.enter_name), Toast.LENGTH_SHORT).show(); return }
         val id = editingId
         if (id == null) {
-            repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm,
+            // Crear sin medicaciones (se editarán aparte)
+            repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, null,
                 onSuccess = { Toast.makeText(requireContext(), getString(R.string.pet_created), Toast.LENGTH_SHORT).show(); parentFragmentManager.popBackStack() },
                 onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
         } else {
-            repo.updatePet(id, name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm,
+            repo.updatePet(id, name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, null,
                 onSuccess = {
                     Toast.makeText(requireContext(), getString(R.string.pet_updated), Toast.LENGTH_SHORT).show()
                     repo.getPet(id, onSuccess = { p ->
@@ -373,40 +489,6 @@ class PetFormFragment : Fragment() {
                 onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
         }
-    }
-
-    private fun loadCrises(petId: String) {
-        repo.getCrisesForPet(petId,
-            onSuccess = { list ->
-                // Calcular tiempo medio de crisis
-                val avgText = if (list.isNotEmpty()) {
-                    val avgSec = list.map { it.durationSec }.average().toInt()
-                    val min = avgSec / 60
-                    val sec = avgSec % 60
-                    getString(R.string.avg_crisis_time_format, min, sec)
-                } else {
-                    "-"
-                }
-                tvAvgCrisisTime.text = avgText
-
-                // Última crisis: días desde la última
-                if (list.isNotEmpty()) {
-                    val lastCrisis = list.maxByOrNull { it.startedAt }
-                    lastCrisis?.let {
-                        val now = System.currentTimeMillis()
-                        val days = ((now - it.startedAt) / (1000 * 60 * 60 * 24)).toInt()
-                        val daysText = if (days == 0) getString(R.string.crisis_today) else getString(R.string.days_since_last_crisis, days)
-                        tvLastCrisisDate.text = daysText
-                    }
-                } else {
-                    tvLastCrisisDate.text = getString(R.string.no_crisis_registered)
-                }
-            },
-            onError = { e ->
-                tvAvgCrisisTime.text = "-"
-                tvLastCrisisDate.text = getString(R.string.error_loading_crisis)
-            }
-        )
     }
 
     private fun renderSummary(p: Pet) {
@@ -421,6 +503,14 @@ class PetFormFragment : Fragment() {
         tvSHeight.text = p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
         tvSLength.text = p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
         // Optionally, set image here as well if needed
+
+        // Resumen de medicación
+        val medsCount = p.medications.size
+        tvMedicationSummary.text = when {
+            medsCount == 0 -> getString(R.string.medication_no_info)
+            medsCount == 1 -> getString(R.string.medication_summary_single)
+            else -> getString(R.string.medication_summary_multi, medsCount)
+        }
     }
 
     private fun yearsFrom(millis: Long): Int {
@@ -478,5 +568,37 @@ class PetFormFragment : Fragment() {
             if (!matrix.isIdentity) Bitmap.createBitmap(original, 0, 0, original.width, original.height, matrix, true)
             else original
         } catch (_: Exception) { null }
+    }
+
+    private fun loadCrises(petId: String) {
+        repo.getCrisesForPet(petId,
+            onSuccess = { list ->
+                val avgText = if (list.isNotEmpty()) {
+                    val avgSec = list.map { it.durationSec }.average().toInt()
+                    val min = avgSec / 60
+                    val sec = avgSec % 60
+                    getString(R.string.avg_crisis_time_format, min, sec)
+                } else {
+                    "-"
+                }
+                tvAvgCrisisTime.text = avgText
+
+                if (list.isNotEmpty()) {
+                    val lastCrisis = list.maxByOrNull { it.startedAt }
+                    lastCrisis?.let {
+                        val now = System.currentTimeMillis()
+                        val days = ((now - it.startedAt) / (1000 * 60 * 60 * 24)).toInt()
+                        val daysText = if (days == 0) getString(R.string.crisis_today) else getString(R.string.days_since_last_crisis, days)
+                        tvLastCrisisDate.text = daysText
+                    }
+                } else {
+                    tvLastCrisisDate.text = getString(R.string.no_crisis_registered)
+                }
+            },
+            onError = {
+                tvAvgCrisisTime.text = "-"
+                tvLastCrisisDate.text = getString(R.string.error_loading_crisis)
+            }
+        )
     }
 }

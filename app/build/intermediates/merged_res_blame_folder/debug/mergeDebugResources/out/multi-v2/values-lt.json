@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-lt/values-lt.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-lt/values-lt.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/34881c85a97ad1d5dece3d82adf7e77b/transformed/play-services-basement-18.4.0/res/values-lt/values.xml",

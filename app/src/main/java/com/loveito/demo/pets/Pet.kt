@@ -1,5 +1,11 @@
 package com.loveito.demo.pets
 
+data class Medication(
+    val name: String = "",
+    val dose: String = "",
+    val times: List<String> = emptyList() // formato HH:mm
+)
+
 data class Pet(
     val id: String,
     val ownerId: String,
@@ -16,4 +22,5 @@ data class Pet(
     val photoUrl: String? = null,
     val createdAt: Long = 0L,
     val updatedAt: Long = 0L,
+    val medications: List<Medication> = emptyList()
 )

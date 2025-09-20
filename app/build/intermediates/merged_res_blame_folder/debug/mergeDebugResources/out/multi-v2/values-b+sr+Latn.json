@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-b+sr+Latn/values-b+sr+Latn.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/6b7a92d03aa004a15706c90f474ce888/transformed/credentials-1.2.0-rc01/res/values-b+sr+Latn/values-b+sr+Latn.xml",

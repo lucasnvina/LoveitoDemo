@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Card de medicación con estilo igual a las cards en fragment_pet_form (bg_pet_item + elevation) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_pet_item"
+    android:elevation="4dp"
+    android:padding="12dp"
+    android:layout_marginBottom="12dp"
+    android:longClickable="true">
+
+    <!-- Fila superior: nombre + botón editar (Extended FAB sin ícono) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvMedName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/text_primary"
+            android:text="Nombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/btnEditMedication"
+            app:layout_constraintEnd_toStartOf="@id/btnEditMedication"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <!-- Botón Editar reducido 20% -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditMedication"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pet_btn_edit"
+            android:contentDescription="@string/medication_edit_button"
+            android:textSize="14sp"
+            android:minHeight="32dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Dosis -->
+    <TextView
+        android:id="@+id/tvMedDose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:fontFamily="@font/nunito_light"
+        android:textColor="@color/text_secondary"
+        android:text="Dosis" />
+
+    <!-- Grupo de chips para horarios -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupMedTimes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:singleLine="false"
+        app:singleSelection="false"
+        app:chipSpacingHorizontal="6dp"
+        app:chipSpacingVertical="4dp" />
+
+</LinearLayout>

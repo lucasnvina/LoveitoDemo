@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-60:/values-my/values-my.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-my/values-my.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-my/values-my.xml",

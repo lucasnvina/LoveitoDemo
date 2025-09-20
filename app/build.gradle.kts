@@ -56,4 +56,6 @@ dependencies {
 
     // Glide actualizado (sin compiler ni ksp, solo si no usas @GlideModule)
     implementation("com.github.bumptech.glide:glide:5.0.4")
+
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 }

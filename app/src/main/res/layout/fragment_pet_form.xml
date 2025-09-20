@@ -310,6 +310,16 @@
                                 android:textColor="@color/text_primary"
                                 android:gravity="start"
                                 android:paddingBottom="2dp" />
+                            <!-- Nueva TextView para resumen de medicación -->
+                            <TextView
+                                android:id="@+id/tvMedicationSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/medication_no_info"
+                                android:textSize="13sp"
+                                android:textColor="@color/text_secondary"
+                                android:fontFamily="@font/nunito_light"
+                                android:gravity="start" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -488,7 +498,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPetName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:inputType="textPersonName"
                         android:autofillHints="name"
                         android:imeOptions="actionNext"
@@ -512,7 +522,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPetBreed"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:inputType="text"
                         android:autofillHints="text"
                         android:imeOptions="actionNext"
@@ -536,7 +546,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPetWeight"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:hint="@string/pet_hint_weight"
                         android:inputType="numberDecimal"
                         android:imeOptions="actionNext"
@@ -562,7 +572,7 @@
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/actvSex"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:inputType="none"
                         android:imeOptions="actionNext"
                         android:singleLine="true"
@@ -591,7 +601,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etBirthDate"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:focusable="false"
                         android:clickable="true"
                         android:inputType="text"
@@ -618,7 +628,7 @@
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/actvNeutered"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:inputType="none"
                         android:imeOptions="actionNext"
                         android:singleLine="true"
@@ -645,7 +655,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHeightCm"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:hint="@string/pet_hint_height"
                         android:inputType="numberDecimal"
                         android:imeOptions="actionNext"
@@ -669,7 +679,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLengthCm"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/field_input_height"
                         android:hint="@string/pet_hint_length"
                         android:inputType="numberDecimal"
                         android:imeOptions="actionDone"

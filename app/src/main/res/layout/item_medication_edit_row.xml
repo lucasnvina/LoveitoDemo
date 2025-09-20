@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="8dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        style="@style/RoundedOutlinedField"
+        android:hint="@string/medication_header_name"
+        app:boxBackgroundMode="outline">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMedName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_input_height"
+            android:inputType="textCapWords"
+            android:singleLine="true"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/maroon_900"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginStart="8dp"
+        style="@style/RoundedOutlinedField"
+        android:hint="@string/medication_header_dose"
+        app:boxBackgroundMode="outline">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMedDose"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_input_height"
+            android:inputType="text"
+            android:singleLine="true"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/maroon_900"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                app:singleLine="false"
+                app:singleSelection="false" />
+        </HorizontalScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddTime"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medication_add_time"
+                android:textAllCaps="false" />
+            <ImageButton
+                android:id="@+id/btnRemoveMedication"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_delete"
+                android:tint="@color/maroon_900" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

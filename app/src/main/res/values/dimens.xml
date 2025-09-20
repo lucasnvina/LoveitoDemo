@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Altura estándar para campos de texto de una sola línea en modo edición -->
+    <dimen name="field_input_height">56dp</dimen>
+</resources>
+
