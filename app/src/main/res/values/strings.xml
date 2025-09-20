@@ -47,7 +47,7 @@
     <string name="crisis_recommendations">Recomendaciones:</string>
     <string name="delete_record">Eliminar Registro</string>
     <string name="pet_label_name">Nombre: </string>
-    <string name="pet_label_breed">Raza:</string>
+    <string name="pet_label_breed">Raza: </string>
     <string name="pet_label_weight">Peso: </string>
     <string name="pet_label_sex">Sexo: </string>
     <string name="pet_label_birth">Nacimiento: </string>

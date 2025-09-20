@@ -92,39 +92,39 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:gravity="center_horizontal"
+                        android:gravity="start"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp">
                         <!-- Campos con etiqueta en Nunito Bold y dato en Nunito Light -->
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_breed" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingStart="0dp" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSBreed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" android:paddingStart="0dp" android:paddingEnd="4dp" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_weight" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSWeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_sex" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSSex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_birth" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSBirth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_age" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSAge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_neutered" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSNeutered" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_height" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSHeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_horizontal" android:baselineAligned="false">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical" android:baselineAligned="false">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pet_label_length" android:textStyle="bold" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:paddingEnd="4dp" />
                             <TextView android:id="@+id/tvSLength" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:fontFamily="@font/nunito_light" />
                         </LinearLayout>
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="4dp">
 
                     <!-- Sección: Última Crisis (izquierda) -->
                     <LinearLayout
@@ -149,7 +149,7 @@
                         android:background="@drawable/bg_pet_item"
                         android:elevation="4dp"
                         android:padding="12dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:gravity="center_vertical">
                         <!-- Icono corazón -->
                         <ImageView
@@ -198,7 +198,7 @@
                         android:background="@drawable/bg_pet_item"
                         android:elevation="4dp"
                         android:padding="12dp"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:gravity="center_vertical">
                         <!-- Icono reloj -->
                         <ImageView
@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="8dp">
 
                     <!-- Sección: Compartir (izquierda) -->
                     <LinearLayout
@@ -256,7 +256,7 @@
                         android:background="@drawable/bg_pet_item"
                         android:elevation="4dp"
                         android:padding="12dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="2dp"
                         android:gravity="center_vertical">
                         <ImageView
                             android:layout_width="32dp"
@@ -326,54 +326,59 @@
                 </LinearLayout>
 
                 <!-- Card colapsable: Recomendaciones -->
+
                 <LinearLayout
                     android:id="@+id/cardRecommendations"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_pet_item"
-                    android:elevation="4dp"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="0dp"
-                    android:gravity="center_vertical">
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_pet_item"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <!-- Header colapsable -->
                     <LinearLayout
                         android:id="@+id/headerRecommendations"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_dialog_info"
-                            app:tint="@color/accent_primary"
-                            android:contentDescription="@string/recommendations_desc"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="12dp" />
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="@string/recommendations_desc"
+                            android:src="@android:drawable/ic_dialog_info"
+                            app:tint="@color/accent_primary" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/recommendations_label"
-                            android:textStyle="bold"
                             android:fontFamily="@font/nunito_semibold"
-                            android:textSize="16sp"
+                            android:gravity="start"
+                            android:text="@string/recommendations_label"
                             android:textColor="@color/text_primary"
-                            android:gravity="start" />
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_weight="1" />
+
                         <ImageView
                             android:id="@+id/ivCollapseArrow"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@android:drawable/arrow_down_float"
+                            android:layout_gravity="center_vertical"
                             android:contentDescription="@string/collapse_desc"
-                            android:layout_gravity="center_vertical" />
+                            android:src="@android:drawable/arrow_down_float" />
                     </LinearLayout>
 
                     <!-- Contenido colapsable -->
@@ -382,32 +387,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone"
-                        android:paddingTop="8dp">
+                        android:paddingTop="8dp"
+                        android:visibility="gone">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/nunito_light"
                             android:text="@string/recommendation_item_1"
                             android:textColor="@color/text_secondary"
-                            android:fontFamily="@font/nunito_light"
-                            android:textSize="14sp"
-                            android:layout_marginBottom="4dp" />
+                            android:textSize="14sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/nunito_light"
                             android:text="@string/recommendation_item_2"
                             android:textColor="@color/text_secondary"
-                            android:fontFamily="@font/nunito_light"
-                            android:textSize="14sp"
-                            android:layout_marginBottom="4dp" />
+                            android:textSize="14sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/nunito_light"
                             android:text="@string/recommendation_item_3"
                             android:textColor="@color/text_secondary"
-                            android:fontFamily="@font/nunito_light"
-                            android:textSize="14sp"
-                            android:layout_marginBottom="4dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -486,7 +494,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pet_label_breed"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="12dp"/>
                 <EditText
                     android:id="@+id/etPetBreed"
                     android:layout_width="match_parent"

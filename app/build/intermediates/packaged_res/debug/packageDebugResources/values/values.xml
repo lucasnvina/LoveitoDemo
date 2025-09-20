@@ -88,7 +88,7 @@
     <string name="pet_label_age">Edad: </string>
     <string name="pet_label_birth">Nacimiento: </string>
     <string name="pet_label_birth_date">Fecha de nacimiento</string>
-    <string name="pet_label_breed">Raza:</string>
+    <string name="pet_label_breed">Raza: </string>
     <string name="pet_label_crisis">Crisis: </string>
     <string name="pet_label_height">Alto: </string>
     <string name="pet_label_height_cm">Alto (cm)</string>
