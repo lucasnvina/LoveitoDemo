@@ -69,7 +69,6 @@
     <string name="pet_btn_pick_birth">Elegir</string>
     <string name="pet_btn_save">Guardar</string>
     <string name="pet_btn_cancel">Cancelar</string>
-    <string name="pet_btn_delete_pet">Eliminar Mascota</string>
     <string name="pet_hint_name">Ej: Lobito</string>
     <string name="pet_hint_breed">Ej: Mestizo</string>
     <string name="pet_hint_weight">Ej: 23.5</string>

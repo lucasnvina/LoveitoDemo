@@ -72,7 +72,6 @@
     <string name="pet_breed">Raza: %1$s</string>
     <string name="pet_btn_cancel">Cancelar</string>
     <string name="pet_btn_delete">Eliminar</string>
-    <string name="pet_btn_delete_pet">Eliminar Mascota</string>
     <string name="pet_btn_edit">Editar</string>
     <string name="pet_btn_pick_birth">Elegir</string>
     <string name="pet_btn_pick_image">Elegir foto</string>

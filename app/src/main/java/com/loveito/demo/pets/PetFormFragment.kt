@@ -71,7 +71,7 @@ class PetFormFragment : Fragment() {
     private lateinit var etLength: EditText
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
-    private lateinit var btnDeletePet: Button // Cambiado a lateinit var
+    private lateinit var btnDeletePetEdit: Button
     private lateinit var btnPickImage: MaterialButton
     private var ivLogoLoveitoDog: ImageView? = null
 
@@ -110,9 +110,10 @@ class PetFormFragment : Fragment() {
 
         groupView = view.findViewById(R.id.groupView)
         groupEdit = view.findViewById(R.id.groupEdit)
+        scrollView = view.findViewById(R.id.scrollView) // Initialize scrollView to avoid crash
         btnStartEdit = view.findViewById(R.id.btnStartEdit)
-        btnDeletePet = view.findViewById(R.id.btnDeletePet)
-        btnDeletePet.setOnClickListener {
+        btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
+        btnDeletePetEdit.setOnClickListener {
             val id = editingId ?: return@setOnClickListener
             AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.delete_pet_title))
@@ -130,6 +131,15 @@ class PetFormFragment : Fragment() {
                 }
                 .setNegativeButton(getString(R.string.cancel), null)
                 .show()
+        }
+        btnStartEdit.setOnClickListener {
+            switchToEditMode()
+            btnPickImage.visibility = View.VISIBLE
+            ivLogoLoveitoDog?.visibility = View.GONE
+            // Scroll al inicio (safe check)
+            if (::scrollView.isInitialized) {
+                scrollView.post { scrollView.fullScroll(View.FOCUS_UP) }
+            }
         }
 
         ivSummaryPhoto = view.findViewById(R.id.ivSummaryPhoto)
@@ -157,7 +167,6 @@ class PetFormFragment : Fragment() {
         etLength = view.findViewById(R.id.etLengthCm)
         btnSave = view.findViewById(R.id.btnSavePet)
         btnCancel = view.findViewById(R.id.btnCancelEdit)
-        btnDeletePet = view.findViewById(R.id.btnDeletePet)
         btnPickImage = view.findViewById(R.id.btnPickImage)
         btnPickImage.setOnClickListener {
             pickImage.launch("image/*")
@@ -205,7 +214,7 @@ class PetFormFragment : Fragment() {
             )
         } else {
             // Creating new pet -> only edit mode
-            btnDeletePet.visibility = View.GONE
+            btnDeletePetEdit.visibility = View.GONE
             switchToEditMode()
             btnPickImage.visibility = View.VISIBLE
         }
@@ -237,31 +246,6 @@ class PetFormFragment : Fragment() {
             save(name, breed, weight, sex, birthDateMillis, neutered, height, length)
         }
 
-        btnDeletePet.setOnClickListener {
-            val id = editingId ?: return@setOnClickListener
-            AlertDialog.Builder(requireContext())
-                .setTitle(getString(R.string.delete_pet_title))
-                .setMessage(getString(R.string.delete_pet_confirm))
-                .setPositiveButton(getString(R.string.delete)) { _, _ ->
-                    repo.deletePet(id,
-                        onSuccess = {
-                            Toast.makeText(requireContext(), getString(R.string.pet_deleted), Toast.LENGTH_SHORT).show()
-                            parentFragmentManager.popBackStack()
-                        },
-                        onError = { e ->
-                            Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-                .setNegativeButton(getString(R.string.cancel), null)
-                .show()
-        }
-
-        btnStartEdit.setOnClickListener {
-            switchToEditMode()
-            btnPickImage.visibility = View.VISIBLE
-            ivLogoLoveitoDog?.visibility = View.GONE // Hide in edit mode
-        }
         btnCancel.setOnClickListener {
             pickedUri = null
             // reload pet to refresh editor fields to last saved

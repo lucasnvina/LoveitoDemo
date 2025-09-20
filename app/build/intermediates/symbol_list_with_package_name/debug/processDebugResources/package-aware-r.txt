@@ -3890,7 +3890,6 @@ id btnAddPet
 id btnCancelEdit
 id btnCancelProfile
 id btnDeleteCrisis
-id btnDeletePet
 id btnDeletePetEdit
 id btnEditProfile
 id btnForgot
@@ -3979,6 +3978,7 @@ id easeInOut
 id easeOut
 id east
 id edge
+id editModeBottomSpacer
 id edit_query
 id edit_text_id
 id elastic
@@ -4853,7 +4853,6 @@ string pet_birth
 string pet_breed
 string pet_btn_cancel
 string pet_btn_delete
-string pet_btn_delete_pet
 string pet_btn_edit
 string pet_btn_pick_birth
 string pet_btn_pick_image

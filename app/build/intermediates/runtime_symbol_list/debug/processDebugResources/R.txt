@@ -3889,7 +3889,6 @@ int id btnAddPet 0x7f09006e
 int id btnCancelEdit 0x7f09006f
 int id btnCancelProfile 0x7f090264
 int id btnDeleteCrisis 0x7f090070
-int id btnDeletePet 0x7f090071
 int id btnDeletePetEdit 0x7f090072
 int id btnEditProfile 0x7f090073
 int id btnForgot 0x7f090074
@@ -3978,6 +3977,7 @@ int id easeInOut 0x7f0900c7
 int id easeOut 0x7f0900c8
 int id east 0x7f0900c9
 int id edge 0x7f0900ca
+int id editModeBottomSpacer 0x7f090265
 int id edit_query 0x7f0900cb
 int id edit_text_id 0x7f0900cc
 int id elastic 0x7f0900cd
@@ -4852,7 +4852,6 @@ int string pet_birth 0x7f1100f0
 int string pet_breed 0x7f1100f1
 int string pet_btn_cancel 0x7f1100f2
 int string pet_btn_delete 0x7f1100f3
-int string pet_btn_delete_pet 0x7f1100f4
 int string pet_btn_edit 0x7f1100f5
 int string pet_btn_pick_birth 0x7f1100f6
 int string pet_btn_pick_image 0x7f1100f7
