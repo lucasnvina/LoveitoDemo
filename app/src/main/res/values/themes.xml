@@ -10,12 +10,13 @@
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorError">@color/error_default</item>
         <item name="colorOnError">@color/text_primary</item>
+        <!-- Cursor personalizado -->
+        <item name="android:textCursorDrawable">@drawable/cursor_maroon</item>
     </style>
 
     <!-- Overlay para color de cursor estándar maroon -->
     <style name="ThemeOverlay.Loveito.CursorMaroon" parent="ThemeOverlay.Material3">
         <item name="colorControlActivated">@color/maroon_900</item>
-        <!-- materialCursorColor no existe en esta versión; usamos drawable personalizado -->
         <item name="android:textCursorDrawable">@drawable/cursor_maroon</item>
         <item name="colorPrimary">@color/maroon_900</item>
     </style>

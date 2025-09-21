@@ -104,6 +104,7 @@
     <string name="medication_header_name">Medicamento</string>
     <string name="medication_header_dose">Dosis</string>
     <string name="medication_header_frequency">Frecuencia</string>
+    <string name="medication_header_unit">Unidad</string>
     <string name="medication_add_button">Añadir medicamento</string>
     <string name="medication_add_time">Agregar horario</string>
     <string name="medication_times_dialog_title">Horarios</string>
@@ -126,4 +127,6 @@
     <string name="medication_empty_list">Sin medicación registrada</string>
     <string name="medication_times_label">Horarios</string>
     <string name="medication_edit_button">Editar medicamento</string>
+    <string name="medication_time_duplicate">Horario ya agregado</string>
+    <string name="medication_time_limit">Máximo de %1$d horarios</string>
 </resources>

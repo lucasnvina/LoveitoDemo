@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array medication_units
 color accent_on
 color accent_primary
 color bg
@@ -11,6 +12,7 @@ color border_default
 color brown_800
 color error_accessible
 color error_default
+color fab_ripple_tint
 color ic_launcher_background
 color maroon_900
 color maroon_900_stroke
@@ -23,6 +25,7 @@ color text_primary
 color text_secondary
 dimen field_input_height
 drawable bg_add_circle
+drawable bg_fab_add_plain
 drawable bg_med_times
 drawable bg_pet_add_item
 drawable bg_pet_item
@@ -39,6 +42,7 @@ drawable circle_transparent
 drawable cursor_maroon
 drawable edittext_accent_primary
 drawable edittext_accent_primary_rounded
+drawable fab_circular_primary
 drawable ic_check_mark
 drawable ic_chevron_right
 drawable ic_chevron_right_brown
@@ -56,6 +60,7 @@ drawable profile_photo_border
 drawable user_photo_border
 font nunito_light
 font nunito_semibold
+id actUnit
 id actvNeutered
 id actvSex
 id btnAddPet
@@ -68,7 +73,6 @@ id btnDeletePetEdit
 id btnEditMedication
 id btnEditProfile
 id btnForgot
-id btnRemoveMedication
 id btnSave
 id btnSavePet
 id btnSaveProfile
@@ -91,8 +95,6 @@ id etFirstName
 id etHeightCm
 id etLastName
 id etLengthCm
-id etMedDose
-id etMedName
 id etName
 id etPassword
 id etPetBreed
@@ -103,6 +105,7 @@ id fragment_host
 id groupEdit
 id groupView
 id headerRecommendations
+id horariosHeader
 id ivCameraOverlay
 id ivChevron
 id ivCollapseArrow
@@ -135,6 +138,7 @@ id tilPetName
 id tilPetNeutered
 id tilPetSex
 id tilPetWeight
+id tilUnit
 id topBar
 id tvAddLabel
 id tvAddSymbol
@@ -143,6 +147,7 @@ id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
 id tvDate
+id tvDropdownUnit
 id tvEmail
 id tvEmpty
 id tvEmptyMedications
@@ -182,8 +187,8 @@ layout fragment_pets_list
 layout fragment_profile
 layout item_crisis
 layout item_dropdown_maroon
+layout item_dropdown_unit
 layout item_medication_card
-layout item_medication_edit_row
 layout item_pet_add
 layout item_pet_grid
 layout item_spinner_center_field
@@ -245,6 +250,7 @@ string medication_empty_list
 string medication_header_dose
 string medication_header_frequency
 string medication_header_name
+string medication_header_unit
 string medication_label
 string medication_no_info
 string medication_no_times
@@ -254,6 +260,8 @@ string medication_saving
 string medication_summary_multi
 string medication_summary_prefix
 string medication_summary_single
+string medication_time_duplicate
+string medication_time_limit
 string medication_times_dialog_title
 string medication_times_label
 string medications_cancel
@@ -328,6 +336,7 @@ style CustomPopupMenu
 style EditCenterField
 style EditSectionCheck
 style EditSectionLabel
+style LoveitoCircularFab
 style NoUnderlineEditText
 style NunitoBoldButton
 style NunitoBoldButtonRounded
@@ -336,5 +345,7 @@ style NunitoBoldEditText
 style NunitoLightEditText
 style RoundedOutlinedField
 style RoundedOutlinedFieldHint
+style ShapeAppearanceOverlay.LoveitoCircle
 style ThemeOverlay.Loveito.CursorMaroon
+style ThemeOverlay.Loveito.TimePicker
 style Theme.Loveito

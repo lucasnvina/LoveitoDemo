@@ -5,6 +5,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.loveito.demo.R
 import androidx.core.content.res.ResourcesCompat
+import com.loveito.demo.R
 
 class PetMedicationsFragment : Fragment() {
     private val repo = PetsRepository()
@@ -25,8 +25,8 @@ class PetMedicationsFragment : Fragment() {
 
     // UI
     private lateinit var tvEmpty: TextView
-    private lateinit var fabAdd: FloatingActionButton
     private lateinit var rv: RecyclerView
+    private lateinit var fabAdd: ImageButton // cambiado a ImageButton
 
     // Data
     private val medications = mutableListOf<Medication>()
@@ -44,19 +44,9 @@ class PetMedicationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvEmpty = view.findViewById(R.id.tvEmptyMedications)
-        fabAdd = view.findViewById(R.id.fabAddMedication)
         rv = view.findViewById(R.id.rvMedications)
         val tvTitle = view.findViewById<TextView>(R.id.tvTitleMedications)
-
-        // Ajustar tamaño del FAB al alto del título
-        tvTitle.post {
-            val h = tvTitle.height
-            if (h > 0) {
-                fabAdd.customSize = h
-                try { fabAdd.setMaxImageSize((h * 0.55f).toInt()) } catch (_: Exception) {}
-                fabAdd.requestLayout()
-            }
-        }
+        fabAdd = view.findViewById(R.id.fabAddMedication)
 
         if (petId == null) {
             Toast.makeText(requireContext(), "PetId faltante", Toast.LENGTH_SHORT).show()
@@ -66,6 +56,7 @@ class PetMedicationsFragment : Fragment() {
         setupRecycler()
         setupFragmentResultListener()
 
+        // Listener del FAB para abrir formulario de nueva medicación
         fabAdd.setOnClickListener { openEditMedication(index = -1, medication = null) }
 
         loadMedications()
@@ -78,8 +69,9 @@ class PetMedicationsFragment : Fragment() {
                 val index = bundle.getInt("index", -1)
                 val name = bundle.getString("name") ?: ""
                 val dose = bundle.getString("dose") ?: ""
+                val unit = bundle.getString("unit") ?: ""
                 val times = bundle.getStringArrayList("times")?.toList() ?: emptyList()
-                val med = Medication(name = name, dose = dose, times = times)
+                val med = Medication(name = name, dose = dose, unit = unit, times = times)
                 if (index in medications.indices) {
                     medications[index] = med
                 } else {
@@ -166,6 +158,7 @@ class PetMedicationsFragment : Fragment() {
             if (medication != null) {
                 putString("name", medication.name)
                 putString("dose", medication.dose)
+                putString("unit", medication.unit)
                 putStringArrayList("times", ArrayList(medication.times))
             }
         }
@@ -232,7 +225,7 @@ class PetMedicationsFragment : Fragment() {
             }
             fun bind(med: Medication, adapterPos: Int) {
                 tvName.text = med.name.ifBlank { getString(R.string.medication_header_name) }
-                tvDose.text = if (med.dose.isBlank()) getString(R.string.medication_header_dose) else med.dose
+                tvDose.text = if (med.dose.isBlank()) getString(R.string.medication_header_dose) else listOf(med.dose, med.unit.takeIf { it.isNotBlank() }).filterNotNull().joinToString(" ")
                 chipGroup.removeAllViews()
                 val ts = med.times
                 if (ts.isEmpty()) {

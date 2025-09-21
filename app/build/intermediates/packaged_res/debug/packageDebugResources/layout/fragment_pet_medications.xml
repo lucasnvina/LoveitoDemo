@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <!-- Encabezado con baseline alignment -->
+        <!-- Encabezado con botón agregar (ImageButton circular plano reducido 50%) -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -30,15 +30,20 @@
                 app:layout_constraintEnd_toStartOf="@id/fabAddMedication"
                 app:layout_constraintHorizontal_bias="0" />
 
-            <!-- FAB reducido para alinearse visualmente con la altura del texto -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageButton
                 android:id="@+id/fabAddMedication"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_fab_add_plain"
                 android:contentDescription="@string/medication_add_button"
-                app:srcCompat="@android:drawable/ic_input_add"
-                app:backgroundTint="@color/accent_primary"
-                android:tint="@color/accent_on"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:src="@android:drawable/ic_input_add"
+                android:tint="#F6E2CC"
+                android:focusable="true"
+                android:clickable="true"
+                android:importantForAccessibility="yes"
+                android:elevation="0dp"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTitleMedications"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

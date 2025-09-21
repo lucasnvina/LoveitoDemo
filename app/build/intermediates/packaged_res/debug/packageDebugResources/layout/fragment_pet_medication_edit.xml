@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:theme="@style/ThemeOverlay.Loveito.CursorMaroon"> <!-- agregado overlay de cursor -->
 
         <TextView
             android:id="@+id/tvTitle"
@@ -28,16 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/medication_header_name"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/field_input_height"
                 android:singleLine="true"
-                android:inputType="textCapWords"
+                android:inputType="textPersonName|textCapWords"
+                android:autofillHints="name"
+                android:imeOptions="actionNext"
+                android:textCursorDrawable="@drawable/cursor_maroon"
                 android:fontFamily="@font/nunito_light"
                 android:textColor="@color/maroon_900"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,46 +52,100 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/medication_header_dose"
-            app:boxBackgroundMode="outline">
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDose"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/field_input_height"
                 android:singleLine="true"
                 android:inputType="text"
+                android:imeOptions="actionNext"
+                android:textCursorDrawable="@drawable/cursor_maroon"
                 android:fontFamily="@font/nunito_light"
                 android:textColor="@color/maroon_900"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvTimesLabel"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUnit"
+            style="@style/RoundedOutlinedField"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/medication_times_label"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:fontFamily="@font/nunito_semibold"
-            android:textColor="@color/text_secondary" />
+            android:layout_marginTop="12dp"
+            android:hint="@string/medication_header_unit"
+            app:boxBackgroundMode="outline"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@color/maroon_900"
+            app:hintTextColor="@color/maroon_900">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actUnit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:inputType="none"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:cursorVisible="false"
+                android:dropDownHorizontalOffset="0dp"
+                android:dropDownVerticalOffset="0dp"
+                android:dropDownSelector="@android:color/transparent"
+                android:fontFamily="@font/nunito_light"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/maroon_900"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Header Horarios con botón agregar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/horariosHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvTimesLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/medication_times_label"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnAddTime"
+                app:layout_constraintHorizontal_bias="0" />
+
+            <ImageButton
+                android:id="@+id/btnAddTime"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_fab_add_plain"
+                android:contentDescription="@string/medication_add_time"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:src="@android:drawable/ic_input_add"
+                android:tint="#F6E2CC"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:clickable="true"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvTimesLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Chips -->
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupTimes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             app:singleLine="false"
             app:singleSelection="false" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddTime"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/medication_add_time"
-            android:textAllCaps="false"
-            android:layout_marginTop="4dp" />
-
+        <!-- Botones Guardar / Cancelar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -93,4 +93,32 @@
         <item name="hintTextColor">@color/maroon_900</item>
         <item name="android:textColorHint">@color/maroon_900</item>
     </style>
+    <style name="ShapeAppearanceOverlay.LoveitoCircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <color name="fab_ripple_tint">#1AF6E2CC</color>
+    <!-- Ajuste: usar backgroundTint y ripple propio en lugar de android:background -->
+    <style name="LoveitoCircularFab" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.LoveitoCircle</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:translationZ">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+        <item name="hoveredFocusedTranslationZ">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="useCompatPadding">false</item>
+        <item name="android:padding">0dp</item>
+        <item name="backgroundTint">#230000</item>
+        <item name="tint">#F6E2CC</item>
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="borderWidth">0dp</item>
+    </style>
+    <style name="ThemeOverlay.Loveito.TimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="colorPrimary">@color/maroon_900</item>
+        <item name="colorOnPrimary">@color/accent_on</item>
+        <item name="colorSecondary">@color/maroon_900</item>
+        <item name="colorOnSecondary">@color/accent_on</item>
+        <item name="android:textColorPrimary">@color/maroon_900</item>
+        <item name="android:colorAccent">@color/maroon_900</item>
+    </style>
 </resources>

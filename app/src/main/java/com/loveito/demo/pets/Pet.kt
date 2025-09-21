@@ -3,6 +3,7 @@ package com.loveito.demo.pets
 data class Medication(
     val name: String = "",
     val dose: String = "",
+    val unit: String = "", // nueva unidad: mg, mL, Ul, µg
     val times: List<String> = emptyList() // formato HH:mm
 )
 

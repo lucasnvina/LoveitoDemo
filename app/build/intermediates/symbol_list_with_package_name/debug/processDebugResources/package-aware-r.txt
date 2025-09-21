@@ -91,6 +91,7 @@ animator nav_default_enter_anim
 animator nav_default_exit_anim
 animator nav_default_pop_enter_anim
 animator nav_default_pop_exit_anim
+array medication_units
 attr ConstraintRotate
 attr SharedValue
 attr SharedValueId
@@ -1638,6 +1639,7 @@ color error_accessible
 color error_color_material_dark
 color error_color_material_light
 color error_default
+color fab_ripple_tint
 color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
@@ -3618,6 +3620,7 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable bg_add_circle
+drawable bg_fab_add_plain
 drawable bg_med_times
 drawable bg_pet_add_item
 drawable bg_pet_item
@@ -3666,6 +3669,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable edittext_accent_primary
 drawable edittext_accent_primary_rounded
+drawable fab_circular_primary
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_arrow_back_black_24
@@ -3833,6 +3837,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id actUnit
 id actionDown
 id actionDownUp
 id actionUp
@@ -3907,7 +3912,6 @@ id btnDeletePetEdit
 id btnEditMedication
 id btnEditProfile
 id btnForgot
-id btnRemoveMedication
 id btnSave
 id btnSavePet
 id btnSaveProfile
@@ -4012,8 +4016,6 @@ id etFirstName
 id etHeightCm
 id etLastName
 id etLengthCm
-id etMedDose
-id etMedName
 id etName
 id etPassword
 id etPetBreed
@@ -4060,6 +4062,7 @@ id hideable
 id home
 id homeAsUp
 id honorRequest
+id horariosHeader
 id horizontal_only
 id icon
 id icon_group
@@ -4354,6 +4357,7 @@ id tilPetName
 id tilPetNeutered
 id tilPetSex
 id tilPetWeight
+id tilUnit
 id time
 id title
 id titleDividerNoCustom
@@ -4382,6 +4386,7 @@ id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
 id tvDate
+id tvDropdownUnit
 id tvEmail
 id tvEmpty
 id tvEmptyMedications
@@ -4585,8 +4590,8 @@ layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_crisis
 layout item_dropdown_maroon
+layout item_dropdown_unit
 layout item_medication_card
-layout item_medication_edit_row
 layout item_pet_add
 layout item_pet_grid
 layout item_spinner_center_field
@@ -4830,6 +4835,7 @@ string medication_empty_list
 string medication_header_dose
 string medication_header_frequency
 string medication_header_name
+string medication_header_unit
 string medication_label
 string medication_no_info
 string medication_no_times
@@ -4839,6 +4845,8 @@ string medication_saving
 string medication_summary_multi
 string medication_summary_prefix
 string medication_summary_single
+string medication_time_duplicate
+string medication_time_limit
 string medication_times_dialog_title
 string medication_times_label
 string medications_cancel
@@ -5288,6 +5296,7 @@ style CustomPopupMenu
 style EditCenterField
 style EditSectionCheck
 style EditSectionLabel
+style LoveitoCircularFab
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text
@@ -5425,6 +5434,7 @@ style ShapeAppearance_MaterialComponents_LargeComponent
 style ShapeAppearance_MaterialComponents_MediumComponent
 style ShapeAppearance_MaterialComponents_SmallComponent
 style ShapeAppearance_MaterialComponents_Tooltip
+style ShapeAppearanceOverlay_LoveitoCircle
 style ShapeAppearanceOverlay_Material3_Button
 style ShapeAppearanceOverlay_Material3_Chip
 style ShapeAppearanceOverlay_Material3_Corner_Bottom
@@ -5713,6 +5723,7 @@ style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
 style ThemeOverlay_Design_TextInputEditText
 style ThemeOverlay_Loveito_CursorMaroon
+style ThemeOverlay_Loveito_TimePicker
 style ThemeOverlay_Material3
 style ThemeOverlay_Material3_ActionBar
 style ThemeOverlay_Material3_AutoCompleteTextView

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="medication_units">
+        <item>mg</item>
+        <item>mL</item>
+        <item>Ul</item>
+        <item>µg</item>
+    </string-array>
+</resources>
+

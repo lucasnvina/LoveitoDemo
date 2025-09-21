@@ -18,9 +18,10 @@ class PetsRepository(
             val m = item as? Map<*, *> ?: return@mapNotNull null
             val name = m["name"] as? String ?: ""
             val dose = m["dose"] as? String ?: ""
+            val unit = m["unit"] as? String ?: ""
             val timesAny = m["times"]
             val times = (timesAny as? List<*>)?.mapNotNull { it as? String } ?: emptyList()
-            Medication(name = name, dose = dose, times = times)
+            Medication(name = name, dose = dose, unit = unit, times = times)
         }
     }
 
@@ -114,7 +115,7 @@ class PetsRepository(
             "updatedAt" to now,
         )
         if (medications != null) {
-            base["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+            base["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
         }
         val docRef = db.collection(PETS).document()
         docRef.set(base)
@@ -164,7 +165,7 @@ class PetsRepository(
             "updatedAt" to System.currentTimeMillis()
         )
         if (medications != null) {
-            updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+            updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
         }
         ref.update(updates)
             .addOnSuccessListener {
@@ -184,7 +185,7 @@ class PetsRepository(
     fun updatePetMedications(id: String, medications: List<Medication>, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         val ref = db.collection(PETS).document(id)
         val updates = hashMapOf<String, Any?>()
-        updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "times" to it.times) }
+        updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
         updates["updatedAt"] = System.currentTimeMillis()
         ref.update(updates)
             .addOnSuccessListener { onSuccess() }
