@@ -3920,7 +3920,6 @@ int id btnStartEdit 0x7f0a0081
 int id buttonPanel 0x7f0a0082
 int id cache_measures 0x7f0a0083
 int id cancel_button 0x7f0a0084
-int id cardRecommendations 0x7f0a0085
 int id cardSummary 0x7f0a0086
 int id carryVelocity 0x7f0a0087
 int id center 0x7f0a0088
@@ -3949,7 +3948,6 @@ int id container 0x7f0a009e
 int id containerActions 0x7f0a009f
 int id content 0x7f0a00a0
 int id contentPanel 0x7f0a00a1
-int id contentRecommendations 0x7f0a00a2
 int id contiguous 0x7f0a00a3
 int id continuousVelocity 0x7f0a00a4
 int id coordinator 0x7f0a00a5
@@ -4052,7 +4050,6 @@ int id groupView 0x7f0a0105
 int id group_divider 0x7f0a0106
 int id grouping 0x7f0a0107
 int id groups 0x7f0a0108
-int id headerRecommendations 0x7f0a0109
 int id header_title 0x7f0a010a
 int id hidden 0x7f0a010b
 int id hide_ime_id 0x7f0a010c
@@ -4080,7 +4077,6 @@ int id italic 0x7f0a0121
 int id item_touch_helper_previous_elevation 0x7f0a0122
 int id ivCameraOverlay 0x7f0a0123
 int id ivChevron 0x7f0a0124
-int id ivCollapseArrow 0x7f0a0125
 int id ivEditPhoto 0x7f0a0126
 int id ivLogoLoveitoDog 0x7f0a0127
 int id ivPetPhoto 0x7f0a0128
@@ -4724,7 +4720,6 @@ int string character_counter_pattern 0x7f12003a
 int string chevron_desc 0x7f12003b
 int string clear_text_end_icon_content_description 0x7f12003c
 int string cm 0x7f12003d
-int string collapse_desc 0x7f12003e
 int string common_google_play_services_enable_button 0x7f12003f
 int string common_google_play_services_enable_text 0x7f120040
 int string common_google_play_services_enable_title 0x7f120041
@@ -4974,11 +4969,6 @@ int string pet_updated 0x7f120134
 int string pet_weight 0x7f120135
 int string profile_change_photo 0x7f120136
 int string project_id 0x7f120137
-int string recommendation_item_1 0x7f120138
-int string recommendation_item_2 0x7f120139
-int string recommendation_item_3 0x7f12013a
-int string recommendations_desc 0x7f12013b
-int string recommendations_label 0x7f12013c
 int string search_menu_title 0x7f12013d
 int string searchbar_scrolling_view_behavior 0x7f12013e
 int string searchview_clear_text_content_description 0x7f12013f

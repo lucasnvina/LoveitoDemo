@@ -85,11 +85,6 @@ class PetFormFragment : Fragment() {
 
     private var editingId: String? = null
 
-    // Collapsible Recommendations Card
-    private lateinit var headerRecommendations: LinearLayout
-    private lateinit var contentRecommendations: LinearLayout
-    private lateinit var ivCollapseArrow: ImageView
-
     private lateinit var sectionMedication: View
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -305,29 +300,6 @@ class PetFormFragment : Fragment() {
                     .commit()
         }
         }
-
-        // Collapsible Recommendations Card setup
-        headerRecommendations = view.findViewById(R.id.headerRecommendations)
-        contentRecommendations = view.findViewById(R.id.contentRecommendations)
-        ivCollapseArrow = view.findViewById(R.id.ivCollapseArrow)
-
-        // Ensure collapsed by default (redundant, but safe)
-        contentRecommendations.visibility = View.GONE
-        ivCollapseArrow.rotation = 0f
-
-        headerRecommendations.setOnClickListener {
-            val isCollapsed = contentRecommendations.visibility == View.GONE
-            if (isCollapsed) {
-                contentRecommendations.visibility = View.VISIBLE
-                ivCollapseArrow.animate().rotation(180f).setDuration(200).start()
-            } else {
-                contentRecommendations.visibility = View.GONE
-                ivCollapseArrow.animate().rotation(0f).setDuration(200).start()
-            }
-        }
-
-        // Ensure ScrollView has enough bottom padding to avoid overlap with logo
-        // Removed programmatic padding adjustment, now handled in XML
 
         // Set click listeners for picking image only in edit mode
         val photoClickListener = View.OnClickListener {

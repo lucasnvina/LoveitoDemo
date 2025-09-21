@@ -72,6 +72,10 @@
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-65:/font/nunito_light.ttf"
     },
     {
+        "merged": "com.loveito.demo.app-debug-63:/layout_fragment_pet_form.xml.flat",
+        "source": "com.loveito.demo.app-main-65:/layout/fragment_pet_form.xml"
+    },
+    {
         "merged": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-debug-63:/drawable_ic_chevron_right_brown.xml.flat",
         "source": "/Users/lucasvina/.gradle/daemon/8.13/com.loveito.demo.app-main-65:/drawable/ic_chevron_right_brown.xml"
     },

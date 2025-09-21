@@ -3921,7 +3921,6 @@ id btnStartEdit
 id buttonPanel
 id cache_measures
 id cancel_button
-id cardRecommendations
 id cardSummary
 id carryVelocity
 id center
@@ -3950,7 +3949,6 @@ id container
 id containerActions
 id content
 id contentPanel
-id contentRecommendations
 id contiguous
 id continuousVelocity
 id coordinator
@@ -4053,7 +4051,6 @@ id groupView
 id group_divider
 id grouping
 id groups
-id headerRecommendations
 id header_title
 id hidden
 id hide_ime_id
@@ -4081,7 +4078,6 @@ id italic
 id item_touch_helper_previous_elevation
 id ivCameraOverlay
 id ivChevron
-id ivCollapseArrow
 id ivEditPhoto
 id ivLogoLoveitoDog
 id ivPetPhoto
@@ -4725,7 +4721,6 @@ string character_counter_pattern
 string chevron_desc
 string clear_text_end_icon_content_description
 string cm
-string collapse_desc
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title
@@ -4975,11 +4970,6 @@ string pet_updated
 string pet_weight
 string profile_change_photo
 string project_id
-string recommendation_item_1
-string recommendation_item_2
-string recommendation_item_3
-string recommendations_desc
-string recommendations_label
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description

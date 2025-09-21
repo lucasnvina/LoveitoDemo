@@ -79,12 +79,10 @@ id btnSaveProfile
 id btnSignIn
 id btnSignUp
 id btnStartEdit
-id cardRecommendations
 id cardSummary
 id chipGroupMedTimes
 id chipGroupTimes
 id containerActions
-id contentRecommendations
 id editModeBottomSpacer
 id editPhotoContainer
 id etBirthDate
@@ -103,11 +101,9 @@ id fabAddMedication
 id fragment_host
 id groupEdit
 id groupView
-id headerRecommendations
 id horariosHeader
 id ivCameraOverlay
 id ivChevron
-id ivCollapseArrow
 id ivEditPhoto
 id ivLogoLoveitoDog
 id ivPetPhoto
@@ -210,7 +206,6 @@ string avg_time_label
 string cancel
 string chevron_desc
 string cm
-string collapse_desc
 string crisis_item
 string crisis_meta
 string crisis_recommendations
@@ -315,11 +310,6 @@ string pet_updated
 string pet_weight
 string profile_change_photo
 string project_id
-string recommendation_item_1
-string recommendation_item_2
-string recommendation_item_3
-string recommendations_desc
-string recommendations_label
 string select_pet_label
 string share_desc
 string share_label
