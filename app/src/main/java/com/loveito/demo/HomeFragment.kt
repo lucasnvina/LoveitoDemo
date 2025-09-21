@@ -8,11 +8,9 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.loveito.demo.pets.CrisisStartFragment
 import com.loveito.demo.pets.PetFormFragment
 import com.loveito.demo.pets.PetGridAdapter
 import com.loveito.demo.pets.PetGridItem

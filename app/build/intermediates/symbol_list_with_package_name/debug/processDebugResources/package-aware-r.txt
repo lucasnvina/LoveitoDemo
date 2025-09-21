@@ -3917,7 +3917,6 @@ id btnSavePet
 id btnSaveProfile
 id btnSignIn
 id btnSignUp
-id btnStart
 id btnStartEdit
 id buttonPanel
 id cache_measures
@@ -4578,7 +4577,6 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_auth
 layout fragment_crisis_detail
-layout fragment_crisis_start
 layout fragment_home
 layout fragment_pet_crises
 layout fragment_pet_form
@@ -5723,6 +5721,7 @@ style ThemeOverlay_AppCompat_Dialog_Alert
 style ThemeOverlay_AppCompat_Light
 style ThemeOverlay_Design_TextInputEditText
 style ThemeOverlay_Loveito_CursorMaroon
+style ThemeOverlay_Loveito_DatePicker
 style ThemeOverlay_Loveito_TimePicker
 style ThemeOverlay_Material3
 style ThemeOverlay_Material3_ActionBar

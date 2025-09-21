@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.loveito.demo.R
 import java.io.ByteArrayInputStream
 import java.net.HttpURLConnection
@@ -178,6 +179,28 @@ class PetFormFragment : Fragment() {
         btnCancel = view.findViewById(R.id.btnCancelEdit)
         btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
         ivLogoLoveitoDog = view.findViewById(R.id.ivLogoLoveitoDog)
+        // Crear crisis directamente para la mascota actual al tocar el logo
+        ivLogoLoveitoDog?.setOnClickListener { logoView ->
+            val petId = editingId
+            if (petId == null) {
+                Toast.makeText(requireContext(), "Guardá la mascota antes de registrar una crisis", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            // Anti multi-click
+            logoView.isEnabled = false
+            val triage = TriageEngine.randomResult(requireContext())
+            repo.createTestCrisisWithTriage(petId, triage,
+                onSuccess = {
+                    Toast.makeText(requireContext(), "Crisis registrada", Toast.LENGTH_SHORT).show()
+                    loadCrises(petId) // refrescar métricas
+                    logoView.postDelayed({ logoView.isEnabled = true }, 600)
+                },
+                onError = { e ->
+                    Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
+                    logoView.isEnabled = true
+                }
+            )
+        }
         sectionMedication = view.findViewById(R.id.sectionMedication)
 
         // Adapters para dropdowns
@@ -431,16 +454,26 @@ class PetFormFragment : Fragment() {
     // }
 
     private fun showDatePicker() {
-        val cal = Calendar.getInstance()
-        if (birthDateMillis != null) cal.timeInMillis = birthDateMillis!!
-        val dlg = DatePickerDialog(requireContext(), { _, y, m, d ->
-            val c = Calendar.getInstance()
-            c.set(y, m, d, 0, 0, 0)
-            c.set(Calendar.MILLISECOND, 0)
-            birthDateMillis = c.timeInMillis
-            etBirthDate.setText(formatDate(birthDateMillis!!))
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
-        dlg.show()
+        val builder = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.pet_label_birth_date))
+            .setTheme(R.style.ThemeOverlay_Loveito_DatePicker)
+        // Pre-seleccionar si ya hay fecha
+        birthDateMillis?.let { builder.setSelection(it) }
+        val picker = builder.build()
+        picker.addOnPositiveButtonClickListener { selection ->
+            if (selection != null) {
+                val cal = Calendar.getInstance()
+                cal.timeInMillis = selection
+                // Normalizar a medianoche local
+                cal.set(Calendar.HOUR_OF_DAY, 0)
+                cal.set(Calendar.MINUTE, 0)
+                cal.set(Calendar.SECOND, 0)
+                cal.set(Calendar.MILLISECOND, 0)
+                birthDateMillis = cal.timeInMillis
+                etBirthDate.setText(formatDate(birthDateMillis!!))
+            }
+        }
+        picker.show(parentFragmentManager, "pet_birth_date_picker")
     }
 
     override fun onResume() {

@@ -15,6 +15,7 @@ import com.google.firebase.storage.FirebaseStorage
 import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.firestore.SetOptions
 
 class ProfileFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
@@ -38,7 +39,15 @@ class ProfileFragment : Fragment() {
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             selectedPhotoUri = uri
-            ivProfilePhoto.setImageURI(uri)
+            // Mostrar inmediatamente la previsualización circular antes de guardar/subir
+            try {
+                com.bumptech.glide.Glide.with(this)
+                    .load(uri)
+                    .circleCrop()
+                    .into(ivProfilePhoto)
+            } catch (_: Exception) {
+                ivProfilePhoto.setImageURI(uri) // fallback
+            }
             currentUid?.let { uid ->
                 uploadPhoto(uid, uri)
             }
@@ -117,15 +126,19 @@ class ProfileFragment : Fragment() {
                 "firstName" to newFirst,
                 "lastName" to newLast
             )
-            db.collection("users").document(uid).update(updates)
+            // Usar set con merge para que el doc se cree si aún no existe (usuarios nuevos)
+            db.collection("users").document(uid)
+                .set(updates, SetOptions.merge())
                 .addOnSuccessListener {
                     originalFirstName = newFirst
                     originalLastName = newLast
                     tvFullName.text = "$newFirst $newLast"
+                    // refrescar nombre en top bar inmediatamente
+                    (activity as? MainActivity)?.loadUserPhoto()
                     exitEditMode(cancel = false)
                     Toast.makeText(requireContext(), "Nombre actualizado", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener {
+                .addOnFailureListener { e ->
                     Toast.makeText(requireContext(), "Error al guardar nombre", Toast.LENGTH_SHORT).show()
                 }
         }
@@ -187,9 +200,13 @@ class ProfileFragment : Fragment() {
             ref.downloadUrl
         }.addOnSuccessListener { download ->
             val updates = hashMapOf<String, Any>("photoUrl" to download.toString())
-            db.collection("users").document(uid).update(updates)
+            // set con merge para crear doc si no existe
+            db.collection("users").document(uid)
+                .set(updates, SetOptions.merge())
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show()
+                    // refrescar nombre/foto en top bar inmediatamente
+                    (activity as? MainActivity)?.loadUserPhoto()
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Error al guardar foto", Toast.LENGTH_SHORT).show()

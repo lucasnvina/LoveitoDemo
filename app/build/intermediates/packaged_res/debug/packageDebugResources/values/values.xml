@@ -288,6 +288,14 @@
         <item name="android:textCursorDrawable">@drawable/cursor_maroon</item>
         <item name="colorPrimary">@color/maroon_900</item>
     </style>
+    <style name="ThemeOverlay.Loveito.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/maroon_900</item>
+        <item name="colorOnPrimary">@color/accent_on</item>
+        <item name="colorSecondary">@color/maroon_900</item>
+        <item name="colorOnSecondary">@color/accent_on</item>
+        <item name="android:textColorPrimary">@color/maroon_900</item>
+        <item name="android:textColorSecondary">@color/maroon_900</item>
+    </style>
     <style name="ThemeOverlay.Loveito.TimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
         <item name="colorPrimary">@color/maroon_900</item>
         <item name="colorOnPrimary">@color/accent_on</item>

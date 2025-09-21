@@ -78,7 +78,6 @@ id btnSavePet
 id btnSaveProfile
 id btnSignIn
 id btnSignUp
-id btnStart
 id btnStartEdit
 id cardRecommendations
 id cardSummary
@@ -177,7 +176,6 @@ layout activity_main
 layout activity_splash
 layout fragment_auth
 layout fragment_crisis_detail
-layout fragment_crisis_start
 layout fragment_home
 layout fragment_pet_crises
 layout fragment_pet_form
@@ -347,5 +345,6 @@ style RoundedOutlinedField
 style RoundedOutlinedFieldHint
 style ShapeAppearanceOverlay.LoveitoCircle
 style ThemeOverlay.Loveito.CursorMaroon
+style ThemeOverlay.Loveito.DatePicker
 style ThemeOverlay.Loveito.TimePicker
 style Theme.Loveito
