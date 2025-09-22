@@ -24,6 +24,10 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
 import java.util.Locale
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PetFormFragment : Fragment() {
 
@@ -88,6 +92,9 @@ class PetFormFragment : Fragment() {
 
     private lateinit var sectionMedication: View
     private lateinit var sectionProfessional: View // nueva sección profesionales
+    private lateinit var sectionShare: View // tarjeta compartir
+
+    private var currentPet: Pet? = null
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
@@ -119,6 +126,11 @@ class PetFormFragment : Fragment() {
         scrollView = view.findViewById(R.id.scrollView)
         btnStartEdit = view.findViewById(R.id.btnStartEdit)
         btnDeletePetEdit = view.findViewById(R.id.btnDeletePetEdit)
+        // Estado inicial: ocultar ambos hasta saber si es edición nueva o existente
+        groupView.visibility = View.GONE
+        groupEdit.visibility = View.GONE
+        btnStartEdit.visibility = View.GONE
+
         btnDeletePetEdit.setOnClickListener {
             val id = editingId ?: return@setOnClickListener
             AlertDialog.Builder(requireContext())
@@ -137,13 +149,6 @@ class PetFormFragment : Fragment() {
                 }
                 .setNegativeButton(getString(R.string.cancel), null)
                 .show()
-        }
-        btnStartEdit.setOnClickListener {
-            switchToEditMode()
-            ivLogoLoveitoDog?.visibility = View.GONE
-            if (::scrollView.isInitialized) {
-                scrollView.post { scrollView.fullScroll(View.FOCUS_UP) }
-            }
         }
 
         ivSummaryPhoto = view.findViewById(R.id.ivSummaryPhoto)
@@ -201,6 +206,7 @@ class PetFormFragment : Fragment() {
         }
         sectionMedication = view.findViewById(R.id.sectionMedication)
         sectionProfessional = view.findViewById(R.id.sectionProfessional)
+        sectionShare = view.findViewById(R.id.sectionShare)
 
         // Adapters para dropdowns
         actvSex.setAdapter(ArrayAdapter(requireContext(), R.layout.item_dropdown_maroon, sexOptions).apply {
@@ -215,10 +221,9 @@ class PetFormFragment : Fragment() {
         editingId = arguments?.getString("id")
 
         if (editingId != null) {
-            switchToViewMode()
             repo.getPet(editingId!!,
                 onSuccess = { p ->
-                    // fill editor fields for when user taps "Editar"
+                    // Poblar campos
                     etName.setText(p.name)
                     etBreed.setText(p.breed ?: "")
                     etWeight.setText(p.weightKg?.toString() ?: "")
@@ -227,39 +232,38 @@ class PetFormFragment : Fragment() {
                     etHeight.setText(p.heightCm?.toString() ?: "")
                     etLength.setText(p.lengthCm?.toString() ?: "")
                     birthDateMillis = p.birthDate
-                    if (birthDateMillis != null) etBirthDate.setText(formatDate(birthDateMillis!!))
+                    if (birthDateMillis != null) etBirthDate.setText(formatDate(birthDateMillis!!)) else etBirthDate.setText("")
 
-                    // Set photo in summary
                     if (p.photoUrl != null && p.photoUrl.isNotEmpty()) {
                         loadBitmapWithExifFromUrl(p.photoUrl) { bmp ->
-                            if (bmp != null) {
-                                ivSummaryPhoto.setImageBitmap(bmp)
-                                ivEditPhoto.setImageBitmap(bmp)
-                            } else {
-                                ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
-                                ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder)
-                            }
+                            if (bmp != null) { ivSummaryPhoto.setImageBitmap(bmp); ivEditPhoto.setImageBitmap(bmp) }
+                            else { ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder); ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder) }
                         }
                     } else {
                         ivSummaryPhoto.setImageResource(R.drawable.ic_user_placeholder)
                         ivEditPhoto.setImageResource(R.drawable.ic_user_placeholder)
                     }
-
                     renderSummary(p)
                     loadCrises(p.id)
+                    // Mostrar modo vista previa
+                    switchToViewMode()
+                    btnStartEdit.visibility = View.VISIBLE
                 },
-                onError = { }
+                onError = {
+                    // Si falla, permitir edición directa
+                    groupEdit.visibility = View.VISIBLE
+                    btnStartEdit.visibility = View.GONE
+                }
             )
         } else {
-            // Creating new pet -> only edit mode
+            // Nueva mascota: directamente en modo edición
+            groupEdit.visibility = View.VISIBLE
             btnDeletePetEdit.visibility = View.GONE
+            btnStartEdit.visibility = View.GONE
             switchToEditMode()
-            // Nueva mascota: agregar 1 fila inicial vacía de medicación opcional
-            // addMedicationRow(null)
         }
 
-        // Date picker sobre el campo no editable
-        etBirthDate.setOnClickListener { showDatePicker() }
+        btnStartEdit.setOnClickListener { switchToEditMode() }
 
         btnSave.setOnClickListener {
             val weight = etWeight.text.toString().replace(',', '.').toDoubleOrNull()
@@ -274,8 +278,9 @@ class PetFormFragment : Fragment() {
 
         btnCancel.setOnClickListener {
             pickedUri = null
-            editingId?.let { id ->
-                repo.getPet(id, onSuccess = { p ->
+            if (editingId != null) {
+                // Revertir a datos persistidos y volver a vista previa
+                repo.getPet(editingId!!, onSuccess = { p ->
                     etName.setText(p.name)
                     etBreed.setText(p.breed ?: "")
                     etWeight.setText(p.weightKg?.toString() ?: "")
@@ -284,12 +289,14 @@ class PetFormFragment : Fragment() {
                     etHeight.setText(p.heightCm?.toString() ?: "")
                     etLength.setText(p.lengthCm?.toString() ?: "")
                     birthDateMillis = p.birthDate
-                    etBirthDate.setText(if (birthDateMillis != null) formatDate(birthDateMillis!!) else getString(R.string.pet_label_not_defined))
+                    etBirthDate.setText(if (birthDateMillis != null) formatDate(birthDateMillis!!) else "")
                     renderSummary(p)
-                }, onError = {})
+                    switchToViewMode()
+                }, onError = { switchToViewMode() })
+            } else {
+                // Nueva: limpiar campos
+                etName.text?.clear(); etBreed.text?.clear(); etWeight.text?.clear(); etHeight.text?.clear(); etLength.text?.clear(); etBirthDate.setText("")
             }
-            switchToViewMode()
-            ivLogoLoveitoDog?.visibility = View.VISIBLE
         }
 
         sectionLastCrisis.setOnClickListener {
@@ -363,6 +370,13 @@ class PetFormFragment : Fragment() {
                     .replace(R.id.fragment_host, f)
                     .addToBackStack(null)
                     .commit()
+            }
+        }
+        sectionShare.setOnClickListener {
+            if (editingId == null) {
+                Toast.makeText(requireContext(), getString(R.string.enter_name), Toast.LENGTH_SHORT).show()
+            } else {
+                showShareDialog()
             }
         }
     }
@@ -484,22 +498,22 @@ class PetFormFragment : Fragment() {
     private fun switchToViewMode() {
         groupView.visibility = View.VISIBLE
         groupEdit.visibility = View.GONE
+        // Mostrar logo sólo en modo visualización
         ivLogoLoveitoDog?.visibility = View.VISIBLE
     }
 
     private fun switchToEditMode() {
         groupView.visibility = View.GONE
         groupEdit.visibility = View.VISIBLE
+        // Ocultar logo en modo edición
         ivLogoLoveitoDog?.visibility = View.GONE
-        // Repoblar meds si ya estaban cargadas
-        // if (loadedMedications.isNotEmpty()) populateMedicationsForEdit(loadedMedications)
+        scrollView.post { scrollView.fullScroll(View.FOCUS_UP) }
     }
 
     private fun save(name: String, breed: String?, weightKg: Double?, sex: String?, birthDate: Long?, neutered: Boolean, heightCm: Double?, lengthCm: Double?) {
         if (name.isEmpty()) { Toast.makeText(requireContext(), getString(R.string.enter_name), Toast.LENGTH_SHORT).show(); return }
         val id = editingId
         if (id == null) {
-            // Crear sin medicaciones / profesionales (se editarán aparte)
             repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, medications = null, professionals = null,
                 onSuccess = { Toast.makeText(requireContext(), getString(R.string.pet_created), Toast.LENGTH_SHORT).show(); parentFragmentManager.popBackStack() },
                 onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
@@ -510,9 +524,9 @@ class PetFormFragment : Fragment() {
                     Toast.makeText(requireContext(), getString(R.string.pet_updated), Toast.LENGTH_SHORT).show()
                     repo.getPet(id, onSuccess = { p ->
                         renderSummary(p)
-                    }, onError = { })
-                    pickedUri = null
-                    switchToViewMode()
+                        switchToViewMode()
+                        pickedUri = null
+                    }, onError = { switchToViewMode() })
                 },
                 onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
@@ -520,6 +534,7 @@ class PetFormFragment : Fragment() {
     }
 
     private fun renderSummary(p: Pet) {
+        currentPet = p
         tvSName.text = p.name
         // Solo el dato, sin prefijo
         tvSBreed.text = p.breed ?: getString(R.string.dash)
@@ -633,5 +648,142 @@ class PetFormFragment : Fragment() {
                 tvLastCrisisDate.text = getString(R.string.error_loading_crisis)
             }
         )
+    }
+
+    // --- Compartir PDF ---
+    private fun showShareDialog() {
+        val ctx = requireContext()
+        val pet = currentPet ?: return
+        val container = ScrollView(ctx)
+        val content = LinearLayout(ctx).apply { orientation = LinearLayout.VERTICAL; setPadding(48,32,48,16) }
+        container.addView(content)
+        val tvSections = TextView(ctx).apply { text = getString(R.string.share_sections_title); textSize = 16f; setPadding(0,0,0,16) }
+        content.addView(tvSections)
+        val cbCrises = CheckBox(ctx).apply { text = getString(R.string.share_section_crises); isChecked = true }
+        val cbMeds = CheckBox(ctx).apply { text = getString(R.string.share_section_medications); isChecked = pet.medications.isNotEmpty() }
+        val cbPros = CheckBox(ctx).apply { text = getString(R.string.share_section_professionals); isChecked = pet.professionals.isNotEmpty() }
+        val cbCare = CheckBox(ctx).apply { text = getString(R.string.share_section_care); isChecked = false }
+        content.addView(cbCrises); content.addView(cbMeds); content.addView(cbPros); content.addView(cbCare)
+        val tvRecipients = TextView(ctx).apply { text = getString(R.string.share_recipients_title); textSize = 16f; setPadding(0,32,0,16) }
+        content.addView(tvRecipients)
+        val authEmail = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.email
+        val cbMe = CheckBox(ctx).apply { text = getString(R.string.share_include_me); isChecked = false; isEnabled = authEmail != null }
+        content.addView(cbMe)
+        val professionalEmailCheckboxes = mutableListOf<Pair<Professional, CheckBox>>()
+        pet.professionals.filter { it.email.isNotBlank() }.forEach { prof ->
+            val cb = CheckBox(ctx).apply {
+                text = listOf(prof.name, prof.lastName).filter { it.isNotBlank() }.joinToString(" ") + " (" + prof.email + ")"
+                isChecked = prof.isFavorite
+            }
+            professionalEmailCheckboxes += prof to cb
+            content.addView(cb)
+        }
+        val dialog = AlertDialog.Builder(ctx)
+            .setView(container)
+            .setPositiveButton(R.string.share_label, null)
+            .setNegativeButton(R.string.cancel, null)
+            .create()
+        dialog.setOnShowListener {
+            fun validateSelection(): Pair<List<String>, Boolean> {
+                val sectionsSelected = listOf(cbCrises, cbMeds, cbPros, cbCare).any { it.isChecked }
+                if (!sectionsSelected) {
+                    Toast.makeText(ctx, getString(R.string.share_no_section_selected), Toast.LENGTH_SHORT).show(); return emptyList<String>() to false
+                }
+                val recipientEmails = mutableSetOf<String>()
+                if (cbMe.isChecked && authEmail != null) recipientEmails += authEmail
+                professionalEmailCheckboxes.forEach { (prof, cb) -> if (cb.isChecked && prof.email.isNotBlank()) recipientEmails += prof.email }
+                return recipientEmails.toList() to true
+            }
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val (recipients, ok) = validateSelection()
+                if (!ok) return@setOnClickListener
+                if (recipients.isEmpty()) {
+                    Toast.makeText(ctx, getString(R.string.share_no_recipient_selected), Toast.LENGTH_SHORT).show(); return@setOnClickListener
+                }
+                dialog.dismiss()
+                generateAndSharePdf(
+                    includeCrises = cbCrises.isChecked,
+                    includeMedications = cbMeds.isChecked,
+                    includeProfessionals = cbPros.isChecked,
+                    includeCare = cbCare.isChecked,
+                    recipients = recipients
+                )
+            }
+        }
+        dialog.show()
+    }
+
+    private fun generateAndSharePdf(
+        includeCrises: Boolean,
+        includeMedications: Boolean,
+        includeProfessionals: Boolean,
+        includeCare: Boolean,
+        recipients: List<String>
+    ) {
+        val pet = currentPet ?: return
+        Toast.makeText(requireContext(), getString(R.string.share_generate_pdf), Toast.LENGTH_SHORT).show()
+        if (includeCrises) {
+            repo.getCrisesForPet(pet.id, onSuccess = { crises ->
+                launchPdfBuild(pet, crises, includeCrises, includeMedications, includeProfessionals, includeCare, recipients)
+            }, onError = {
+                launchPdfBuild(pet, emptyList(), includeCrises, includeMedications, includeProfessionals, includeCare, recipients)
+            })
+        } else {
+            launchPdfBuild(pet, emptyList(), includeCrises, includeMedications, includeProfessionals, includeCare, recipients)
+        }
+    }
+
+    private fun launchPdfBuild(
+        pet: Pet,
+        crises: List<Crisis>,
+        includeCrises: Boolean,
+        includeMedications: Boolean,
+        includeProfessionals: Boolean,
+        includeCare: Boolean,
+        recipients: List<String>
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val file = withContext(Dispatchers.IO) {
+                try { PetReportPdfBuilder(requireContext(), includeCrises, includeMedications, includeProfessionals, includeCare).build(pet, crises) } catch (e: Exception) { null }
+            }
+            if (file == null || !file.exists()) {
+                Toast.makeText(requireContext(), getString(R.string.share_pdf_error), Toast.LENGTH_SHORT).show()
+            } else {
+                sharePdfFile(file, pet, includeCrises, includeMedications, includeProfessionals, includeCare, recipients)
+                view?.postDelayed({ file.delete() }, 5 * 60 * 1000)
+            }
+        }
+    }
+
+    private fun sharePdfFile(
+        file: java.io.File,
+        pet: Pet,
+        includeCrises: Boolean,
+        includeMedications: Boolean,
+        includeProfessionals: Boolean,
+        includeCare: Boolean,
+        recipients: List<String>
+    ) {
+        val ctx = requireContext()
+        val uri = androidx.core.content.FileProvider.getUriForFile(ctx, ctx.packageName + ".fileprovider", file)
+        val sections = mutableListOf<String>()
+        if (includeCrises) sections += getString(R.string.share_section_crises)
+        if (includeMedications) sections += getString(R.string.share_section_medications)
+        if (includeProfessionals) sections += getString(R.string.share_section_professionals)
+        if (includeCare) sections += getString(R.string.share_section_care)
+        val subject = getString(R.string.share_email_subject, pet.name)
+        val body = getString(R.string.share_email_body_intro, pet.name, sections.joinToString(", "))
+        val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+            type = "application/pdf"
+            putExtra(android.content.Intent.EXTRA_EMAIL, recipients.toTypedArray())
+            putExtra(android.content.Intent.EXTRA_SUBJECT, subject)
+            putExtra(android.content.Intent.EXTRA_TEXT, body)
+            putExtra(android.content.Intent.EXTRA_STREAM, uri)
+            addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        val chooser = android.content.Intent.createChooser(intent, getString(R.string.share_chooser_title))
+        try { startActivity(chooser) } catch (e: Exception) {
+            Toast.makeText(ctx, getString(R.string.share_no_app), Toast.LENGTH_SHORT).show()
+        }
     }
 }

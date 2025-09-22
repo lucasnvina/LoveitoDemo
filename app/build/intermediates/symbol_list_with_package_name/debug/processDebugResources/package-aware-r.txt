@@ -5025,13 +5025,41 @@ string professional_summary_single
 string professionals_save_changes
 string profile_change_photo
 string project_id
+string report_generated_label
+string report_hours_minutes
+string report_minutes_seconds
+string report_no_last_crisis
+string report_page_label
+string report_page_of
+string report_summary_avg_duration
+string report_summary_crisis_count
+string report_summary_last_crisis
+string report_summary_title
+string report_table_medications_title
+string report_table_professionals_title
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
 string select_pet_label
+string share_care_no_info
+string share_chooser_title
 string share_desc
+string share_email_body_intro
+string share_email_subject
+string share_generate_pdf
+string share_include_me
 string share_label
+string share_no_app
+string share_no_recipient_selected
+string share_no_section_selected
+string share_pdf_error
+string share_recipients_title
+string share_section_care
+string share_section_crises
+string share_section_medications
+string share_section_professionals
+string share_sections_title
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string sign_out_button
@@ -6469,6 +6497,7 @@ styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration ifTagNotSet ifTagSet motionInterpolator motionTarget onStateTransition pathMotionArc setsTag transitionDisable upDuration viewTransitionMode
 styleable include constraintSet
+xml file_paths
 xml image_share_filepaths
 xml m3_button_group_child_size_change
 xml m3_split_button_inner_corner_size_state_list

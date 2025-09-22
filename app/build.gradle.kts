@@ -50,6 +50,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.3")
     implementation("androidx.navigation:navigation-fragment-ktx:2.9.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.9.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.3")
 
     // Para corregir orientación EXIF de imágenes
     implementation("androidx.exifinterface:exifinterface:1.4.1")
@@ -61,4 +62,6 @@ dependencies {
 
     // Animaciones de chips
     implementation("androidx.transition:transition:1.5.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 }
