@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitleProfessionals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/professional_label"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fabAddProfessional"
+                app:layout_constraintHorizontal_bias="0" />
+
+            <ImageButton
+                android:id="@+id/fabAddProfessional"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_fab_add_plain"
+                android:contentDescription="@string/professional_add_button"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:src="@android:drawable/ic_input_add"
+                android:tint="#F6E2CC"
+                android:focusable="true"
+                android:clickable="true"
+                android:importantForAccessibility="yes"
+                android:elevation="0dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvTitleProfessionals"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvEmptyProfessionals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/professional_empty_list"
+            android:textSize="14sp"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="#230000"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProfessionals"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

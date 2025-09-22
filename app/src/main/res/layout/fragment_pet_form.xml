@@ -51,7 +51,7 @@
                     android:background="@drawable/bg_pet_item"
                     android:elevation="4dp"
                     android:padding="12dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="0dp"
                     android:layout_marginTop="0dp"
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginBottom="8dp">
 
                     <!-- Sección: Última Crisis (izquierda) -->
                     <LinearLayout
@@ -310,7 +310,6 @@
                                 android:textColor="@color/text_primary"
                                 android:gravity="start"
                                 android:paddingBottom="2dp" />
-                            <!-- Nueva TextView para resumen de medicación -->
                             <TextView
                                 android:id="@+id/tvMedicationSummary"
                                 android:layout_width="wrap_content"
@@ -320,6 +319,103 @@
                                 android:textColor="@color/text_secondary"
                                 android:fontFamily="@font/nunito_light"
                                 android:gravity="start" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout> <!-- end share/medication horizontal row -->
+
+                <!-- Sección horizontal: Profesional y Cuidados -->
+                <LinearLayout
+                    android:id="@+id/rowProfessionalCare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- Card: Profesional (izquierda) -->
+                    <LinearLayout
+                        android:id="@+id/sectionProfessional"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_pet_item"
+                        android:elevation="4dp"
+                        android:padding="12dp"
+                        android:layout_marginEnd="2dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            android:contentDescription="@string/professional_desc"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="12dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:baselineAligned="false">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/professional_label"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nunito_semibold"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_primary"
+                                android:gravity="start"
+                                android:paddingBottom="2dp" />
+                            <TextView
+                                android:id="@+id/tvProfessionalSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/professional_no_info"
+                                android:textSize="13sp"
+                                android:textColor="@color/text_secondary"
+                                android:fontFamily="@font/nunito_light"
+                                android:gravity="start" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Card: Cuidados (derecha) -->
+                    <LinearLayout
+                        android:id="@+id/sectionCare"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_pet_item"
+                        android:elevation="4dp"
+                        android:padding="12dp"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/ic_menu_manage"
+                            android:contentDescription="@string/care_desc"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="12dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:baselineAligned="false">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/care_label"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nunito_semibold"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_primary"
+                                android:gravity="start"
+                                android:paddingBottom="2dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

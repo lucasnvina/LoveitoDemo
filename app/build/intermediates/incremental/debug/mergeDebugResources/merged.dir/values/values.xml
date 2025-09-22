@@ -6,6 +6,13 @@
         <item>Ul</item>
         <item>µg</item>
     </string-array>
+    <string-array name="professional_specialties">
+        <item>Clinica</item>
+        <item>Neurologia</item>
+        <item>Cirugia</item>
+        <item>Traumatologia</item>
+        <item>Cardiologia</item>
+    </string-array>
     <attr format="enum" name="animateCircleAngleTo">
         <enum name="bestChoice" value="0"/>
         <enum name="closest" value="1"/>
@@ -2516,6 +2523,8 @@
     <string name="call_notification_ongoing_text">Ongoing call</string>
     <string name="call_notification_screening_text">Screening an incoming call</string>
     <string name="cancel">Cancelar</string>
+    <string name="care_desc">Cuidados</string>
+    <string name="care_label">Cuidados</string>
     <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>
     <string name="character_counter_overflowed_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
@@ -2783,6 +2792,24 @@
     <string name="pet_sex">Sexo: %1$s</string>
     <string name="pet_updated">Mascota actualizada</string>
     <string name="pet_weight">Peso: %1$s</string>
+    <string name="professional_add_button">Añadir profesional</string>
+    <string name="professional_add_title">Agregar profesional</string>
+    <string name="professional_desc">Profesional</string>
+    <string name="professional_edit_button">Editar profesional</string>
+    <string name="professional_edit_title">Editar profesional</string>
+    <string name="professional_empty_list">Sin profesional registrado</string>
+    <string name="professional_favorite_desc">Marcar profesional favorito</string>
+    <string name="professional_header_email">Email</string>
+    <string name="professional_header_last_name">Apellido</string>
+    <string name="professional_header_name">Nombre</string>
+    <string name="professional_header_phone">Teléfono</string>
+    <string name="professional_header_specialty">Especialidad</string>
+    <string name="professional_label">Profesional</string>
+    <string name="professional_no_info">Sin profesional</string>
+    <string name="professional_saved">Profesionales guardados</string>
+    <string name="professional_summary_multi">%1$d profesionales</string>
+    <string name="professional_summary_single">1 profesional</string>
+    <string name="professionals_save_changes">Guardar cambios</string>
     <string name="profile_change_photo">Cambiar foto de perfil</string>
     <string name="project_id" translatable="false">loveito-aeec9</string>
     <string name="search_menu_title">Search</string>

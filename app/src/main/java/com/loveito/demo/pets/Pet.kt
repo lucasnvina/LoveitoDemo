@@ -7,6 +7,15 @@ data class Medication(
     val times: List<String> = emptyList() // formato HH:mm
 )
 
+data class Professional(
+    val name: String = "",
+    val lastName: String = "",
+    val specialty: String = "",
+    val phone: String = "",
+    val email: String = "",
+    val isFavorite: Boolean = false // nuevo flag para marcar favorito
+)
+
 data class Pet(
     val id: String,
     val ownerId: String,
@@ -23,5 +32,6 @@ data class Pet(
     val photoUrl: String? = null,
     val createdAt: Long = 0L,
     val updatedAt: Long = 0L,
-    val medications: List<Medication> = emptyList()
+    val medications: List<Medication> = emptyList(),
+    val professionals: List<Professional> = emptyList()
 )

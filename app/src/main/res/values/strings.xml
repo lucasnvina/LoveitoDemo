@@ -90,6 +90,11 @@
     <string name="fab_loveito_icon_desc">Botón Loveito</string>
     <string name="share_desc">Compartir</string>
     <string name="share_label">Compartir</string>
+    <string name="care_desc">Cuidados</string>
+    <string name="care_label">Cuidados</string>
+    <string name="professional_desc">Profesional</string>
+    <string name="professional_label">Profesional</string>
+    <string name="professional_no_info">Sin profesional</string>
     <string name="medication_desc">Medicación</string>
     <string name="medication_label">Medicación</string>
     <string name="logo_loveito_dog_desc">Logo Loveito Dog</string>
@@ -123,4 +128,19 @@
     <string name="medication_edit_button">Editar medicamento</string>
     <string name="medication_time_duplicate">Horario ya agregado</string>
     <string name="medication_time_limit">Máximo de %1$d horarios</string>
+    <string name="professional_add_button">Añadir profesional</string>
+    <string name="professional_empty_list">Sin profesional registrado</string>
+    <string name="professional_add_title">Agregar profesional</string>
+    <string name="professional_edit_title">Editar profesional</string>
+    <string name="professional_saved">Profesionales guardados</string>
+    <string name="professionals_save_changes">Guardar cambios</string>
+    <string name="professional_header_name">Nombre</string>
+    <string name="professional_header_last_name">Apellido</string>
+    <string name="professional_header_email">Email</string>
+    <string name="professional_header_specialty">Especialidad</string>
+    <string name="professional_header_phone">Teléfono</string>
+    <string name="professional_edit_button">Editar profesional</string>
+    <string name="professional_summary_single">1 profesional</string>
+    <string name="professional_summary_multi">%1$d profesionales</string>
+    <string name="professional_favorite_desc">Marcar profesional favorito</string>
 </resources>

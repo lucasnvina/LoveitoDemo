@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_pet_item"
+    android:elevation="4dp"
+    android:padding="12dp"
+    android:layout_marginBottom="12dp"
+    android:longClickable="true">
+
+    <!-- Contenedor vertical original -->
+    <LinearLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ivFavoriteStar"
+        android:paddingBottom="28dp"> <!-- dejar espacio para la estrella superpuesta -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvProName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary"
+                android:text="@string/professional_header_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/btnEditProfessional"
+                app:layout_constraintEnd_toStartOf="@id/btnEditProfessional"
+                app:layout_constraintHorizontal_bias="0" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditProfessional"
+                style="@style/NunitoBoldButtonRounded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pet_btn_edit"
+                android:contentDescription="@string/professional_edit_button"
+                android:textSize="14sp"
+                android:minHeight="32dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvProSpecialty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/text_secondary"
+            android:text="@string/professional_header_specialty" />
+
+        <TextView
+            android:id="@+id/tvProPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/text_secondary"
+            android:text="@string/professional_header_phone" />
+
+        <TextView
+            android:id="@+id/tvProEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="13sp"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/text_secondary"
+            android:text="@string/professional_header_email" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivFavoriteStar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="@string/professional_favorite_desc"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTitlePro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/professional_add_title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/text_primary" />
+
+        <!-- Nombre -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/professional_header_name"
+            style="@style/RoundedOutlinedField"
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:singleLine="true"
+                android:inputType="textPersonName|textCapWords"
+                android:textCursorDrawable="@drawable/cursor_maroon"
+                android:textColor="@color/maroon_900"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Apellido -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/professional_header_last_name"
+            style="@style/RoundedOutlinedField"
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProLastName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:singleLine="true"
+                android:inputType="textPersonName|textCapWords"
+                android:textCursorDrawable="@drawable/cursor_maroon"
+                android:textColor="@color/maroon_900"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Especialidad (formato igual a Dosis: outline, misma altura y tipografía) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSpecialty"
+            style="@style/RoundedOutlinedField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/professional_header_specialty"
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@color/maroon_900">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/actProSpecialty"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:singleLine="true"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:gravity="start|center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/maroon_900"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Teléfono -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/professional_header_phone"
+            style="@style/RoundedOutlinedField"
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProPhone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:singleLine="true"
+                android:inputType="phone"
+                android:textCursorDrawable="@drawable/cursor_maroon"
+                android:textColor="@color/maroon_900"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/professional_header_email"
+            style="@style/RoundedOutlinedField"
+            app:boxBackgroundMode="outline"
+            app:hintTextColor="@color/maroon_900">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_input_height"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/cursor_maroon"
+                android:textColor="@color/maroon_900"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSavePro"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/pet_btn_save"
+                style="@style/NunitoBoldButtonRounded"
+                android:layout_marginEnd="4dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelPro"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/pet_btn_cancel"
+                style="@style/NunitoBoldButtonRounded.Destructive"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

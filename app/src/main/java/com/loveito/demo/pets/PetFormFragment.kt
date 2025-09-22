@@ -63,6 +63,7 @@ class PetFormFragment : Fragment() {
     private lateinit var sectionLastCrisis: View
     private lateinit var tvAvgCrisisTime: TextView
     private lateinit var tvMedicationSummary: TextView
+    private lateinit var tvProfessionalSummary: TextView // nuevo resumen profesionales
 
     // Editor (nuevos widgets Material)
     private lateinit var etName: EditText
@@ -86,6 +87,7 @@ class PetFormFragment : Fragment() {
     private var editingId: String? = null
 
     private lateinit var sectionMedication: View
+    private lateinit var sectionProfessional: View // nueva sección profesionales
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
@@ -161,6 +163,7 @@ class PetFormFragment : Fragment() {
         sectionLastCrisis = view.findViewById(R.id.sectionLastCrisis)
         tvAvgCrisisTime = view.findViewById(R.id.tvAvgCrisisTime)
         tvMedicationSummary = view.findViewById(R.id.tvMedicationSummary)
+        tvProfessionalSummary = view.findViewById(R.id.tvProfessionalSummary)
 
         etName = view.findViewById(R.id.etPetName)
         etBreed = view.findViewById(R.id.etPetBreed)
@@ -197,6 +200,7 @@ class PetFormFragment : Fragment() {
             )
         }
         sectionMedication = view.findViewById(R.id.sectionMedication)
+        sectionProfessional = view.findViewById(R.id.sectionProfessional)
 
         // Adapters para dropdowns
         actvSex.setAdapter(ArrayAdapter(requireContext(), R.layout.item_dropdown_maroon, sexOptions).apply {
@@ -331,10 +335,29 @@ class PetFormFragment : Fragment() {
                 }, onError = { })
             }
         }
+        // Escuchar resultados de actualización de profesionales
+        setFragmentResultListener("professionalsUpdated") { _, bundle ->
+            val updatedPetId = bundle.getString("petId")
+            if (updatedPetId != null && updatedPetId == editingId) {
+                repo.getPet(updatedPetId, onSuccess = { p ->
+                    renderSummary(p)
+                }, onError = { })
+            }
+        }
 
         sectionMedication.setOnClickListener {
             editingId?.let { petId ->
                 val f = PetMedicationsFragment()
+                f.arguments = Bundle().apply { putString("petId", petId) }
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_host, f)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+        sectionProfessional.setOnClickListener {
+            editingId?.let { petId ->
+                val f = PetProfessionalsFragment()
                 f.arguments = Bundle().apply { putString("petId", petId) }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_host, f)
@@ -476,13 +499,13 @@ class PetFormFragment : Fragment() {
         if (name.isEmpty()) { Toast.makeText(requireContext(), getString(R.string.enter_name), Toast.LENGTH_SHORT).show(); return }
         val id = editingId
         if (id == null) {
-            // Crear sin medicaciones (se editarán aparte)
-            repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, null,
+            // Crear sin medicaciones / profesionales (se editarán aparte)
+            repo.createPet(name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, medications = null, professionals = null,
                 onSuccess = { Toast.makeText(requireContext(), getString(R.string.pet_created), Toast.LENGTH_SHORT).show(); parentFragmentManager.popBackStack() },
                 onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
             )
         } else {
-            repo.updatePet(id, name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, null,
+            repo.updatePet(id, name, breed, weightKg, pickedUri, sex, birthDate, neutered, heightCm, lengthCm, medications = null, professionals = null,
                 onSuccess = {
                     Toast.makeText(requireContext(), getString(R.string.pet_updated), Toast.LENGTH_SHORT).show()
                     repo.getPet(id, onSuccess = { p ->
@@ -507,14 +530,19 @@ class PetFormFragment : Fragment() {
         tvSNeutered.text = if (p.neutered == true) getString(R.string.yes) else getString(R.string.no)
         tvSHeight.text = p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
         tvSLength.text = p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
-        // Optionally, set image here as well if needed
-
         // Resumen de medicación
         val medsCount = p.medications.size
         tvMedicationSummary.text = when {
             medsCount == 0 -> getString(R.string.medication_no_info)
             medsCount == 1 -> getString(R.string.medication_summary_single)
             else -> getString(R.string.medication_summary_multi, medsCount)
+        }
+        // Profesional favorito: mostrar Nombre Apellido, o 'Sin profesional' si no hay
+        val favorite = p.professionals.firstOrNull { it.isFavorite }
+        tvProfessionalSummary.text = if (favorite != null) {
+            listOf(favorite.name, favorite.lastName).filter { it.isNotBlank() }.joinToString(" ").ifBlank { getString(R.string.professional_no_info) }
+        } else {
+            getString(R.string.professional_no_info)
         }
     }
 

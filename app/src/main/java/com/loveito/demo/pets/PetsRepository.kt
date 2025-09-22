@@ -25,6 +25,21 @@ class PetsRepository(
         }
     }
 
+    private fun parseProfessionals(raw: Any?): List<Professional> {
+        val list = raw as? List<*> ?: return emptyList()
+        return list.mapNotNull { item ->
+            val m = item as? Map<*, *> ?: return@mapNotNull null
+            Professional(
+                name = m["name"] as? String ?: "",
+                lastName = m["lastName"] as? String ?: "",
+                specialty = m["specialty"] as? String ?: "",
+                phone = m["phone"] as? String ?: "",
+                email = m["email"] as? String ?: "",
+                isFavorite = m["isFavorite"] as? Boolean ?: false
+            )
+        }
+    }
+
     fun getMyPets(onSuccess: (List<Pet>) -> Unit, onError: (Exception) -> Unit) {
         val uid = auth.currentUser?.uid ?: run { onSuccess(emptyList()); return }
         db.collection(PETS)
@@ -49,7 +64,8 @@ class PetsRepository(
                         photoUrl = doc.getString("photoUrl"),
                         createdAt = doc.getLong("createdAt") ?: 0L,
                         updatedAt = doc.getLong("updatedAt") ?: 0L,
-                        medications = parseMedications(doc.get("medications"))
+                        medications = parseMedications(doc.get("medications")),
+                        professionals = parseProfessionals(doc.get("professionals"))
                     )
                 }
                 onSuccess(list)
@@ -77,7 +93,8 @@ class PetsRepository(
                     photoUrl = doc.getString("photoUrl"),
                     createdAt = doc.getLong("createdAt") ?: 0L,
                     updatedAt = doc.getLong("updatedAt") ?: 0L,
-                    medications = parseMedications(doc.get("medications"))
+                    medications = parseMedications(doc.get("medications")),
+                    professionals = parseProfessionals(doc.get("professionals"))
                 )
                 onSuccess(p)
             }
@@ -95,6 +112,7 @@ class PetsRepository(
         heightCm: Double?,
         lengthCm: Double?,
         medications: List<Medication>? = null,
+        professionals: List<Professional>? = null,
         onSuccess: (String) -> Unit,
         onError: (Exception) -> Unit
     ) {
@@ -116,6 +134,16 @@ class PetsRepository(
         )
         if (medications != null) {
             base["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
+        }
+        if (professionals != null) {
+            base["professionals"] = professionals.map { mapOf(
+                "name" to it.name,
+                "lastName" to it.lastName,
+                "specialty" to it.specialty,
+                "phone" to it.phone,
+                "email" to it.email,
+                "isFavorite" to it.isFavorite
+            ) }
         }
         val docRef = db.collection(PETS).document()
         docRef.set(base)
@@ -148,6 +176,7 @@ class PetsRepository(
         heightCm: Double?,
         lengthCm: Double?,
         medications: List<Medication>? = null,
+        professionals: List<Professional>? = null,
         onSuccess: () -> Unit,
         onError: (Exception) -> Unit
     ) {
@@ -166,6 +195,16 @@ class PetsRepository(
         )
         if (medications != null) {
             updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
+        }
+        if (professionals != null) {
+            updates["professionals"] = professionals.map { mapOf(
+                "name" to it.name,
+                "lastName" to it.lastName,
+                "specialty" to it.specialty,
+                "phone" to it.phone,
+                "email" to it.email,
+                "isFavorite" to it.isFavorite
+            ) }
         }
         ref.update(updates)
             .addOnSuccessListener {
@@ -186,6 +225,23 @@ class PetsRepository(
         val ref = db.collection(PETS).document(id)
         val updates = hashMapOf<String, Any?>()
         updates["medications"] = medications.map { mapOf("name" to it.name, "dose" to it.dose, "unit" to it.unit, "times" to it.times) }
+        updates["updatedAt"] = System.currentTimeMillis()
+        ref.update(updates)
+            .addOnSuccessListener { onSuccess() }
+            .addOnFailureListener(onError)
+    }
+
+    fun updatePetProfessionals(id: String, professionals: List<Professional>, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
+        val ref = db.collection(PETS).document(id)
+        val updates = hashMapOf<String, Any?>()
+        updates["professionals"] = professionals.map { mapOf(
+            "name" to it.name,
+            "lastName" to it.lastName,
+            "specialty" to it.specialty,
+            "phone" to it.phone,
+            "email" to it.email,
+            "isFavorite" to it.isFavorite
+        ) }
         updates["updatedAt"] = System.currentTimeMillis()
         ref.update(updates)
             .addOnSuccessListener { onSuccess() }

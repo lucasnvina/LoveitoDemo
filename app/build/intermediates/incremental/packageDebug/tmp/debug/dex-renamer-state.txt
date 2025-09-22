@@ -1,4 +1,4 @@
-#Sun Sep 21 19:41:12 ART 2025
+#Sun Sep 21 21:16:20 ART 2025
 base.0=/Users/lucasvina/StudioProjects/LoveitoDemo/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/lucasvina/StudioProjects/LoveitoDemo/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.2=/Users/lucasvina/StudioProjects/LoveitoDemo/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex

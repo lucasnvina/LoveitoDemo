@@ -6,5 +6,11 @@
         <item>Ul</item>
         <item>µg</item>
     </string-array>
+    <string-array name="professional_specialties">
+        <item>Clinica</item>
+        <item>Neurologia</item>
+        <item>Cirugia</item>
+        <item>Traumatologia</item>
+        <item>Cardiologia</item>
+    </string-array>
 </resources>
-

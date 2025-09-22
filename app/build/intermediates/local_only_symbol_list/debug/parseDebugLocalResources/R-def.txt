@@ -1,6 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 array medication_units
+array professional_specialties
 color accent_on
 color accent_primary
 color bg
@@ -49,6 +50,8 @@ drawable ic_chevron_right_brown
 drawable ic_heart
 drawable ic_launcher_fab
 drawable ic_launcher_logo
+drawable ic_star_filled
+drawable ic_star_outline
 drawable ic_timer
 drawable ic_user_placeholder
 drawable logo_final
@@ -60,6 +63,7 @@ drawable profile_photo_border
 drawable user_photo_border
 font nunito_light
 font nunito_semibold
+id actProSpecialty
 id actUnit
 id actvNeutered
 id actvSex
@@ -67,14 +71,17 @@ id btnAddPet
 id btnAddTime
 id btnCancel
 id btnCancelEdit
+id btnCancelPro
 id btnCancelProfile
 id btnDeleteCrisis
 id btnDeletePetEdit
 id btnEditMedication
+id btnEditProfessional
 id btnEditProfile
 id btnForgot
 id btnSave
 id btnSavePet
+id btnSavePro
 id btnSaveProfile
 id btnSignIn
 id btnSignUp
@@ -83,6 +90,7 @@ id cardSummary
 id chipGroupMedTimes
 id chipGroupTimes
 id containerActions
+id contentContainer
 id editModeBottomSpacer
 id editPhotoContainer
 id etBirthDate
@@ -97,7 +105,12 @@ id etPassword
 id etPetBreed
 id etPetName
 id etPetWeight
+id etProEmail
+id etProLastName
+id etProName
+id etProPhone
 id fabAddMedication
+id fabAddProfessional
 id fragment_host
 id groupEdit
 id groupView
@@ -105,6 +118,7 @@ id horariosHeader
 id ivCameraOverlay
 id ivChevron
 id ivEditPhoto
+id ivFavoriteStar
 id ivLogoLoveitoDog
 id ivPetPhoto
 id ivProfileCameraOverlay
@@ -115,12 +129,16 @@ id listPets
 id login_logo
 id profilePhotoContainer
 id recyclerPets
+id rowProfessionalCare
 id rvCrises
 id rvMedications
+id rvProfessionals
 id scrollView
 id sectionAvgTime
+id sectionCare
 id sectionLastCrisis
 id sectionMedication
+id sectionProfessional
 id sectionShare
 id splash_logo
 id tilDose
@@ -133,6 +151,7 @@ id tilPetName
 id tilPetNeutered
 id tilPetSex
 id tilPetWeight
+id tilSpecialty
 id tilUnit
 id topBar
 id tvAddLabel
@@ -146,6 +165,7 @@ id tvDropdownUnit
 id tvEmail
 id tvEmpty
 id tvEmptyMedications
+id tvEmptyProfessionals
 id tvFullName
 id tvItem
 id tvLastCrisisDate
@@ -154,6 +174,11 @@ id tvMedName
 id tvMedicationSummary
 id tvNote
 id tvPetName
+id tvProEmail
+id tvProName
+id tvProPhone
+id tvProSpecialty
+id tvProfessionalSummary
 id tvSAge
 id tvSBirth
 id tvSBreed
@@ -167,6 +192,8 @@ id tvSeverity
 id tvTimesLabel
 id tvTitle
 id tvTitleMedications
+id tvTitlePro
+id tvTitleProfessionals
 id tvUserName
 layout activity_main
 layout activity_splash
@@ -177,6 +204,8 @@ layout fragment_pet_crises
 layout fragment_pet_form
 layout fragment_pet_medication_edit
 layout fragment_pet_medications
+layout fragment_pet_professional_edit
+layout fragment_pet_professionals
 layout fragment_pets_list
 layout fragment_profile
 layout item_crisis
@@ -185,6 +214,7 @@ layout item_dropdown_unit
 layout item_medication_card
 layout item_pet_add
 layout item_pet_grid
+layout item_professional_card
 layout item_spinner_center_field
 layout item_spinner_center_field_dropdown
 layout top_bar
@@ -204,6 +234,8 @@ string avg_crisis_time_format
 string avg_time_desc
 string avg_time_label
 string cancel
+string care_desc
+string care_label
 string chevron_desc
 string cm
 string crisis_item
@@ -308,6 +340,24 @@ string pet_photo_desc
 string pet_sex
 string pet_updated
 string pet_weight
+string professional_add_button
+string professional_add_title
+string professional_desc
+string professional_edit_button
+string professional_edit_title
+string professional_empty_list
+string professional_favorite_desc
+string professional_header_email
+string professional_header_last_name
+string professional_header_name
+string professional_header_phone
+string professional_header_specialty
+string professional_label
+string professional_no_info
+string professional_saved
+string professional_summary_multi
+string professional_summary_single
+string professionals_save_changes
 string profile_change_photo
 string project_id
 string select_pet_label
