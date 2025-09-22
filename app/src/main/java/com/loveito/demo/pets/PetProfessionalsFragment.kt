@@ -67,7 +67,9 @@ class PetProfessionalsFragment : Fragment() {
                 val phone = bundle.getString("phone") ?: ""
                 val email = bundle.getString("email") ?: ""
                 val prevFav = if (index in professionals.indices) professionals[index].isFavorite else false
-                val pro = Professional(name = name, lastName = lastName, specialty = specialty, phone = phone, email = email, isFavorite = prevFav)
+                val anyFavorite = professionals.any { it.isFavorite }
+                val makeFavorite = if (index !in professionals.indices && !anyFavorite) true else prevFav
+                val pro = Professional(name = name, lastName = lastName, specialty = specialty, phone = phone, email = email, isFavorite = makeFavorite)
                 if (index in professionals.indices) {
                     professionals[index] = pro
                 } else {
@@ -76,6 +78,27 @@ class PetProfessionalsFragment : Fragment() {
                 persistAndRefresh(showToast = true)
             }
         }
+        setFragmentResultListener("professionalDeleted") { _, bundle ->
+            val resultPetId = bundle.getString("petId")
+            if (resultPetId == petId) {
+                val index = bundle.getInt("index", -1)
+                if (index in professionals.indices) {
+                    val wasFavorite = professionals[index].isFavorite
+                    professionals.removeAt(index)
+                    if (wasFavorite && professionals.isNotEmpty()) {
+                        // Asignar favorito al siguiente en la misma posición si existe, sino al último.
+                        val newIndex = if (index < professionals.size) index else professionals.lastIndex
+                        professionals.replaceAllIndexed { i, p -> if (i == newIndex) p.copy(isFavorite = true) else p.copy(isFavorite = false) }
+                    }
+                    persistAndRefresh(showToast = true)
+                }
+            }
+        }
+    }
+
+    // Helper para replaceAll con índice
+    private inline fun <T> MutableList<T>.replaceAllIndexed(transform: (Int, T) -> T) {
+        for (i in indices) this[i] = transform(i, this[i])
     }
 
     private fun setupRecycler() {

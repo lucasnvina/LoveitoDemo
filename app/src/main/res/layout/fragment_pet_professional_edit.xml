@@ -153,5 +153,14 @@
                 android:layout_marginStart="4dp" />
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeletePro"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/professional_delete_button"
+            style="@style/NunitoBoldButtonRounded.Destructive"
+            android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>

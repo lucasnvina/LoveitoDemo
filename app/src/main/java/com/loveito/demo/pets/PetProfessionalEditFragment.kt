@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.button.MaterialButton
@@ -26,6 +27,7 @@ class PetProfessionalEditFragment : Fragment() {
     private lateinit var btnSave: MaterialButton
     private lateinit var btnCancel: MaterialButton
     private lateinit var tvTitle: TextView
+    private lateinit var btnDelete: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,7 @@ class PetProfessionalEditFragment : Fragment() {
         btnSave = view.findViewById(R.id.btnSavePro)
         btnCancel = view.findViewById(R.id.btnCancelPro)
         tvTitle = view.findViewById(R.id.tvTitlePro)
+        btnDelete = view.findViewById(R.id.btnDeletePro)
 
         // Adapter de especialidades
         val specialties = resources.getStringArray(R.array.professional_specialties)
@@ -65,17 +68,37 @@ class PetProfessionalEditFragment : Fragment() {
             if (index >= 0) {
                 tvTitle.text = getString(R.string.professional_edit_title)
                 btnSave.text = getString(R.string.professionals_save_changes)
+                btnDelete.visibility = View.VISIBLE
             } else {
                 tvTitle.text = getString(R.string.professional_add_title)
                 btnSave.text = getString(R.string.add_label)
+                btnDelete.visibility = View.GONE
             }
         } ?: run {
             tvTitle.text = getString(R.string.professional_add_title)
             btnSave.text = getString(R.string.add_label)
+            btnDelete.visibility = View.GONE
         }
 
         btnSave.setOnClickListener { saveAndReturn() }
         btnCancel.setOnClickListener { parentFragmentManager.popBackStack() }
+        btnDelete.setOnClickListener { confirmDelete() }
+    }
+
+    private fun confirmDelete() {
+        if (petId == null || index < 0) return
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.professional_delete_title))
+            .setMessage(getString(R.string.professional_delete_confirm))
+            .setPositiveButton(getString(R.string.professional_delete_button)) { _, _ ->
+                setFragmentResult("professionalDeleted", Bundle().apply {
+                    putString("petId", petId)
+                    putInt("index", index)
+                })
+                parentFragmentManager.popBackStack()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
     private fun saveAndReturn() {

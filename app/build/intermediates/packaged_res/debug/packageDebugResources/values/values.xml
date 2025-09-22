@@ -156,6 +156,9 @@
     <string name="pet_weight">Peso: %1$s</string>
     <string name="professional_add_button">Añadir profesional</string>
     <string name="professional_add_title">Agregar profesional</string>
+    <string name="professional_delete_button">Eliminar</string>
+    <string name="professional_delete_confirm">¿Querés eliminar este profesional?</string>
+    <string name="professional_delete_title">Eliminar profesional</string>
     <string name="professional_desc">Profesional</string>
     <string name="professional_edit_button">Editar profesional</string>
     <string name="professional_edit_title">Editar profesional</string>

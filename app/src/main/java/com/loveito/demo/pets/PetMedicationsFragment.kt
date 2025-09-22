@@ -80,6 +80,16 @@ class PetMedicationsFragment : Fragment() {
                 persistAndRefresh(showToast = true)
             }
         }
+        setFragmentResultListener("medicationDeleted") { _, bundle ->
+            val resultPetId = bundle.getString("petId")
+            if (resultPetId == petId) {
+                val index = bundle.getInt("index", -1)
+                if (index in medications.indices) {
+                    medications.removeAt(index)
+                    persistAndRefresh(showToast = true)
+                }
+            }
+        }
     }
 
     private fun setupRecycler() {

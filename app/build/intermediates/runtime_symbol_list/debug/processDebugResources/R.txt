@@ -3911,8 +3911,10 @@ int id btnCancel 0x7f0a0074
 int id btnCancelEdit 0x7f0a0075
 int id btnCancelPro 0x7f0a0076
 int id btnCancelProfile 0x7f0a0077
+int id btnDelete 0x7f0a029c
 int id btnDeleteCrisis 0x7f0a0078
 int id btnDeletePetEdit 0x7f0a0079
+int id btnDeletePro 0x7f0a029b
 int id btnEditMedication 0x7f0a007a
 int id btnEditProfessional 0x7f0a007b
 int id btnEditProfile 0x7f0a007c
@@ -5001,6 +5003,9 @@ int string pet_updated 0x7f120135
 int string pet_weight 0x7f120136
 int string professional_add_button 0x7f120137
 int string professional_add_title 0x7f120138
+int string professional_delete_button 0x7f12015c
+int string professional_delete_confirm 0x7f12015d
+int string professional_delete_title 0x7f12015e
 int string professional_desc 0x7f120139
 int string professional_edit_button 0x7f12013a
 int string professional_edit_title 0x7f12013b

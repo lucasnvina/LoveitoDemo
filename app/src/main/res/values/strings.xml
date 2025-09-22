@@ -143,4 +143,7 @@
     <string name="professional_summary_single">1 profesional</string>
     <string name="professional_summary_multi">%1$d profesionales</string>
     <string name="professional_favorite_desc">Marcar profesional favorito</string>
+    <string name="professional_delete_title">Eliminar profesional</string>
+    <string name="professional_delete_confirm">¿Querés eliminar este profesional?</string>
+    <string name="professional_delete_button">Eliminar</string>
 </resources>

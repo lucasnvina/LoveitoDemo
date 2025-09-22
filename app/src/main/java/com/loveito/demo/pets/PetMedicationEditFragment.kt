@@ -39,6 +39,7 @@ class PetMedicationEditFragment : Fragment() {
     private lateinit var btnCancel: MaterialButton
     private lateinit var tvTitle: TextView
     private lateinit var btnAddTime: ImageButton
+    private lateinit var btnDelete: MaterialButton
 
     private val timesList = mutableListOf<String>()
     private val MAX_TIMES = 12 // límite de horarios
@@ -65,6 +66,7 @@ class PetMedicationEditFragment : Fragment() {
         btnCancel = view.findViewById(R.id.btnCancel)
         tvTitle = view.findViewById(R.id.tvTitle)
         btnAddTime = view.findViewById(R.id.btnAddTime)
+        btnDelete = view.findViewById(R.id.btnDelete)
 
         arguments?.let { a ->
             val existingName = a.getString("name", "")
@@ -78,13 +80,16 @@ class PetMedicationEditFragment : Fragment() {
             if (index >= 0) {
                 tvTitle.text = getString(R.string.medication_edit_title)
                 btnSave.text = getString(R.string.medications_save_changes)
+                btnDelete.visibility = View.VISIBLE
             } else {
                 tvTitle.text = getString(R.string.medication_add_title)
                 btnSave.text = getString(R.string.add_label)
+                btnDelete.visibility = View.GONE
             }
         } ?: run {
             tvTitle.text = getString(R.string.medication_add_title)
             btnSave.text = getString(R.string.add_label)
+            btnDelete.visibility = View.GONE
         }
         rebuildChips()
 
@@ -96,6 +101,7 @@ class PetMedicationEditFragment : Fragment() {
         btnAddTime.setOnClickListener { promptAddTime() }
         btnSave.setOnClickListener { saveAndReturn() }
         btnCancel.setOnClickListener { parentFragmentManager.popBackStack() }
+        btnDelete.setOnClickListener { confirmDelete() }
     }
 
     private fun promptAddTime() {
@@ -190,5 +196,21 @@ class PetMedicationEditFragment : Fragment() {
             putStringArrayList("times", ArrayList(times))
         })
         parentFragmentManager.popBackStack()
+    }
+
+    private fun confirmDelete() {
+        if (petId == null || index < 0) return
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.medication_delete))
+            .setMessage(getString(R.string.medication_delete_confirm))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                setFragmentResult("medicationDeleted", Bundle().apply {
+                    putString("petId", petId)
+                    putInt("index", index)
+                })
+                parentFragmentManager.popBackStack()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 }

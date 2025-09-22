@@ -73,8 +73,10 @@ id btnCancel
 id btnCancelEdit
 id btnCancelPro
 id btnCancelProfile
+id btnDelete
 id btnDeleteCrisis
 id btnDeletePetEdit
+id btnDeletePro
 id btnEditMedication
 id btnEditProfessional
 id btnEditProfile
@@ -342,6 +344,9 @@ string pet_updated
 string pet_weight
 string professional_add_button
 string professional_add_title
+string professional_delete_button
+string professional_delete_confirm
+string professional_delete_title
 string professional_desc
 string professional_edit_button
 string professional_edit_title
