@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollDetails"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre principal -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp" />
+
+            <!-- Card resumen con labels -->
+            <LinearLayout
+                android:id="@+id/cardSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_pet_item"
+                android:elevation="4dp"
+                android:padding="12dp"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical">
+
+                <!-- Contenedor con borde circular -->
+                <FrameLayout
+                    android:id="@+id/photoContainer"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/pet_photo_border">
+                    <ImageView
+                        android:id="@+id/ivPhoto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/pet_photo_desc"
+                        android:padding="0dp"
+                        android:clipToOutline="true"
+                        android:outlineProvider="background"
+                        android:background="@drawable/circle_transparent" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingEnd="4dp">
+
+                    <!-- Raza -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="start|center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pet_label_breed"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:paddingEnd="4dp" />
+                        <TextView
+                            android:id="@+id/tvBreed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_light"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Peso -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_weight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvWeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Sexo -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_sex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvSex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Nacimiento -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_birth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvBirth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Edad -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvAge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Castrado -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_neutered" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvNeutered" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Alto -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_height" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvHeight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                    <!-- Largo -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start|center_vertical">
+                        <TextView android:text="@string/pet_label_length" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_semibold" android:textColor="@color/text_primary" android:textSize="13sp" android:paddingEnd="4dp" />
+                        <TextView android:id="@+id/tvLength" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/nunito_light" android:textColor="@color/text_primary" android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Métricas: crisis / promedio (icono izquierda + textos) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+                <LinearLayout
+                    android:id="@+id/sectionLastCrisis"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_heart"
+                        android:contentDescription="@string/heart_desc"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/last_crisis_label"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:id="@+id/tvLastCrisis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_crisis_registered"
+                            android:fontFamily="@font/nunito_light"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/sectionAvgTime"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_timer"
+                        android:contentDescription="@string/avg_time_desc"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/avg_time_label"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:id="@+id/tvAvgTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash"
+                            android:fontFamily="@font/nunito_light"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Compartir / Medicación -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+                <LinearLayout
+                    android:id="@+id/sectionShare"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:contentDescription="@string/share_desc"
+                        android:layout_marginEnd="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/share_label"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/sectionMedication"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        android:contentDescription="@string/medication_desc"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/medication_label"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:id="@+id/tvMedicationSummary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/medication_no_info"
+                            android:fontFamily="@font/nunito_light"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Profesionales / Cuidados -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp">
+                <LinearLayout
+                    android:id="@+id/sectionProfessional"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_myplaces"
+                        android:contentDescription="@string/professional_desc"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/professional_label"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:paddingBottom="2dp" />
+                        <TextView
+                            android:id="@+id/tvProfessionalSummary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/professional_no_info"
+                            android:fontFamily="@font/nunito_light"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/sectionCare"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_pet_item"
+                    android:padding="12dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_manage"
+                        android:contentDescription="@string/care_desc"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/care_label"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEdit"
+                style="@style/NunitoBoldButtonRounded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/pet_btn_edit" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Logo flotante -->
+    <ImageView
+        android:id="@+id/ivLogoLoveitoDog"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo_loveito_dog"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/logo_loveito_dog_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="56dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

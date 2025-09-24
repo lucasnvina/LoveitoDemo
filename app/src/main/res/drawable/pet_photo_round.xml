@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo transparente -->
+    <solid android:color="@android:color/transparent" />
+    <!-- Radio igual a la mitad del tamaño (128dp contenedor) para círculo -->
+    <corners android:radius="64dp" />
+    <!-- Borde más grueso para mejor visibilidad -->
+    <stroke android:width="3dp" android:color="@color/maroon_900" />
+</shape>

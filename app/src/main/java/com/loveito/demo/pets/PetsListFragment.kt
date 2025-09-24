@@ -31,16 +31,15 @@ class PetsListFragment : Fragment() {
 
         view.findViewById<Button>(R.id.btnAddPet).setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, PetFormFragment())
+                .replace(R.id.fragment_host, PetEditFragment.newCreate())
                 .addToBackStack(null)
                 .commit()
         }
 
         listView.setOnItemClickListener { _, _, position, _ ->
             val pet = items[position]
-            val form = PetFormFragment.newEdit(pet.id, pet.name, pet.notes ?: "", pet.photoUrl ?: "")
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_host, form)
+                .replace(R.id.fragment_host, PetDetailsFragment.newInstance(pet.id))
                 .addToBackStack(null)
                 .commit()
         }

@@ -3783,6 +3783,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable pet_photo_border
+drawable pet_photo_round
 drawable pill_button
 drawable pill_edittext
 drawable profile_photo_border
@@ -3916,6 +3917,7 @@ id btnDelete
 id btnDeleteCrisis
 id btnDeletePetEdit
 id btnDeletePro
+id btnEdit
 id btnEditMedication
 id btnEditProfessional
 id btnEditProfile
@@ -4097,6 +4099,7 @@ id ivEditPhoto
 id ivFavoriteStar
 id ivLogoLoveitoDog
 id ivPetPhoto
+id ivPhoto
 id ivProfileCameraOverlay
 id ivProfilePhoto
 id ivSummaryPhoto
@@ -4233,6 +4236,7 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id photoContainer
 id pin
 id pooling_container_listener_holder_tag
 id position
@@ -4265,6 +4269,7 @@ id sawtooth
 id scale
 id screen
 id scroll
+id scrollDetails
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
@@ -4397,7 +4402,11 @@ id transition_transform
 id triangle
 id tvAddLabel
 id tvAddSymbol
+id tvAge
 id tvAvgCrisisTime
+id tvAvgTime
+id tvBirth
+id tvBreed
 id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
@@ -4408,11 +4417,16 @@ id tvEmpty
 id tvEmptyMedications
 id tvEmptyProfessionals
 id tvFullName
+id tvHeight
 id tvItem
+id tvLastCrisis
 id tvLastCrisisDate
+id tvLength
 id tvMedDose
 id tvMedName
 id tvMedicationSummary
+id tvName
+id tvNeutered
 id tvNote
 id tvPetName
 id tvProEmail
@@ -4430,12 +4444,14 @@ id tvSNeutered
 id tvSSex
 id tvSWeight
 id tvSeverity
+id tvSex
 id tvTimesLabel
 id tvTitle
 id tvTitleMedications
 id tvTitlePro
 id tvTitleProfessionals
 id tvUserName
+id tvWeight
 id unchecked
 id uniform
 id unlabeled
@@ -4604,6 +4620,8 @@ layout fragment_auth
 layout fragment_crisis_detail
 layout fragment_home
 layout fragment_pet_crises
+layout fragment_pet_details
+layout fragment_pet_edit
 layout fragment_pet_form
 layout fragment_pet_medication_edit
 layout fragment_pet_medications

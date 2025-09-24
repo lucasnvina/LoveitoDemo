@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.loveito.demo.pets.PetFormFragment
+import com.loveito.demo.pets.PetDetailsFragment
+import com.loveito.demo.pets.PetEditFragment
 import com.loveito.demo.pets.PetGridAdapter
 import com.loveito.demo.pets.PetGridItem
 import com.loveito.demo.pets.PetsRepository
@@ -66,13 +67,13 @@ class HomeFragment : Fragment() {
             adapter = PetGridAdapter(items,
                 onPetClick = { pet: PetGridItem.Pet ->
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_host, PetFormFragment.newEdit(pet.id))
+                        .replace(R.id.fragment_host, PetDetailsFragment.newInstance(pet.id))
                         .addToBackStack(null)
                         .commit()
                 },
                 onAddClick = {
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_host, PetFormFragment())
+                        .replace(R.id.fragment_host, PetEditFragment.newCreate())
                         .addToBackStack(null)
                         .commit()
                 }

@@ -3782,6 +3782,7 @@ int drawable notification_template_icon_low_bg 0x7f080118
 int drawable notification_tile_bg 0x7f080119
 int drawable notify_panel_notification_icon_bg 0x7f08011a
 int drawable pet_photo_border 0x7f08011b
+int drawable pet_photo_round 0x7f080123
 int drawable pill_button 0x7f08011c
 int drawable pill_edittext 0x7f08011d
 int drawable profile_photo_border 0x7f08011e
@@ -3915,6 +3916,7 @@ int id btnDelete 0x7f0a0078
 int id btnDeleteCrisis 0x7f0a0079
 int id btnDeletePetEdit 0x7f0a007a
 int id btnDeletePro 0x7f0a007b
+int id btnEdit 0x7f0a029d
 int id btnEditMedication 0x7f0a007c
 int id btnEditProfessional 0x7f0a007d
 int id btnEditProfile 0x7f0a007e
@@ -4096,6 +4098,7 @@ int id ivEditPhoto 0x7f0a012d
 int id ivFavoriteStar 0x7f0a012e
 int id ivLogoLoveitoDog 0x7f0a012f
 int id ivPetPhoto 0x7f0a0130
+int id ivPhoto 0x7f0a029e
 int id ivProfileCameraOverlay 0x7f0a0131
 int id ivProfilePhoto 0x7f0a0132
 int id ivSummaryPhoto 0x7f0a0133
@@ -4232,6 +4235,7 @@ int id path 0x7f0a01b5
 int id pathRelative 0x7f0a01b6
 int id peekHeight 0x7f0a01b7
 int id percent 0x7f0a01b8
+int id photoContainer 0x7f0a02ab
 int id pin 0x7f0a01b9
 int id pooling_container_listener_holder_tag 0x7f0a01ba
 int id position 0x7f0a01bb
@@ -4264,6 +4268,7 @@ int id sawtooth 0x7f0a01d5
 int id scale 0x7f0a01d6
 int id screen 0x7f0a01d7
 int id scroll 0x7f0a01d8
+int id scrollDetails 0x7f0a029f
 int id scrollIndicatorDown 0x7f0a01d9
 int id scrollIndicatorUp 0x7f0a01da
 int id scrollView 0x7f0a01db
@@ -4396,7 +4401,11 @@ int id transition_transform 0x7f0a0259
 int id triangle 0x7f0a025a
 int id tvAddLabel 0x7f0a025b
 int id tvAddSymbol 0x7f0a025c
+int id tvAge 0x7f0a02a0
 int id tvAvgCrisisTime 0x7f0a025d
+int id tvAvgTime 0x7f0a02a1
+int id tvBirth 0x7f0a02a2
+int id tvBreed 0x7f0a02a3
 int id tvCrisisMeta 0x7f0a025e
 int id tvCrisisSeverity 0x7f0a025f
 int id tvCrisisTitle 0x7f0a0260
@@ -4407,11 +4416,16 @@ int id tvEmpty 0x7f0a0264
 int id tvEmptyMedications 0x7f0a0265
 int id tvEmptyProfessionals 0x7f0a0266
 int id tvFullName 0x7f0a0267
+int id tvHeight 0x7f0a02a4
 int id tvItem 0x7f0a0268
+int id tvLastCrisis 0x7f0a02a5
 int id tvLastCrisisDate 0x7f0a0269
+int id tvLength 0x7f0a02a6
 int id tvMedDose 0x7f0a026a
 int id tvMedName 0x7f0a026b
 int id tvMedicationSummary 0x7f0a026c
+int id tvName 0x7f0a02a7
+int id tvNeutered 0x7f0a02a8
 int id tvNote 0x7f0a026d
 int id tvPetName 0x7f0a026e
 int id tvProEmail 0x7f0a026f
@@ -4429,12 +4443,14 @@ int id tvSNeutered 0x7f0a027a
 int id tvSSex 0x7f0a027b
 int id tvSWeight 0x7f0a027c
 int id tvSeverity 0x7f0a027d
+int id tvSex 0x7f0a02a9
 int id tvTimesLabel 0x7f0a027e
 int id tvTitle 0x7f0a027f
 int id tvTitleMedications 0x7f0a0280
 int id tvTitlePro 0x7f0a0281
 int id tvTitleProfessionals 0x7f0a0282
 int id tvUserName 0x7f0a0283
+int id tvWeight 0x7f0a02aa
 int id unchecked 0x7f0a0284
 int id uniform 0x7f0a0285
 int id unlabeled 0x7f0a0286
@@ -4603,6 +4619,8 @@ int layout fragment_auth 0x7f0d0030
 int layout fragment_crisis_detail 0x7f0d0031
 int layout fragment_home 0x7f0d0032
 int layout fragment_pet_crises 0x7f0d0033
+int layout fragment_pet_details 0x7f0d0086
+int layout fragment_pet_edit 0x7f0d0087
 int layout fragment_pet_form 0x7f0d0034
 int layout fragment_pet_medication_edit 0x7f0d0035
 int layout fragment_pet_medications 0x7f0d0036
