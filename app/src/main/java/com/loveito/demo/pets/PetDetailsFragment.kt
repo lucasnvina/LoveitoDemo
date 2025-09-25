@@ -185,14 +185,34 @@ class PetDetailsFragment : Fragment() {
             try {
                 val conn = URL(url).openConnection() as HttpURLConnection
                 conn.connect(); val bytes = conn.inputStream.readBytes(); conn.disconnect()
-                val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                val bmp = decodeBitmapWithExif(bytes)
                 withContext(Dispatchers.Main) { ivPhoto.setImageBitmap(bmp) }
             } catch (_: Exception) {}
         }
     }
 
+    private fun decodeBitmapWithExif(bytes: ByteArray): android.graphics.Bitmap? {
+        return try {
+            val exif = androidx.exifinterface.media.ExifInterface(java.io.ByteArrayInputStream(bytes))
+            val orientation = exif.getAttributeInt(androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION, androidx.exifinterface.media.ExifInterface.ORIENTATION_NORMAL)
+            val original = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size) ?: return null
+            val matrix = android.graphics.Matrix()
+            when (orientation) {
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.setScale(-1f, 1f)
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_FLIP_VERTICAL -> { matrix.setRotate(180f); matrix.postScale(-1f, 1f) }
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_TRANSPOSE -> { matrix.setRotate(90f); matrix.postScale(-1f, 1f) }
+                androidx.exifinterface.media.ExifInterface.ORIENTATION_TRANSVERSE -> { matrix.setRotate(270f); matrix.postScale(-1f, 1f) }
+                else -> { /* ORIENTATION_NORMAL */ }
+            }
+            if (!matrix.isIdentity) android.graphics.Bitmap.createBitmap(original, 0, 0, original.width, original.height, matrix, true) else original
+        } catch (_: Exception) { null }
+    }
+
     private fun openEdit() {
-        val f = PetEditFragment.newEdit(petId!!)
+        val f = com.loveito.demo.pets.PetEditFragment.newEdit(petId!!)
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_host, f)
             .addToBackStack(null)

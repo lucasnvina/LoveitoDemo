@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Card de medicación con estilo igual a las cards en fragment_pet_form (bg_pet_item + elevation) -->
+<!-- Card de medicación con estilo de bg_pet_item + elevation; usada por el listado en PetMedicationsFragment -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -24,7 +24,6 @@
             android:textSize="16sp"
             android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/text_primary"
-            android:text="Nombre"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/btnEditMedication"
@@ -56,8 +55,7 @@
         android:layout_marginTop="4dp"
         android:textSize="14sp"
         android:fontFamily="@font/nunito_light"
-        android:textColor="@color/text_secondary"
-        android:text="Dosis" />
+        android:textColor="@color/text_secondary" />
 
     <!-- Grupo de chips para horarios -->
     <com.google.android.material.chip.ChipGroup
