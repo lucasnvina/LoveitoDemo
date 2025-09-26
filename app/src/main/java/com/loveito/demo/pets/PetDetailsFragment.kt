@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -64,6 +65,29 @@ class PetDetailsFragment : Fragment() {
 
     private lateinit var viewModel: PetDetailsViewModel
 
+    private var pendingPdfFile: java.io.File? = null
+
+    private val createPdfLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/pdf")) { uri ->
+        val file = pendingPdfFile
+        if (uri != null && file != null) {
+            try {
+                requireContext().contentResolver.openOutputStream(uri)?.use { out ->
+                    file.inputStream().use { inp -> inp.copyTo(out) }
+                }
+                Toast.makeText(requireContext(), getString(R.string.share_generated_label, file.name), Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), getString(R.string.share_pdf_error), Toast.LENGTH_SHORT).show()
+            } finally {
+                if (file.exists()) file.delete()
+                pendingPdfFile = null
+            }
+        } else {
+            // Cancelado por el usuario: limpiar archivo temporal
+            if (file != null && file.exists()) file.delete()
+            pendingPdfFile = null
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         petId = arguments?.getString("petId")
@@ -116,6 +140,7 @@ class PetDetailsFragment : Fragment() {
         sectionLastCrisis.setOnClickListener { petId?.let { openCrises(it) } }
         // sectionAvgTime: do nothing on tap (no navigation)
         sectionAvgTime.setOnClickListener(null)
+        sectionCare.setOnClickListener { openCare() }
         logo?.setOnClickListener { quickRegisterCrisis() }
 
         parentFragmentManager.setFragmentResultListener("petUpdated", this) { _, bundle ->
@@ -159,6 +184,7 @@ class PetDetailsFragment : Fragment() {
     }
 
     private fun bind(p: Pet) {
+        this.pet = p
         tvName.text = p.name
         tvBreed.text = p.breed ?: getString(R.string.dash)
         tvWeight.text = p.weightKg?.let { "${it} ${getString(R.string.kg)}" } ?: getString(R.string.dash)
@@ -178,7 +204,8 @@ class PetDetailsFragment : Fragment() {
         tvProfessionalSummary.text = fav?.let { listOf(it.name, it.lastName).filter { s -> s.isNotBlank() }.joinToString(" ") }
             ?: getString(R.string.professional_no_info)
         // photo
-        if (!p.photoUrl.isNullOrBlank()) loadPhoto(p.photoUrl!!) else ivPhoto.setImageResource(R.drawable.ic_user_placeholder)
+        val photoUrl = p.photoUrl
+        if (!photoUrl.isNullOrBlank()) loadPhoto(photoUrl) else ivPhoto.setImageResource(R.drawable.ic_user_placeholder)
     }
 
     private fun loadPhoto(url: String) {
@@ -235,6 +262,14 @@ class PetDetailsFragment : Fragment() {
         parentFragmentManager.beginTransaction().replace(R.id.fragment_host, f).addToBackStack(null).commit()
     }
 
+    private fun openCare() {
+        val f = PetCareFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_host, f)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun yearsFrom(millis: Long): Int {
         val dob = java.util.Calendar.getInstance().apply { timeInMillis = millis }
         val now = java.util.Calendar.getInstance()
@@ -285,6 +320,7 @@ class PetDetailsFragment : Fragment() {
             .setView(container)
             .setPositiveButton(R.string.share_label, null)
             .setNegativeButton(R.string.cancel, null)
+            .setNeutralButton(R.string.save_label, null)
             .create()
         dialog.setOnShowListener {
             dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
@@ -296,6 +332,12 @@ class PetDetailsFragment : Fragment() {
                 if (recipients.isEmpty()) { Toast.makeText(ctx, getString(R.string.share_no_recipient_selected), Toast.LENGTH_SHORT).show(); return@setOnClickListener }
                 dialog.dismiss()
                 generateAndSharePdf(p, cbCrises.isChecked, cbMeds.isChecked, cbPros.isChecked, cbCare.isChecked, recipients.toList())
+            }
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
+                val sectionsOk = listOf(cbCrises, cbMeds, cbPros, cbCare).any { it.isChecked }
+                if (!sectionsOk) { Toast.makeText(ctx, getString(R.string.share_no_section_selected), Toast.LENGTH_SHORT).show(); return@setOnClickListener }
+                dialog.dismiss()
+                generateAndSavePdf(p, cbCrises.isChecked, cbMeds.isChecked, cbPros.isChecked, cbCare.isChecked)
             }
         }
         dialog.show()
@@ -331,15 +373,51 @@ class PetDetailsFragment : Fragment() {
         if (m) sections += getString(R.string.share_section_medications)
         if (pr) sections += getString(R.string.share_section_professionals)
         if (care) sections += getString(R.string.share_section_care)
+        val subject = if (recipients.isEmpty()) file.name else getString(R.string.share_email_subject, p.name)
         val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
             type = "application/pdf"
-            putExtra(android.content.Intent.EXTRA_EMAIL, recipients.toTypedArray())
-            putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_email_subject, p.name))
+            if (recipients.isNotEmpty()) putExtra(android.content.Intent.EXTRA_EMAIL, recipients.toTypedArray())
+            putExtra(android.content.Intent.EXTRA_SUBJECT, subject)
             putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.share_email_body_intro, p.name, sections.joinToString(", ")))
             putExtra(android.content.Intent.EXTRA_STREAM, uri)
+            // Sugerir nombre de archivo a apps como Google Drive
+            putExtra(android.content.Intent.EXTRA_TITLE, file.name)
+            // Adjuntar ClipData con etiqueta = nombre del archivo (algunas apps lo usan como título)
+            clipData = android.content.ClipData.newUri(ctx.contentResolver, file.name, uri)
             addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         try { startActivity(android.content.Intent.createChooser(intent, getString(R.string.share_chooser_title))) }
         catch (_: Exception) { Toast.makeText(ctx, getString(R.string.share_no_app), Toast.LENGTH_SHORT).show() }
+    }
+
+    private fun generateAndSavePdf(pet: Pet, c: Boolean, m: Boolean, pr: Boolean, care: Boolean) {
+        Toast.makeText(requireContext(), getString(R.string.share_generate_pdf), Toast.LENGTH_SHORT).show()
+        val proceed: (List<Crisis>) -> Unit = { crises ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                val file = try { PetReportPdfBuilder(requireContext(), c, m, pr, care).build(pet, crises) } catch (e: Exception) { null }
+                withContext(Dispatchers.Main) {
+                    if (file == null || !file.exists()) {
+                        Toast.makeText(requireContext(), getString(R.string.share_pdf_error), Toast.LENGTH_SHORT).show()
+                    } else {
+                        pendingPdfFile = file
+                        val suggested = suggestedPdfName(pet)
+                        createPdfLauncher.launch(suggested)
+                    }
+                }
+            }
+        }
+        if (c) repo.getCrisesForPet(pet.id, onSuccess = proceed, onError = { proceed(emptyList()) }) else proceed(emptyList())
+    }
+
+    private fun suggestedPdfName(p: Pet): String {
+        val safe = p.name.trim().ifBlank { "Mascota" }
+            .replace("[\\/:*?\"<>|]".toRegex(), "-")
+            .replace("\n|\r".toRegex(), " ")
+            .replace("\\s+".toRegex(), " ")
+            .replace("-+".toRegex(), "-")
+            .trim()
+            .take(100)
+        val date = java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault()).format(java.util.Date())
+        return "$safe - $date.pdf"
     }
 }

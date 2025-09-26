@@ -4,6 +4,9 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
 import androidx.annotation.WorkerThread
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
+import androidx.core.graphics.drawable.toBitmap
 import com.loveito.demo.R
 import java.io.File
 import java.io.FileOutputStream
@@ -12,7 +15,7 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import androidx.core.graphics.drawable.toBitmap
+import kotlin.math.max
 import kotlin.math.min
 
 /**
@@ -20,7 +23,7 @@ import kotlin.math.min
  * - Encabezado por página (foto + nombre + fecha)
  * - Footer con número de página
  * - Sección de resumen (crisis totales, promedio, tiempo desde última)
- * - Tablas simples para medicaciones y profesionales
+ * - Tablas simples para medicaciones y profesionales con encabezado sombreado y filas cebra
  * - Paginación adecuada evitando cortar títulos solos
  */
 class PetReportPdfBuilder(
@@ -29,18 +32,20 @@ class PetReportPdfBuilder(
     private val includeMedications: Boolean,
     private val includeProfessionals: Boolean,
     private val includeCare: Boolean,
+    private val compactMode: Boolean = false,
 ) {
     private val dateFmtFull = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
     private val dateFmtShort = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    private val fileDateFmt = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
 
     private val bodyPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         textSize = 11f
         color = Color.BLACK
     }
     private val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 16f
+        textSize = 18f
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-        color = Color.rgb(60,21,32) // tono relacionado con paleta (?)
+        color = Color.rgb(60,21,32)
     }
     private val sectionPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         textSize = 14f
@@ -60,13 +65,36 @@ class PetReportPdfBuilder(
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         color = Color.BLACK
     }
+    private val tableHeaderBgPaint = Paint().apply {
+        color = Color.argb(40, 0, 0, 0)
+        style = Paint.Style.FILL
+    }
+    private val zebraBgPaint = Paint().apply {
+        color = Color.argb(18, 0, 0, 0)
+        style = Paint.Style.FILL
+    }
 
-    private val pageWidth = 595 // A4 72dpi approx
+    // Brand colors
+    init {
+        val border = ContextCompat.getColor(context, R.color.border_default)
+        val textPrimary = ContextCompat.getColor(context, R.color.text_primary)
+        val titleColor = ContextCompat.getColor(context, R.color.maroon_900)
+        val sectionColor = ContextCompat.getColor(context, R.color.brown_800)
+        bodyPaint.color = textPrimary
+        titlePaint.color = titleColor
+        sectionPaint.color = sectionColor
+        linePaint.color = border
+        // backgrounds with light alpha from brand palette
+        tableHeaderBgPaint.color = ColorUtils.setAlphaComponent(textPrimary, 28) // ~11%
+        zebraBgPaint.color = ColorUtils.setAlphaComponent(border, 20) // very light
+    }
+
+    private val pageWidth = 595
     private val pageHeight = 842
     private val marginLeft = 40f
     private val marginTop = 40f
     private val marginRight = 40f
-    private val marginBottom = 50f // espacio para footer
+    private val marginBottom = 50f
     private val usableWidth = pageWidth - marginLeft - marginRight
 
     private lateinit var pdf: PdfDocument
@@ -78,15 +106,25 @@ class PetReportPdfBuilder(
     private var petPhoto: Bitmap? = null
     private var appLogo: Bitmap? = null
     private var totalPages: Int = 0
-    // Nuevo: cache de altura real usada para header primera página
     private var headerPhotoHeight: Float = 0f
+    private var headerTitle: String = ""
+
+    private var compactEnabled: Boolean = compactMode
 
     @WorkerThread
     fun build(pet: Pet, crises: List<Crisis>): File {
         loadPetPhotoSync(pet.photoUrl)
         loadAppLogo()
-        // Simular páginas antes para footer "x de y"
+        headerTitle = context.getString(R.string.share_email_subject, pet.name)
+        if (compactEnabled) applyCompactSizing()
+        // First simulation
         totalPages = simulateLayout(pet, crises)
+        // Auto-compact if too many pages
+        if (!compactEnabled && totalPages >= 6) {
+            compactEnabled = true
+            applyCompactSizing()
+            totalPages = simulateLayout(pet, crises)
+        }
         pdf = PdfDocument()
         pageNumber = 0
         newPage()
@@ -97,17 +135,44 @@ class PetReportPdfBuilder(
         drawBasicPetInfo(pet)
         y += 16f
         drawSummarySection(pet, crises)
-        // Separación clara antes de posibles secciones adicionales
-        y += 14f
+        y += if (compactEnabled) 10f else 14f
         if (includeCrises) drawCrisesSection(crises)
         if (includeMedications) drawMedicationsSection(pet)
         if (includeProfessionals) drawProfessionalsSection(pet)
         if (includeCare) drawCareSection(pet)
         finishPage()
-        val file = File(context.cacheDir, "pet_report_${pet.id}_${System.currentTimeMillis()}.pdf")
+        // Nombre de archivo: "%nombredelamascota% - %fecha(YYYYMMDD)%"
+        val safeName = sanitizeFileName(pet.name.ifBlank { "Mascota" })
+        val datePart = fileDateFmt.format(Date())
+        val file = File(context.cacheDir, "$safeName - $datePart.pdf")
         FileOutputStream(file).use { pdf.writeTo(it) }
         pdf.close()
         return file
+    }
+
+    private fun applyCompactSizing() {
+        // Reduce text sizes slightly and tighten layout spacing
+        bodyPaint.textSize = 10f
+        tableHeaderPaint.textSize = 10f
+        smallPaint.textSize = 8f
+        sectionPaint.textSize = 13f
+        // Keep title readable
+        // titlePaint.textSize remains
+    }
+
+    private fun rowPadV(): Float = if (compactEnabled) 4f else 6f
+
+    private fun sanitizeFileName(input: String): String {
+        // Reemplazar caracteres inseguros en nombres de archivo por guiones o espacios seguros
+        val trimmed = input.trim().ifBlank { "Mascota" }
+        val replaced = trimmed.replace("[\\:*?\"<>|/]".toRegex(), "-")
+        // Colapsar múltiples espacios/guiones y recortar
+        return replaced
+            .replace("[\n\r]".toRegex(), " ")
+            .replace("\\s+".toRegex(), " ")
+            .replace("-+".toRegex(), "-")
+            .trim()
+            .take(100) // evitar nombres excesivamente largos
     }
 
     private fun loadPetPhotoSync(url: String?) {
@@ -243,8 +308,8 @@ class PetReportPdfBuilder(
     }
 
     private fun drawHeaderCached() {
-        val title = context.getString(R.string.app_name)
-        canvas.drawText(title, marginLeft, y, sectionPaint)
+        val text = headerTitle.ifBlank { context.getString(R.string.app_name) }
+        canvas.drawText(text, marginLeft, y, sectionPaint)
         appLogo?.let { logo ->
             val lx = pageWidth - marginRight - logo.width
             val ly = y - sectionPaint.textSize
@@ -325,84 +390,138 @@ class PetReportPdfBuilder(
         drawSectionTitle(context.getString(R.string.share_section_medications))
         if (pet.medications.isEmpty()) {
             drawWrapped(context.getString(R.string.medication_no_info))
-            divider(10f, 16f)
+            divider(if (compactEnabled) 8f else 10f, if (compactEnabled) 10f else 16f)
             return
         }
-        // Table header
+        // Column widths
         val colNameW = usableWidth * 0.35f
         val colDoseW = usableWidth * 0.25f
         val colTimesW = usableWidth * 0.40f
-        fun drawRow(name: String, dose: String, times: String, header: Boolean) {
-            ensureSpace(20f)
-            val pName = if (header) tableHeaderPaint else bodyPaint
-            canvas.drawText(name, marginLeft, y, pName)
-            canvas.drawText(dose, marginLeft + colNameW, y, pName)
-            // wrap times if needed
-            val timesLines = wrapText(times, pName, colTimesW)
-            if (timesLines.isEmpty()) {
-                y += pName.textSize + 6f
-                return
-            }
-            val first = timesLines.first()
-            canvas.drawText(first, marginLeft + colNameW + colDoseW, y, pName)
-            y += pName.textSize + 4f
-            timesLines.drop(1).forEach { l ->
-                ensureSpace(pName.textSize + 6f)
-                canvas.drawText(l, marginLeft + colNameW + colDoseW, y, pName)
-                y += pName.textSize + 4f
-            }
-        }
-        drawRow(context.getString(R.string.medication_header_name), context.getString(R.string.medication_header_dose), context.getString(R.string.medication_header_frequency), true)
-        canvas.drawLine(marginLeft, y, pageWidth - marginRight, y, linePaint)
-        y += 6f
+        val padV = rowPadV()
+        val x1 = marginLeft
+        val x2 = marginLeft + colNameW
+        val x3 = x2 + colDoseW
+        val x4 = pageWidth - marginRight
+        // Header background band
+        ensureSpace(tableHeaderPaint.textSize + 2*padV + 6f)
+        val headerTop = y
+        val headerBottom = headerTop + tableHeaderPaint.textSize + 2*padV
+        canvas.drawRect(x1, headerTop, x4, headerBottom, tableHeaderBgPaint)
+        // Header texts
+        val baseline = headerTop + padV + tableHeaderPaint.textSize
+        canvas.drawText(context.getString(R.string.medication_header_name), x1, baseline, tableHeaderPaint)
+        canvas.drawText(context.getString(R.string.medication_header_dose), x2, baseline, tableHeaderPaint)
+        canvas.drawText(context.getString(R.string.medication_header_frequency), x3, baseline, tableHeaderPaint)
+        // header vertical borders
+        canvas.drawLine(x1, headerTop, x1, headerBottom, linePaint)
+        canvas.drawLine(x2, headerTop, x2, headerBottom, linePaint)
+        canvas.drawLine(x3, headerTop, x3, headerBottom, linePaint)
+        canvas.drawLine(x4, headerTop, x4, headerBottom, linePaint)
+
+        y = headerBottom
+        canvas.drawLine(x1, y, x4, y, linePaint)
+        y += if (compactEnabled) 4f else 6f
+        var zebra = false
         pet.medications.forEach { m ->
             val doseStr = listOf(m.dose.takeIf { it.isNotBlank() }, m.unit.takeIf { it.isNotBlank() }).filterNotNull().joinToString(" ")
             val times = if (m.times.isEmpty()) context.getString(R.string.medication_no_times) else m.times.joinToString(", ")
-            drawRow(m.name, doseStr, times, false)
+            val timesLines = wrapText(times, bodyPaint, colTimesW)
+            val linesCount = max(1, timesLines.size)
+            val rowHeight = linesCount * (bodyPaint.textSize + 4f) + 2*padV
+            ensureSpace(rowHeight + (if (compactEnabled) 4f else 6f))
+            val top = y
+            val bottom = top + rowHeight
+            if (zebra) canvas.drawRect(x1, top, x4, bottom, zebraBgPaint)
+            // name (left)
+            val textBase = top + padV + bodyPaint.textSize
+            canvas.drawText(m.name, x1, textBase, bodyPaint)
+            // dose (right-aligned within its column)
+            val doseW = bodyPaint.measureText(doseStr)
+            val doseX = (x3 - 4f - doseW).coerceAtLeast(x2)
+            canvas.drawText(doseStr, doseX, textBase, bodyPaint)
+            // times (wrapped)
+            timesLines.forEachIndexed { idx, line ->
+                val ly = top + padV + bodyPaint.textSize + idx * (bodyPaint.textSize + 4f)
+                canvas.drawText(line, x3, ly, bodyPaint)
+            }
+            // row borders
+            canvas.drawLine(x1, top, x1, bottom, linePaint)
+            canvas.drawLine(x2, top, x2, bottom, linePaint)
+            canvas.drawLine(x3, top, x3, bottom, linePaint)
+            canvas.drawLine(x4, top, x4, bottom, linePaint)
+
+            y = bottom
+            canvas.drawLine(x1, y, x4, y, linePaint)
+            y += if (compactEnabled) 4f else 6f
+            zebra = !zebra
         }
-        y += 6f
-        canvas.drawLine(marginLeft, y, pageWidth - marginRight, y, linePaint)
-        y += 12f
-        divider(4f, 12f) // separador adicional uniforme post tabla
+        y += if (compactEnabled) 6f else 8f
+        divider(4f, if (compactEnabled) 10f else 12f)
     }
 
     private fun drawProfessionalsSection(pet: Pet) {
         drawSectionTitle(context.getString(R.string.share_section_professionals))
         if (pet.professionals.isEmpty()) {
             drawWrapped(context.getString(R.string.professional_empty_list))
-            divider(10f, 16f); return
+            divider(if (compactEnabled) 8f else 10f, if (compactEnabled) 10f else 16f); return
         }
         val colNameW = usableWidth * 0.40f
         val colSpecW = usableWidth * 0.25f
         val colContactW = usableWidth * 0.35f
-        fun drawRow(name: String, spec: String, contact: String, header: Boolean) {
-            ensureSpace(20f)
-            val pName = if (header) tableHeaderPaint else bodyPaint
-            canvas.drawText(name, marginLeft, y, pName)
-            canvas.drawText(spec, marginLeft + colNameW, y, pName)
-            val contactLines = wrapText(contact, pName, colContactW)
-            if (contactLines.isEmpty()) { y += pName.textSize + 6f; return }
-            canvas.drawText(contactLines.first(), marginLeft + colNameW + colSpecW, y, pName)
-            y += pName.textSize + 4f
-            contactLines.drop(1).forEach { l ->
-                ensureSpace(pName.textSize + 6f)
-                canvas.drawText(l, marginLeft + colNameW + colSpecW, y, pName)
-                y += pName.textSize + 4f
-            }
-        }
-        drawRow(context.getString(R.string.professional_header_name), context.getString(R.string.professional_header_specialty), context.getString(R.string.professional_header_email), true)
-        canvas.drawLine(marginLeft, y, pageWidth - marginRight, y, linePaint)
-        y += 6f
+        val padV = rowPadV()
+        val x1 = marginLeft
+        val x2 = marginLeft + colNameW
+        val x3 = x2 + colSpecW
+        val x4 = pageWidth - marginRight
+        // Header background band
+        ensureSpace(tableHeaderPaint.textSize + 2*padV + 6f)
+        val headerTop = y
+        val headerBottom = headerTop + tableHeaderPaint.textSize + 2*padV
+        canvas.drawRect(x1, headerTop, x4, headerBottom, tableHeaderBgPaint)
+        val baseline = headerTop + padV + tableHeaderPaint.textSize
+        canvas.drawText(context.getString(R.string.professional_header_name), x1, baseline, tableHeaderPaint)
+        canvas.drawText(context.getString(R.string.professional_header_specialty), x2, baseline, tableHeaderPaint)
+        canvas.drawText(context.getString(R.string.professional_header_email), x3, baseline, tableHeaderPaint)
+        // header vertical borders
+        canvas.drawLine(x1, headerTop, x1, headerBottom, linePaint)
+        canvas.drawLine(x2, headerTop, x2, headerBottom, linePaint)
+        canvas.drawLine(x3, headerTop, x3, headerBottom, linePaint)
+        canvas.drawLine(x4, headerTop, x4, headerBottom, linePaint)
+
+        y = headerBottom
+        canvas.drawLine(x1, y, x4, y, linePaint)
+        y += if (compactEnabled) 4f else 6f
+        var zebra = false
         pet.professionals.forEach { pr ->
             val name = listOf(pr.name, pr.lastName).filter { it.isNotBlank() }.joinToString(" ") + if (pr.isFavorite) " ★" else ""
             val spec = pr.specialty
             val contact = listOf(pr.email.takeIf { it.isNotBlank() }, pr.phone.takeIf { it.isNotBlank() }).filterNotNull().joinToString(" / ")
-            drawRow(name, spec, contact, false)
+            val contactLines = wrapText(contact, bodyPaint, colContactW)
+            val linesCount = max(1, contactLines.size)
+            val rowHeight = linesCount * (bodyPaint.textSize + 4f) + 2*padV
+            ensureSpace(rowHeight + (if (compactEnabled) 4f else 6f))
+            val top = y
+            val bottom = top + rowHeight
+            if (zebra) canvas.drawRect(x1, top, x4, bottom, zebraBgPaint)
+            canvas.drawText(name, x1, top + padV + bodyPaint.textSize, bodyPaint)
+            canvas.drawText(spec, x2, top + padV + bodyPaint.textSize, bodyPaint)
+            contactLines.forEachIndexed { idx, line ->
+                val ly = top + padV + bodyPaint.textSize + idx * (bodyPaint.textSize + 4f)
+                canvas.drawText(line, x3, ly, bodyPaint)
+            }
+            // row borders
+            canvas.drawLine(x1, top, x1, bottom, linePaint)
+            canvas.drawLine(x2, top, x2, bottom, linePaint)
+            canvas.drawLine(x3, top, x3, bottom, linePaint)
+            canvas.drawLine(x4, top, x4, bottom, linePaint)
+
+            y = bottom
+            canvas.drawLine(x1, y, x4, y, linePaint)
+            y += if (compactEnabled) 4f else 6f
+            zebra = !zebra
         }
-        y += 6f
-        canvas.drawLine(marginLeft, y, pageWidth - marginRight, y, linePaint)
-        y += 12f
-        divider(4f, 12f)
+        y += if (compactEnabled) 6f else 8f
+        divider(4f, if (compactEnabled) 10f else 12f)
     }
 
     private fun drawCareSection(pet: Pet) {

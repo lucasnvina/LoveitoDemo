@@ -4394,6 +4394,7 @@ id tvAge
 id tvAvgTime
 id tvBirth
 id tvBreed
+id tvCareTitle
 id tvCrisisMeta
 id tvCrisisSeverity
 id tvCrisisTitle
@@ -4597,6 +4598,7 @@ layout design_text_input_start_icon
 layout fragment_auth
 layout fragment_crisis_detail
 layout fragment_home
+layout fragment_pet_care
 layout fragment_pet_crises
 layout fragment_pet_details
 layout fragment_pet_edit
@@ -4740,6 +4742,12 @@ string call_notification_screening_text
 string cancel
 string care_desc
 string care_label
+string care_placeholder_coming_soon
+string care_screen_title
+string care_topic_exercise
+string care_topic_food
+string care_topic_hygiene
+string care_topic_vet
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -5030,6 +5038,7 @@ string report_summary_last_crisis
 string report_summary_title
 string report_table_medications_title
 string report_table_professionals_title
+string save_label
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -5041,6 +5050,7 @@ string share_desc
 string share_email_body_intro
 string share_email_subject
 string share_generate_pdf
+string share_generated_label
 string share_include_me
 string share_label
 string share_no_app

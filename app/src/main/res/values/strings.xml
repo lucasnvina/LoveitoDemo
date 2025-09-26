@@ -175,4 +175,12 @@
     <string name="report_page_of">Página %1$d de %2$d</string>
     <string name="pet_add_title">Agregar mascota</string>
     <string name="pet_edit_title">Editar mascota</string>
+    <string name="care_screen_title">Cuidados</string>
+    <string name="care_placeholder_coming_soon">Próximamente</string>
+    <string name="care_topic_hygiene">Higiene</string>
+    <string name="care_topic_exercise">Ejercicio</string>
+    <string name="care_topic_food">Alimentación</string>
+    <string name="care_topic_vet">Visitas al veterinario</string>
+    <string name="save_label">Guardar</string>
+    <string name="share_generated_label">Archivo guardado: %1$s</string>
 </resources>

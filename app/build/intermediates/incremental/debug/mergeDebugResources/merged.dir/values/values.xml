@@ -2524,6 +2524,12 @@
     <string name="cancel">Cancelar</string>
     <string name="care_desc">Cuidados</string>
     <string name="care_label">Cuidados</string>
+    <string name="care_placeholder_coming_soon">Próximamente</string>
+    <string name="care_screen_title">Cuidados</string>
+    <string name="care_topic_exercise">Ejercicio</string>
+    <string name="care_topic_food">Alimentación</string>
+    <string name="care_topic_hygiene">Higiene</string>
+    <string name="care_topic_vet">Visitas al veterinario</string>
     <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>
     <string name="character_counter_overflowed_content_description">Character limit exceeded %1$d of %2$d</string>
     <string name="character_counter_pattern" translatable="false">%1$d/%2$d</string>
@@ -2828,6 +2834,7 @@
     <string name="report_summary_title">Resumen</string>
     <string name="report_table_medications_title">Tabla de Medicación</string>
     <string name="report_table_professionals_title">Profesionales</string>
+    <string name="save_label">Guardar</string>
     <string name="search_menu_title">Search</string>
     <string name="searchbar_scrolling_view_behavior" translatable="false">
     com.google.android.material.search.SearchBar$ScrollingViewBehavior
@@ -2841,6 +2848,7 @@
     <string name="share_email_body_intro">Adjunto informe de %1$s con: %2$s.</string>
     <string name="share_email_subject">Informe de %1$s</string>
     <string name="share_generate_pdf">Generando PDF…</string>
+    <string name="share_generated_label">Archivo guardado: %1$s</string>
     <string name="share_include_me">Copiarme a mí</string>
     <string name="share_label">Compartir</string>
     <string name="share_no_app">No hay aplicaciones de correo disponibles</string>
