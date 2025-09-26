@@ -67,6 +67,7 @@ class PetEditFragment : Fragment() {
     private lateinit var btnSave: MaterialButton
     private lateinit var btnCancel: MaterialButton
     private lateinit var btnDelete: MaterialButton
+    private lateinit var tvTitlePet: android.widget.TextView
 
     private var birthDateMillis: Long? = null
     private var pickedUri: Uri? = null
@@ -111,6 +112,7 @@ class PetEditFragment : Fragment() {
         btnSave = view.findViewById(R.id.btnSave)
         btnCancel = view.findViewById(R.id.btnCancel)
         btnDelete = view.findViewById(R.id.btnDelete)
+        tvTitlePet = view.findViewById(R.id.tvTitlePet)
 
         // Dropdowns
         actvSex.setAdapter(android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, sexOptions))
@@ -129,9 +131,13 @@ class PetEditFragment : Fragment() {
 
         if (petId == null) {
             // Creación
+            tvTitlePet.setText(R.string.pet_add_title)
+            btnSave.setText(R.string.add_label)
             btnDelete.visibility = View.GONE
             ivPhoto.setImageResource(R.drawable.ic_user_placeholder)
         } else {
+            tvTitlePet.setText(R.string.pet_edit_title)
+            btnSave.setText(R.string.pet_btn_save)
             loadPet()
         }
     }

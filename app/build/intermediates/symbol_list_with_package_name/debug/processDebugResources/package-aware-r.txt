@@ -3906,7 +3906,6 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
-id btnAddPet
 id btnAddTime
 id btnCancel
 id btnCancelPro
@@ -4107,7 +4106,6 @@ id line1
 id line3
 id linear
 id listMode
-id listPets
 id list_item
 id locale
 id login_logo
@@ -4427,6 +4425,7 @@ id tvSex
 id tvTimesLabel
 id tvTitle
 id tvTitleMedications
+id tvTitlePet
 id tvTitlePro
 id tvTitleProfessionals
 id tvUserName
@@ -4605,7 +4604,6 @@ layout fragment_pet_medication_edit
 layout fragment_pet_medications
 layout fragment_pet_professional_edit
 layout fragment_pet_professionals
-layout fragment_pets_list
 layout fragment_profile
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
@@ -4713,7 +4711,6 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_label
-string add_pet_button
 string add_symbol
 string android_credentials_TYPE_PASSWORD_CREDENTIAL
 string androidx_credentials_TYPE_PUBLIC_KEY_CREDENTIAL
@@ -4953,6 +4950,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string pet_add_title
 string pet_age
 string pet_birth
 string pet_breed
@@ -4965,6 +4963,7 @@ string pet_btn_save
 string pet_change_photo
 string pet_created
 string pet_deleted
+string pet_edit_title
 string pet_height
 string pet_hint_breed
 string pet_hint_height

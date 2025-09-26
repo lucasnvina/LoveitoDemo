@@ -67,7 +67,6 @@ id actProSpecialty
 id actUnit
 id actvNeutered
 id actvSex
-id btnAddPet
 id btnAddTime
 id btnCancel
 id btnCancelPro
@@ -121,7 +120,6 @@ id ivPhoto
 id ivProfileCameraOverlay
 id ivProfilePhoto
 id ivUserPhoto
-id listPets
 id login_logo
 id photoContainer
 id profilePhotoContainer
@@ -187,6 +185,7 @@ id tvSex
 id tvTimesLabel
 id tvTitle
 id tvTitleMedications
+id tvTitlePet
 id tvTitlePro
 id tvTitleProfessionals
 id tvUserName
@@ -203,7 +202,6 @@ layout fragment_pet_medication_edit
 layout fragment_pet_medications
 layout fragment_pet_professional_edit
 layout fragment_pet_professionals
-layout fragment_pets_list
 layout fragment_profile
 layout item_crisis
 layout item_dropdown_maroon
@@ -217,7 +215,6 @@ mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string add_label
-string add_pet_button
 string add_symbol
 string app_name
 string auth_email
@@ -292,6 +289,7 @@ string no
 string no_crises
 string no_crisis_registered
 string not_defined
+string pet_add_title
 string pet_age
 string pet_birth
 string pet_breed
@@ -304,6 +302,7 @@ string pet_btn_save
 string pet_change_photo
 string pet_created
 string pet_deleted
+string pet_edit_title
 string pet_height
 string pet_hint_breed
 string pet_hint_height

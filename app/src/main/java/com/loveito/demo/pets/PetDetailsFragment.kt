@@ -114,7 +114,8 @@ class PetDetailsFragment : Fragment() {
         sectionProfessional.setOnClickListener { petId?.let { openProfessionals(it) } }
         sectionShare.setOnClickListener { pet?.let { showShareDialog(it) } }
         sectionLastCrisis.setOnClickListener { petId?.let { openCrises(it) } }
-        sectionAvgTime.setOnClickListener { petId?.let { openCrises(it) } }
+        // sectionAvgTime: do nothing on tap (no navigation)
+        sectionAvgTime.setOnClickListener(null)
         logo?.setOnClickListener { quickRegisterCrisis() }
 
         parentFragmentManager.setFragmentResultListener("petUpdated", this) { _, bundle ->

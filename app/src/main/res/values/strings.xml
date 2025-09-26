@@ -33,7 +33,6 @@
     <string name="auth_signup">Crear cuenta</string>
     <string name="auth_signin">Ingresar</string>
     <string name="auth_forgot_password">Olvidé mi contraseña</string>
-    <string name="add_pet_button">Agregar mascota</string>
     <string name="select_pet_label">Elegí la mascota</string>
     <string name="start_button">Iniciar</string>
     <string name="pet_name_label">Nombre</string>
@@ -174,4 +173,6 @@
     <string name="report_table_professionals_title">Profesionales</string>
     <string name="report_generated_label">Generado: %1$s</string>
     <string name="report_page_of">Página %1$d de %2$d</string>
+    <string name="pet_add_title">Agregar mascota</string>
+    <string name="pet_edit_title">Editar mascota</string>
 </resources>

@@ -3905,7 +3905,6 @@ int id browser_actions_menu_item_icon 0x7f0a006e
 int id browser_actions_menu_item_text 0x7f0a006f
 int id browser_actions_menu_items 0x7f0a0070
 int id browser_actions_menu_view 0x7f0a0071
-int id btnAddPet 0x7f0a0072
 int id btnAddTime 0x7f0a0073
 int id btnCancel 0x7f0a0074
 int id btnCancelPro 0x7f0a0075
@@ -4106,7 +4105,6 @@ int id line1 0x7f0a0137
 int id line3 0x7f0a0138
 int id linear 0x7f0a0139
 int id listMode 0x7f0a013a
-int id listPets 0x7f0a013b
 int id list_item 0x7f0a013c
 int id locale 0x7f0a013d
 int id login_logo 0x7f0a013e
@@ -4426,6 +4424,7 @@ int id tvSex 0x7f0a0277
 int id tvTimesLabel 0x7f0a0278
 int id tvTitle 0x7f0a0279
 int id tvTitleMedications 0x7f0a027a
+int id tvTitlePet 0x7f0a0298
 int id tvTitlePro 0x7f0a027b
 int id tvTitleProfessionals 0x7f0a027c
 int id tvUserName 0x7f0a027d
@@ -4604,7 +4603,6 @@ int layout fragment_pet_medication_edit 0x7f0d0036
 int layout fragment_pet_medications 0x7f0d0037
 int layout fragment_pet_professional_edit 0x7f0d0038
 int layout fragment_pet_professionals 0x7f0d0039
-int layout fragment_pets_list 0x7f0d003a
 int layout fragment_profile 0x7f0d003b
 int layout ime_base_split_test_activity 0x7f0d003c
 int layout ime_secondary_split_test_activity 0x7f0d003d
@@ -4712,7 +4710,6 @@ int string abc_shareactionprovider_share_with 0x7f120018
 int string abc_shareactionprovider_share_with_application 0x7f120019
 int string abc_toolbar_collapse_description 0x7f12001a
 int string add_label 0x7f12001b
-int string add_pet_button 0x7f12001c
 int string add_symbol 0x7f12001d
 int string android_credentials_TYPE_PASSWORD_CREDENTIAL 0x7f12001e
 int string androidx_credentials_TYPE_PUBLIC_KEY_CREDENTIAL 0x7f12001f
@@ -4952,6 +4949,7 @@ int string path_password_eye 0x7f120108
 int string path_password_eye_mask_strike_through 0x7f120109
 int string path_password_eye_mask_visible 0x7f12010a
 int string path_password_strike_through 0x7f12010b
+int string pet_add_title 0x7f12017b
 int string pet_age 0x7f12010c
 int string pet_birth 0x7f12010d
 int string pet_breed 0x7f12010e
@@ -4964,6 +4962,7 @@ int string pet_btn_save 0x7f120114
 int string pet_change_photo 0x7f120115
 int string pet_created 0x7f120116
 int string pet_deleted 0x7f120117
+int string pet_edit_title 0x7f12017c
 int string pet_height 0x7f120118
 int string pet_hint_breed 0x7f120119
 int string pet_hint_height 0x7f12011a

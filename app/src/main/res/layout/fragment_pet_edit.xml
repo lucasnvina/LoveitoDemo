@@ -12,6 +12,17 @@
         android:paddingBottom="32dp"
         android:theme="@style/ThemeOverlay.Loveito.CursorMaroon">
 
+        <TextView
+            android:id="@+id/tvTitlePet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pet_add_title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="16dp" />
+
         <!-- Foto con borde redondeado -->
         <FrameLayout
             android:id="@+id/editPhotoContainer"

@@ -36,7 +36,6 @@
     <color name="text_secondary">@color/rust_tinted_off_white</color>
     <dimen name="field_input_height">56dp</dimen>
     <string name="add_label">Agregar</string>
-    <string name="add_pet_button">Agregar mascota</string>
     <string name="add_symbol">+</string>
     <string name="app_name">Loveito</string>
     <string name="auth_email">Email</string>
@@ -111,6 +110,7 @@
     <string name="no_crises">Sin crisis registradas</string>
     <string name="no_crisis_registered">Sin crisis registrada</string>
     <string name="not_defined">No definida</string>
+    <string name="pet_add_title">Agregar mascota</string>
     <string name="pet_age">Edad: %1$s</string>
     <string name="pet_birth">Nacimiento: %1$s</string>
     <string name="pet_breed">Raza: %1$s</string>
@@ -123,6 +123,7 @@
     <string name="pet_change_photo">Cambiar foto</string>
     <string name="pet_created">Mascota creada</string>
     <string name="pet_deleted">Mascota eliminada</string>
+    <string name="pet_edit_title">Editar mascota</string>
     <string name="pet_height">Alto: %1$s</string>
     <string name="pet_hint_breed">Ej: Mestizo</string>
     <string name="pet_hint_height">Ej: 55</string>
