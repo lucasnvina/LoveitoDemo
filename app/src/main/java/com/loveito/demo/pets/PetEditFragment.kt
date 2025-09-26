@@ -1,6 +1,5 @@
 package com.loveito.demo.pets
 
-import android.app.DatePickerDialog
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
@@ -18,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.loveito.demo.R
@@ -115,8 +115,9 @@ class PetEditFragment : Fragment() {
         tvTitlePet = view.findViewById(R.id.tvTitlePet)
 
         // Dropdowns
-        actvSex.setAdapter(android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, sexOptions))
-        actvNeutered.setAdapter(android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, neuteredOptions))
+        val dropdownItemLayout = R.layout.item_dropdown
+        actvSex.setAdapter(android.widget.ArrayAdapter(requireContext(), dropdownItemLayout, sexOptions))
+        actvNeutered.setAdapter(android.widget.ArrayAdapter(requireContext(), dropdownItemLayout, neuteredOptions))
         actvSex.setOnClickListener { actvSex.showDropDown() }
         actvNeutered.setOnClickListener { actvNeutered.showDropDown() }
 
@@ -134,7 +135,7 @@ class PetEditFragment : Fragment() {
             tvTitlePet.setText(R.string.pet_add_title)
             btnSave.setText(R.string.add_label)
             btnDelete.visibility = View.GONE
-            ivPhoto.setImageResource(R.drawable.ic_user_placeholder)
+            // ivPhoto.setImageResource(R.drawable.ic_user_placeholder) // Eliminado para que no muestre silueta
         } else {
             tvTitlePet.setText(R.string.pet_edit_title)
             btnSave.setText(R.string.pet_btn_save)
@@ -155,7 +156,7 @@ class PetEditFragment : Fragment() {
                 birthDateMillis = p.birthDate
                 etBirthDate.setText(p.birthDate?.let { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date(it)) }
                     ?: getString(R.string.pet_label_not_defined))
-                if (!p.photoUrl.isNullOrBlank()) loadPhoto(p.photoUrl!!) else ivPhoto.setImageResource(R.drawable.ic_user_placeholder)
+                if (!p.photoUrl.isNullOrBlank()) loadPhoto(p.photoUrl!!) else ivPhoto.setImageDrawable(null)
             },
             onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() })
     }
@@ -163,11 +164,16 @@ class PetEditFragment : Fragment() {
     private fun openDatePicker() {
         val cal = Calendar.getInstance()
         birthDateMillis?.let { cal.timeInMillis = it }
-        DatePickerDialog(requireContext(), { _, y, m, d ->
-            val c = Calendar.getInstance(); c.set(y, m, d, 0, 0, 0); c.set(Calendar.MILLISECOND, 0)
-            birthDateMillis = c.timeInMillis
-            etBirthDate.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(c.time))
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+        val picker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.pet_label_birth_date))
+            .setSelection(birthDateMillis ?: MaterialDatePicker.todayInUtcMilliseconds())
+            .setTheme(R.style.ThemeOverlay_Loveito_DatePicker)
+            .build()
+        picker.addOnPositiveButtonClickListener { selection ->
+            birthDateMillis = selection
+            etBirthDate.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date(selection)))
+        }
+        picker.show(parentFragmentManager, "birthDatePicker")
     }
 
     private fun validate(): Boolean {
@@ -227,7 +233,9 @@ class PetEditFragment : Fragment() {
         repo.deletePet(id,
             onSuccess = {
                 Toast.makeText(requireContext(), getString(R.string.pet_deleted), Toast.LENGTH_SHORT).show()
-                parentFragmentManager.popBackStack()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_host, com.loveito.demo.HomeFragment())
+                    .commit()
             },
             onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show() }
         )

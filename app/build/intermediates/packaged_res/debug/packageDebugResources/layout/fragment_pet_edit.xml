@@ -159,7 +159,8 @@
                 android:fontFamily="@font/nunito_light"
                 android:textColor="@color/maroon_900"
                 android:textSize="20sp"
-                android:textColorHint="@color/text_secondary" />
+                android:textColorHint="@color/text_secondary"
+                android:gravity="start|center_vertical" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Fecha nacimiento -->
@@ -214,7 +215,8 @@
                 android:fontFamily="@font/nunito_light"
                 android:textColor="@color/maroon_900"
                 android:textSize="20sp"
-                android:textColorHint="@color/text_secondary" />
+                android:textColorHint="@color/text_secondary"
+                android:gravity="start|center_vertical" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Alto -->

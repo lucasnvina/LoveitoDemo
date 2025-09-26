@@ -124,8 +124,8 @@
     <style name="ThemeOverlay.Loveito.DatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorPrimary">@color/maroon_900</item>
         <item name="colorOnPrimary">@color/accent_on</item>
-        <item name="colorSecondary">@color/maroon_900</item>
-        <item name="colorOnSecondary">@color/accent_on</item>
+        <item name="colorSurface">@color/bg_primary</item>
+        <item name="colorOnSurface">@color/maroon_900</item>
         <item name="android:textColorPrimary">@color/maroon_900</item>
         <item name="android:textColorSecondary">@color/maroon_900</item>
     </style>

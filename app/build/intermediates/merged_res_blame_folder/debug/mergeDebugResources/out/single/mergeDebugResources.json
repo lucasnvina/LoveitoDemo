@@ -76,6 +76,10 @@
         "source": "com.loveito.demo.app-main-65:/layout/fragment_home.xml"
     },
     {
+        "merged": "com.loveito.demo.app-debug-63:/layout_item_dropdown.xml.flat",
+        "source": "com.loveito.demo.app-main-65:/layout/item_dropdown.xml"
+    },
+    {
         "merged": "com.loveito.demo.app-debug-63:/drawable_bg_pet_add_item.xml.flat",
         "source": "com.loveito.demo.app-main-65:/drawable/bg_pet_add_item.xml"
     },
