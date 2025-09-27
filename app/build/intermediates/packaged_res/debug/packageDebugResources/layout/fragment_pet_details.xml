@@ -386,6 +386,40 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Indicador de sesión activa del asistente -->
+    <LinearLayout
+        android:id="@+id/assistantIndicator"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_assistant_indicator"
+        app:layout_constraintBottom_toTopOf="@id/ivLogoLoveitoDog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="12dp">
+        <View
+            android:id="@+id/assistantPulse"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_pulse_dot"
+            android:contentDescription="@string/assistant_pulse_desc"/>
+        <TextView
+            android:id="@+id/assistantTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/text_primary"
+            android:text="Asistente activo · 00:00"
+            android:contentDescription="@string/assistant_active_desc"/>
+    </LinearLayout>
+
     <!-- Logo flotante -->
     <ImageView
         android:id="@+id/ivLogoLoveitoDog"

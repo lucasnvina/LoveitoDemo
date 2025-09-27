@@ -183,4 +183,6 @@
     <string name="care_topic_vet">Visitas al veterinario</string>
     <string name="save_label">Guardar</string>
     <string name="share_generated_label">Archivo guardado: %1$s</string>
+    <string name="assistant_active_desc">Asistente de crisis activo</string>
+    <string name="assistant_pulse_desc">Indicador de actividad del asistente</string>
 </resources>

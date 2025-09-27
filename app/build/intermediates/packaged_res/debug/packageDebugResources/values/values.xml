@@ -38,6 +38,8 @@
     <string name="add_label">Agregar</string>
     <string name="add_symbol">+</string>
     <string name="app_name">Loveito</string>
+    <string name="assistant_active_desc">Asistente de crisis activo</string>
+    <string name="assistant_pulse_desc">Indicador de actividad del asistente</string>
     <string name="auth_email">Email</string>
     <string name="auth_forgot_password">Olvidé mi contraseña</string>
     <string name="auth_password">Contraseña</string>

@@ -9,15 +9,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.tasks.await
 
 /**
- * ViewModel híbrida:
- * 1. Descarga definición de flujo desde Firestore (con caché local + fallback asset).
- * 2. Ejecuta el motor local (baja latencia) y persiste sesión/resultado en Firestore.
- * 3. Al finalizar invoca Cloud Function finalizeSeizureSession para verificación server-side.
+ * ViewModel simplificada: sólo asset, sin FirestoreFlowSource ni FlowValidator.
  */
 class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -25,85 +25,75 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
         object Loading: UiState()
         data class NodeYesNo(val id: String, val prompt: String): UiState()
         data class NodeInfo(val id: String, val prompt: String): UiState()
-        data class NodeEvent(val id: String, val event: String): UiState() // espera trigger externo
+        data class NodeEvent(val id: String, val event: String): UiState()
         data class NodeAction(val id: String, val prompt: String?): UiState()
         data class Finished(
-            val triageLevel: String?,           // triage local (pre-verify) si final no disponible
+            val triageLevel: String?,
             val durationSec: Long?,
             val vars: Map<String, Any?>,
-            val verified: Boolean,              // verificado por backend
-            val triageLevelFinal: String?,      // triage definitivo tras finalize
-            val decisionCond: String?,          // condición coincidente en finalize
-            val updatedByFinalize: Boolean      // si el backend cambió la clasificación
+            val verified: Boolean,
+            val triageLevelFinal: String?,
+            val decisionCond: String?,
+            val updatedByFinalize: Boolean
         ): UiState()
         data class Error(val message: String, val recoverable: Boolean = true): UiState()
     }
 
+    private val firestore = FirebaseFirestore.getInstance()
+    private val remoteRepo = CloudFlowRemoteRepository()
+
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState: StateFlow<UiState> = _uiState
 
-    private val firestore = FirebaseFirestore.getInstance()
-    private val remoteRepo = CloudFlowRemoteRepository()
-    private val flowSource = FirestoreFlowSource(app.applicationContext)
+    private val _sourceInfo = MutableStateFlow("")
+    val sourceInfo: StateFlow<String> = _sourceInfo
 
-    // Runtime
     private var engine: FlowEngine? = null
     private var timerJob: Job? = null
 
-    // Identificadores de sesión
     private var sessionId: String? = null
     private var flowId: String = "seizure_assistant"
     private var activeVersion: String? = null
 
-    // Finalize state
     private var finalizeRequested = false
     private var finalizeCompleted = false
     private var finalizeDecisionCond: String? = null
     private var finalizeTriageFinal: String? = null
     private var finalizeUpdated = false
 
-    // Exponer origen de definición (debug / telemetría)
-    private val _sourceInfo = MutableStateFlow("")
-    val sourceInfo: StateFlow<String> = _sourceInfo
-
     /** Inicia el flujo híbrido. */
     fun start(
         flowId: String = "seizure_assistant",
-        forceRefresh: Boolean = false,
+        forceRefresh: Boolean = false, // ignorado (sin remoto)
         petId: String? = null
     ) {
         this.flowId = flowId
         _uiState.value = UiState.Loading
         viewModelScope.launch {
             try {
-                val fetch = flowSource.getActiveDefinition(
-                    flowId = flowId,
-                    forceRefresh = forceRefresh,
-                    allowAssetFallback = true,
-                    assetName = "seizure_assistant_v1_6_0.json"
-                )
-                activeVersion = fetch.version
-                _sourceInfo.value = "def:${fetch.source}@${fetch.version}"
-
-                // Contexto externo (seizures últimas 24h)
-                val c24 = flowSource.getSeizuresCount24h(petId)
-                val def = fetch.definition
-                val eng = FlowEngine.fromDefinition(def).also {
-                    it.setAppContext("seizures_count_24h", c24)
+                // Cargar definición desde assets directamente (sin remoto / sin caché)
+                val json = withContext(Dispatchers.IO) {
+                    val assetName = "seizure_assistant_v1_6_0.json"
+                    getApplication<Application>().assets.open(assetName).bufferedReader().use { it.readText() }
                 }
+                val def = FlowParser.parse(json)
+                activeVersion = def.version
+                _sourceInfo.value = "def:ASSET@${def.version}"
+
+                // Contexto externo (seizures últimas 24h) replicando lógica previa
+                val c24 = getSeizuresCount24h(petId)
+                val eng = FlowEngine.fromDefinition(def).also { it.setAppContext("seizures_count_24h", c24) }
                 engine = eng
 
-                // Avance inicial (nodos info/action/branch automáticos)
                 eng.proceedIfInfoOrAction()
                 pushCurrentNode()
 
-                // Crear sesión en Firestore (trazabilidad) - asincrónico
-                createLocalSessionDocument(petId = petId, seizuresCount24h = c24)
+                // Mantener creación de sesión en Firestore (auditoría) si se desea
+                createLocalSessionDocument(petId, c24)
 
-                // Timer loop (verifica hooks, p.ej. >=180s)
                 startTimerLoopIfNeeded()
-            } catch (ex: Exception) {
-                _uiState.value = UiState.Error(ex.message ?: "Error iniciando flujo", recoverable = true)
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error(e.message ?: "Error iniciando flujo", true)
             }
         }
     }
@@ -120,17 +110,14 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
                 triageLevelFinal = finalizeTriageFinal ?: (e.getVar("triage_level") as? String),
                 decisionCond = finalizeDecisionCond,
                 updatedByFinalize = finalizeUpdated
-            )
-            return
+            ); return
         }
         when (val n = e.currentNode()) {
             is Node.YesNoNode -> _uiState.value = UiState.NodeYesNo(n.id, n.prompt)
             is Node.InfoNode -> _uiState.value = UiState.NodeInfo(n.id, n.prompt)
             is Node.EventNode -> _uiState.value = UiState.NodeEvent(n.id, n.event)
             is Node.ActionNode -> _uiState.value = UiState.NodeAction(n.id, n.prompt)
-            is Node.BranchNode -> { // no debería permanecer: motor debería resolver
-                e.proceedIfInfoOrAction(); pushCurrentNode(); return
-            }
+            is Node.BranchNode -> { e.proceedIfInfoOrAction(); pushCurrentNode(); return }
         }
     }
 
@@ -139,8 +126,7 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
         val e = engine ?: return
         viewModelScope.launch {
             try {
-                if (e.isFinished()) return@launch
-                if (e.currentNode() !is Node.YesNoNode) return@launch
+                if (e.isFinished() || e.currentNode() !is Node.YesNoNode) return@launch
                 e.answerYesNo(answer)
                 pushCurrentNode()
                 if (e.isFinished()) {
@@ -148,9 +134,7 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
                 } else {
                     startTimerLoopIfNeeded()
                 }
-            } catch (ex: Exception) {
-                _uiState.value = UiState.Error(ex.message ?: "Error procesando respuesta", true)
-            }
+            } catch (e2: Exception) { _uiState.value = UiState.Error(e2.message ?: "Error procesando respuesta", true) }
         }
     }
 
@@ -159,8 +143,7 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
         val e = engine ?: return
         viewModelScope.launch {
             try {
-                if (e.isFinished()) return@launch
-                if (e.currentNode() !is Node.EventNode) return@launch
+                if (e.isFinished() || e.currentNode() !is Node.EventNode) return@launch
                 e.triggerEvent(event)
                 pushCurrentNode()
                 if (e.isFinished()) {
@@ -168,9 +151,7 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
                 } else {
                     startTimerLoopIfNeeded()
                 }
-            } catch (ex: Exception) {
-                _uiState.value = UiState.Error(ex.message ?: "Error procesando evento", true)
-            }
+            } catch (e2: Exception) { _uiState.value = UiState.Error(e2.message ?: "Error procesando evento", true) }
         }
     }
 
@@ -223,14 +204,8 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
     private fun snapshotVars(): Map<String, Any?> {
         val e = engine ?: return emptyMap()
         val keys = listOf(
-            "started_at_epoch",
-            "duration_sec",
-            "seizures_count_24h",
-            "has_rescue_med_prescribed",
-            "rescue_med_admin",
-            "breathing_ok",
-            "injury_present",
-            "triage_level"
+            "started_at_epoch","duration_sec","seizures_count_24h",
+            "has_rescue_med_prescribed","rescue_med_admin","breathing_ok","injury_present","triage_level"
         )
         return keys.associateWith { e.getVar(it) }
     }
@@ -307,19 +282,23 @@ class HybridFlowViewModel(app: Application) : AndroidViewModel(app) {
                     finalizeDecisionCond = resp.matchedCond
                     finalizeTriageFinal = resp.triageLevelFinal
                     finalizeUpdated = resp.updated
-                    if (resp.updated && resp.triageLevelFinal != null) {
-                        // Actualizamos UI (el motor ya había terminado; triage final manda)
-                    }
                     pushCurrentNode()
                 }
-                .onFailure {
-                    // Mantener estado no verificado; UI puede ofrecer retry
-                }
+                .onFailure { /* mantener estado no verificado */ }
         }
     }
 
-    override fun onCleared() {
-        timerJob?.cancel()
-        super.onCleared()
+    /** Contexto externo (seizures últimas 24h) replicando lógica previa */
+    private suspend fun getSeizuresCount24h(petId: String?): Int = withContext(Dispatchers.IO) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@withContext 0
+        val since = System.currentTimeMillis() - 24L * 3600_000L
+        var query = firestore.collection("seizures")
+            .whereEqualTo("userId", uid)
+            .whereGreaterThan("createdAt", com.google.firebase.Timestamp(since / 1000, 0))
+        if (petId != null) query = query.whereEqualTo("petId", petId)
+        val snap = runCatching { query.get().await() }.getOrNull() ?: return@withContext 0
+        snap.size()
     }
+
+    override fun onCleared() { timerJob?.cancel(); super.onCleared() }
 }

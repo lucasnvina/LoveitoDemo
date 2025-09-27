@@ -37,11 +37,21 @@
       ]
     }
   ],
+  "defaults": {
+    "yes_no": {
+      "other": "No te entendí",
+      "timeout": "No te entendí",
+      "silence": "No te entendí"
+    },
+    "event": {
+      "timeout": "No te entendí. Avisame diciendo 'terminó' cuando finalice la crisis."
+    }
+  },
   "nodes": [
     {
       "id": "safety",
       "type": "info",
-      "prompt": "Hola %nombre_de_usuario%. {{m:Tranquilo|f:Tranquila}}, estoy con vos, es muy importante para la salud de tu mascota que mantengas la calma. {{mascota_m:Ponelo|mascota_f:Ponela}} en un lugar seguro y por nada del mundo pongas la mano en su boca. Mantenete cerca para que no se lastime pero no debés intervenir físicamente en el flujo de su crisis.",
+      "prompt": "Hola %nombre_de_usuario%. {{m:Tranquilo|f:Tranquila}}, estoy con vos, es muy importante para la salud de tu mascota que mantengas la calma. {{mascota_m:Ponelo|mascota_f:Ponela}} en un lugar seguro y por nada del mundo pongas la mano en su boca. Mantenete cerca para que no se lastime pero no interfieras físicamente en el flujo de su crisis.",
       "actions": [
         { "do": "start_timer" },
         { "do": "record_note", "params": { "field": "started_at_epoch", "value": "$now.epoch" } }
@@ -55,8 +65,7 @@
       "on_answer": [
         { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "has_rescue_med_prescribed", "value": true } } ], "next": "q_rescue_admin" },
         { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "has_rescue_med_prescribed", "value": false } }, { "do": "say", "params": { "text": "Para el futuro, pedile a tu veterinario medicación de rescate y mantenela accesible. Sigamos." } } ], "next": "q_breathing" },
-        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Podés responder sí, no o no sé. Si no estás seguro, decí no y seguimos." } } ], "next": "q_breathing" },
-        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Por favor respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_has_rescue_med" }
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí" } } ], "next": "q_has_rescue_med" }
       ]
     },
     {
@@ -66,36 +75,30 @@
       "on_answer": [
         { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "rescue_med_admin", "value": true } } ], "next": "q_breathing" },
         { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "rescue_med_admin", "value": false } }, { "do": "say", "params": { "text": "Si es seguro para vos y está indicada por tu veterinario, administrala ahora. Si no es seguro, no fuerces. Sigamos." } } ], "next": "q_breathing" },
-        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Si tenés dudas, no fuerces la administración. Priorizá seguridad. Sigamos." } } ], "next": "q_breathing" },
-        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_rescue_admin" }
-      ]
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí" } } ], "next": "q_rescue_admin" } ]
     },
     {
       "id": "q_breathing",
       "type": "yes_no",
-      "prompt": "¿Está respirando con normalidad (sin pausas largas ni lengua azulada)?",
+      "prompt": "¿Está respirando con normalidad?, ¿Sin pausas largas ni lengua azulada?",
       "on_answer": [
         { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "breathing_ok", "value": true } } ], "next": "q_injury" },
         { "when": "no", "actions": [ { "do": "mark_emergency" }, { "do": "say", "params": { "text": "⚠️ Urgencia. Priorizá la vía aérea: cuello extendido y ambiente ventilado. Llevá a tu mascota al veterinario de inmediato." } }, { "do": "record_note", "params": { "field": "breathing_ok", "value": false } } ], "next": "q_injury" },
-        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Mirale el pecho: ¿sube y baja regularmente? Revisá la lengua: si está pálida o azulada es anormal. Decime si respira normal o no." } } ], "next": "q_injury" },
-        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_breathing" }
-      ]
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí" } } ], "next": "q_breathing" } ]
     },
     {
       "id": "q_injury",
       "type": "yes_no",
-      "prompt": "¿Se lastimó durante la crisis (golpes, cortes, sangrado)?",
+      "prompt": "¿Se lastimó durante la crisis?, ¿Esta con sangrado?",
       "on_answer": [
         { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "injury_present", "value": true } }, { "do": "say", "params": { "text": "Aplicá presión suave con gasa si sangra. No intentes abrirle la boca. Mantenelo en superficie segura." } } ], "next": "wait_end" },
         { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "injury_present", "value": false } } ], "next": "wait_end" },
-        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Hacé una revisión rápida: cabeza, boca, patas, flancos. ¿Ves sangrado o golpes?" } } ], "next": "wait_end" },
-        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_injury" }
-      ]
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí" } } ], "next": "q_injury" } ]
     },
     {
       "id": "wait_end",
       "type": "info",
-      "prompt": "Bien, ya respondiste lo más importante. Ahora lo clave es que sigas manteniendo la calma y simplemente decime ‘terminó’ cuando el episodio cese.",
+      "prompt": "Bien, ya respondiste lo más importante. Ahora lo clave es que sigas manteniendo la calma y simplemente decime ‘terminó’ cuando el episodio acabe.",
       "actions": [],
       "next": "on_seizure_end"
     },
@@ -128,4 +131,3 @@
     }
   ]
 }
-

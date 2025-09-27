@@ -208,7 +208,7 @@ export const progressSeizureSession = functions.https.onCall(async (data, contex
   if (!context.auth) throw new functions.https.HttpsError('unauthenticated','Auth required');
   const userId = context.auth.uid;
   const sessionId = data.sessionId as string;
-  const answer = data.answer as string | undefined; // yes/no/unknown
+  const answer = data.answer as string | undefined; // yes/no (other inputs will map to 'other')
   const event = data.event as string | undefined; // user_confirms_seizure_stopped
   const timerSec = data.elapsedSec as number | undefined; // optional client reported
 
@@ -241,7 +241,7 @@ export const progressSeizureSession = functions.https.onCall(async (data, contex
     const node = nodeMap[rt.currentNodeId];
     if (node && node.type === 'yes_no' && answer) {
       const yesNo = node as YesNoNode;
-      const norm = normalizeAnswer(answer);
+      const norm = normalizeAnswer(answer); // only 'yes','no','other'
       const route = yesNo.on_answer.find(r => r.when === norm) || yesNo.on_answer.find(r=> r.when === 'other');
       if (route) {
         executeActions(route.actions, rt);
@@ -397,10 +397,17 @@ export const finalizeSeizureSession = functions.https.onCall(async (data, contex
 });
 
 function normalizeAnswer(a: string): string {
-  const v = a.toLowerCase();
-  if (['si','sí','yes','y','s'].includes(v)) return 'yes';
-  if (['no','n'].includes(v)) return 'no';
-  if (['unknown','nose','no se','no sé','ns'].includes(v)) return 'unknown';
+  if (a == null) return 'other';
+  if (typeof (a as any) === 'boolean') return (a as any) ? 'yes' : 'no';
+  let v = String(a).trim().toLowerCase();
+  v = v.replace(/[¡!?.;,]+$/g, '').trim();
+  v = v.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  v = v.replace(/\s+/g, ' ');
+  // YES synonyms
+  if (['si','yes','y','s','claro','affirmative','afirmativo','correcto','ok','okay'].includes(v)) return 'yes';
+  // NO synonyms
+  if (['no','n','nop','nope','negativo','ninguno','nah'].includes(v)) return 'no';
+  // Anything else (including 'nose','no se','ns','tal vez', etc.) becomes 'other'
   return 'other';
 }
 

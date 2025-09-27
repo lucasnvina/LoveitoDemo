@@ -18,17 +18,42 @@ class FlowEngine(
     fun getVar(key: String): Any? = state.vars[key]
     fun setAppContext(key: String, value: Any?) { state.appContext[key] = value }
     fun getCurrentNodeId(): String = state.currentNodeId
+    fun getDefaults(): DefaultsConfig? = state.definition.defaults
 
     fun tickTimer(seconds: Long) { state.elapsedSec = seconds; processEventHooks("timer_tick") }
+
+    fun enqueueSay(text: String) { if (text.isNotBlank()) state.sayBuffer += text }
 
     fun answerYesNo(answerRaw: String) {
         if (state.finished) return
         val node = currentNode()
         require(node is Node.YesNoNode) { "Nodo actual no es yes_no" }
         val answer = normalizeAnswer(answerRaw)
+        val defaults = state.definition.defaults
+        if (answer == "other") {
+            // Intentar ruta explícita 'other'
+            val explicit = node.onAnswer.firstOrNull { it.predicate == "other" }
+            if (explicit != null) {
+                executeActions(explicit.actions)
+                goTo(explicit.next)
+                return
+            }
+            // Usar defaults si existen
+            val defMsg = defaults?.yesNo?.other
+            if (defMsg != null) {
+                enqueueSay(defMsg)
+                // Quedarse en mismo nodo para re-preguntar
+                return
+            }
+            // Si no hay ruta ni default -> error explícito (debería haberlo prevenido el validator)
+            error("Ruta 'other' faltante en nodo ${node.id} y no hay defaults.yes_no.other")
+        }
         val route = node.onAnswer.firstOrNull { it.predicate == answer }
-            ?: node.onAnswer.firstOrNull { it.predicate == "other" }
-            ?: error("Ruta 'other' faltante en nodo ${node.id}")
+            ?: node.onAnswer.firstOrNull { it.predicate == "other" } // fallback si la clasificación cayó a valor inesperado
+            ?: run {
+                val defMsg = defaults?.yesNo?.other
+                if (defMsg != null) { enqueueSay(defMsg); return } else error("Ruta 'other' faltante en nodo ${node.id}")
+            }
         executeActions(route.actions)
         goTo(route.next)
     }
@@ -60,10 +85,9 @@ class FlowEngine(
             if (allTrue) {
                 executeActions(hook.actions)
                 if (hook.interrupt) {
-                    // Si redirect cambió el nodo y es info/action/branch evaluarlo
                     val node = currentNode()
                     when (node) {
-                        is Node.InfoNode, is Node.ActionNode, is Node.BranchNode -> proceedIfInfoOrAction()
+                        is Node.ActionNode, is Node.BranchNode -> proceedIfInfoOrAction()
                         else -> {}
                     }
                     break
@@ -82,7 +106,12 @@ class FlowEngine(
                     state.finished = true
                 } else {
                     state.currentNodeId = cond.next
-                    proceedIfInfoOrAction()
+                    val node = currentNode()
+                    // Igual que en goTo: no auto-skip de InfoNode
+                    when (node) {
+                        is Node.ActionNode, is Node.BranchNode -> proceedIfInfoOrAction()
+                        else -> {}
+                    }
                 }
                 return
             }
@@ -94,9 +123,10 @@ class FlowEngine(
         if (next == null) { state.finished = true; return }
         state.currentNodeId = next
         val node = currentNode()
+        // Ya no auto-avanzamos InfoNode: dejamos que la capa de voz lo lea y luego llame a proceedIfInfoOrAction()
         when (node) {
-            is Node.InfoNode, is Node.ActionNode, is Node.BranchNode -> proceedIfInfoOrAction()
-            else -> {}
+            is Node.ActionNode, is Node.BranchNode -> proceedIfInfoOrAction()
+            else -> { /* mantener en InfoNode / YesNo / Event hasta que motor de voz actúe */ }
         }
     }
 
@@ -108,7 +138,10 @@ class FlowEngine(
                 "record_note" -> recordNote(act)
                 "mark_emergency" -> markFlag("ROJO")
                 "mark_warning" -> markFlag("AMARILLO")
-                "say" -> { /* UI/TTS */ }
+                "say" -> {
+                    val text = (act.params?.get("text") as? String)?.takeIf { it.isNotBlank() }
+                    if (text != null) state.sayBuffer += text
+                }
                 "redirect" -> {
                     val nodeId = act.params?.get("node_id") as? String
                     if (!nodeId.isNullOrBlank()) state.currentNodeId = nodeId
@@ -142,10 +175,15 @@ class FlowEngine(
 
     private fun normalizeAnswer(a: String): String = when (a.lowercase()) {
         "si", "sí", "yes" -> "yes"
-        "no" -> "no"
-        "ns", "nose", "no se", "no sé", "unknown" -> "unknown"
+        // Tratar variantes de 'no' y expansiones frecuentes de ASR como 'nose' / 'no se' / 'no sé' como NO
+        "no", "nose", "no se", "no sé", "negativo" -> "no"
+        // 'ns' (no sé abreviado) lo dejamos como 'other' para forzar aclaración
+        // Cualquier otra cosa cae en 'other'
         else -> "other"
     }
+
+    fun pollSayMessage(): String? = if (state.sayBuffer.isNotEmpty()) state.sayBuffer.removeAt(0) else null
+    fun hasPendingSay(): Boolean = state.sayBuffer.isNotEmpty()
 
     companion object {
         fun fromDefinition(def: SeizureAssistantDefinition): FlowEngine {

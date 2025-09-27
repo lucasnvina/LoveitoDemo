@@ -30,6 +30,11 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.os.Handler
+import android.os.Looper
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.view.animation.LinearInterpolator
 
 class PetDetailsFragment : Fragment() {
 
@@ -102,6 +107,14 @@ class PetDetailsFragment : Fragment() {
 
     private lateinit var requestAudioPermissionLauncher: ActivityResultLauncher<String>
 
+    private var assistantIndicator: View? = null
+    private var assistantTimer: TextView? = null
+    private var assistantPulse: View? = null
+    private var assistantSessionStartMs: Long? = null
+    private val assistantHandler = Handler(Looper.getMainLooper())
+    private var assistantUpdateRunnable: Runnable? = null
+    private var pulseAnimator: ObjectAnimator? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         petId = arguments?.getString("petId")
@@ -140,6 +153,9 @@ class PetDetailsFragment : Fragment() {
         sectionLastCrisis = view.findViewById(R.id.sectionLastCrisis)
         sectionAvgTime = view.findViewById(R.id.sectionAvgTime)
         logo = view.findViewById(R.id.ivLogoLoveitoDog)
+        assistantIndicator = view.findViewById(R.id.assistantIndicator)
+        assistantTimer = view.findViewById(R.id.assistantTimer)
+        assistantPulse = view.findViewById(R.id.assistantPulse)
 
         if (petId == null) {
             Toast.makeText(requireContext(), "Falta petId", Toast.LENGTH_SHORT).show()
@@ -170,31 +186,44 @@ class PetDetailsFragment : Fragment() {
                 requestAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
                 return@setOnClickListener
             }
-            Toast.makeText(requireContext(), "Iniciando asistente de voz...", Toast.LENGTH_SHORT).show()
             val ctx = requireActivity()
-            voiceSeizureAssistant = VoiceSeizureAssistant(
-                activity = ctx,
-                petId = id,
-                onFinish = { triageResult ->
-                    repo.createTestCrisisWithTriage(id, triageResult,
-                        onSuccess = {
-                            Toast.makeText(requireContext(), "Crisis registrada", Toast.LENGTH_SHORT).show()
-                            viewModel.invalidateCrises()
-                            viewModel.loadCrises(force = true)
-                            logo?.postDelayed({ logo?.isEnabled = true }, 600)
-                            voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
-                        },
-                        onError = { e ->
-                            Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
-                            logo?.isEnabled = true
-                            voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
-                        }
-                    )
-                }
-                // onFallback = { assistant -> /* Podés abrir UI manual si querés */ }
-            )
-            logo?.isEnabled = false
-            voiceSeizureAssistant?.start()
+            val currentPetSex = pet?.sex
+            val startAssistant: (String?) -> Unit = { uname ->
+                Toast.makeText(requireContext(), "Iniciando asistente de voz...", Toast.LENGTH_SHORT).show()
+                voiceSeizureAssistant = VoiceSeizureAssistant(
+                    activity = ctx,
+                    onFinish = { triageResult ->
+                        repo.createTestCrisisWithTriage(id, triageResult,
+                            onSuccess = {
+                                Toast.makeText(requireContext(), "Crisis registrada", Toast.LENGTH_SHORT).show()
+                                viewModel.invalidateCrises(); viewModel.loadCrises(force = true)
+                                logo?.postDelayed({ logo?.isEnabled = true }, 600)
+                                hideAssistantIndicator()
+                                voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
+                            },
+                            onError = { e ->
+                                Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
+                                logo?.isEnabled = true
+                                hideAssistantIndicator()
+                                voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
+                            }
+                        )
+                    },
+                    userName = uname,
+                    userSex = null,
+                    petSex = currentPetSex
+                )
+                logo?.isEnabled = false
+                showAssistantIndicator()
+                voiceSeizureAssistant?.start()
+            }
+            val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+            if (uid != null) {
+                com.google.firebase.firestore.FirebaseFirestore.getInstance().collection("users").document(uid)
+                    .get()
+                    .addOnSuccessListener { doc -> startAssistant(doc.getString("firstName")) }
+                    .addOnFailureListener { startAssistant(null) }
+            } else startAssistant(null)
         }
 
         parentFragmentManager.setFragmentResultListener("petUpdated", this) { _, bundle ->
@@ -334,8 +363,53 @@ class PetDetailsFragment : Fragment() {
         return years
     }
 
+    private fun showAssistantIndicator() {
+        if (assistantIndicator == null) return
+        assistantSessionStartMs = System.currentTimeMillis()
+        assistantIndicator?.visibility = View.VISIBLE
+        assistantTimer?.text = "Asistente activo · 00:00"
+        startPulse()
+        startAssistantTimerLoop()
+    }
+
+    private fun hideAssistantIndicator() {
+        assistantIndicator?.visibility = View.GONE
+        assistantUpdateRunnable?.let { assistantHandler.removeCallbacks(it) }
+        assistantUpdateRunnable = null
+        pulseAnimator?.cancel(); pulseAnimator = null
+    }
+
+    private fun startPulse() {
+        val v = assistantPulse ?: return
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 1.4f, 1f)
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 1.4f, 1f)
+        val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0.3f, 1f)
+        pulseAnimator = ObjectAnimator.ofPropertyValuesHolder(v, scaleX, scaleY, alpha).apply {
+            duration = 1600
+            interpolator = LinearInterpolator()
+            repeatCount = ObjectAnimator.INFINITE
+            start()
+        }
+    }
+
+    private fun startAssistantTimerLoop() {
+        assistantUpdateRunnable?.let { assistantHandler.removeCallbacks(it) }
+        assistantUpdateRunnable = object : Runnable {
+            override fun run() {
+                val start = assistantSessionStartMs ?: return
+                val elapsed = ((System.currentTimeMillis() - start) / 1000).coerceAtLeast(0)
+                val m = elapsed / 60
+                val s = elapsed % 60
+                assistantTimer?.text = String.format(Locale.getDefault(), "Asistente activo · %02d:%02d", m, s)
+                assistantHandler.postDelayed(this, 1000)
+            }
+        }
+        assistantHandler.postDelayed(assistantUpdateRunnable!!, 1000)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        hideAssistantIndicator()
         voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
     }
 

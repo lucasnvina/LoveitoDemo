@@ -10,10 +10,32 @@ data class SeizureAssistantDefinition(
     val globals: GlobalsBlock?,
     @SerializedName("actions_catalog") val actionsCatalog: Map<String, ActionCatalogEntry>?,
     @SerializedName("event_hooks") val eventHooks: List<EventHook>?,
+    // NUEVO: bloque de defaults opcional
+    val defaults: DefaultsConfig? = null,
     val nodes: List<Node>
 ) {
     fun nodeMap(): Map<String, Node> = nodes.associateBy { it.id }
 }
+
+// --- Defaults ---
+// Estructura: {
+//   "defaults": { "yes_no": { "other": "...", "timeout": "...", "silence": "..." }, "event": { "timeout": "..." } }
+// }
+
+data class DefaultsConfig(
+    @SerializedName("yes_no") val yesNo: YesNoDefaults? = null,
+    val event: EventDefaults? = null
+)
+
+data class YesNoDefaults(
+    val other: String? = null,
+    val timeout: String? = null,
+    val silence: String? = null
+)
+
+data class EventDefaults(
+    val timeout: String? = null
+)
 
 data class GlobalsBlock(
     val vars: MutableMap<String, Any?> = mutableMapOf()
@@ -115,4 +137,6 @@ class FlowRuntimeState(
     var currentNodeId: String = definition.startNode
     var elapsedSec: Long = 0L
     var finished: Boolean = false
+    // Buffer de mensajes de acciones 'say' pendientes de pronunciar
+    val sayBuffer: MutableList<String> = mutableListOf()
 }

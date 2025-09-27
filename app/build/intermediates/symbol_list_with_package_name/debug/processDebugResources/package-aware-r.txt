@@ -3621,6 +3621,7 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable bg_add_circle
+drawable bg_assistant_indicator
 drawable bg_fab_add_plain
 drawable bg_med_times
 drawable bg_pet_add_item
@@ -3786,6 +3787,7 @@ drawable pet_photo_border
 drawable pill_button
 drawable pill_edittext
 drawable profile_photo_border
+drawable shape_pulse_dot
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3882,6 +3884,9 @@ id antiClockwise
 id anticipate
 id arc
 id asConfigured
+id assistantIndicator
+id assistantPulse
+id assistantTimer
 id async
 id auto
 id autoComplete
@@ -4720,6 +4725,8 @@ string androidx_credentials_TYPE_PUBLIC_KEY_CREDENTIAL
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string assistant_active_desc
+string assistant_pulse_desc
 string auth_email
 string auth_forgot_password
 string auth_password

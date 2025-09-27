@@ -26,6 +26,7 @@ color text_primary
 color text_secondary
 dimen field_input_height
 drawable bg_add_circle
+drawable bg_assistant_indicator
 drawable bg_fab_add_plain
 drawable bg_med_times
 drawable bg_pet_add_item
@@ -60,6 +61,7 @@ drawable pet_photo_border
 drawable pill_button
 drawable pill_edittext
 drawable profile_photo_border
+drawable shape_pulse_dot
 drawable user_photo_border
 font nunito_light
 font nunito_semibold
@@ -67,6 +69,9 @@ id actProSpecialty
 id actUnit
 id actvNeutered
 id actvSex
+id assistantIndicator
+id assistantPulse
+id assistantTimer
 id btnAddTime
 id btnCancel
 id btnCancelPro
@@ -220,6 +225,8 @@ mipmap ic_launcher_round
 string add_label
 string add_symbol
 string app_name
+string assistant_active_desc
+string assistant_pulse_desc
 string auth_email
 string auth_forgot_password
 string auth_password
