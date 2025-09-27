@@ -1,6 +1,10 @@
 package com.loveito.demo.pets
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +12,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -88,9 +96,22 @@ class PetDetailsFragment : Fragment() {
         }
     }
 
+    private var voiceSeizureAssistant: VoiceSeizureAssistant? = null
+
+    private val RECORD_AUDIO_REQUEST_CODE = 1001
+
+    private lateinit var requestAudioPermissionLauncher: ActivityResultLauncher<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         petId = arguments?.getString("petId")
+        requestAudioPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                logo?.performClick()
+            } else {
+                Toast.makeText(requireContext(), "Permiso de micrófono denegado", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -141,7 +162,40 @@ class PetDetailsFragment : Fragment() {
         // sectionAvgTime: do nothing on tap (no navigation)
         sectionAvgTime.setOnClickListener(null)
         sectionCare.setOnClickListener { openCare() }
-        logo?.setOnClickListener { quickRegisterCrisis() }
+        logo?.setOnClickListener {
+            val id = petId ?: return@setOnClickListener
+            if (voiceSeizureAssistant != null) return@setOnClickListener
+            val hasPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
+            if (!hasPermission) {
+                requestAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                return@setOnClickListener
+            }
+            Toast.makeText(requireContext(), "Iniciando asistente de voz...", Toast.LENGTH_SHORT).show()
+            val ctx = requireActivity()
+            voiceSeizureAssistant = VoiceSeizureAssistant(
+                activity = ctx,
+                petId = id,
+                onFinish = { triageResult ->
+                    repo.createTestCrisisWithTriage(id, triageResult,
+                        onSuccess = {
+                            Toast.makeText(requireContext(), "Crisis registrada", Toast.LENGTH_SHORT).show()
+                            viewModel.invalidateCrises()
+                            viewModel.loadCrises(force = true)
+                            logo?.postDelayed({ logo?.isEnabled = true }, 600)
+                            voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
+                        },
+                        onError = { e ->
+                            Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show()
+                            logo?.isEnabled = true
+                            voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
+                        }
+                    )
+                }
+                // onFallback = { assistant -> /* Podés abrir UI manual si querés */ }
+            )
+            logo?.isEnabled = false
+            voiceSeizureAssistant?.start()
+        }
 
         parentFragmentManager.setFragmentResultListener("petUpdated", this) { _, bundle ->
             if (bundle.getString("petId") == petId) {
@@ -280,20 +334,9 @@ class PetDetailsFragment : Fragment() {
         return years
     }
 
-    private fun quickRegisterCrisis() {
-        val id = petId ?: return
-        val logoView = logo ?: return
-        logoView.isEnabled = false
-        val triage = TriageEngine.randomResult(requireContext())
-        repo.createTestCrisisWithTriage(id, triage,
-            onSuccess = {
-                Toast.makeText(requireContext(), "Crisis registrada", Toast.LENGTH_SHORT).show()
-                viewModel.invalidateCrises()
-                viewModel.loadCrises(force = true)
-                logoView.postDelayed({ logoView.isEnabled = true }, 600)
-            },
-            onError = { e -> Toast.makeText(requireContext(), getString(R.string.error, e.localizedMessage), Toast.LENGTH_SHORT).show(); logoView.isEnabled = true }
-        )
+    override fun onDestroyView() {
+        super.onDestroyView()
+        voiceSeizureAssistant?.shutdown(); voiceSeizureAssistant = null
     }
 
     // --- Compartir PDF (adaptado del fragment original) ---

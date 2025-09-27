@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:26:9-34:20
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:30:9-38:20
 	android:grantUriPermissions
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:30:13-47
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:34:13-47
 	android:authorities
 		INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:28:13-64
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:32:13-64
 	android:exported
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:29:13-37
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:33:13-37
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:27:13-62
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:31:13-62
 manifest
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-38:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-38:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-38:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-38:12
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
 MERGED from [androidx.navigation:navigation-runtime-android:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/0b232754f2eb354ec73c0676c4cac3b6/transformed/navigation-runtime-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-android:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/264f5376039e2e7cacfc4be5d4afed02/transformed/navigation-common-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-fragment:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/2d366ec4e44a9810844bac09dd17f0ab/transformed/navigation-fragment-2.9.3/AndroidManifest.xml:17:1-22:12
@@ -30,11 +30,12 @@ MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/
 MERGED from [androidx.recyclerview:recyclerview:1.3.2] /Users/lucasvina/.gradle/caches/8.13/transforms/c43f2e35ebe32678294f2067c758317c/transformed/recyclerview-1.3.2/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /Users/lucasvina/.gradle/caches/8.13/transforms/c6428d644713cbee9e372628c1317fb7/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:2:1-26:12
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:15:1-39:12
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/6b7a92d03aa004a15706c90f474ce888/transformed/credentials-1.2.0-rc01/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/f2ee0c9dfc6d66b8648c27379a9af3bf/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:17:1-40:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/lucasvina/.gradle/caches/8.13/transforms/dbe399640d336612facdfc3fce50dd4c/transformed/play-services-auth-api-phone-18.0.2/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:15:1-39:12
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/449c12115261f65a16316161043415c8/transformed/integrity-1.3.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/42b79003086ece3571c27670adec65b5/transformed/firebase-auth-interop-20.0.0/AndroidManifest.xml:2:1-10:12
@@ -45,6 +46,8 @@ MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] /Users/lucasv
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/2fade0c45b4037d1f5434c50151b75f7/transformed/play-services-fido-20.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/3ec1a91e784478c124cd31d3fa100b70/transformed/play-services-auth-base-18.0.4/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d0b025cd00ec7bbc0157580dad7e4077/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.transition:transition:1.5.1] /Users/lucasvina/.gradle/caches/8.13/transforms/264572848ae87e7ab0d1de94876014c1/transformed/transition-1.5.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d840f3c78700b70c08bd980a39d98292/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
@@ -59,6 +62,8 @@ MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/lucasvina/.gradle/caches
 MERGED from [androidx.customview:customview:1.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/3aed9eb009755c1eac7a69d0d356aa66/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity-ktx:1.8.1] /Users/lucasvina/.gradle/caches/8.13/transforms/f0dbdff2d1fd94152463386ce2932ccc/transformed/activity-ktx-1.8.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity:1.8.1] /Users/lucasvina/.gradle/caches/8.13/transforms/b9e41172076efd3b1b76ddb713c2fcf3/transformed/activity-1.8.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ca57f9475a86a73f5448128b63e8981f/transformed/play-services-stats-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/171b8907000c8858efa9793bacfdb5f6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/7cb22bbc5221a5c46721eb7d2416abf2/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4d116b8c50478500c994a84b829fa9fb/transformed/window-1.0.0/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.core:core:1.17.0] /Users/lucasvina/.gradle/caches/8.13/transforms/b0392afceddc912aab6911d6f24d6fa4/transformed/core-1.17.0/AndroidManifest.xml:17:1-30:12
@@ -77,6 +82,9 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.9.3] /Users/lucasv
 MERGED from [androidx.datastore:datastore-core-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/d6843b5b4228784bd96fc81ddd3b2a83/transformed/datastore-core-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.datastore:datastore-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/0b8ca9dad1de8b2322f7c9ca5d24a5c0/transformed/datastore-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/4c51c1035d7a43e354aad3f05c9510ea/transformed/datastore-preferences-release/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/15b0d3b132e01fe247196f3d7d93efa2/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:15:1-19:12
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1a9b8aa15e768017a9013405d87ff633/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34881c85a97ad1d5dece3d82adf7e77b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.fragment:fragment:1.8.9] /Users/lucasvina/.gradle/caches/8.13/transforms/f47b5193127622e1e49fb2302df8d443/transformed/fragment-1.8.9/AndroidManifest.xml:2:1-7:12
@@ -99,6 +107,8 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lucasvina/.gradle/ca
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c1347a2b73f69d38e4e408bc269e0e97/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c7a8c19be488ebd1c3123c743dbf0e8f/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d1290b0a749403b606ee34c6e0b18a7e/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.github.bumptech.glide:disklrucache:5.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/2b70069cdf34f75ba37218322c37a143/transformed/disklrucache-5.0.4/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/05a8ee35d9cef9a61f29083f895dd13e/transformed/protolite-well-known-types-18.0.1/AndroidManifest.xml:2:1-7:12
@@ -111,9 +121,53 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/lucasvina/.gradle
 		INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:4:5-70
+	android:name
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:4:22-68
+uses-permission#android.permission.INTERNET
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:5:5-66
+MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:25:5-67
+MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:25:5-67
+MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:9:5-67
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:9:5-67
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:7:5-67
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:8:5-67
+	android:name
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:6:5-78
+MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:8:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:8:5-79
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:7:5-79
+MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
+MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:6:22-76
 application
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:4:5-36:19
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:4:5-36:19
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-40:19
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-40:19
 MERGED from [com.google.android.material:material:1.13.0] /Users/lucasvina/.gradle/caches/8.13/transforms/afd5d1f0d4ab858c49ee6da8295fb0a4/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] /Users/lucasvina/.gradle/caches/8.13/transforms/afd5d1f0d4ab858c49ee6da8295fb0a4/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/7a3864749a0c4654ebebff0bad4f2a48/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
@@ -122,12 +176,14 @@ MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/
 MERGED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:13:5-24:19
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:26:5-37:19
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:26:5-37:19
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/f2ee0c9dfc6d66b8648c27379a9af3bf/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:23:5-42:19
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/f2ee0c9dfc6d66b8648c27379a9af3bf/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:23:5-42:19
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:26:5-37:19
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:26:5-37:19
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/449c12115261f65a16316161043415c8/transformed/integrity-1.3.0/AndroidManifest.xml:5:5-6:19
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/449c12115261f65a16316161043415c8/transformed/integrity-1.3.0/AndroidManifest.xml:5:5-6:19
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/42b79003086ece3571c27670adec65b5/transformed/firebase-auth-interop-20.0.0/AndroidManifest.xml:7:5-8:19
@@ -142,14 +198,22 @@ MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/lucasvina/
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/2fade0c45b4037d1f5434c50151b75f7/transformed/play-services-fido-20.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c3385a9268e7a36b6bc07bf4f421b986/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c3385a9268e7a36b6bc07bf4f421b986/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ca57f9475a86a73f5448128b63e8981f/transformed/play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ca57f9475a86a73f5448128b63e8981f/transformed/play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [androidx.window:window:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4d116b8c50478500c994a84b829fa9fb/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4d116b8c50478500c994a84b829fa9fb/transformed/window-1.0.0/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.core:core:1.17.0] /Users/lucasvina/.gradle/caches/8.13/transforms/b0392afceddc912aab6911d6f24d6fa4/transformed/core-1.17.0/AndroidManifest.xml:28:5-89
 MERGED from [androidx.core:core:1.17.0] /Users/lucasvina/.gradle/caches/8.13/transforms/b0392afceddc912aab6911d6f24d6fa4/transformed/core-1.17.0/AndroidManifest.xml:28:5-89
 MERGED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/9150a39e732f8cadb1cb766f5887fa02/transformed/lifecycle-process-2.9.3/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/9150a39e732f8cadb1cb766f5887fa02/transformed/lifecycle-process-2.9.3/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:11:5-22:19
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1a9b8aa15e768017a9013405d87ff633/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1a9b8aa15e768017a9013405d87ff633/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34881c85a97ad1d5dece3d82adf7e77b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
@@ -167,45 +231,45 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/lucasvina/.gradle
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.17.0] /Users/lucasvina/.gradle/caches/8.13/transforms/b0392afceddc912aab6911d6f24d6fa4/transformed/core-1.17.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:7:9-35
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:11:9-35
 	android:label
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:6:9-32
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:10:9-32
 	android:roundIcon
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:9:9-54
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:13:9-54
 	android:icon
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:9-43
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:5:9-35
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:9:9-35
 	android:theme
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:10:9-45
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:14:9-45
 activity#com.loveito.demo.SplashActivity
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:12:9-19:20
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:16:9-23:20
 	android:exported
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:14:13-36
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:18:13-36
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:13:13-43
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:17:13-43
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:15:13-18:29
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:19:13-22:29
 action#android.intent.action.MAIN
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:16:17-69
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:20:17-69
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:16:25-66
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:20:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:17:17-77
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:21:17-77
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:17:27-74
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:21:27-74
 activity#com.loveito.demo.MainActivity
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:21:9-23:39
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:25:9-27:39
 	android:exported
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:23:13-36
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:27:13-36
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:22:13-41
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:26:13-41
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:31:13-33:54
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:35:13-37:54
 	android:resource
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:33:17-51
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:37:17-51
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:32:17-67
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:36:17-67
 uses-sdk
 INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
@@ -240,6 +304,10 @@ MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /Users/lucasvina/.grad
 MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] /Users/lucasvina/.gradle/caches/8.13/transforms/c6428d644713cbee9e372628c1317fb7/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:6:5-44
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:19:5-44
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/6b7a92d03aa004a15706c90f474ce888/transformed/credentials-1.2.0-rc01/AndroidManifest.xml:5:5-44
 MERGED from [androidx.credentials:credentials:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/6b7a92d03aa004a15706c90f474ce888/transformed/credentials-1.2.0-rc01/AndroidManifest.xml:5:5-44
 MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/f2ee0c9dfc6d66b8648c27379a9af3bf/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:21:5-44
@@ -248,8 +316,6 @@ MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/lucasvina/.gradle/caches/8.13/transforms/dbe399640d336612facdfc3fce50dd4c/transformed/play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] /Users/lucasvina/.gradle/caches/8.13/transforms/dbe399640d336612facdfc3fce50dd4c/transformed/play-services-auth-api-phone-18.0.2/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:19:5-44
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:19:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.play:integrity:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/449c12115261f65a16316161043415c8/transformed/integrity-1.3.0/AndroidManifest.xml:4:5-44
@@ -270,6 +336,10 @@ MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] /Users/lucas
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/3ec1a91e784478c124cd31d3fa100b70/transformed/play-services-auth-base-18.0.4/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d0b025cd00ec7bbc0157580dad7e4077/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d0b025cd00ec7bbc0157580dad7e4077/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.transition:transition:1.5.1] /Users/lucasvina/.gradle/caches/8.13/transforms/264572848ae87e7ab0d1de94876014c1/transformed/transition-1.5.1/AndroidManifest.xml:5:5-44
@@ -298,6 +368,10 @@ MERGED from [androidx.activity:activity-ktx:1.8.1] /Users/lucasvina/.gradle/cach
 MERGED from [androidx.activity:activity-ktx:1.8.1] /Users/lucasvina/.gradle/caches/8.13/transforms/f0dbdff2d1fd94152463386ce2932ccc/transformed/activity-ktx-1.8.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.activity:activity:1.8.1] /Users/lucasvina/.gradle/caches/8.13/transforms/b9e41172076efd3b1b76ddb713c2fcf3/transformed/activity-1.8.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.8.1] /Users/lucasvina/.gradle/caches/8.13/transforms/b9e41172076efd3b1b76ddb713c2fcf3/transformed/activity-1.8.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ca57f9475a86a73f5448128b63e8981f/transformed/play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ca57f9475a86a73f5448128b63e8981f/transformed/play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/171b8907000c8858efa9793bacfdb5f6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/171b8907000c8858efa9793bacfdb5f6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/7cb22bbc5221a5c46721eb7d2416abf2/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/7cb22bbc5221a5c46721eb7d2416abf2/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.window:window:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4d116b8c50478500c994a84b829fa9fb/transformed/window-1.0.0/AndroidManifest.xml:20:5-22:41
@@ -334,6 +408,12 @@ MERGED from [androidx.datastore:datastore-android:1.1.3] /Users/lucasvina/.gradl
 MERGED from [androidx.datastore:datastore-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/0b8ca9dad1de8b2322f7c9ca5d24a5c0/transformed/datastore-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/4c51c1035d7a43e354aad3f05c9510ea/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.datastore:datastore-preferences-android:1.1.3] /Users/lucasvina/.gradle/caches/8.13/transforms/4c51c1035d7a43e354aad3f05c9510ea/transformed/datastore-preferences-release/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/15b0d3b132e01fe247196f3d7d93efa2/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/15b0d3b132e01fe247196f3d7d93efa2/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1a9b8aa15e768017a9013405d87ff633/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1a9b8aa15e768017a9013405d87ff633/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34881c85a97ad1d5dece3d82adf7e77b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
@@ -378,6 +458,10 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c7a8c19be488ebd1c3123c743dbf0e8f/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c7a8c19be488ebd1c3123c743dbf0e8f/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d1290b0a749403b606ee34c6e0b18a7e/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d1290b0a749403b606ee34c6e0b18a7e/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:5:5-44
 MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:5:5-44
 MERGED from [com.github.bumptech.glide:disklrucache:5.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/2b70069cdf34f75ba37218322c37a143/transformed/disklrucache-5.0.4/AndroidManifest.xml:5:5-44
@@ -392,28 +476,6 @@ MERGED from [com.google.android.play:core-common:2.0.3] /Users/lucasvina/.gradle
 		INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:25:5-67
-MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:11:5-67
-MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:11:5-67
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:7:5-67
-MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:7:5-67
-	android:name
-		ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:25:22-64
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:26:5-79
-MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:8:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:8:5-79
-MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
-MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/transforms/0789124be5389af1d2aeacea775587da/transformed/grpc-android-1.62.2/AndroidManifest.xml:7:5-79
-	android:name
-		ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:26:22-76
 activity#com.google.firebase.auth.internal.GenericIdpActivity
 ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:29:9-46:20
 	android:excludeFromRecents
@@ -466,12 +528,18 @@ service#com.google.firebase.components.ComponentDiscoveryService
 ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:66:9-72:19
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:14:9-23:19
 MERGED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:14:9-23:19
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:12:9-21:19
 MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:27:9-36:19
 MERGED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:27:9-36:19
 MERGED from [com.google.firebase:firebase-common:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/6e96f8aaf52be6f0d24459dbe4a72f77/transformed/firebase-common-22.0.0/AndroidManifest.xml:30:9-38:19
 MERGED from [com.google.firebase:firebase-common:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/6e96f8aaf52be6f0d24459dbe4a72f77/transformed/firebase-common-22.0.0/AndroidManifest.xml:30:9-38:19
 MERGED from [com.google.firebase:firebase-appcheck:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/963c20c893c144d6b60c85cc2e32a245/transformed/firebase-appcheck-19.0.0/AndroidManifest.xml:22:9-31:19
 MERGED from [com.google.firebase:firebase-appcheck:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/963c20c893c144d6b60c85cc2e32a245/transformed/firebase-appcheck-19.0.0/AndroidManifest.xml:22:9-31:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:12:9-21:19
 	android:exported
 		ADDED from [com.google.firebase:firebase-auth:24.0.1] /Users/lucasvina/.gradle/caches/8.13/transforms/52ac3e062eea90039d2e62678a525b90/transformed/firebase-auth-24.0.1/AndroidManifest.xml:68:13-37
 	tools:targetApi
@@ -498,6 +566,30 @@ ADDED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gra
 		ADDED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:22:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-firestore:26.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34d419400ff65e4501e4c8e8cda72e5f/transformed/firebase-firestore-26.0.0/AndroidManifest.xml:21:17-111
+meta-data#com.google.firebase.components:com.google.firebase.functions.FirebaseFunctionsKtxRegistrar
+ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:16:17-122
+meta-data#com.google.firebase.components:com.google.firebase.functions.FunctionsRegistrar
+ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-functions:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/05a0f6f243f13f5642b31fb6564626c2/transformed/firebase-functions-22.0.0/AndroidManifest.xml:19:17-111
+meta-data#com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar
+ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:31:17-118
+meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
+ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:33:13-35:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:35:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:34:17-107
 service#androidx.credentials.playservices.CredentialProviderMetadataHolder
 ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/lucasvina/.gradle/caches/8.13/transforms/f2ee0c9dfc6d66b8648c27379a9af3bf/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:24:9-32:19
 	android:enabled
@@ -548,18 +640,6 @@ ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.
 		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
 	android:name
 		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-meta-data#com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar
-ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:30:13-32:85
-	android:value
-		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:32:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:31:17-118
-meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
-ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:33:13-35:85
-	android:value
-		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:35:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-storage:22.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/33edab56333ecdd45bb6b8505ffa3c05/transformed/firebase-storage-22.0.0/AndroidManifest.xml:34:17-107
 uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
 ADDED from [com.google.android.recaptcha:recaptcha:18.6.1] /Users/lucasvina/.gradle/caches/8.13/transforms/4bcf20db7384b28224df5624ba502e61/transformed/recaptcha-18.6.1/AndroidManifest.xml:9:5-98
 	android:name
@@ -602,6 +682,24 @@ ADDED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.
 		ADDED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:21:19-78
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:18.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/70f15f87440ec78ccd8e97a324670c2b/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:9:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:9:5-68
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:24:22-65
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:11:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/4aa1535afbe2226abf37c0a8efe8c687/transformed/play-services-cloud-messaging-16.0.0/AndroidManifest.xml:11:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/bf86afee73ad47f73342a1a001549f65/transformed/firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
 provider#androidx.startup.InitializationProvider
 ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c3385a9268e7a36b6bc07bf4f421b986/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
 MERGED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/9150a39e732f8cadb1cb766f5887fa02/transformed/lifecycle-process-2.9.3/AndroidManifest.xml:24:9-32:20
@@ -662,6 +760,18 @@ ADDED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle
 		ADDED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/9150a39e732f8cadb1cb766f5887fa02/transformed/lifecycle-process-2.9.3/AndroidManifest.xml:31:17-49
 	android:name
 		ADDED from [androidx.lifecycle:lifecycle-process:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/9150a39e732f8cadb1cb766f5887fa02/transformed/lifecycle-process-2.9.3/AndroidManifest.xml:30:17-78
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar
+ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:16:17-130
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d9cd4aea5c8896b30dcdca088520b289/transformed/firebase-installations-19.0.0/AndroidManifest.xml:19:17-127
 meta-data#com.google.android.gms.version
 ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/lucasvina/.gradle/caches/8.13/transforms/34881c85a97ad1d5dece3d82adf7e77b/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
 	android:value

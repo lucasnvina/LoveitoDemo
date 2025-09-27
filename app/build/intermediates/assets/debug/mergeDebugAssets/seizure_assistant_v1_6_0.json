@@ -1,0 +1,131 @@
+{
+  "version": "1.6.0",
+  "locale": "es-AR",
+  "start_node": "safety",
+  "globals": {
+    "vars": {
+      "started_at_epoch": null,
+      "duration_sec": 0,
+      "seizures_count_24h": 0,
+      "has_rescue_med_prescribed": null,
+      "rescue_med_admin": null,
+      "breathing_ok": null,
+      "injury_present": null,
+      "triage_level": null
+    }
+  },
+  "actions_catalog": {
+    "say": { "type": "voice", "params": { "text": "" } },
+    "start_timer": { "type": "system", "params": {} },
+    "stop_timer": { "type": "system", "params": {} },
+    "record_note": { "type": "capture", "params": { "field": "", "value": "" } },
+    "mark_emergency": { "type": "flag", "params": { "level": "red" } },
+    "mark_warning": { "type": "flag", "params": { "level": "amber" } },
+    "redirect": { "type": "control", "params": { "node_id": "" } }
+  },
+  "event_hooks": [
+    {
+      "id": "auto_status_check_3min",
+      "event": "timer_tick",
+      "interrupt": true,
+      "conditions": ["$timer.elapsed_sec >= 180"],
+      "actions": [
+        { "do": "mark_emergency" },
+        { "do": "stop_timer" },
+        { "do": "record_note", "params": { "field": "duration_sec", "value": "$timer.elapsed_sec" } },
+        { "do": "redirect", "params": { "node_id": "emergency_3min_end" } }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "safety",
+      "type": "info",
+      "prompt": "Hola %nombre_de_usuario%. {{m:Tranquilo|f:Tranquila}}, estoy con vos, es muy importante para la salud de tu mascota que mantengas la calma. {{mascota_m:Ponelo|mascota_f:Ponela}} en un lugar seguro y por nada del mundo pongas la mano en su boca. Mantenete cerca para que no se lastime pero no debés intervenir físicamente en el flujo de su crisis.",
+      "actions": [
+        { "do": "start_timer" },
+        { "do": "record_note", "params": { "field": "started_at_epoch", "value": "$now.epoch" } }
+      ],
+      "next": "q_has_rescue_med"
+    },
+    {
+      "id": "q_has_rescue_med",
+      "type": "yes_no",
+      "prompt": "¿Tenés medicación de rescate indicada por tu veterinario?",
+      "on_answer": [
+        { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "has_rescue_med_prescribed", "value": true } } ], "next": "q_rescue_admin" },
+        { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "has_rescue_med_prescribed", "value": false } }, { "do": "say", "params": { "text": "Para el futuro, pedile a tu veterinario medicación de rescate y mantenela accesible. Sigamos." } } ], "next": "q_breathing" },
+        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Podés responder sí, no o no sé. Si no estás seguro, decí no y seguimos." } } ], "next": "q_breathing" },
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Por favor respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_has_rescue_med" }
+      ]
+    },
+    {
+      "id": "q_rescue_admin",
+      "type": "yes_no",
+      "prompt": "¿Pudiste administrarla según indicación?",
+      "on_answer": [
+        { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "rescue_med_admin", "value": true } } ], "next": "q_breathing" },
+        { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "rescue_med_admin", "value": false } }, { "do": "say", "params": { "text": "Si es seguro para vos y está indicada por tu veterinario, administrala ahora. Si no es seguro, no fuerces. Sigamos." } } ], "next": "q_breathing" },
+        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Si tenés dudas, no fuerces la administración. Priorizá seguridad. Sigamos." } } ], "next": "q_breathing" },
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_rescue_admin" }
+      ]
+    },
+    {
+      "id": "q_breathing",
+      "type": "yes_no",
+      "prompt": "¿Está respirando con normalidad (sin pausas largas ni lengua azulada)?",
+      "on_answer": [
+        { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "breathing_ok", "value": true } } ], "next": "q_injury" },
+        { "when": "no", "actions": [ { "do": "mark_emergency" }, { "do": "say", "params": { "text": "⚠️ Urgencia. Priorizá la vía aérea: cuello extendido y ambiente ventilado. Llevá a tu mascota al veterinario de inmediato." } }, { "do": "record_note", "params": { "field": "breathing_ok", "value": false } } ], "next": "q_injury" },
+        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Mirale el pecho: ¿sube y baja regularmente? Revisá la lengua: si está pálida o azulada es anormal. Decime si respira normal o no." } } ], "next": "q_injury" },
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_breathing" }
+      ]
+    },
+    {
+      "id": "q_injury",
+      "type": "yes_no",
+      "prompt": "¿Se lastimó durante la crisis (golpes, cortes, sangrado)?",
+      "on_answer": [
+        { "when": "yes", "actions": [ { "do": "record_note", "params": { "field": "injury_present", "value": true } }, { "do": "say", "params": { "text": "Aplicá presión suave con gasa si sangra. No intentes abrirle la boca. Mantenelo en superficie segura." } } ], "next": "wait_end" },
+        { "when": "no", "actions": [ { "do": "record_note", "params": { "field": "injury_present", "value": false } } ], "next": "wait_end" },
+        { "when": "unknown", "actions": [ { "do": "say", "params": { "text": "Hacé una revisión rápida: cabeza, boca, patas, flancos. ¿Ves sangrado o golpes?" } } ], "next": "wait_end" },
+        { "when": "other", "actions": [ { "do": "say", "params": { "text": "No te entendí. Respondé sí, no o no sé. Probemos de nuevo." } } ], "next": "q_injury" }
+      ]
+    },
+    {
+      "id": "wait_end",
+      "type": "info",
+      "prompt": "Bien, ya respondiste lo más importante. Ahora lo clave es que sigas manteniendo la calma y simplemente decime ‘terminó’ cuando el episodio cese.",
+      "actions": [],
+      "next": "on_seizure_end"
+    },
+    {
+      "id": "on_seizure_end",
+      "type": "event",
+      "event": "user_confirms_seizure_stopped",
+      "actions": [ { "do": "stop_timer" }, { "do": "record_note", "params": { "field": "duration_sec", "value": "$timer.elapsed_sec" } } ],
+      "next": "final_triage"
+    },
+    {
+      "id": "emergency_3min_end",
+      "type": "action",
+      "prompt": "Fin inmediato por duración ≥ 3 minutos",
+      "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Urgencia super crítica. La crisis superó 3 minutos. Llevá a tu mascota al veterinario de inmediato. Cerramos el asistente para que puedas actuar ya." } } ],
+      "next": null
+    },
+    {
+      "id": "final_triage",
+      "type": "branch",
+      "conditions": [
+        { "when": "($vars.duration_sec >= 180)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. La crisis superó 3 minutos. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario de inmediato." } } ], "next": null },
+        { "when": "($vars.breathing_ok == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. Reportaste respiración anormal. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario ahora mismo." } } ], "next": null },
+        { "when": "($app.seizures_count_24h >= 2)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. Esta fue la segunda crisis en menos de 24 horas. Es crítico que {{mascota_m:lo|mascota_f:la}} lleves al veterinario." } } ], "next": null },
+        { "when": "($vars.injury_present == true)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "NARANJA" } }, { "do": "say", "params": { "text": "⚠️ Muy urgente. Informaste una lesión. Mantené presión suave si hay sangrado y consultá a tu veterinario a la brevedad." } } ], "next": null },
+        { "when": "($vars.has_rescue_med_prescribed == true && $vars.rescue_med_admin == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "⚠️ Urgente. No se administró la medicación de rescate indicada. Consultá con tu veterinario cómo proceder y practicá el uso fuera de la crisis." } } ], "next": null },
+        { "when": "($vars.breathing_ok == null)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "⚠️ Urgente. No pudimos confirmar si la respiración fue normal. Recomendamos control veterinario para seguridad." } } ], "next": null },
+        { "when": "else", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "VERDE" } }, { "do": "say", "params": { "text": "✅ No urgente. Registro guardado. Mantené observación cercana. Ante cualquier cambio o nuevo episodio, consultá a tu veterinario." } } ], "next": null }
+      ]
+    }
+  ]
+}
+

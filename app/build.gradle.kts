@@ -41,6 +41,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-functions")
 
     // AndroidX actualizado
     implementation("androidx.core:core-ktx:1.17.0")
@@ -64,4 +65,11 @@ dependencies {
     implementation("androidx.transition:transition:1.5.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
+
+    // JSON parsing para motor de flujo
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    // Test
+    testImplementation("junit:junit:4.13.2")
 }
