@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:30:9-38:20
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:31:9-39:20
 	android:grantUriPermissions
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:34:13-47
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:35:13-47
 	android:authorities
 		INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:32:13-64
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:33:13-64
 	android:exported
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:33:13-37
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:34:13-37
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:31:13-62
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:32:13-62
 manifest
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-42:12
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:2:1-43:12
 MERGED from [androidx.navigation:navigation-runtime-android:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/0b232754f2eb354ec73c0676c4cac3b6/transformed/navigation-runtime-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-android:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/264f5376039e2e7cacfc4be5d4afed02/transformed/navigation-common-release/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-fragment:2.9.3] /Users/lucasvina/.gradle/caches/8.13/transforms/2d366ec4e44a9810844bac09dd17f0ab/transformed/navigation-fragment-2.9.3/AndroidManifest.xml:17:1-22:12
@@ -166,8 +166,8 @@ MERGED from [io.grpc:grpc-android:1.62.2] /Users/lucasvina/.gradle/caches/8.13/t
 	android:name
 		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:6:22-76
 application
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-40:19
-INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-40:19
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-41:19
+INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:8:5-41:19
 MERGED from [com.google.android.material:material:1.13.0] /Users/lucasvina/.gradle/caches/8.13/transforms/afd5d1f0d4ab858c49ee6da8295fb0a4/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] /Users/lucasvina/.gradle/caches/8.13/transforms/afd5d1f0d4ab858c49ee6da8295fb0a4/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/7a3864749a0c4654ebebff0bad4f2a48/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
@@ -259,17 +259,19 @@ ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManif
 	android:name
 		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:21:27-74
 activity#com.loveito.demo.MainActivity
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:25:9-27:39
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:25:9-28:52
+	android:screenOrientation
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:28:13-49
 	android:exported
 		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:27:13-36
 	android:name
 		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:26:13-41
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:35:13-37:54
+ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:36:13-38:54
 	android:resource
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:37:17-51
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:38:17-51
 	android:name
-		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:36:17-67
+		ADDED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml:37:17-67
 uses-sdk
 INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/lucasvina/StudioProjects/LoveitoDemo/app/src/main/AndroidManifest.xml
