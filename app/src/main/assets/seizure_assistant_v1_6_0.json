@@ -42,10 +42,11 @@
       "other": "No te entendí",
       "timeout": "No te entendí",
       "silence": "No te entendí"
-    },
-    "event": {
-      "timeout": "No te entendí. Avisame diciendo 'terminó' cuando finalice la crisis."
     }
+  },
+  "reminders": {
+    "wait_end_repeat": "Sigo acá. Seguí manteniendo la calma y simplemente decime 'término' cuando el episodio acabe.",
+    "wait_end_repeat_interval_sec": 20
   },
   "nodes": [
     {
@@ -98,7 +99,7 @@
     {
       "id": "wait_end",
       "type": "info",
-      "prompt": "Bien, ya respondiste lo más importante. Ahora lo clave es que sigas manteniendo la calma y simplemente decime ‘terminó’ cuando el episodio acabe.",
+      "prompt": "Bien, ya respondiste lo más importante. Ahora lo clave es que sigas manteniendo la calma y simplemente decime ‘término’ cuando el episodio acabe.",
       "actions": [],
       "next": "on_seizure_end"
     },
@@ -120,13 +121,13 @@
       "id": "final_triage",
       "type": "branch",
       "conditions": [
-        { "when": "($vars.duration_sec >= 180)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. La crisis superó 3 minutos. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario de inmediato." } } ], "next": null },
-        { "when": "($vars.breathing_ok == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. Reportaste respiración anormal. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario ahora mismo." } } ], "next": null },
-        { "when": "($app.seizures_count_24h >= 2)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "⚠️ Crítico. Esta fue la segunda crisis en menos de 24 horas. Es crítico que {{mascota_m:lo|mascota_f:la}} lleves al veterinario." } } ], "next": null },
-        { "when": "($vars.injury_present == true)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "NARANJA" } }, { "do": "say", "params": { "text": "⚠️ Muy urgente. Informaste una lesión. Mantené presión suave si hay sangrado y consultá a tu veterinario a la brevedad." } } ], "next": null },
-        { "when": "($vars.has_rescue_med_prescribed == true && $vars.rescue_med_admin == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "⚠️ Urgente. No se administró la medicación de rescate indicada. Consultá con tu veterinario cómo proceder y practicá el uso fuera de la crisis." } } ], "next": null },
-        { "when": "($vars.breathing_ok == null)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "⚠️ Urgente. No pudimos confirmar si la respiración fue normal. Recomendamos control veterinario para seguridad." } } ], "next": null },
-        { "when": "else", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "VERDE" } }, { "do": "say", "params": { "text": "✅ No urgente. Registro guardado. Mantené observación cercana. Ante cualquier cambio o nuevo episodio, consultá a tu veterinario." } } ], "next": null }
+        { "when": "($vars.duration_sec >= 180)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "Esta crisis es crítica ya que la misma superó los 3 minutos. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario de inmediato." } } ], "next": null },
+        { "when": "($vars.breathing_ok == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "Esta crisis es crítica ya que reportaste respiración anormal. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario ahora mismo." } } ], "next": null },
+        { "when": "($app.seizures_count_24h >= 2)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "ROJO" } }, { "do": "say", "params": { "text": "Esta crisis es crítica ya que fue la segunda crisis en menos de 24 horas. {{mascota_m:Llevalo|mascota_f:Llevala}} al veterinario ahora mismo." } } ], "next": null },
+        { "when": "($vars.injury_present == true)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "NARANJA" } }, { "do": "say", "params": { "text": "Esta crisis es muy urgente ya que informaste una lesión. Mantené presión suave si hay sangrado y consultá a tu veterinario de forma inmediata." } } ], "next": null },
+        { "when": "($vars.has_rescue_med_prescribed == true && $vars.rescue_med_admin == false)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "Esta crisis es urgente pero moderada ya que no se administró la medicación de rescate indicada. Consultá con tu veterinario cómo proceder y practicá el uso fuera de la crisis." } } ], "next": null },
+        { "when": "($vars.breathing_ok == null)", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "AMARILLO" } }, { "do": "say", "params": { "text": "Esta crisis es urgente pero moderada ya que no pudimos confirmar del todo si la respiración fue normal. Recomiendo un control veterinario para seguridad." } } ], "next": null },
+        { "when": "else", "actions": [ { "do": "record_note", "params": { "field": "triage_level", "value": "VERDE" } }, { "do": "say", "params": { "text": "Esta crisis no es urgente. De todas formas, mantené observación cercana y consultá a tu veterinario." } } ], "next": null }
       ]
     }
   ]

@@ -78,6 +78,14 @@ class VoiceSeizureAssistant(
     // Added: tracking generation of recognition sessions and one-shot fallback suppression flag
     private var recognitionGeneration: Long = 0
     private var suppressFallbackMessagesOnce: Boolean = false
+    // Reminder logic for waiting at event node (on_seizure_end)
+    private var waitEventEnteredAt: Long? = null
+    private var waitReminderRunnable: Runnable? = null
+    // Removed hardcoded constants; now loaded from JSON with fallbacks
+    private var waitReminderIntervalMs: Long = 20_000L
+    private var waitReminderMessage: String = "Sigo acá. Seguí manteniendo la calma y simplemente decime 'terminó' cuando el episodio acabe."
+    private var incompleteTimeoutMessage: String = "No recibí respuesta. Finalizamos la sesión y guardamos como registro incompleto."
+
     private fun cancelAutoCommit() { autoCommitRunnable?.let { handler.removeCallbacks(it) }; autoCommitRunnable = null; autoCommitValue = null }
     private fun scheduleAutoCommit(value: String) {
         if (!listening) return
@@ -98,7 +106,7 @@ class VoiceSeizureAssistant(
         val prevNode = eng.getCurrentNodeId()
         log("ASR", "AUTO_COMMIT_SINGLE_WORD value='$value' answer='$ans'")
         eng.answerYesNo(ans)
-        if (eng.getCurrentNodeId() != prevNode) suppressFallbackMessagesOnce = true
+        if (eng.getCurrentNodeId() != prevNode) suppressFallbackMessagesOnce = true else scheduleWaitReminderIfNeeded()
         if (eng.isFinished()) { finalizeAndSpeakResult(); return }
         handler.postDelayed({ proceedVoice() }, MIN_INTER_NODE_DELAY_MS)
     }
@@ -213,18 +221,24 @@ class VoiceSeizureAssistant(
     private fun extractDefaults(raw: String) {
         try {
             val root = JSONObject(raw)
-            val defs = root.optJSONObject("defaults") ?: return
-            defs.optJSONObject("yes_no")?.let { obj ->
+            val defs = root.optJSONObject("defaults")
+            defs?.optJSONObject("yes_no")?.let { obj ->
                 listOf("other","timeout","silence").forEach { k ->
                     obj.optString(k)?.takeIf { it.isNotBlank() }?.let { yesNoDefaults[k] = it }
                 }
             }
-            defs.optJSONObject("event")?.let { obj ->
+            defs?.optJSONObject("event")?.let { obj ->
                 listOf("timeout").forEach { k ->
                     obj.optString(k)?.takeIf { it.isNotBlank() }?.let { eventDefaults[k] = it }
                 }
             }
-        } catch (_: Exception) { /* ignorar parse de defaults */ }
+            // Load reminders
+            root.optJSONObject("reminders")?.let { r ->
+                r.optString("wait_end_repeat")?.takeIf { it.isNotBlank() }?.let { waitReminderMessage = it }
+                r.optInt("wait_end_repeat_interval_sec").takeIf { it > 0 }?.let { waitReminderIntervalMs = it * 1000L }
+                r.optString("incomplete_timeout")?.takeIf { it.isNotBlank() }?.let { incompleteTimeoutMessage = it }
+            }
+        } catch (_: Exception) { /* ignore parse errors */ }
     }
 
     private fun preValidateJson(raw: String) {
@@ -330,6 +344,7 @@ class VoiceSeizureAssistant(
             }
             "event" -> {
                 // Ya se dio la instrucción en el nodo info previo (p.ej. wait_end). No repetir texto extra.
+                scheduleWaitReminderIfNeeded()
                 handler.postDelayed({ playBeep { startListeningEvent() } }, MIN_INTER_NODE_DELAY_MS)
             }
             "info" -> {
@@ -556,7 +571,7 @@ class VoiceSeizureAssistant(
             val prevNode = eng.getCurrentNodeId()
             log("ASR", "CLASSIFIED_TOKENS answer=$answer tokens='${normText.split(' ')}'")
             eng.answerYesNo(answer)
-            if (eng.getCurrentNodeId() != prevNode && (answer == "yes" || answer == "no")) suppressFallbackMessagesOnce = true
+            if (eng.getCurrentNodeId() != prevNode && (answer == "yes" || answer == "no")) suppressFallbackMessagesOnce = true else scheduleWaitReminderIfNeeded()
             if (eng.isFinished()) { finalizeAndSpeakResult(); return@listen }
             handler.postDelayed({ proceedVoice() }, MIN_INTER_NODE_DELAY_MS)
         }
@@ -564,20 +579,27 @@ class VoiceSeizureAssistant(
 
     private fun startListeningEvent() {
         if (listening) return
-        // Ya se indicó en el nodo info anterior cómo finalizar. Simplemente escuchar.
-        val basePrompt = "" // no hablar nada aquí
+        val eng = engine
+        val isSeizureEndEvent = eng != null && eng.currentNode().id == "on_seizure_end"
+        if (isSeizureEndEvent) scheduleWaitReminderIfNeeded()
+        // En el evento de fin de crisis no volvemos a decir la instrucción (ya la dijo wait_end)
+        val basePrompt = ""
         listening = true
-        scheduleNoAnswerTimeout("event", basePrompt)
+        // IMPORTANTE: No programar timeout de no respuesta para on_seizure_end (debe esperar indefinidamente hasta 'terminó' o 3min)
+        if (!isSeizureEndEvent) scheduleNoAnswerTimeout("event", basePrompt)
         listen { text ->
             cancelNoAnswerTimeout(); listening = false
-            val eng = engine ?: return@listen
+            val engInner = engine ?: return@listen
             val norm = normalize(text)
             if (finishWords.any { norm.contains(it) }) {
-                eng.triggerEvent("user_confirms_seizure_stopped"); noAnswerCycles = 0; handler.postDelayed({ proceedVoice() }, MIN_INTER_NODE_DELAY_MS)
+                engInner.triggerEvent("user_confirms_seizure_stopped"); noAnswerCycles = 0; cancelWaitReminders(); handler.postDelayed({ proceedVoice() }, MIN_INTER_NODE_DELAY_MS)
             } else {
-                val msg = eventDefaults["timeout"] ?: "No te entendí."
-                speak(formatPrompt(msg)) {
-                    handler.postDelayed({ playBeep { startListeningEvent() } }, 300)
+                if (isSeizureEndEvent) {
+                    // Ignorar entrada irrelevante: simplemente re-escuchar sin mensaje de error ni incremento de ciclos
+                    handler.postDelayed({ playBeep { startListeningEvent() } }, 250)
+                } else {
+                    val msg = eventDefaults["timeout"] ?: "No te entendí."
+                    speak(formatPrompt(msg)) { handler.postDelayed({ playBeep { startListeningEvent() } }, 300) }
                 }
             }
         }
@@ -653,6 +675,7 @@ class VoiceSeizureAssistant(
         fatalError = true
         val eng = engine
         if (eng != null && !eng.isFinished() && onFallback != null) {
+            cancelWaitReminders()
             try { speechRecognizer?.destroy() } catch (_: Exception) {}
             try { tts?.shutdown() } catch (_: Exception) {}
             speechRecognizer = null; tts = null
@@ -668,28 +691,24 @@ class VoiceSeizureAssistant(
     private fun finalizeAndSpeakResult() {
         if (shuttingDown.get()) return
         val eng = engine ?: return
-        // Si el flujo (JSON) ya seteó triage_level lo usamos; si no, aplicamos reglas fallback simplificadas
         var triage = (eng.getVar("triage_level") as? String)
         val duration = (eng.getVar("duration_sec") as? Number)?.toLong()
-        if (triage == null) {
-            triage = inferTriageByRules(eng)
-            android.util.Log.i(TAG, "[triage] Fallback inference applied (flow did not set triage_level). Inferred=$triage duration=${duration} breathing=${eng.getVar("breathing_ok")} injury=${eng.getVar("injury_present")}")
-        }
-        val phrase = when (triage) {
-            "ROJO" -> "Situación crítica. Recomendación: asistencia veterinaria inmediata."
-            "NARANJA" -> "Muy urgente. Vigila y acude a tu veterinario."
-            "AMARILLO" -> "Urgente. Revisión recomendada pronto."
-            "VERDE" -> "No urgente. Observa y registra cualquier cambio."
-            else -> "Flujo finalizado."
-        }
-        speak("Triage final: ${mapTriageToTitle(triage)}. $phrase") {
-            onFinish(mapOf(
-                "severity" to mapTriageToSeverity(triage),
-                "title" to mapTriageToTitle(triage),
-                "triage_level" to triage,
-                "duration_sec" to duration
-            ))
-            shutdown()
+        val hadTriageFromFlow = triage != null
+        if (triage == null) triage = inferTriageByRules(eng)
+        val resultMap = mapOf(
+            "severity" to mapTriageToSeverity(triage),
+            "title" to mapTriageToTitle(triage),
+            "triage_level" to triage,
+            "duration_sec" to duration
+        )
+        if (!hadTriageFromFlow) {
+            // Sólo en fallback (cuando el JSON no entregó un mensaje final). Emitimos una frase mínima.
+            speak("${mapTriageToTitle(triage)} finalizado.") {
+                onFinish(resultMap); shutdown()
+            }
+        } else {
+            // El JSON ya habló el mensaje final (acciones 'say' en final_triage o emergencia). No repetir nada.
+            onFinish(resultMap); shutdown()
         }
     }
 
@@ -729,6 +748,9 @@ class VoiceSeizureAssistant(
                 val elapsedSec = ((System.currentTimeMillis()-startedAtMs)/1000).coerceAtLeast(0)
                 eng.tickTimer(elapsedSec)
                 if (eng.isFinished()) { finalizeAndSpeakResult(); break }
+                // If node changed away from event, cancel reminders
+                val node = eng.currentNode()
+                if (node.type != "event" || node.id != "on_seizure_end") cancelWaitReminders() else scheduleWaitReminderIfNeeded()
                 kotlinx.coroutines.delay(1000)
             }
         }
@@ -738,6 +760,7 @@ class VoiceSeizureAssistant(
         if (!shuttingDown.compareAndSet(false, true)) return
         try { speechRecognizer?.destroy() } catch (_: Exception) {}
         try { tts?.shutdown() } catch (_: Exception) {}
+        cancelWaitReminders()
         tickJob?.cancel(); cancelNoAnswerTimeout()
         try { activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (_: Exception) {}
         try { toneGen?.release() } catch (_: Exception) {}
@@ -749,10 +772,60 @@ class VoiceSeizureAssistant(
         if (!shuttingDown.compareAndSet(false, true)) return
         try { speechRecognizer?.destroy() } catch (_: Exception) {}
         try { tts?.shutdown() } catch (_: Exception) {}
+        cancelWaitReminders()
         tickJob?.cancel(); cancelNoAnswerTimeout()
         try { activity.window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (_: Exception) {}
         try { toneGen?.release() } catch (_: Exception) {}
         toneGen = null
         engine = null
+    }
+
+    private fun cancelWaitReminders() {
+        waitReminderRunnable?.let { handler.removeCallbacks(it) }
+        waitReminderRunnable = null
+        waitEventEnteredAt = null
+    }
+
+    private fun scheduleWaitReminderIfNeeded() {
+        val eng = engine ?: return
+        val node = eng.currentNode()
+        if (node.type != "event" || node.id != "on_seizure_end") { // if we left the waiting event, cancel
+            if (waitReminderRunnable != null) cancelWaitReminders()
+            return
+        }
+        if (waitEventEnteredAt == null) waitEventEnteredAt = System.currentTimeMillis()
+        if (waitReminderRunnable != null) return // already scheduled
+        waitReminderRunnable = object : Runnable {
+            override fun run() {
+                if (shuttingDown.get()) { cancelWaitReminders(); return }
+                val engInner = engine ?: return
+                val current = engInner.currentNode()
+                if (current.type != "event" || current.id != "on_seizure_end") { cancelWaitReminders(); return }
+                if (engInner.isFinished()) { cancelWaitReminders(); return }
+                // postpone while TTS is speaking
+                if (ttsActive) {
+                    handler.postDelayed(this, 1000)
+                    return
+                }
+                // stop current listening to speak reminder
+                if (listening) {
+                    try { lastManualCancelMs = System.currentTimeMillis(); speechRecognizer?.cancel() } catch (_: Exception) {}
+                    listening = false
+                }
+                log("REM", "Reminder spoken (interval=${waitReminderIntervalMs}ms)")
+                speak(waitReminderMessage) {
+                    val still = engine?.currentNode()
+                    if (still != null && !shuttingDown.get() && !engine!!.isFinished() && still.type == "event" && still.id == "on_seizure_end") {
+                        handler.postDelayed({ if (!ttsActive && !listening) playBeep { startListeningEvent() } }, 300)
+                        // schedule next cycle
+                        waitReminderRunnable = null
+                        scheduleWaitReminderIfNeeded()
+                    } else {
+                        cancelWaitReminders()
+                    }
+                }
+            }
+        }
+        handler.postDelayed(waitReminderRunnable!!, waitReminderIntervalMs)
     }
 }
