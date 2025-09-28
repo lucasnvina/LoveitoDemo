@@ -3883,6 +3883,7 @@ int id antiClockwise 0x7f0a0056
 int id anticipate 0x7f0a0057
 int id arc 0x7f0a0058
 int id asConfigured 0x7f0a0059
+int id assistantDimOverlay 0x7f0a029b
 int id assistantIndicator 0x7f0a005a
 int id assistantPulse 0x7f0a005b
 int id assistantTimer 0x7f0a005c

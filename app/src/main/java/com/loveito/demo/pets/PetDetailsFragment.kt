@@ -114,6 +114,7 @@ class PetDetailsFragment : Fragment() {
     private val assistantHandler = Handler(Looper.getMainLooper())
     private var assistantUpdateRunnable: Runnable? = null
     private var pulseAnimator: ObjectAnimator? = null
+    private var assistantDimOverlay: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,6 +157,7 @@ class PetDetailsFragment : Fragment() {
         assistantIndicator = view.findViewById(R.id.assistantIndicator)
         assistantTimer = view.findViewById(R.id.assistantTimer)
         assistantPulse = view.findViewById(R.id.assistantPulse)
+        assistantDimOverlay = view.findViewById(R.id.assistantDimOverlay)
 
         if (petId == null) {
             Toast.makeText(requireContext(), "Falta petId", Toast.LENGTH_SHORT).show()
@@ -370,6 +372,7 @@ class PetDetailsFragment : Fragment() {
         assistantTimer?.text = "Asistente activo · 00:00"
         startPulse()
         startAssistantTimerLoop()
+        showAssistantDimOverlay(true)
     }
 
     private fun hideAssistantIndicator() {
@@ -377,6 +380,7 @@ class PetDetailsFragment : Fragment() {
         assistantUpdateRunnable?.let { assistantHandler.removeCallbacks(it) }
         assistantUpdateRunnable = null
         pulseAnimator?.cancel(); pulseAnimator = null
+        showAssistantDimOverlay(false)
     }
 
     private fun startPulse() {
@@ -405,6 +409,10 @@ class PetDetailsFragment : Fragment() {
             }
         }
         assistantHandler.postDelayed(assistantUpdateRunnable!!, 1000)
+    }
+
+    private fun showAssistantDimOverlay(show: Boolean) {
+        assistantDimOverlay?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

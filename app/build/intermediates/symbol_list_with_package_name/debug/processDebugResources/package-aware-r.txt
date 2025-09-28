@@ -3884,6 +3884,7 @@ id antiClockwise
 id anticipate
 id arc
 id asConfigured
+id assistantDimOverlay
 id assistantIndicator
 id assistantPulse
 id assistantTimer

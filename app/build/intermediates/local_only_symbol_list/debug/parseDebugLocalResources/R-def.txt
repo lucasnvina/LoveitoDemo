@@ -69,6 +69,7 @@ id actProSpecialty
 id actUnit
 id actvNeutered
 id actvSex
+id assistantDimOverlay
 id assistantIndicator
 id assistantPulse
 id assistantTimer

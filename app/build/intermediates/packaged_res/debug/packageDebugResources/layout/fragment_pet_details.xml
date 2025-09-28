@@ -386,6 +386,19 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Overlay para dimmear la pantalla excepto el logo -->
+    <!-- negro 50% -->
+    <View
+        android:id="@+id/assistantDimOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#80000000"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Indicador de sesión activa del asistente -->
     <LinearLayout
         android:id="@+id/assistantIndicator"
@@ -393,7 +406,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="14dp"
+        android:paddingStart="22dp"
         android:paddingEnd="18dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
@@ -408,6 +421,7 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/shape_pulse_dot"
             android:contentDescription="@string/assistant_pulse_desc"/>
         <TextView
