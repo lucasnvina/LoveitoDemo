@@ -1,17 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Título con estilo consistente y color forzado #230000 -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Historial de crisis"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_marginBottom="8dp"/>
+        android:text="@string/crisis_history_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nunito_semibold"
+        android:textColor="@color/maroon_900"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Barra de filtros -->
+    <LinearLayout
+        android:id="@+id/filterBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSortDate"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:minHeight="36dp"
+            android:text="@string/filter_date"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:layout_marginEnd="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSortDuration"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:minHeight="36dp"
+            android:text="@string/filter_duration"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:layout_marginEnd="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSortSeverity"
+            style="@style/NunitoBoldButtonRounded"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:minHeight="36dp"
+            android:text="@string/filter_severity"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:layout_marginEnd="12dp" />
+
+        <Spinner
+            android:id="@+id/spSeverityFilter"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCrises"
@@ -19,16 +76,17 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp" />
 
     <TextView
         android:id="@+id/tvEmpty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay crisis registradas"
+        android:text="@string/crisis_empty_list"
         android:gravity="center"
         android:visibility="gone"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:textSize="14sp"
+        android:fontFamily="@font/nunito_light"
+        android:textColor="@color/maroon_900" />
 
 </LinearLayout>
-

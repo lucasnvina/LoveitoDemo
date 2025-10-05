@@ -1594,6 +1594,9 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color crisis_severity_amber
+color crisis_severity_green
+color crisis_severity_red
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -3788,6 +3791,7 @@ drawable pill_button
 drawable pill_edittext
 drawable profile_photo_border
 drawable shape_pulse_dot
+drawable shape_severity_dot
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3929,6 +3933,9 @@ id btnSavePro
 id btnSaveProfile
 id btnSignIn
 id btnSignUp
+id btnSortDate
+id btnSortDuration
+id btnSortSeverity
 id buttonPanel
 id cache_measures
 id cancel_button
@@ -3957,7 +3964,6 @@ id compress
 id confirm_button
 id constraint
 id container
-id containerActions
 id content
 id contentContainer
 id contentPanel
@@ -4043,6 +4049,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterBar
 id fitCenter
 id fitEnd
 id fitStart
@@ -4102,6 +4109,9 @@ id ivProfilePhoto
 id ivUserPhoto
 id jumpToEnd
 id jumpToStart
+id labelDate
+id labelDuration
+id labelTime
 id labeled
 id layout
 id left
@@ -4113,6 +4123,7 @@ id line3
 id linear
 id listMode
 id list_item
+id llMeta
 id locale
 id login_logo
 id ltr
@@ -4287,6 +4298,8 @@ id sectionShare
 id select_dialog_listview
 id selected
 id selection_type
+id severityContainer
+id severityDot
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -4304,6 +4317,7 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id spSeverityFilter
 id spacer
 id special_effects_controller_view_tag
 id splash_logo
@@ -4401,11 +4415,9 @@ id tvAvgTime
 id tvBirth
 id tvBreed
 id tvCareTitle
-id tvCrisisMeta
-id tvCrisisSeverity
-id tvCrisisTitle
 id tvDate
 id tvDropdownUnit
+id tvDuration
 id tvEmail
 id tvEmpty
 id tvEmptyMedications
@@ -4429,6 +4441,7 @@ id tvProSpecialty
 id tvProfessionalSummary
 id tvSeverity
 id tvSex
+id tvTime
 id tvTimesLabel
 id tvTitle
 id tvTitleMedications
@@ -4602,7 +4615,6 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_auth
-layout fragment_crisis_detail
 layout fragment_home
 layout fragment_pet_care
 layout fragment_pet_crises
@@ -4719,6 +4731,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_cancel
 string add_label
 string add_symbol
 string android_credentials_TYPE_PASSWORD_CREDENTIAL
@@ -4781,8 +4794,15 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string confirm_delete_msg_crisis
+string confirm_delete_title_crisis
 string copy_toast_msg
+string crisis_empty_list
+string crisis_history_title
 string crisis_item
+string crisis_label_date
+string crisis_label_duration
+string crisis_label_time
 string crisis_meta
 string crisis_recommendations
 string crisis_severity
@@ -4794,10 +4814,12 @@ string delete
 string delete_pet_confirm
 string delete_pet_title
 string delete_record
+string deleted_successfully
 string dest_title
 string enter_name
 string error
 string error_a11y_label
+string error_generic
 string error_icon_content_description
 string error_loading_crisis
 string exposed_dropdown_menu_content_description
@@ -4807,6 +4829,9 @@ string fab_transformation_sheet_behavior
 string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
+string filter_date
+string filter_duration
+string filter_severity
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
@@ -4969,6 +4994,8 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string pet_add_title
 string pet_age
+string pet_age_months
+string pet_age_years
 string pet_birth
 string pet_breed
 string pet_btn_cancel
@@ -5012,6 +5039,11 @@ string pet_photo_desc
 string pet_sex
 string pet_updated
 string pet_weight
+string placeholder_date_ddmmyyyy
+string placeholder_duration_zero
+string placeholder_note
+string placeholder_severity_observation
+string placeholder_time_hhmm
 string professional_add_button
 string professional_add_title
 string professional_delete_button
@@ -5053,6 +5085,10 @@ string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
 string select_pet_label
+string severity_all
+string severity_emergency
+string severity_observation
+string severity_urgency
 string share_care_no_info
 string share_chooser_title
 string share_desc

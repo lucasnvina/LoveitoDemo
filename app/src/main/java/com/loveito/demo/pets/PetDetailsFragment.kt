@@ -275,7 +275,15 @@ class PetDetailsFragment : Fragment() {
         tvWeight.text = p.weightKg?.let { "${it} ${getString(R.string.kg)}" } ?: getString(R.string.dash)
         tvSex.text = p.sex ?: getString(R.string.dash)
         tvBirth.text = p.birthDate?.let { dateFmt.format(Date(it)) } ?: getString(R.string.dash)
-        tvAge.text = p.birthDate?.let { yearsFrom(it).toString() } ?: getString(R.string.dash)
+        tvAge.text = p.birthDate?.let {
+            val years = yearsFrom(it)
+            if (years >= 1) {
+                getString(R.string.pet_age_years, years)
+            } else {
+                val months = monthsFrom(it)
+                getString(R.string.pet_age_months, months)
+            }
+        } ?: getString(R.string.dash)
         tvNeutered.text = if (p.neutered == true) getString(R.string.yes) else getString(R.string.no)
         tvHeight.text = p.heightCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
         tvLength.text = p.lengthCm?.let { "${it} ${getString(R.string.cm)}" } ?: getString(R.string.dash)
@@ -365,6 +373,17 @@ class PetDetailsFragment : Fragment() {
         return years
     }
 
+    private fun monthsFrom(millis: Long): Int {
+        val dob = java.util.Calendar.getInstance().apply { timeInMillis = millis }
+        val now = java.util.Calendar.getInstance()
+        var months = (now.get(java.util.Calendar.YEAR) - dob.get(java.util.Calendar.YEAR)) * 12
+        months += now.get(java.util.Calendar.MONTH) - dob.get(java.util.Calendar.MONTH)
+        if (now.get(java.util.Calendar.DAY_OF_MONTH) < dob.get(java.util.Calendar.DAY_OF_MONTH)) {
+            months -= 1
+        }
+        return months.coerceAtLeast(0)
+    }
+
     private fun showAssistantIndicator() {
         if (assistantIndicator == null) return
         assistantSessionStartMs = System.currentTimeMillis()
@@ -448,6 +467,10 @@ class PetDetailsFragment : Fragment() {
             .setNeutralButton(R.string.save_label, null)
             .create()
         dialog.setOnShowListener {
+            val color = android.graphics.Color.parseColor("#230000")
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(color)
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(color)
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL)?.setTextColor(color)
             dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val sectionsOk = listOf(cbCrises, cbMeds, cbPros, cbCare).any { it.isChecked }
                 if (!sectionsOk) { Toast.makeText(ctx, getString(R.string.share_no_section_selected), Toast.LENGTH_SHORT).show(); return@setOnClickListener }

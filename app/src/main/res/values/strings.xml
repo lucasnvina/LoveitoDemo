@@ -185,4 +185,31 @@
     <string name="share_generated_label">Archivo guardado: %1$s</string>
     <string name="assistant_active_desc">Asistente de crisis activo</string>
     <string name="assistant_pulse_desc">Indicador de actividad del asistente</string>
+    <string name="pet_age_years">%1$d años</string>
+    <string name="pet_age_months">%1$d meses</string>
+    <string name="crisis_history_title">Historial de crisis</string>
+    <string name="crisis_empty_list">No hay crisis registradas</string>
+    <string name="crisis_label_date">Fecha:</string>
+    <string name="crisis_label_time">Horario:</string>
+    <string name="crisis_label_duration">Duración:</string>
+
+    <!-- Strings añadidos para borrar crisis -->
+    <string name="confirm_delete_title_crisis">Eliminar registro</string>
+    <string name="confirm_delete_msg_crisis">¿Querés eliminar este registro de crisis?</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="deleted_successfully">Registro eliminado</string>
+    <string name="error_generic">Error: %1$s</string>
+    <!-- Placeholders para item_crisis -->
+    <string name="placeholder_severity_observation">OBSERVACIÓN</string>
+    <string name="placeholder_date_ddmmyyyy">--/--/----</string>
+    <string name="placeholder_time_hhmm">--:--</string>
+    <string name="placeholder_duration_zero">0s</string>
+    <string name="placeholder_note">Nota</string>
+    <string name="filter_date">Fecha</string>
+    <string name="filter_duration">Duración</string>
+    <string name="filter_severity">Severidad</string>
+    <string name="severity_all">Todas</string>
+    <string name="severity_emergency">EMERGENCIA</string>
+    <string name="severity_urgency">URGENCIA</string>
+    <string name="severity_observation">OBSERVACIÓN</string>
 </resources>

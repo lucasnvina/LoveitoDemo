@@ -3,6 +3,7 @@ package com.loveito.demo.pets
 import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 
@@ -286,9 +287,10 @@ class PetsRepository(
             "id" to ref.id,
             "petId" to petId,
             "ownerId" to uid,
-            "startedAt" to System.currentTimeMillis(),
+            // usar timestamp del servidor (UTC)
+            "startedAt" to FieldValue.serverTimestamp(),
             "durationSec" to (30..240).random(),
-            "note" to "crisis de prueba",
+            // se elimina la nota de prueba
             "audioUrl" to null,
             "triage" to triage
         )
@@ -300,23 +302,30 @@ class PetsRepository(
     fun getCrisesForPet(petId: String, onSuccess: (List<Crisis>) -> Unit, onError: (Exception) -> Unit) {
         db.collection(PETS).document(petId)
             .collection("crises")
-            .orderBy("startedAt", Query.Direction.DESCENDING)
+            // Se evita orderBy en Firestore porque la mezcla de tipos (Long y Timestamp) puede causar error.
             .get()
             .addOnSuccessListener { snap ->
                 val list = snap.documents.map { d ->
                     val triage = d.get("triage") as? Map<*,*>
+                    val startedAtRaw = d.get("startedAt")
+                    val startedAtMs = when (startedAtRaw) {
+                        is com.google.firebase.Timestamp -> startedAtRaw.toDate().time
+                        is Number -> startedAtRaw.toLong()
+                        is java.util.Date -> startedAtRaw.time
+                        else -> 0L
+                    }
                     Crisis(
                         id = d.getString("id") ?: d.id,
                         petId = d.getString("petId") ?: petId,
                         ownerId = d.getString("ownerId") ?: "",
-                        startedAt = d.getLong("startedAt") ?: 0L,
+                        startedAt = startedAtMs,
                         durationSec = (d.getLong("durationSec") ?: 0L).toInt(),
                         note = d.getString("note"),
                         audioUrl = d.getString("audioUrl"),
                         triageSeverity = triage?.get("severity") as? String,
                         triageTitle = triage?.get("title") as? String
                     )
-                }
+                }.sortedByDescending { it.startedAt }
                 onSuccess(list)
             }
             .addOnFailureListener(onError)

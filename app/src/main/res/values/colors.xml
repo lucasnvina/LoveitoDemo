@@ -25,4 +25,9 @@
 
     <color name="border_default">@color/rust_500</color>
     <color name="error_default">@color/error_accessible</color>
+
+    <!-- Crisis Severity Colors -->
+    <color name="crisis_severity_red">#D32F2F</color>
+    <color name="crisis_severity_amber">#F57C00</color>
+    <color name="crisis_severity_green">#388E3C</color>
 </resources>

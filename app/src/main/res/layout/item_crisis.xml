@@ -1,34 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:background="@drawable/bg_pet_item"
     android:padding="12dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_marginBottom="12dp"
+    android:elevation="4dp"
+    android:longClickable="true">
 
-    <TextView
-        android:id="@+id/tvDate"
+    <!-- Contenedor severidad (texto + punto al lado, centrados verticalmente) -->
+    <LinearLayout
+        android:id="@+id/severityContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="Fecha" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/tvSeverity"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvSeverity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_severity_observation"
+            android:textSize="14sp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textStyle="bold"
+            android:textColor="@color/maroon_900" />
+
+        <View
+            android:id="@+id/severityDot"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/shape_severity_dot" />
+    </LinearLayout>
+
+    <!-- Contenedor de filas (Fecha, Horario, Duración) -->
+    <LinearLayout
+        android:id="@+id/llMeta"
+        android:orientation="vertical"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Severidad"
-        android:textColor="#D32F2F"
-        android:textSize="14sp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/severityContainer"
+        android:layout_marginEnd="12dp">
 
+        <!-- Fila Fecha -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+            <TextView
+                android:id="@+id/labelDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crisis_label_date"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary" />
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/placeholder_date_ddmmyyyy"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/accent_on" />
+        </LinearLayout>
+
+        <!-- Fila Horario -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+            <TextView
+                android:id="@+id/labelTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crisis_label_time"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary" />
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/placeholder_time_hhmm"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/accent_on" />
+        </LinearLayout>
+
+        <!-- Fila Duración -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/labelDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crisis_label_duration"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="@color/text_primary" />
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/placeholder_duration_zero"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_light"
+                android:textColor="@color/accent_on" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeleteCrisis"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:minHeight="32dp"
+        android:minWidth="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/delete"
+        android:contentDescription="@string/delete"
+        style="@style/NunitoBoldButtonRounded.Destructive"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Nota debajo -->
     <TextView
         android:id="@+id/tvNote"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nota"
+        android:layout_marginTop="6dp"
         android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        android:fontFamily="@font/nunito_light"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toBottomOf="@id/llMeta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteCrisis"
+        app:layout_constraintBottom_toTopOf="@+id/btnDeleteCrisis"
+        android:text="@string/placeholder_note"
+        android:visibility="gone" />
 
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
