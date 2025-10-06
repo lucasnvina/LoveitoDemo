@@ -208,8 +208,21 @@
     <string name="filter_date">Fecha</string>
     <string name="filter_duration">Duración</string>
     <string name="filter_severity">Severidad</string>
+    <string name="filter_date_from">Desde fecha</string>
+    <string name="filter_date_to">Hasta fecha</string>
+    <string name="filter_duration_min">Duración mín (s)</string>
+    <string name="filter_duration_max">Duración máx (s)</string>
+    <string name="filter_apply">Aplicar</string>
+    <string name="filter_clear">Limpiar</string>
     <string name="severity_all">Todas</string>
     <string name="severity_emergency">EMERGENCIA</string>
     <string name="severity_urgency">URGENCIA</string>
     <string name="severity_observation">OBSERVACIÓN</string>
+    <string name="filter_date_range">Fechas</string>
+    <string name="filter_summary_none">Sin filtros activos</string>
+    <string name="filter_configure_title">Filtros</string>
+    <string name="filter_duration_no_min">Sin mínimo</string>
+    <string name="filter_duration_no_max">Sin máximo</string>
+    <string name="filter_duration_invalid_range">La duración mínima no puede ser mayor que la máxima</string>
+    <string name="filter_summary_active">Filtros activos</string>
 </resources>

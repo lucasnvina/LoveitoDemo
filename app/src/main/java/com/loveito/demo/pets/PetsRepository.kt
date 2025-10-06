@@ -308,11 +308,15 @@ class PetsRepository(
                 val list = snap.documents.map { d ->
                     val triage = d.get("triage") as? Map<*,*>
                     val startedAtRaw = d.get("startedAt")
-                    val startedAtMs = when (startedAtRaw) {
+                    var startedAtMs = when (startedAtRaw) {
                         is com.google.firebase.Timestamp -> startedAtRaw.toDate().time
                         is Number -> startedAtRaw.toLong()
                         is java.util.Date -> startedAtRaw.time
                         else -> 0L
+                    }
+                    // Normalizar: si parece estar en segundos (10 dígitos típico < 1e11) convertir a ms
+                    if (startedAtMs in 1_000_000_000L..99_999_999_999L) {
+                        startedAtMs *= 1000
                     }
                     Crisis(
                         id = d.getString("id") ?: d.id,

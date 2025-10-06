@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,60 +15,45 @@
         android:textStyle="bold"
         android:fontFamily="@font/nunito_semibold"
         android:textColor="@color/maroon_900"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="4dp" />
 
-    <!-- Barra de filtros -->
+    <!-- Resumen + botón para configurar filtros en otra pantalla -->
     <LinearLayout
-        android:id="@+id/filterBar"
+        android:id="@+id/filtersHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginBottom="8dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSortDate"
-            style="@style/NunitoBoldButtonRounded"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:minHeight="36dp"
-            android:text="@string/filter_date"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:layout_marginEnd="8dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSortDuration"
-            style="@style/NunitoBoldButtonRounded"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:minHeight="36dp"
-            android:text="@string/filter_duration"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:layout_marginEnd="8dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSortSeverity"
-            style="@style/NunitoBoldButtonRounded"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:minHeight="36dp"
-            android:text="@string/filter_severity"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:layout_marginEnd="12dp" />
-
-        <Spinner
-            android:id="@+id/spSeverityFilter"
+        <TextView
+            android:id="@+id/tvFilterSummary"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:spinnerMode="dropdown"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp" />
+            android:text="@string/filter_summary_none"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito_light"
+            android:textColor="@color/maroon_900" />
+        <ImageView
+            android:id="@+id/btnClearFilters"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="6dp"
+            android:contentDescription="@string/filter_clear"
+            android:src="@drawable/ic_clear_filters"
+            android:visibility="gone"
+            android:background="@android:color/transparent" />
+        <ImageView
+            android:id="@+id/btnOpenFilters"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="6dp"
+            android:contentDescription="@string/filter_apply"
+            android:src="@drawable/ic_filter"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 
+    <!-- Lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCrises"
         android:layout_width="match_parent"

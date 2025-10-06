@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Circle background using maroon tone (#230000 as in design) -->
+    <path
+        android:fillColor="#230000"
+        android:pathData="M12,2A10,10 0 0 0 2,12A10,10 0 0 0 12,22A10,10 0 0 0 22,12A10,10 0 0 0 12,2Z" />
+    <!-- Cross centered, color #f6e2cc -->
+    <path
+        android:fillColor="#f6e2cc"
+        android:pathData="M15.3,8.7C15.69,9.09 15.69,9.71 15.3,10.1L13.4,12L15.3,13.9C15.69,14.29 15.69,14.91 15.3,15.3C14.91,15.69 14.29,15.69 13.9,15.3L12,13.4L10.1,15.3C9.71,15.69 9.09,15.69 8.7,15.3C8.31,14.91 8.31,14.29 8.7,13.9L10.6,12L8.7,10.1C8.31,9.71 8.31,9.09 8.7,8.7C9.09,8.31 9.71,8.31 10.1,8.7L12,10.6L13.9,8.7C14.29,8.31 14.91,8.31 15.3,8.7Z" />
+</vector>
