@@ -1,0 +1,20 @@
+// Cloud Storage rules
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isUser(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // Pet photos
+    match /users/{userId}/pets/{petId}/{allPaths=**} {
+      allow read, write: if isUser(userId);
+    }
+
+    // Profile photo (archivo único)
+    match /users/{userId}/profilepic {
+      allow read, write: if isUser(userId);
+    }
+  }
+}
