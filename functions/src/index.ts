@@ -393,7 +393,7 @@ async function recomputeForPet(petId: string, ownerId: string) {
   // Baseline: alimentación
   await upsertRecommendation(petId, ownerId, {
     category: "food",
-    title: "Ajuste de ración",
+    title: "Ajuste de alimentación",
     body: "Mantené horarios regulares y evitá cambios bruscos. Ajustá ración según peso y actividad.",
     priority: 2,
     riskLevel: "low",
