@@ -11,6 +11,18 @@ import {setGlobalOptions} from "firebase-functions";
 //import {onRequest} from "firebase-functions/https";
 //import * as logger from "firebase-functions/logger";
 
+import { onRequest } from "firebase-functions/v2/https";
+import * as admin from "firebase-admin";
+
+// Inicializa el SDK Admin (permite usar Firestore/Storage/Auth desde el server)
+admin.initializeApp();
+
+// Cloud Function HTTP: endpoint GET/POST que devuelve "pong"
+export const ping = onRequest((_req, res) => {
+  res.status(200).send("pong");
+});
+
+
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
 
