@@ -357,6 +357,7 @@ class PetDetailsFragment : Fragment() {
 
     private fun openCare() {
         val f = PetCareFragment()
+        f.arguments = Bundle().apply { putString("petId", petId) }
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_host, f)
             .addToBackStack(null)

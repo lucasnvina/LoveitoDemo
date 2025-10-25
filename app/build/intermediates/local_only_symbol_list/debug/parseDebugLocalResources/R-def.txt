@@ -87,6 +87,9 @@ id btnApply
 id btnCancel
 id btnCancelPro
 id btnCancelProfile
+id btnCareDismiss
+id btnCareDone
+id btnCareSnooze
 id btnClear
 id btnClearFilters
 id btnDelete
@@ -143,11 +146,13 @@ id ivUserPhoto
 id labelDate
 id labelDuration
 id labelTime
+id llCareActions
 id llMeta
 id login_logo
 id photoContainer
 id profilePhotoContainer
 id recyclerPets
+id rvCare
 id rvCrises
 id rvMedications
 id rvProfessionals
@@ -161,6 +166,7 @@ id sectionShare
 id severityContainer
 id severityDot
 id splash_logo
+id swipeRefresh
 id tilDateRange
 id tilDose
 id tilMaxDuration
@@ -184,7 +190,11 @@ id tvAge
 id tvAvgTime
 id tvBirth
 id tvBreed
-id tvCareTitle
+id tvCareEmptyRow
+id tvCareHeader
+id tvCareItemBody
+id tvCareItemEvidence
+id tvCareItemTitle
 id tvDate
 id tvDropdownUnit
 id tvDuration
@@ -235,6 +245,9 @@ layout fragment_pet_medications
 layout fragment_pet_professional_edit
 layout fragment_pet_professionals
 layout fragment_profile
+layout item_care_empty
+layout item_care_header
+layout item_care_recommendation
 layout item_crisis
 layout item_dropdown
 layout item_dropdown_maroon
@@ -265,6 +278,7 @@ string avg_time_desc
 string avg_time_label
 string cancel
 string care_desc
+string care_empty_state
 string care_label
 string care_placeholder_coming_soon
 string care_screen_title
@@ -294,6 +308,8 @@ string delete_pet_confirm
 string delete_pet_title
 string delete_record
 string deleted_successfully
+string dismiss_label
+string done_label
 string enter_name
 string error
 string error_generic
@@ -323,6 +339,7 @@ string google_storage_bucket
 string heart_desc
 string kg
 string last_crisis_label
+string loading
 string logo_loveito_dog_desc
 string medication_add_button
 string medication_add_time
@@ -433,6 +450,7 @@ string professional_summary_single
 string professionals_save_changes
 string profile_change_photo
 string project_id
+string refresh
 string report_generated_label
 string report_hours_minutes
 string report_minutes_seconds
@@ -471,6 +489,7 @@ string share_section_medications
 string share_section_professionals
 string share_sections_title
 string sign_out_button
+string snooze_label
 string splash_logo_desc
 string start_button
 string start_crisis_button

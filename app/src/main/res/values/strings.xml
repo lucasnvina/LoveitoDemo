@@ -225,4 +225,10 @@
     <string name="filter_duration_no_max">Sin máximo</string>
     <string name="filter_duration_invalid_range">La duración mínima no puede ser mayor que la máxima</string>
     <string name="filter_summary_active">Filtros activos</string>
+    <string name="care_empty_state">No hay recomendaciones por ahora</string>
+    <string name="done_label">Listo</string>
+    <string name="snooze_label">Posponer</string>
+    <string name="dismiss_label">Descartar</string>
+    <string name="refresh">Actualizar</string>
+    <string name="loading">Actualizando…</string>
 </resources>

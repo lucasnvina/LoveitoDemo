@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-62:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/4740fa39394b86de3636fed982e70a55/transformed/play-services-auth-20.7.0/res/values-watch-v20/values.xml",

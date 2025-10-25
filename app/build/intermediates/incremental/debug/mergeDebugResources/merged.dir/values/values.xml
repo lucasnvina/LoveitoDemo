@@ -2529,6 +2529,7 @@
     <string name="call_notification_screening_text">Screening an incoming call</string>
     <string name="cancel">Cancelar</string>
     <string name="care_desc">Cuidados</string>
+    <string name="care_empty_state">No hay recomendaciones por ahora</string>
     <string name="care_label">Cuidados</string>
     <string name="care_placeholder_coming_soon">Próximamente</string>
     <string name="care_screen_title">Cuidados</string>
@@ -2582,6 +2583,8 @@
     <string name="delete_record">Eliminar Registro</string>
     <string name="deleted_successfully">Registro eliminado</string>
     <string name="dest_title">destination title</string>
+    <string name="dismiss_label">Descartar</string>
+    <string name="done_label">Listo</string>
     <string name="enter_name">Ingresá un nombre</string>
     <string name="error">Error: %1$s</string>
     <string description="Screen reader announcement for when a checkbox is on error. [CHAR LIMIT=NONE]" name="error_a11y_label">
@@ -2624,6 +2627,7 @@
     <string name="item_view_role_description">Tab</string>
     <string name="kg">kg</string>
     <string name="last_crisis_label">Última Crisis</string>
+    <string name="loading">Actualizando…</string>
     <string name="logo_loveito_dog_desc">Logo Loveito Dog</string>
     <string name="m3_exceed_max_badge_text_suffix" translatable="false"><ns2:g example="Some te" id="part of a long text">%1$s</ns2:g><ns2:g example="…" id="suffix">%2$s</ns2:g></string>
     <string description="Content description for a loading indicator [CHAR LIMIT=NONE]" name="m3_loading_indicator_content_description">
@@ -2860,6 +2864,7 @@
     <string name="professionals_save_changes">Guardar cambios</string>
     <string name="profile_change_photo">Cambiar foto de perfil</string>
     <string name="project_id" translatable="false">loveito-aeec9</string>
+    <string name="refresh">Actualizar</string>
     <string name="report_generated_label">Generado: %1$s</string>
     <string name="report_hours_minutes">%1$dh %2$dm</string>
     <string name="report_minutes_seconds">%1$dm %2$ds</string>
@@ -2906,6 +2911,7 @@
     <string description="Title of the side sheet&apos;s accessibility pane that is spoken by TalkBack when the side sheet appears on screen. [CHAR_LIMIT=NONE]" name="side_sheet_accessibility_pane_title">Side Sheet</string>
     <string name="side_sheet_behavior" translatable="false">com.google.android.material.sidesheet.SideSheetBehavior</string>
     <string name="sign_out_button">Cerrar sesión</string>
+    <string name="snooze_label">Posponer</string>
     <string name="splash_logo_desc">Logo de la pantalla de inicio</string>
     <string name="start_button">Iniciar</string>
     <string name="start_crisis_button">Registrar crisis</string>
@@ -15105,6 +15111,10 @@
   </declare-styleable>
     <declare-styleable name="StateSet">
         <attr format="reference" name="defaultState"/>
+    </declare-styleable>
+    <declare-styleable name="SwipeRefreshLayout">
+        
+        <attr format="color" name="swipeRefreshLayoutProgressSpinnerBackgroundColor"/>
     </declare-styleable>
     <declare-styleable name="SwitchCompat">
         

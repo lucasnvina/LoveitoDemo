@@ -34,8 +34,29 @@ service cloud.firestore {
         allow read, update, delete: if petIsMine();
       }
 
+      // Subcolección de recomendaciones
+      match /care_recommendations/{recId} {
+        function petIsMine() {
+          return isSignedIn()
+                 && exists(/databases/$(database)/documents/pets/$(petId))
+                 && get(/databases/$(database)/documents/pets/$(petId)).data.ownerId == request.auth.uid;
+        }
 
-  }
+        // Lectura: dueño de la mascota
+        allow read: if petIsMine();
+
+        // Escritura total: bloqueada para clientes; sólo backend (Admin SDK) puede escribir contenido
+        allow create, delete: if false; // sólo Cloud Functions (Admin)
+
+        // Actualización: permitir únicamente cambios de status o snoozeUntil por el dueño
+        allow update: if petIsMine()
+                      && request.resource.data.diff(resource.data).changedKeys().hasOnly(["status", "snoozeUntil", "updatedAt"])
+                      && request.resource.data.status in ["active", "done", "dismissed", "snoozed"]
+                      && (request.resource.data.snoozeUntil == null || request.resource.data.snoozeUntil is timestamp);
+      }
+    }
+
+
   match /users/{userId} {
       allow read, update, delete: if request.auth != null && request.auth.uid == userId;
       allow create: if request.auth != null && request.auth.uid == userId;

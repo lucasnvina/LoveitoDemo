@@ -50,6 +50,7 @@ MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/lucasvina/.gradle/c
 MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/cc3bd12dc3b25d479d92ecd8e09d907f/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d0b025cd00ec7bbc0157580dad7e4077/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.transition:transition:1.5.1] /Users/lucasvina/.gradle/caches/8.13/transforms/264572848ae87e7ab0d1de94876014c1/transformed/transition-1.5.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1b752d8dcf82814e7461400bdfea91a3/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d840f3c78700b70c08bd980a39d98292/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c3385a9268e7a36b6bc07bf4f421b986/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/076a3ac779eb7dcee03abc71e5c60b43/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
@@ -100,12 +101,12 @@ MERGED from [androidx.exifinterface:exifinterface:1.4.1] /Users/lucasvina/.gradl
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/26496f3604eedad182368848c81d62d0/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/5fd7a92468cc12e3b5e402c7350653b1/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.bumptech.glide:gifdecoder:5.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/771f0a8b9f4a657da6a5b4428b6083e0/transformed/gifdecoder-5.0.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/9c2c1affbd0d4e474676d4648440836f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ea9b8481541e21ae17a4cd36cb878258/transformed/firebase-components-19.0.0/AndroidManifest.xml:15:1-20:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/lucasvina/.gradle/caches/8.13/transforms/070e399e76543ff9df5d39473d621468/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/91060cb69edcf642d89e164563cdb404/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c1347a2b73f69d38e4e408bc269e0e97/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c7a8c19be488ebd1c3123c743dbf0e8f/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d1290b0a749403b606ee34c6e0b18a7e/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -346,6 +347,8 @@ MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvin
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d0b025cd00ec7bbc0157580dad7e4077/transformed/slidingpanelayout-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.transition:transition:1.5.1] /Users/lucasvina/.gradle/caches/8.13/transforms/264572848ae87e7ab0d1de94876014c1/transformed/transition-1.5.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.transition:transition:1.5.1] /Users/lucasvina/.gradle/caches/8.13/transforms/264572848ae87e7ab0d1de94876014c1/transformed/transition-1.5.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1b752d8dcf82814e7461400bdfea91a3/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/lucasvina/.gradle/caches/8.13/transforms/1b752d8dcf82814e7461400bdfea91a3/transformed/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d840f3c78700b70c08bd980a39d98292/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/d840f3c78700b70c08bd980a39d98292/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c3385a9268e7a36b6bc07bf4f421b986/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
@@ -446,6 +449,8 @@ MERGED from [androidx.cardview:cardview:1.0.0] /Users/lucasvina/.gradle/caches/8
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/5fd7a92468cc12e3b5e402c7350653b1/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.github.bumptech.glide:gifdecoder:5.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/771f0a8b9f4a657da6a5b4428b6083e0/transformed/gifdecoder-5.0.4/AndroidManifest.xml:5:5-44
 MERGED from [com.github.bumptech.glide:gifdecoder:5.0.4] /Users/lucasvina/.gradle/caches/8.13/transforms/771f0a8b9f4a657da6a5b4428b6083e0/transformed/gifdecoder-5.0.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/9c2c1affbd0d4e474676d4648440836f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/9c2c1affbd0d4e474676d4648440836f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:19.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/ea9b8481541e21ae17a4cd36cb878258/transformed/firebase-components-19.0.0/AndroidManifest.xml:18:5-44
@@ -456,8 +461,6 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lucasvina/.gradle/ca
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/lucasvina/.gradle/caches/8.13/transforms/91060cb69edcf642d89e164563cdb404/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c1347a2b73f69d38e4e408bc269e0e97/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.tracing:tracing:1.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c1347a2b73f69d38e4e408bc269e0e97/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/dffd8d0401b7091f66f9b37e522e412b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c0a5103fd087bdb461592a9a79a7fcf1/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/lucasvina/.gradle/caches/8.13/transforms/c7a8c19be488ebd1c3123c743dbf0e8f/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44

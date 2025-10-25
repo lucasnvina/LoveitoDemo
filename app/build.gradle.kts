@@ -70,6 +70,9 @@ dependencies {
     // JSON parsing para motor de flujo
     implementation("com.google.code.gson:gson:2.11.0")
 
+    // SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     // Test
     testImplementation("junit:junit:4.13.2")
 }

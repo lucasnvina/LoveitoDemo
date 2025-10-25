@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-62:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-sw600dp-v13/values-sw600dp-v13.xml",

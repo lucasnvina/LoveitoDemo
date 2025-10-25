@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.loveito.demo.app-mergeDebugResources-61:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "com.loveito.demo.app-mergeDebugResources-62:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "/Users/lucasvina/.gradle/caches/8.13/transforms/e61375d36af7de1deb55af497483c131/transformed/appcompat-1.7.1/res/values-xlarge-v4/values-xlarge-v4.xml",
