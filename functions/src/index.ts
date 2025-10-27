@@ -8,7 +8,7 @@
  */
 
 import { setGlobalOptions } from "firebase-functions";
-import { onRequest, onCall } from "firebase-functions/v2/https";
+import { onRequest, onCall, HttpsError } from "firebase-functions/v2/https";
 import { onDocumentCreated, onDocumentUpdated } from "firebase-functions/v2/firestore";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import * as logger from "firebase-functions/logger";
@@ -151,16 +151,48 @@ async function upsertRecommendation(petId: string, ownerId: string, payload: Omi
   const now = nowTs();
   const recRef = db.collection("pets").doc(petId).collection("care_recommendations").doc(docId);
   const snap = await recRef.get();
-  const base: Partial<RecommendationDoc> = {
-    ...payload,
-    ownerId,
-    validFrom: payload.validFrom ?? now,
-    updatedAt: now,
-  };
   if (!snap.exists) {
-    await recRef.set({ ...base, createdAt: now } as RecommendationDoc, { merge: true });
+    const toCreate: RecommendationDoc = {
+      ...(payload as any),
+      ownerId,
+      status: payload.status ?? "active",
+      validFrom: payload.validFrom ?? now,
+      createdAt: now,
+      updatedAt: now,
+    };
+    await recRef.set(stripUndefinedShallow(toCreate), { merge: true });
   } else {
-    await recRef.set(base, { merge: true });
+    const current = snap.data() as RecommendationDoc;
+    // No pisar estado del usuario: si ya no está 'active', preservarlo.
+    const preserveStatus = current.status && current.status !== "active";
+    // Preservar snoozeUntil existente si sigue vigente; maintenance se encarga de reactivar cuando corresponde
+    const preserveSnooze = current.status === "snoozed" && current.snoozeUntil != null;
+
+    const base: Partial<RecommendationDoc> = {
+      // Campos de contenido que sí queremos actualizar
+      category: payload.category,
+      title: payload.title,
+      body: payload.body,
+      evidence: payload.evidence,
+      priority: payload.priority,
+      riskLevel: payload.riskLevel,
+      validTo: payload.validTo,
+      actions: payload.actions,
+      dedupeKey: payload.dedupeKey,
+      ownerId,
+      // No tocar validFrom si ya estaba seteado
+      validFrom: current.validFrom ?? payload.validFrom ?? now,
+      updatedAt: now,
+    };
+    if (!preserveStatus) {
+      // Sólo si estaba active (o vacío), permitir actualizar estado (típicamente a 'active')
+      (base as any).status = payload.status ?? current.status ?? "active";
+    }
+    if (!preserveSnooze) {
+      // Actualizar snooze sólo si no había uno vigente
+      (base as any).snoozeUntil = payload.snoozeUntil ?? current.snoozeUntil ?? null;
+    }
+    await recRef.set(stripUndefinedShallow(base as any), { merge: true });
   }
   return docId;
 }
@@ -458,19 +490,68 @@ async function recomputeForPet(petId: string, ownerId: string) {
 }
 
 export const recomputeCare = onCall({ region: "southamerica-east1" }, async (request) => {
-  const uid = request.auth?.uid;
-  const petId = (request.data && (request.data.petId as string)) || "";
-  if (!uid) {
-    throw new Error("UNAUTHENTICATED");
-  }
-  if (!petId) {
-    throw new Error("INVALID_ARGUMENT: petId requerido");
-  }
-  const petSnap = await db.collection("pets").doc(petId).get();
-  if (!petSnap.exists) throw new Error("NOT_FOUND: mascota no existe");
-  const ownerId = petSnap.get("ownerId");
-  if (ownerId !== uid) throw new Error("PERMISSION_DENIED");
+  try {
+    const uid = request.auth?.uid;
+    const petId = (request.data && (request.data.petId as string)) || "";
+    if (!uid) {
+      throw new HttpsError("unauthenticated", "Usuario no autenticado");
+    }
+    if (!petId) {
+      throw new HttpsError("invalid-argument", "petId requerido");
+    }
+    const petSnap = await db.collection("pets").doc(petId).get();
+    if (!petSnap.exists) throw new HttpsError("not-found", "Mascota no existe");
+    const ownerId = petSnap.get("ownerId");
+    if (ownerId !== uid) throw new HttpsError("permission-denied", "No sos el dueño de esta mascota");
 
-  const res = await recomputeForPet(petId, ownerId);
-  return { ok: true, upserted: res.upserted };
+    const res = await recomputeForPet(petId, ownerId);
+    return { ok: true, upserted: res.upserted };
+  } catch (e: any) {
+    // Propagar HttpsError tal cual; envolver otros errores como INTERNAL
+    if (e instanceof HttpsError) throw e;
+    logger.error("recomputeCare error", { message: e?.message, stack: e?.stack });
+    throw new HttpsError("internal", e?.message || "Error interno");
+  }
 });
+
+export const recomputeCareHttp = onRequest({ region: "southamerica-east1" }, async (req, res) => {
+  try {
+    if (req.method !== "POST") {
+      res.status(405).json({ error: "method-not-allowed" }); return;
+    }
+    const auth = req.get("Authorization") || "";
+    const m = auth.match(/^Bearer (.*)$/i);
+    if (!m) {
+      res.status(401).json({ error: "unauthenticated", message: "Missing bearer token" }); return;
+    }
+    const idToken = m[1];
+    let decoded: admin.auth.DecodedIdToken;
+    try { decoded = await admin.auth().verifyIdToken(idToken); }
+    catch (e: any) { res.status(401).json({ error: "unauthenticated", message: e?.message || "Invalid token" }); return; }
+
+    const uid = decoded.uid;
+    const petId = (req.body && (req.body.petId as string)) || "";
+    if (!petId) { res.status(400).json({ error: "invalid-argument", message: "petId requerido" }); return; }
+
+    const petSnap = await db.collection("pets").doc(petId).get();
+    if (!petSnap.exists) { res.status(404).json({ error: "not-found", message: "Mascota no existe" }); return; }
+    const ownerId = petSnap.get("ownerId");
+    if (ownerId !== uid) { res.status(403).json({ error: "permission-denied", message: "No sos el dueño de esta mascota" }); return; }
+
+    const result = await recomputeForPet(petId, ownerId);
+    res.status(200).json({ ok: true, upserted: result.upserted });
+  } catch (e: any) {
+    logger.error("recomputeCareHttp error", { message: e?.message, stack: e?.stack });
+    res.status(500).json({ error: "internal", message: e?.message || "Error interno" });
+  }
+});
+
+// Utility: remove undefined fields (shallow) to satisfy Firestore constraints
+function stripUndefinedShallow<T extends Record<string, any>>(obj: T): T {
+  const out: any = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (v !== undefined) out[k] = v;
+  }
+  return out as T;
+}
+
