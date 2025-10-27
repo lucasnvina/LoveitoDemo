@@ -35,6 +35,7 @@ import android.os.Looper
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.view.animation.LinearInterpolator
+import kotlin.coroutines.resume
 
 class PetDetailsFragment : Fragment() {
 
@@ -502,7 +503,13 @@ class PetDetailsFragment : Fragment() {
 
     private fun buildShare(p: Pet, crises: List<Crisis>, c: Boolean, m: Boolean, pr: Boolean, care: Boolean, recipients: List<String>) {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val file = try { PetReportPdfBuilder(requireContext(), c, m, pr, care).build(p, crises) } catch (e: Exception) { null }
+            // Obtener recomendaciones de cuidado si fue seleccionada la sección
+            val careRecs = if (care) kotlin.runCatching {
+                kotlinx.coroutines.suspendCancellableCoroutine<List<CareRecommendation>> { cont ->
+                    repo.getActiveCareRecommendations(p.id, onSuccess = { cont.resume(it) }, onError = { _ -> cont.resume(emptyList()) })
+                }
+            }.getOrElse { emptyList() } else emptyList()
+            val file = try { PetReportPdfBuilder(requireContext(), c, m, pr, care, careRecs = careRecs).build(p, crises) } catch (e: Exception) { null }
             withContext(Dispatchers.Main) {
                 if (file == null || !file.exists()) {
                     Toast.makeText(requireContext(), getString(R.string.share_pdf_error), Toast.LENGTH_SHORT).show()
@@ -541,9 +548,9 @@ class PetDetailsFragment : Fragment() {
 
     private fun generateAndSavePdf(pet: Pet, c: Boolean, m: Boolean, pr: Boolean, care: Boolean) {
         Toast.makeText(requireContext(), getString(R.string.share_generate_pdf), Toast.LENGTH_SHORT).show()
-        val proceed: (List<Crisis>) -> Unit = { crises ->
+        val proceed: (List<Crisis>, List<CareRecommendation>) -> Unit = { crises, careRecs ->
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                val file = try { PetReportPdfBuilder(requireContext(), c, m, pr, care).build(pet, crises) } catch (e: Exception) { null }
+                val file = try { PetReportPdfBuilder(requireContext(), c, m, pr, care, careRecs = careRecs).build(pet, crises) } catch (e: Exception) { null }
                 withContext(Dispatchers.Main) {
                     if (file == null || !file.exists()) {
                         Toast.makeText(requireContext(), getString(R.string.share_pdf_error), Toast.LENGTH_SHORT).show()
@@ -555,7 +562,26 @@ class PetDetailsFragment : Fragment() {
                 }
             }
         }
-        if (c) repo.getCrisesForPet(pet.id, onSuccess = proceed, onError = { proceed(emptyList()) }) else proceed(emptyList())
+        if (c || care) {
+            val repoCare = repo
+            val loadCrises = suspend {
+                kotlinx.coroutines.suspendCancellableCoroutine<List<Crisis>> { cont ->
+                    repo.getCrisesForPet(pet.id, onSuccess = { cont.resume(it) }, onError = { cont.resume(emptyList()) })
+                }
+            }
+            val loadCare = suspend {
+                kotlinx.coroutines.suspendCancellableCoroutine<List<CareRecommendation>> { cont ->
+                    repoCare.getActiveCareRecommendations(pet.id, onSuccess = { cont.resume(it) }, onError = { cont.resume(emptyList()) })
+                }
+            }
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                val crises = if (c) runCatching { loadCrises() }.getOrElse { emptyList() } else emptyList()
+                val careRecs = if (care) runCatching { loadCare() }.getOrElse { emptyList() } else emptyList()
+                withContext(Dispatchers.Main) { proceed(crises, careRecs) }
+            }
+        } else {
+            proceed(emptyList(), emptyList())
+        }
     }
 
     private fun suggestedPdfName(p: Pet): String {

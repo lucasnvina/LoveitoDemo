@@ -283,14 +283,16 @@ class PetsRepository(
     fun createTestCrisisWithTriage(petId: String, triage: Map<String, Any?>, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {
         val uid = auth.currentUser?.uid ?: run { onError(IllegalStateException("No hay usuario autenticado")); return }
         val ref = db.collection(PETS).document(petId).collection("crises").document()
+        // Tomar duración real del resultado del asistente si está disponible
+        val durationFromTriage = (triage["duration_sec"] as? Number)?.toLong()?.coerceAtLeast(0L)?.toInt()
         val data = hashMapOf(
             "id" to ref.id,
             "petId" to petId,
             "ownerId" to uid,
             // usar timestamp del servidor (UTC)
             "startedAt" to FieldValue.serverTimestamp(),
-            "durationSec" to (30..240).random(),
-            // se elimina la nota de prueba
+            // Persistir duración real si existe; caso contrario, 0 como valor por defecto
+            "durationSec" to (durationFromTriage ?: 0),
             "audioUrl" to null,
             "triage" to triage
         )
@@ -318,12 +320,15 @@ class PetsRepository(
                     if (startedAtMs in 1_000_000_000L..99_999_999_999L) {
                         startedAtMs *= 1000
                     }
+                    val durationStored = (d.getLong("durationSec") ?: 0L).toInt()
+                    val durationFromTriage = (triage?.get("duration_sec") as? Number)?.toLong()?.coerceAtLeast(0L)?.toInt()
+                    val duration = durationFromTriage ?: durationStored
                     Crisis(
                         id = d.getString("id") ?: d.id,
                         petId = d.getString("petId") ?: petId,
                         ownerId = d.getString("ownerId") ?: "",
                         startedAt = startedAtMs,
-                        durationSec = (d.getLong("durationSec") ?: 0L).toInt(),
+                        durationSec = duration,
                         note = d.getString("note"),
                         audioUrl = d.getString("audioUrl"),
                         triageSeverity = triage?.get("severity") as? String,
@@ -360,6 +365,26 @@ class PetsRepository(
                 }
                 .addOnFailureListener(onError)
         }.addOnFailureListener(onError)
+    }
+
+    fun getActiveCareRecommendations(petId: String, onSuccess: (List<CareRecommendation>) -> Unit, onError: (Exception) -> Unit) {
+        db.collection(PETS).document(petId)
+            .collection("care_recommendations")
+            .whereEqualTo("status", "active")
+            .get()
+            .addOnSuccessListener { qs ->
+                val list = qs.documents.map { d ->
+                    CareRecommendation(
+                        title = d.getString("title") ?: "",
+                        body = d.getString("body") ?: "",
+                        evidence = d.getString("evidence"),
+                        priority = (d.getLong("priority") ?: 0L).toInt(),
+                        validTo = d.getTimestamp("validTo")?.toDate()?.time
+                    )
+                }.sortedWith(compareByDescending<CareRecommendation> { it.priority }.thenBy { it.validTo ?: Long.MAX_VALUE })
+                onSuccess(list)
+            }
+            .addOnFailureListener(onError)
     }
 
     private fun uploadPetPhoto(uid: String, petId: String, uri: Uri, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {

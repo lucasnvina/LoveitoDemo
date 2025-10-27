@@ -33,6 +33,7 @@ class PetReportPdfBuilder(
     private val includeProfessionals: Boolean,
     private val includeCare: Boolean,
     private val compactMode: Boolean = false,
+    private val careRecs: List<CareRecommendation> = emptyList(),
 ) {
     private val dateFmtFull = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
     private val dateFmtShort = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -527,8 +528,22 @@ class PetReportPdfBuilder(
     private fun drawCareSection(pet: Pet) {
         ensureSpace(40f)
         drawSectionTitle(context.getString(R.string.share_section_care))
-        val careText = pet.notes?.takeIf { it.isNotBlank() } ?: context.getString(R.string.share_care_no_info)
-        drawWrapped(careText)
+        if (careRecs.isNotEmpty()) {
+            careRecs.forEach { rec ->
+                ensureSpace(bodyPaint.textSize + 8f)
+                canvas.drawText("• ${rec.title}", marginLeft, y, bodyPaint)
+                y += bodyPaint.textSize + 2f
+                if (rec.body.isNotBlank()) drawWrapped(rec.body)
+                rec.evidence?.takeIf { it.isNotBlank() }?.let { ev ->
+                    val italic = Paint(bodyPaint).apply { typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC); color = Color.DKGRAY }
+                    drawWrapped(ev, italic)
+                }
+                y += 4f
+            }
+        } else {
+            val careText = pet.notes?.takeIf { it.isNotBlank() } ?: context.getString(R.string.share_care_no_info)
+            drawWrapped(careText)
+        }
         divider(10f, 12f)
     }
 
