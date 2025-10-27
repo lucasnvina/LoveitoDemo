@@ -16,6 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import com.loveito.demo.flow.TriageEngineStore
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -196,7 +197,22 @@ class VoiceSeizureAssistant(
     fun manualAnswer(answer: String) { val eng = engine ?: return; if (eng.isFinished()) return; if (eng.currentNode() is com.loveito.demo.flow.Node.YesNoNode) { eng.answerYesNo(answer); if (eng.isFinished()) manualFinalize() } }
     @Suppress("unused")
     fun manualEventFinished() { val eng = engine ?: return; if (eng.isFinished()) return; if (eng.currentNode() is com.loveito.demo.flow.Node.EventNode) { eng.triggerEvent("user_confirms_seizure_stopped"); if (eng.isFinished()) manualFinalize() } }
-    private fun manualFinalize() { val eng = engine ?: return; val triage = (eng.getVar("triage_level") as? String) ?: inferTriageByRules(eng); val duration = (eng.getVar("duration_sec") as? Number)?.toLong(); onFinish(mapOf("severity" to mapTriageToSeverity(triage), "title" to mapTriageToTitle(triage), "triage_level" to triage, "duration_sec" to duration, "fallback" to true)); shutdownPreserveEngine(); engine = null }
+    private fun manualFinalize() {
+        val eng = engine ?: return
+        val triage = (eng.getVar("triage_level") as? String) ?: inferTriageByRules(eng)
+        val elapsedSec = ((System.currentTimeMillis() - startedAtMs) / 1000).coerceAtLeast(0)
+        onFinish(
+            mapOf(
+                "severity" to mapTriageToSeverity(triage),
+                "title" to mapTriageToTitle(triage),
+                "triage_level" to triage,
+                // Duración basada en el tiempo real del asistente (inicio->fin)
+                "duration_sec" to elapsedSec,
+                "fallback" to true
+            )
+        )
+        shutdownPreserveEngine(); engine = null
+    }
 
     fun start() {
         try { activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) } catch (_: Exception) {}
@@ -210,12 +226,18 @@ class VoiceSeizureAssistant(
     }
 
     private fun loadFlowJson(): Pair<String,String?> = try {
-        val json = activity.assets.open("seizure_assistant_v1_6_0.json").use { ins -> BufferedReader(InputStreamReader(ins)).use { it.readText() } }
-        // Extraer defaults antes de parsear
-        extractDefaults(json)
-        json to null
+        // Try local cached file first
+        val cached: String? = TriageEngineStore.readLocalJson(activity)
+        if (!cached.isNullOrBlank()) {
+            extractDefaults(cached)
+            cached to null
+        } else {
+            val json: String = activity.assets.open("seizure_assistant_v1_6_0.json").use { ins -> BufferedReader(InputStreamReader(ins)).use { it.readText() } }
+            extractDefaults(json)
+            json to null
+        }
     } catch (e: Exception) {
-        val fb = """{\n  \"version\": \"fallback\",\n  \"start_node\": \"only\",\n  \"nodes\": [{\"id\":\"only\",\"type\":\"info\",\"prompt\":\"Flujo fallback.\",\"next\":null}]\n}""".trimIndent(); fb to e.message
+        val fb: String = """{\n  \"version\": \"fallback\",\n  \"start_node\": \"only\",\n  \"nodes\": [{\"id\":\"only\",\"type\":\"info\",\"prompt\":\"Flujo fallback.\",\"next\":null}]\n}""".trimIndent(); fb to e.message
     }
 
     private fun extractDefaults(raw: String) {
@@ -692,14 +714,16 @@ class VoiceSeizureAssistant(
         if (shuttingDown.get()) return
         val eng = engine ?: return
         var triage = (eng.getVar("triage_level") as? String)
-        val duration = (eng.getVar("duration_sec") as? Number)?.toLong()
         val hadTriageFromFlow = triage != null
         if (triage == null) triage = inferTriageByRules(eng)
+        // Usar el tiempo real desde que inició el asistente hasta el final
+        val elapsedSec = ((System.currentTimeMillis() - startedAtMs) / 1000).coerceAtLeast(0)
         val resultMap = mapOf(
             "severity" to mapTriageToSeverity(triage),
             "title" to mapTriageToTitle(triage),
             "triage_level" to triage,
-            "duration_sec" to duration
+            // Duración exacta en segundos
+            "duration_sec" to elapsedSec
         )
         if (!hadTriageFromFlow) {
             // Sólo en fallback (cuando el JSON no entregó un mensaje final). Emitimos una frase mínima.

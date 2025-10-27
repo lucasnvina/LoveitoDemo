@@ -17,6 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.functions.FirebaseFunctions
 import com.loveito.demo.R
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 
 class PetCareFragment : Fragment() {
     private var petId: String? = null
@@ -213,6 +215,21 @@ class PetCareFragment : Fragment() {
     }
 
     private fun triggerRecompute(id: String) {
+        val api = GoogleApiAvailability.getInstance()
+        val code = api.isGooglePlayServicesAvailable(requireContext())
+        if (code != ConnectionResult.SUCCESS) {
+            // Try to resolve (update/install Play services) and retry once if successful
+            api.makeGooglePlayServicesAvailable(requireActivity())
+                .addOnSuccessListener {
+                    // After update availability, try again
+                    triggerRecompute(id)
+                }
+                .addOnFailureListener {
+                    swipeRefresh?.isRefreshing = false
+                    Toast.makeText(requireContext(), getString(R.string.error_generic, "Actualizá Google Play Services desde Play Store"), Toast.LENGTH_LONG).show()
+                }
+            return
+        }
         val fns = FirebaseFunctions.getInstance("southamerica-east1")
         swipeRefresh?.isRefreshing = true
         fns.getHttpsCallable("recomputeCare")
@@ -221,7 +238,19 @@ class PetCareFragment : Fragment() {
                 Toast.makeText(requireContext(), "Recomendaciones actualizadas", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), getString(R.string.error_generic, e.localizedMessage ?: ""), Toast.LENGTH_SHORT).show()
+                val msg = when (e) {
+                    is com.google.firebase.functions.FirebaseFunctionsException -> {
+                        when (e.code) {
+                            com.google.firebase.functions.FirebaseFunctionsException.Code.UNAUTHENTICATED -> "Iniciá sesión para actualizar recomendaciones"
+                            com.google.firebase.functions.FirebaseFunctionsException.Code.PERMISSION_DENIED -> "No tenés permisos para esta mascota"
+                            com.google.firebase.functions.FirebaseFunctionsException.Code.INVALID_ARGUMENT -> "Falta petId"
+                            com.google.firebase.functions.FirebaseFunctionsException.Code.NOT_FOUND -> "Mascota no encontrada"
+                            else -> e.message ?: "Error"
+                        }
+                    }
+                    else -> e.localizedMessage ?: "Error"
+                }
+                Toast.makeText(requireContext(), getString(R.string.error_generic, msg), Toast.LENGTH_SHORT).show()
             }
             .addOnCompleteListener {
                 swipeRefresh?.isRefreshing = false
