@@ -26,10 +26,7 @@ import android.media.AudioManager
 import android.media.ToneGenerator
 
 /**
- * Limpio: implementación única sin duplicados. Incluye:
- * - Temporizador y finalización incompleta por falta de respuesta
- * - Acciones 'say' con buffer
- * - Beep auditivo antes de escuchar
+ * Asistente de voz para registrar crisis: maneja prompts, TTS/ASR, y finalización con triage.
  */
 class VoiceSeizureAssistant(
     private val activity: Activity,
@@ -42,15 +39,13 @@ class VoiceSeizureAssistant(
 
     companion object { private const val TAG = "VoiceSeizureAssistant" }
 
-    // --- Nuevo: retardo mínimo entre prompts para que no se "peguen" ---
+    // Retardo mínimo entre prompts para evitar solapamiento
     private val MIN_INTER_NODE_DELAY_MS = 550L
-    // Delay entre fin de TTS y comienzo de escucha (anti-eco, margen de cancelación)
+    // Demora entre fin de TTS y comienzo de escucha
     private val TTS_LISTEN_DELAY_MS = 600L
 
-    // Flag interno para saber si TTS está hablando y evitar iniciar escucha prematuramente
     private var ttsActive: Boolean = false
 
-    // Defaults cargados desde el JSON para reutilizar mensajes (silence/timeout/other)
     private val yesNoDefaults = mutableMapOf<String, String>()
     private val eventDefaults = mutableMapOf<String, String>()
 
@@ -66,23 +61,18 @@ class VoiceSeizureAssistant(
 
     private val yesWords = listOf("si", "sí", "yes", "affirmative", "claro")
     private val noWords = listOf("no", "negativo")
-    // Eliminado unknownWords: ahora todo lo que no es sí/no pasa a 'other'
-    // private val unknownWords = listOf("no se", "no sé", "dudo", "no estoy seguro", "no estoy segura")
     private val finishWords = listOf("termino", "terminó", "termino la crisis", "paro", "paró", "se detuvo", "fin", "finalizo", "finalizó")
 
-    // Auto-commit single word yes/no handling
     private val AUTO_COMMIT_DELAY_MS = 450L
     private var autoCommitRunnable: Runnable? = null
     private var autoCommitValue: String? = null
     private var lastSingleWordPartial: String? = null
     private var lastSingleWordCount: Int = 0
-    // Added: tracking generation of recognition sessions and one-shot fallback suppression flag
     private var recognitionGeneration: Long = 0
     private var suppressFallbackMessagesOnce: Boolean = false
-    // Reminder logic for waiting at event node (on_seizure_end)
     private var waitEventEnteredAt: Long? = null
+    // Recordatorio periódico para el nodo de espera de fin de crisis
     private var waitReminderRunnable: Runnable? = null
-    // Removed hardcoded constants; now loaded from JSON with fallbacks
     private var waitReminderIntervalMs: Long = 20_000L
     private var waitReminderMessage: String = "Sigo acá. Seguí manteniendo la calma y simplemente decime 'terminó' cuando el episodio acabe."
     private var incompleteTimeoutMessage: String = "No recibí respuesta. Finalizamos la sesión y guardamos como registro incompleto."
@@ -161,7 +151,6 @@ class VoiceSeizureAssistant(
 
             if (kind == "yes_no") {
                 val msg = yesNoDefaults["timeout"] ?: yesNoDefaults["silence"] ?: "No te entendí."
-                // Primer mensaje default, luego repetir pregunta original limpia
                 speak(formatPrompt(msg)) {
                     val question = originalPrompt.trim()
                     if (question.isNotEmpty()) speak(question) {
@@ -726,18 +715,15 @@ class VoiceSeizureAssistant(
             "duration_sec" to elapsedSec
         )
         if (!hadTriageFromFlow) {
-            // Sólo en fallback (cuando el JSON no entregó un mensaje final). Emitimos una frase mínima.
             speak("${mapTriageToTitle(triage)} finalizado.") {
                 onFinish(resultMap); shutdown()
             }
         } else {
-            // El JSON ya habló el mensaje final (acciones 'say' en final_triage o emergencia). No repetir nada.
             onFinish(resultMap); shutdown()
         }
     }
 
-    // Reglas fallback minimalistas: sirven sólo si el flujo no seteó triage_level (por finalización anticipada / emergencia / interrupción).
-    // NOTA: El JSON tiene lógica más rica (branch final) que contempla más condiciones (seizures_count_24h, falta de administración, etc.).
+    // Reglas fallback mínimas
     private fun inferTriageByRules(eng: FlowEngine): String {
         val dur = (eng.getVar("duration_sec") as? Number)?.toLong() ?: 0L
         val breathing = eng.getVar("breathing_ok") as? Boolean?

@@ -268,7 +268,7 @@ class PetsRepository(
                                         storageRef.delete()
                                             .addOnSuccessListener { onSuccess() }
                                             .addOnFailureListener { onSuccess() }
-                                    } catch (e: Exception) { onSuccess() }
+                                    } catch (_: Exception) { onSuccess() }
                                 } else onSuccess()
                             }
                             .addOnFailureListener(onError)
@@ -277,8 +277,6 @@ class PetsRepository(
                 .addOnFailureListener(onError)
         }.addOnFailureListener(onError)
     }
-
-    // --- Crises (se mantienen igual que tu versión actual) ---
 
     fun createTestCrisisWithTriage(petId: String, triage: Map<String, Any?>, onSuccess: (String) -> Unit, onError: (Exception) -> Unit) {
         val uid = auth.currentUser?.uid ?: run { onError(IllegalStateException("No hay usuario autenticado")); return }
@@ -340,14 +338,6 @@ class PetsRepository(
             .addOnFailureListener(onError)
     }
 
-    fun getCrisisDetail(petId: String, crisisId: String, onSuccess: (Map<String, Any?>) -> Unit, onError: (Exception) -> Unit) {
-        db.collection(PETS).document(petId)
-            .collection("crises").document(crisisId)
-            .get()
-            .addOnSuccessListener { doc -> onSuccess(doc.data ?: emptyMap()) }
-            .addOnFailureListener(onError)
-    }
-
     fun deleteCrisis(petId: String, crisisId: String, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         val ref = db.collection(PETS).document(petId).collection("crises").document(crisisId)
         ref.get().addOnSuccessListener { doc ->
@@ -360,7 +350,7 @@ class PetsRepository(
                             storageRef.delete()
                                 .addOnSuccessListener { onSuccess() }
                                 .addOnFailureListener { onSuccess() }
-                        } catch (e: Exception) { onSuccess() }
+                        } catch (_: Exception) { onSuccess() }
                     } else onSuccess()
                 }
                 .addOnFailureListener(onError)

@@ -155,21 +155,18 @@ async function upsertRecommendation(petId: string, ownerId: string, payload: Omi
     const toCreate: RecommendationDoc = {
       ...(payload as any),
       ownerId,
-      status: payload.status ?? "active",
+      status: (payload as any).status ?? "active",
       validFrom: payload.validFrom ?? now,
       createdAt: now,
       updatedAt: now,
     };
-    await recRef.set(stripUndefinedShallow(toCreate), { merge: true });
+    await recRef.set(deepStripUndefined(toCreate), { merge: true });
   } else {
     const current = snap.data() as RecommendationDoc;
-    // No pisar estado del usuario: si ya no está 'active', preservarlo.
     const preserveStatus = current.status && current.status !== "active";
-    // Preservar snoozeUntil existente si sigue vigente; maintenance se encarga de reactivar cuando corresponde
     const preserveSnooze = current.status === "snoozed" && current.snoozeUntil != null;
 
     const base: Partial<RecommendationDoc> = {
-      // Campos de contenido que sí queremos actualizar
       category: payload.category,
       title: payload.title,
       body: payload.body,
@@ -180,19 +177,16 @@ async function upsertRecommendation(petId: string, ownerId: string, payload: Omi
       actions: payload.actions,
       dedupeKey: payload.dedupeKey,
       ownerId,
-      // No tocar validFrom si ya estaba seteado
       validFrom: current.validFrom ?? payload.validFrom ?? now,
       updatedAt: now,
     };
     if (!preserveStatus) {
-      // Sólo si estaba active (o vacío), permitir actualizar estado (típicamente a 'active')
-      (base as any).status = payload.status ?? current.status ?? "active";
+      (base as any).status = (payload as any).status ?? current.status ?? "active";
     }
     if (!preserveSnooze) {
-      // Actualizar snooze sólo si no había uno vigente
-      (base as any).snoozeUntil = payload.snoozeUntil ?? current.snoozeUntil ?? null;
+      (base as any).snoozeUntil = (payload as any).snoozeUntil ?? current.snoozeUntil ?? null;
     }
-    await recRef.set(stripUndefinedShallow(base as any), { merge: true });
+    await recRef.set(deepStripUndefined(base as any), { merge: true });
   }
   return docId;
 }
@@ -546,12 +540,22 @@ export const recomputeCareHttp = onRequest({ region: "southamerica-east1" }, asy
   }
 });
 
-// Utility: remove undefined fields (shallow) to satisfy Firestore constraints
-function stripUndefinedShallow<T extends Record<string, any>>(obj: T): T {
-  const out: any = {};
-  for (const [k, v] of Object.entries(obj)) {
-    if (v !== undefined) out[k] = v;
+// Utility: remove undefined fields deeply (objects and arrays)
+function deepStripUndefined<T>(input: T): T {
+  if (input === undefined) return undefined as unknown as T;
+  if (input === null) return input;
+  if (Array.isArray(input)) {
+    // map and filter out undefined entries
+    const arr = (input as unknown[]).map(v => deepStripUndefined(v)).filter(v => v !== undefined);
+    return arr as unknown as T;
   }
-  return out as T;
+  if (typeof input === "object") {
+    const out: Record<string, any> = {};
+    for (const [k, v] of Object.entries(input as Record<string, any>)) {
+      const cleaned = deepStripUndefined(v);
+      if (cleaned !== undefined) out[k] = cleaned;
+    }
+    return out as T;
+  }
+  return input as T;
 }
-

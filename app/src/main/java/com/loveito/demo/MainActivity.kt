@@ -3,6 +3,12 @@ package com.loveito.demo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import com.loveito.demo.flow.TriageEngineStore
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     fun updateTopBarVisibility() {
@@ -14,14 +20,17 @@ class MainActivity : AppCompatActivity() {
     fun loadUserPhoto() {
         val ivUserPhoto = findViewById<android.widget.ImageView>(R.id.ivUserPhoto)
         val tvUserName = findViewById<android.widget.TextView>(R.id.tvUserName)
-        val uid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+        val defaultName: String = try {
+            val id = resources.getIdentifier("user_default_name", "string", packageName)
+            if (id != 0) getString(id) else "Usuario"
+        } catch (_: Exception) { "Usuario" }
         db.collection("users").document(uid).get().addOnSuccessListener { doc ->
             val photoUrl = doc.getString("photoUrl")
             val firstName = doc.getString("firstName") ?: ""
-            // Solo mostrar el primer nombre (primer palabra)
-            val firstWord = firstName.split(" ").firstOrNull()?.trim() ?: "Usuario"
-            tvUserName?.text = if (firstWord.isNotBlank()) firstWord else "Usuario"
+            val firstWord = firstName.split(" ").firstOrNull()?.trim() ?: defaultName
+            tvUserName?.text = if (firstWord.isNotBlank()) firstWord else defaultName
             if (!photoUrl.isNullOrEmpty()) {
                 try {
                     com.bumptech.glide.Glide.with(this)
@@ -35,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 ivUserPhoto?.setImageResource(R.drawable.ic_user_placeholder)
             }
         }.addOnFailureListener {
-            tvUserName?.text = "Usuario"
+            tvUserName?.text = defaultName
             ivUserPhoto?.setImageResource(R.drawable.ic_user_placeholder)
         }
     }
@@ -55,17 +64,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Ajuste dinámico de padding superior para la barra
+        // Ajuste dinámico de padding superior para la barra (compatible API 24+)
         val topBar = findViewById<android.view.View>(R.id.topBar)
-        topBar?.setOnApplyWindowInsetsListener { view, insets ->
-            val statusBarHeight = insets.getInsets(android.view.WindowInsets.Type.statusBars()).top
-            view.setPadding(
-                view.paddingLeft,
-                statusBarHeight,
-                view.paddingRight,
-                view.paddingBottom
-            )
-            insets
+        topBar?.let { tb ->
+            ViewCompat.setOnApplyWindowInsetsListener(tb) { view, insets ->
+                val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+                view.setPadding(view.paddingLeft, statusBarHeight, view.paddingRight, view.paddingBottom)
+                insets
+            }
+            // Solicitar una aplicación inicial de insets
+            ViewCompat.requestApplyInsets(tb)
         }
 
         val ivUserPhoto = findViewById<android.widget.ImageView>(R.id.ivUserPhoto)
@@ -80,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     "Cerrar Sesión" -> {
-                        com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                        FirebaseAuth.getInstance().signOut()
                         navigateToFragment(AuthFragment())
                         true
                     }
@@ -95,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            val start = if (com.google.firebase.auth.FirebaseAuth.getInstance().currentUser == null) {
+            val start = if (FirebaseAuth.getInstance().currentUser == null) {
                 AuthFragment()
             } else {
                 HomeFragment()
@@ -104,6 +112,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadUserPhoto()
+
+        // Actualizar motor de triage local desde Storage en segundo plano
+        lifecycleScope.launch(Dispatchers.IO) {
+            try { TriageEngineStore.ensureLatest(applicationContext) } catch (_: Exception) {}
+        }
     }
 
     fun navigateToFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean = false) {

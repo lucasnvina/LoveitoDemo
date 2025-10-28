@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.math.max
-import kotlin.math.min
 
 /**
  * Genera el PDF del reporte de la mascota con formato mejorado:
@@ -164,16 +163,14 @@ class PetReportPdfBuilder(
     private fun rowPadV(): Float = if (compactEnabled) 4f else 6f
 
     private fun sanitizeFileName(input: String): String {
-        // Reemplazar caracteres inseguros en nombres de archivo por guiones o espacios seguros
         val trimmed = input.trim().ifBlank { "Mascota" }
-        val replaced = trimmed.replace("[\\:*?\"<>|/]".toRegex(), "-")
-        // Colapsar múltiples espacios/guiones y recortar
-        return replaced
-            .replace("[\n\r]".toRegex(), " ")
+        // Remover caracteres no permitidos en archivos, incluyendo espacio -> guion
+        val replaced = trimmed
+            .replace("[\\:*?\"<>|/]".toRegex(), "-")
+            .replace("[\\n\\r]".toRegex(), " ")
             .replace("\\s+".toRegex(), " ")
             .replace("-+".toRegex(), "-")
-            .trim()
-            .take(100) // evitar nombres excesivamente largos
+        return replaced.trim().take(100)
     }
 
     private fun loadPetPhotoSync(url: String?) {
@@ -198,10 +195,11 @@ class PetReportPdfBuilder(
 
     private fun loadAppLogo() {
         try {
-            val d = context.packageManager.getApplicationIcon(context.packageName)
-            val raw = (d ?: context.getDrawable(R.mipmap.ic_launcher))?.toBitmap()
+            val d = androidx.appcompat.content.res.AppCompatResources.getDrawable(context, R.mipmap.ic_launcher)
+            val raw = d?.toBitmap()
             raw?.let {
                 val size = 48
+                // Usar createScaledBitmap está bien aquí (dependencia mínima), mantener por compatibilidad
                 appLogo = Bitmap.createScaledBitmap(it, size, size, true)
             }
         } catch (_: Exception) { }
@@ -496,7 +494,7 @@ class PetReportPdfBuilder(
         pet.professionals.forEach { pr ->
             val name = listOf(pr.name, pr.lastName).filter { it.isNotBlank() }.joinToString(" ") + if (pr.isFavorite) " ★" else ""
             val spec = pr.specialty
-            val contact = listOf(pr.email.takeIf { it.isNotBlank() }, pr.phone.takeIf { it.isNotBlank() }).filterNotNull().joinToString(" / ")
+            val contact = listOfNotNull(pr.email.takeIf { it.isNotBlank() }, pr.phone.takeIf { it.isNotBlank() }).joinToString(" / ")
             val contactLines = wrapText(contact, bodyPaint, colContactW)
             val linesCount = max(1, contactLines.size)
             val rowHeight = linesCount * (bodyPaint.textSize + 4f) + 2*padV

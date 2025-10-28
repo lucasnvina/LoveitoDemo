@@ -5162,6 +5162,7 @@ string splash_logo_desc
 string start_button
 string start_crisis_button
 string status_bar_notification_info_overflow
+string user_default_name
 string user_photo_desc
 string years
 string yes

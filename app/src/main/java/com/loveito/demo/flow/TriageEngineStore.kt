@@ -10,6 +10,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.security.MessageDigest
+import androidx.core.content.edit
 
 object TriageEngineStore {
     private const val TAG = "TriageEngineStore"
@@ -67,7 +68,10 @@ object TriageEngineStore {
                     }
                 }
                 tmp.delete()
-                prefs.edit().putString(KEY_VERSION, remoteVersion).putString(KEY_SHA256, remoteSha).apply()
+                prefs.edit {
+                    putString(KEY_VERSION, remoteVersion)
+                    putString(KEY_SHA256, remoteSha)
+                }
                 EngineUpdateResult(true, remoteVersion, remoteSha)
             } catch (e: Exception) {
                 Log.w(TAG, "ensureLatest failed: ${e.message}")

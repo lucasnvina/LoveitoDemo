@@ -5161,9 +5161,10 @@ int string splash_logo_desc 0x7f1201aa
 int string start_button 0x7f1201ab
 int string start_crisis_button 0x7f1201ac
 int string status_bar_notification_info_overflow 0x7f1201ad
-int string user_photo_desc 0x7f1201ae
-int string years 0x7f1201af
-int string yes 0x7f1201b0
+int string user_default_name 0x7f1201ae
+int string user_photo_desc 0x7f1201af
+int string years 0x7f1201b0
+int string yes 0x7f1201b1
 int style AlertDialog_AppCompat 0x7f130000
 int style AlertDialog_AppCompat_Light 0x7f130001
 int style Animation_AppCompat_Dialog 0x7f130002
